@@ -2,1185 +2,2018 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>证券从业 · 高频考点速记</title>
 <style>
-:root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --dim:#94a3b8; --accent:#38bdf8; --green:#34d399; --red:#f87171; --yellow:#fbbf24; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; padding:1rem; }
+:root { --bg:#0b1120; --card:#1a2332; --border:rgba(148,163,184,0.12); --text:#f1f5f9; --dim:#94a3b8; --accent:#38bdf8; --green:#34d399; --green-bg:rgba(52,211,153,0.12); --red:#f87171; --red-bg:rgba(248,113,113,0.12); --yellow:#fbbf24; --yellow-bg:rgba(251,191,36,0.12); }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; padding:0.8rem; }
 .container { max-width:900px; margin:0 auto; }
-/* ====== Header ====== */
-.header { text-align:center; padding:1.5rem 0; border-bottom:2px solid var(--border); margin-bottom:1.2rem; }
-.header h1 { font-size:1.6rem; font-weight:800; background:linear-gradient(135deg,var(--accent),var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.header .sub { color:var(--dim); font-size:0.85rem; }
-/* ====== Subject Tabs ====== */
-.tabs { display:flex; gap:6px; margin-bottom:1rem; flex-wrap:wrap; }
-.tab { padding:0.4rem 1rem; border-radius:999px; font-size:0.85rem; font-weight:600; border:1px solid var(--border); cursor:pointer; background:var(--card); color:var(--dim); transition:all 0.2s; }
-.tab.active { background:linear-gradient(135deg,var(--accent),var(--green)); color:#0f172a; border-color:transparent; }
-.tab:active { transform:scale(0.95); }
-/* ====== Chapter Section ====== */
-.chapter-title { font-size:1.1rem; font-weight:700; padding:0.6rem 0; margin:0.8rem 0 0.5rem; border-bottom:1px solid var(--border); color:var(--accent); display:flex; align-items:center; gap:8px; }
-.chapter-title .weight { font-size:0.75rem; color:var(--dim); font-weight:400; }
-/* ====== Card Grid ====== */
-.card-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:0.5rem; }
+.header { text-align:center; padding:1rem 0; border-bottom:1px solid var(--border); margin-bottom:0.8rem; }
+.header h1 { font-size:1.4rem; font-weight:800; background:linear-gradient(135deg,var(--accent),var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header .sub { color:var(--dim); font-size:0.8rem; margin-top:0.2rem; }
+/* ====== Switch ====== */
+.switch-row { display:flex; gap:6px; justify-content:center; margin:0.6rem 0; }
+.sw-btn { padding:0.35rem 1rem; border-radius:999px; font-size:0.85rem; font-weight:600; border:1px solid var(--border); cursor:pointer; background:var(--card); color:var(--dim); transition:all 0.2s; }
+.sw-btn:active { transform:scale(0.95); }
+.sw-btn.on { background:linear-gradient(135deg,var(--accent),var(--green)); color:#0b1120; border-color:transparent; }
+/* ====== Sections ====== */
+.subject-section { display:none; }
+.subject-section.on { display:block; }
+.section-desc { text-align:center; font-size:0.8rem; color:var(--dim); margin-bottom:0.8rem; }
+.ch-title { font-size:1rem; font-weight:700; padding:0.5rem 0; margin:0.6rem 0 0.4rem; border-bottom:1px solid var(--border); color:var(--accent); display:flex; align-items:center; gap:8px; }
+.ch-weight { font-size:0.7rem; color:var(--dim); font-weight:400; }
+/* ====== Cards ====== */
+.card-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:0.4rem; }
 @media (max-width:640px) { .card-grid { grid-template-columns:1fr; } }
 .card {
-  background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px;
-  cursor:pointer; transition:all 0.2s; break-inside:avoid;
+  background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px;
+  break-inside:avoid; display:flex; flex-direction:column; gap:6px;
 }
-.card:active { border-color:var(--accent); }
-.card .tag { font-size:0.65rem; padding:1px 6px; border-radius:3px; font-weight:600; display:inline-block; margin-bottom:4px; }
-.card .tag.s { background:rgba(52,211,153,0.2); color:var(--green); }
-.card .tag.m { background:rgba(248,113,113,0.2); color:var(--red); }
-.card .tag.j { background:rgba(251,191,36,0.2); color:var(--yellow); }
-.card .k { font-size:0.88rem; font-weight:600; margin-bottom:4px; line-height:1.5; }
-.card .p { font-size:0.78rem; color:var(--dim); margin-bottom:6px; line-height:1.6; }
-.card .example { font-size:0.72rem; color:var(--dim); background:rgba(148,163,184,0.06); border-radius:6px; padding:6px 8px; margin-top:4px; border-left:2px solid var(--accent); }
-.card .example b { color:var(--green); }
-.card .freq { font-size:0.65rem; color:var(--accent); display:inline-block; margin-top:2px; }
-.subject-section { display:none; }
-.subject-section.active { display:block; }
+.ch-tag { font-size:0.65rem; padding:1px 8px; border-radius:4px; font-weight:600; display:inline-block; width:fit-content; }
+.ch-tag.s { background:var(--green-bg); color:var(--green); }
+.ch-tag.m { background:var(--red-bg); color:var(--red); }
+.ch-tag.j { background:var(--yellow-bg); color:var(--yellow); }
+.q-text { font-size:0.88rem; line-height:1.6; }
+.opts { display:flex; flex-direction:column; gap:4px; }
+.co { display:flex; align-items:flex-start; gap:6px; padding:3px 6px; border-radius:6px; font-size:0.82rem; background:rgba(148,163,184,0.03); }
+.ck { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; font-size:0.7rem; font-weight:700; flex-shrink:0; background:rgba(148,163,184,0.12); color:var(--dim); }
+.cv { flex:1; line-height:1.5; padding-top:1px; }
+/* ====== Answer ====== */
+.ans-area { margin-top:4px; padding:10px; background:rgba(56,189,248,0.04); border:1px solid rgba(56,189,248,0.15); border-radius:8px; display:none; }
+.ans-area.show { display:block; }
+.ans-label { color:var(--green); font-weight:600; font-size:0.85rem; margin-bottom:4px; }
+.ans-label b { font-size:0.95rem; }
+.ans-detail { color:var(--dim); font-size:0.8rem; line-height:1.6; }
+.card-actions { text-align:center; padding-top:4px; }
+.show-ans { font-size:0.75rem; color:var(--accent); cursor:pointer; padding:4px 12px; border-radius:6px; border:1px solid var(--border); display:inline-block; transition:all 0.2s; }
+.show-ans:active { background:rgba(56,189,248,0.1); }
+.show-ans.done { color:var(--green); border-color:var(--green); }
 /* ====== Print ====== */
 @media print {
-  @page { size:A4; margin:0.8cm; }
-  body { background:#fff; color:#000; padding:0; font-size:11px; }
-  .header { padding:0.8rem 0; margin-bottom:0.6rem; }
+  @page { size:A4; margin:0.6cm; }
+  body { background:#fff; color:#000; padding:0; font-size:10px; }
   .header h1 { -webkit-text-fill-color:#000; color:#000; background:none; }
   .header .sub { color:#666; }
-  .tabs, .tab { display:none; }
+  .switch-row, .show-ans, .card-actions { display:none !important; }
   .subject-section { display:block !important; }
-  .card-grid { grid-template-columns:1fr 1fr; gap:6px; }
-  .card { background:#f8f9fa; border:1px solid #ddd; padding:8px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .card .tag.s { background:#e8f5e9; color:#2e7d32; }
-  .card .tag.m { background:#ffebee; color:#c62828; }
-  .card .tag.j { background:#fff8e1; color:#f57f17; }
-  .card .example { background:#f5f5f5; border-left-color:#1976d2; }
-  .chapter-title { color:#1976d2; }
-  .card .freq { color:#1976d2; }
-  .no-print { display:none !important; }
+  .card-grid { grid-template-columns:1fr 1fr; gap:4px; }
+  .card { background:#f8f9fa; border:1px solid #ddd; padding:6px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .ans-area { display:block !important; background:#f0f7ff; border-color:#1976d2; }
+  .ans-label { color:#2e7d32; }
+  .ch-title { color:#1976d2; }
+  .co { background:#f5f5f5; }
 }
-/* ====== Footer ====== */
-.footer { text-align:center; padding:1.2rem; color:var(--dim); font-size:0.8rem; border-top:1px solid var(--border); margin-top:1rem; }
+.footer { text-align:center; padding:1rem; color:var(--dim); font-size:0.75rem; border-top:1px solid var(--border); margin-top:0.8rem; }
 </style>
 </head>
 <body>
 <div class="container">
 <div class="header">
   <h1>📚 证券从业 · 高频考点速记</h1>
-  <div class="sub">基于CFLUE 1,223道考题 · 按2025官方教材章节 · 可打印/手机学习两用</div>
-  <div style="margin-top:0.4rem;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
-    <span class="tab active" onclick="switchSubject('fin',this)">📈 金融基础</span>
-    <span class="tab" onclick="switchSubject('law',this)">⚖️ 法律法规</span>
+  <div class="sub">1,223道考题提炼 · 每卡含完整题目+选项 · 点击"显示答案"自测</div>
+  <div class="switch-row">
+    <span class="sw-btn on" id="sw-fin" onclick="sw('fin')">📈 金融市场基础知识</span>
+    <span class="sw-btn" id="sw-law" onclick="sw('law')">⚖️ 证券市场基本法律法规</span>
   </div>
 </div>
 
 <div class="subject-section" id="sec-fin">
-<div class="no-print" style="text-align:center;font-size:0.85rem;color:var(--dim);margin-bottom:0.8rem;">共 8 章 · 651 题 · 点击卡片展开解析</div>
-<div class="chapter-title">第一章 金融市场体系 <span class="weight">(30题 · 5%)</span></div>
+<div class="section-desc">共 8 章 · 651 道高频题 · 先看题自测，再点"显示答案"</div>
+<div class="ch-title">第一章 金融市场体系 <span class="ch-weight">(30题 · 5%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 4次</span>
-  <div class="k">下列属于</div>
-  <div class="p">资本市场包括：股票市场、中长期国债市场、中长期银行存款市场等。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BD</b><br>
-    真题: 下列属于资本市场的有（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于金融市场的说法，错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">金融市场是政府调控经济的一个主要渠道</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">金融市场的发展可以促成厂商“正常存货投资”的减少</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">金融市场的繁荣与萧条与实体经济的兴旺与不景气存在一定的关联</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">金融市场使得“意愿储蓄”脱离了实物窖藏的方式，使社会可用的投资品增长。</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">金融市场是经济运行状态的“晴雨表”，繁荣的金融市场往往对应着实体经济的兴旺发达，而金融市场的萧条通常也意味着真实经济部门的不景气。金融市场或金融体系首先使“意愿的储蓄”脱离了实物窖藏的方式，使社会可用的投资品总量增长，同时，又将“货币形态”的储蓄提供给需要追加投资的部门，使它们能够支付得起对投资品的需要，最后促成厂商【“非正常存货投资”】的减少，最终实现全社会储蓄与投资的一种事前的或计划的均衡，增进了社会福利。由于金融市场在联系储蓄—投资以及在调整资源配置方面所具有的重要作用，再加上金融市场主体对市场变化的敏感性，金融市场逐渐成为政府调控经济的一个主要渠道。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">期限在1年以上的资金的跨国流动是国际长期</div>
-  <div class="p">国际长期资金流动，是指期限在1年以上的资金的跨国流动，包括国际直接投资、国际间接投资和国际信贷三种形式。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 期限在1年以上的资金的跨国流动是国际长期资金流动。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">根据国际货币基金组织的《金融稳健指标编制指南》，不属于全球金融体系的参与者的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">中央银行</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">为住户服务的非营利机构，包括由政府部门控制和提供资金支持的机构</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">建房互助协会</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">租赁公司</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">根据市场组织方式，证券市场可以分为（）</div>
-  <div class="p">按组织方式分为交易所市场和场外交易市场。</div>
-  <div class="example" style="display:none;">
-    <b>答案: AD</b><br>
-    真题: 根据市场组织方式，证券市场可以分为（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">根据国际货币基金组织的《金融稳健指标编制指南》，全球金融体系的主要参与者包括金融公司（含建房互助协会）、非金融公司、住户、为住户服务的非营利机构、广义政府、公共部门。为住户服务的非营利机构。为住户服务的非营利机构的主要活动是向住户和社会提供免费的或价格不具有经济意义的商品或服务，【不包括】由政府部门控制和提供资金支持的机构。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">直接融资与间接融资的区别主要在于资金需求</div>
-  <div class="p">直接融资与间接融资的区别主要在于资金需求者与供给者【是否直接形成债权债务关系】。直接融资的特点包括直接性、分散性、融资的信誉有较大的差异性、部分融资方式具有不可逆性、融资者有相对较强的自主性。间接融资的特点包括资金获得的间接性、融资的相对集中性、融资信誉的差异性相对较小、全部具有可逆性（即可返还性）、融资的主动权主要掌握在金融机构手中。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 直接融资与间接融资的区别主要在于资金需求者与供给者是否直接形成债权债务关系。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">金融资产的持有者为了资金安全而进行资金调拨所形成的国际资金流动被称为（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">国际间接投资</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">投机性资金流动</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">保值性资金流动</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">盈利性资金流动</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于金融市场的说法，错误的是（）</div>
-  <div class="p">金融市场是经济运行状态的“晴雨表”，繁荣的金融市场往往对应着实体经济的兴旺发达，而金融市场的萧条通常也意味着真实经济部门的不景气。金融市场或金融体系首先使“意愿的储蓄”脱离了实物窖藏的方式，使社会可用的投资品总量增长，同时，又将“货币形态”的储蓄提供给需要追加投资的部门，使它们能够支付得起对投资品的需要，最后促成厂商【“非正常存货投资”】的减少，最终实现全社会储蓄与投资的一种事前的或计划的均衡，增</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 下列关于金融市场的说法，错误的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">套利性（盈利性）资金的流动是利用各国金融市场上利率差异与汇率差异进行套利活动而引起的短期资本流动。保值性资金的流动又称作避险性资金流动或资本外逃，它是指金融资产的持有者为了资金安全而进行资金调拨所形成的短期资金流动。投机性资金的流动是指投资者利用国际市场上金融资产或商品价格的波动，进行高抛低吸而形成的资金流动。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">股票市场融资的特点有（）</div>
-  <div class="p">股票市场融资无须退还本金、售出的股票只能转让，不能退股，也不保证收益，但如果企业盈利，股票持有人享受企业盈余的分配权。</div>
-  <div class="example" style="display:none;">
-    <b>答案: CD</b><br>
-    真题: 股票市场融资的特点有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据市场组织方式，证券市场可以分为（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">场外市场</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">发行市场</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">流通市场</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">交易所市场</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">金融市场的重要性主要体现在（）</div>
-  <div class="p">金融市场的重要性主要体现在：促进储蓄—投资转化、优化资源配置、反映经济状态和宏观调控。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABC</b><br>
-    真题: 金融市场的重要性主要体现在（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>AD</b></div>
+    <div class="ans-detail">按组织方式分为交易所市场和场外交易市场。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">间接融资相对集中于银行或非银行金融机构，</div>
-  <div class="p">【融资信誉的差异性相对较小】：间接融资相对集中于银行或非银行金融机构，由于国家对金融机构的管理一般都较为严格，银行自身的经营也多采取稳健方针，加上一些国家实行了存款保险制度，相对于直接融资来说，间接融资的信誉程度高，风险也相对较小，融资的稳定性较强。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 间接融资相对集中于银行或非银行金融机构，国家对金融机构的管理一般都较为严格，银行自身的经营也多采取稳健方针，一些国家还实行了存款保险制度，这反映出间接融资具有资...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">股票市场融资的特点有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">可以退股</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">保证收益</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">可以转让</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">无须退还本金</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>CD</b></div>
+    <div class="ans-detail">股票市场融资无须退还本金、售出的股票只能转让，不能退股，也不保证收益，但如果企业盈利，股票持有人享受企业盈余的分配权。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">金融市场的重要性主要体现在（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">优化资源配置</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">宏观调控</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">促进储蓄-投资转化</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">风险管理</span></div>
 </div>
-<div class="chapter-title">第二章 中国的金融体系与多层次资本市场 <span class="weight">(78题 · 12%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABC</b></div>
+    <div class="ans-detail">金融市场的重要性主要体现在：促进储蓄—投资转化、优化资源配置、反映经济状态和宏观调控。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">期限在1年以上的资金的跨国流动是国际长期资金流动。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">国际长期资金流动，是指期限在1年以上的资金的跨国流动，包括国际直接投资、国际间接投资和国际信贷三种形式。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">直接融资与间接融资的区别主要在于资金需求者与供给者是否直接形成债权债务关系。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">直接融资与间接融资的区别主要在于资金需求者与供给者【是否直接形成债权债务关系】。直接融资的特点包括直接性、分散性、融资的信誉有较大的差异性、部分融资方式具有不可逆性、融资者有相对较强的自主性。间接融资的特点包括资金获得的间接性、融资的相对集中性、融资信誉的差异性相对较小、全部具有可逆性（即可返还性）、融资的主动权主要掌握在金融机构手中。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">间接融资相对集中于银行或非银行金融机构，国家对金融机构的管理一般都较为严格，银行自身的经营也多采取稳健方针，一些国家还实行了存款保险制度，这反映出间接融资具有资金获得的间接性的特点。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">【融资信誉的差异性相对较小】：间接融资相对集中于银行或非银行金融机构，由于国家对金融机构的管理一般都较为严格，银行自身的经营也多采取稳健方针，加上一些国家实行了存款保险制度，相对于直接融资来说，间接融资的信誉程度高，风险也相对较小，融资的稳定性较强。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">下列关于直接融资对金融市场的影响的说法，正确的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">发展多种股权融资方式并不能够弥补间接融资的不足</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">提高直接融资比重，可以起到分散过度集中于银行的金融风险作用</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">直接融资占比反映了一国金融体系风险及风险分布情况</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">直接融资与间接融资的比例可以反映一国金融体系配置的效率是否与实体经济相匹配</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">我国正处于转变经济发展方式、调整产业结构的经济转型期，在这个过程中提高直接融资比重，特别是发展多种股权融资方式【能够】弥补间接融资的不足，也有利于提高实体经济的健康稳定发展。C错误。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第二章 中国的金融体系与多层次资本市场 <span class="ch-weight">(78题 · 12%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">国际经济环境因素作为影响我国金融市场运行</div>
-  <div class="p">国际经济环境因素包括经济全球化、世界货币制度影响、放松监管和加强监管两种经济哲学的交替。汇率和国际资本流动属于宏观经济运行对金融市场的影响。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 国际经济环境因素作为影响我国金融市场运行的主要因素，内容不包括（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">国际经济环境因素作为影响我国金融市场运行的主要因素，内容不包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">世界货币制度影响</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">放松监管和加强监管两种经济哲学的交替</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">汇率和国际资本流动</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">经济全球化</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">国际经济环境因素包括经济全球化、世界货币制度影响、放松监管和加强监管两种经济哲学的交替。汇率和国际资本流动属于宏观经济运行对金融市场的影响。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">中央银行采取宽松性货币政策，（）货币供给</div>
-  <div class="p">中央银行采取宽松性货币政策，增加货币供给，股市资金增加，对股票的需求增加，立即促使股价上升。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 中央银行采取宽松性货币政策，（）货币供给，促使股价（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">中央银行采取宽松性货币政策，（）货币供给，促使股价（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">减少，上升</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">减少，下降</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">增加，下降</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">增加，上升</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">中央银行是代表一国政府发行法偿货币、制定</div>
-  <div class="p">中央银行作为证券发行主体，主要涉及两类证券：1、中央银行【股票】。在一些国家（如美国），中央银行采取了股份制组织结构，通过发行股票募集资金，但是，中央银行的股东并不享有决定中央银行政策的权利，只能按期收取固定的红利，其股票类似于优先股。2、中央银行出于调控货币供给量目的而发行的【特殊债券】。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 中央银行是代表一国政府发行法偿货币、制定和执行货币政策、实施金融监管的重要机构。中央银行作为证券发行主体，既可以发行股票，也可以发行债券。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">中央银行采取宽松性货币政策，增加货币供给，股市资金增加，对股票的需求增加，立即促使股价上升。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">在上海证券交易所设立科创板，坚持面向（）</div>
-  <div class="p">在上海证券交易所新设科创板，坚持面向【世界科技前沿、面向经济主战场、面向国家重大需求】，主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。&amp;nbsp;&amp;nbsp;</div>
-  <div class="example" style="display:none;">
-    <b>答案: ACD</b><br>
-    真题: 在上海证券交易所设立科创板，坚持面向（），主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">以下关于我国金融业主要行业的基本情况，不正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">股份制银行资产规模增长较快</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">在分业监管体系下，相较于银行业和证券业，信托业务的融资活动灵活性不具有优势</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券业传统业务面临激烈的同质化竞争</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">大型商业银行在资产规模、资金来源和网点布局上占有主导地位</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">以下关于我国金融业主要行业的基本情况，不</div>
-  <div class="p">在分业监管体系下，相较于银行业和证券业，信托业务的融资活动更具灵活性优势。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 以下关于我国金融业主要行业的基本情况，不正确的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">在分业监管体系下，相较于银行业和证券业，信托业务的融资活动更具灵活性优势。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">《创业板上市公司证券发行注册管理办法（试</div>
-  <div class="p">《创业板上市公司证券发行注册管理办法（试行）》明确发行上市审核和注册程序，深交所审核期限为2个月，中国证监会注册期限为15个工作日。同时，针对“小额快速”融资设置简易程序</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 《创业板上市公司证券发行注册管理办法（试行）》明确发行上市审核和注册程序，深交所审核期限为（）个月，中国证监会注册期限为（）个工作日。同时，针对（）融资设置简易...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">在上海证券交易所设立科创板，坚持面向（），主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">世界科技前沿</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">资本市场前沿</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">国家重大需求</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">经济主战场</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">行业分类，在联合国统计署按经济活动类型分</div>
-  <div class="p">投资银行属于辅助金融中介的活动，选项C是按照业务特征及货币创造、交换媒介和支付手段的功能划分。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 诚信租行是一家金融租赁公司，拟今年上市，因此聘请A投资银行进行IPO材料的编写，按照行业分类，在联合国统计署按经济活动类型分类的表里，A投资银行属于金融中介的（...
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ACD</b></div>
+    <div class="ans-detail">在上海证券交易所新设科创板，坚持面向【世界科技前沿、面向经济主战场、面向国家重大需求】，主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。&amp;nbsp;&amp;nbsp;</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">出，根据科创板定位，保荐机构优先推荐的科</div>
-  <div class="p">科创板重点推荐六大领域的科技创新企业包括：新一代信息技术领域；高端装备领域；新材料领域；新能源领域；节能环保领域；生物医药领域。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABC</b><br>
-    真题: 上海证券交易所在《上海证券交易所科创板企业上市推荐指引》中指出，根据科创板定位，保荐机构优先推荐的科技创新企业所属的领域包括（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">上海证券交易所在《上海证券交易所科创板企业上市推荐指引》中指出，根据科创板定位，保荐机构优先推荐的科技创新企业所属的领域包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">新能源领域</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">节能环保领域</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">生物医药领域</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">新型农业</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABC</b></div>
+    <div class="ans-detail">科创板重点推荐六大领域的科技创新企业包括：新一代信息技术领域；高端装备领域；新材料领域；新能源领域；节能环保领域；生物医药领域。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">场外交易市场是我国多层次资本市场体系的重要组成部分，主要具备的功能有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">拓宽融资渠道，改善中小企业融资环境</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">为不能在证券交易所上市交易的证券提供流通转让的场所</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">提供风险分层的金融资产管理渠道</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">宏观调控</span></div>
 </div>
-<div class="chapter-title">第三章 证券市场主体 <span class="weight">(90题 · 14%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABC</b></div>
+    <div class="ans-detail">场外交易市场是我国多层次资本市场体系的重要组成部分，主要具备功能：1、拓宽融资渠道，改善中小企业融资环境；2、为不能在证券交易所上市交易的证券提供流通转让的场所；3、提供风险分层的金融资产管理渠道。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">中央银行是代表一国政府发行法偿货币、制定和执行货币政策、实施金融监管的重要机构。中央银行作为证券发行主体，既可以发行股票，也可以发行债券。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">中央银行作为证券发行主体，主要涉及两类证券：1、中央银行【股票】。在一些国家（如美国），中央银行采取了股份制组织结构，通过发行股票募集资金，但是，中央银行的股东并不享有决定中央银行政策的权利，只能按期收取固定的红利，其股票类似于优先股。2、中央银行出于调控货币供给量目的而发行的【特殊债券】。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">当前我国银行业中，在资产规模、资金来源和网点布局上占据主导地位的是城市商业银行。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">【国有大型商业银行】在资产规模、资金来源和网点布局上占据主导地位，业务遍布全国主要城市及大部分县域地区，网点众多且分散，各项业务均衡发展。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">金融产品的创新和复杂化，使得实体经济和金融的界限日益分明。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">实体经济发展水平和质量从根本上决定着金融发展水平和质量，实体经济发展不好，风险最后会集中反映在金融体系中，金融的健康发展可以促进经济增长；反之则不利于经济增长，金融产品的创新和复杂化，使得实体经济和金融的界限【日益模糊】。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">《创业板上市公司证券发行注册管理办法（试行）》明确发行上市审核和注册程序，深交所审核期限为（）个月，中国证监会注册期限为（）个工作日。同时，针对（）融资设置简易程序。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">2；15；小额快速</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">2；10；小额便捷</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">3；15；小额便捷</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">2；15；小额便捷</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">《创业板上市公司证券发行注册管理办法（试行）》明确发行上市审核和注册程序，深交所审核期限为2个月，中国证监会注册期限为15个工作日。同时，针对“小额快速”融资设置简易程序</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第三章 证券市场主体 <span class="ch-weight">(90题 · 14%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">按照《证券公司私募投资基金子公司管理规范</div>
-  <div class="p">按照《证券公司私募投资基金子公司管理规范》，私募基金子公司及其下设特殊目的机构可以以现金管理为目的管理闲置资金，但应当坚持有效控制风险、保证流动性的原则，且只能投资于依法公开发行的国债、央行票据、短期融资券、投资级公司债、货币市场基金及保本型银行理财产品等风险较低、流动性较强的证券。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 按照《证券公司私募投资基金子公司管理规范》，下列说法错误的是（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">负责证券投资者保护基金筹集、管理和使用的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">社保基金理事会</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">中国证券投资者保护基金有限责任公司</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券投资基金</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">中国证券登记结算机构</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">证券投资者保护基金公司负责保护基金筹集、管理和使用。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">证券服务机构为证券的发行、上市、交易等证</div>
-  <div class="p">证券服务机构为证券的发行、上市、交易等证券业务活动制作、出具审计报告、资产评估报告、财务顾问报告、资信评级报告或者法律意见书等文件，应当勤勉尽责，对所依据的文件资料内容的真实性、准确性、完整性进行核查和验证。其制作、出具的文件有虚假记载、误导性陈述或者重大遗漏，给他人造成损失的，应当与发行人、上市公司承担连带赔偿责任，但是，能够证明自己没有过错的除外。如果与被服务机构有利益冲突，需要建立严格的防火</div>
-  <div class="example" style="display:none;">
-    <b>答案: BD</b><br>
-    真题: 证券服务机构为证券的发行、上市、交易等证券业务活动提供相关服务时，关于其法律责任，下列说法正确的有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">按照《证券公司私募投资基金子公司管理规范》，下列说法错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">私募基金子公司管理的闲置资金只能投资于依法公开发行的国债、央行票据等风险较低的证券</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">私募基金子公司管理闲置资金应当坚持有效控制风险、保证流动性的原则</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">私募基金子公司不得从事与私募基金无关的业务</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">私募基金子公司及其下设特殊目的机构可以以盈利为目的管理闲置资金</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">合格境内机构投资者，是指</div>
-  <div class="p">合格境内机构投资者，是指经一国金融管理当局审批通过、获准直接投资境外股票或者债券市场的国内机构投资者，在一定规定下通过【基金】形式募集一定额度的人民币资金。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 合格境内机构投资者，是指经一国金融管理当局审批通过、获准直接投资境外股票或者债券市场的国内机构投资者，在一定规定下通过基金形式募集一定额度的人民币资金。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">按照《证券公司私募投资基金子公司管理规范》，私募基金子公司及其下设特殊目的机构可以以现金管理为目的管理闲置资金，但应当坚持有效控制风险、保证流动性的原则，且只能投资于依法公开发行的国债、央行票据、短期融资券、投资级公司债、货币市场基金及保本型银行理财产品等风险较低、流动性较强的证券。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">国务院证券监督管理机构依法履行职责，有权</div>
-  <div class="p">中国证监会有权对证券发行人、上市公司、证券公司、证券投资基金管理公司、证券服务机构（资产评估机构和资信评级机构属于证券服务机构。）、证券交易所、证券登记结算机构进行现场检查。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 国务院证券监督管理机构依法履行职责，有权对（）进行现场检查。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">会员大会可以行使的职能不包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">管理人员的聘任、解聘及薪酬事项</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">审议和通过理事会、监事会和总经理的工作报告</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">选举和罢免会员理事、会员监事</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">制定和修改证券交易所章程</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">证券公司为期货公司介绍客户时，应当（）</div>
-  <div class="p">证券公司为期货公司介绍客户时，应当向客户明示其与期货公司的介绍业务委托关系，解释期货交易的方式、流程及风险，不得作获利保证、共担风险等承诺，不得向客户虚假宣传、误导客户。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 证券公司为期货公司介绍客户时，应当（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">会员大会可以行使的职能有制定和修改证券交易所章程；选举和罢免会员理事、会员监事；审议和通过理事会、监事会和总经理的工作报告；审议和通过证券交易所的财务预算、决算报告；法律、行政法规、部门规章和证券交易所章程规定的其他重大事项。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">我国对合格境外投资者机构汇出汇入资金的规</div>
-  <div class="p">合格境外投资者未在规定时间内汇满本金的，应当向中国证监会和国家外汇管理局做出【书面】解释。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 我国对合格境外投资者机构汇出汇入资金的规定有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">国务院证券监督管理机构依法履行职责，有权对（）进行现场检查。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">证券交易所</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">上市公司</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券发行人</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">证券登记结算机构</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">负责证券投资者保护基金筹集、管理和使用的</div>
-  <div class="p">证券投资者保护基金公司负责保护基金筹集、管理和使用。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 负责证券投资者保护基金筹集、管理和使用的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">中国证监会有权对证券发行人、上市公司、证券公司、证券投资基金管理公司、证券服务机构（资产评估机构和资信评级机构属于证券服务机构。）、证券交易所、证券登记结算机构进行现场检查。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">政府机构类投资者参与证券投资的主要目的有</div>
-  <div class="p">政府机构类投资者，是指进行证券投资的政府机构。政府机构类投资者的特点是，通常很少考虑盈利，参与证券投资的目的主要是为了调剂资金余缺、实施宏观调控、实行特定产业政策等要求。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 政府机构类投资者参与证券投资的主要目的有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">证券公司为期货公司介绍客户时，应当（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">向客户作获利保证、共担风险等承诺</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">不得向客户虚假宣传、误导客户</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">向客户解释期货交易的方式、流程及风险</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">向客户明示其与期货公司的介绍业务委托关系</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">证券公司为期货公司介绍客户时，应当向客户明示其与期货公司的介绍业务委托关系，解释期货交易的方式、流程及风险，不得作获利保证、共担风险等承诺，不得向客户虚假宣传、误导客户。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">我国对合格境外投资者机构汇出汇入资金的规定有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">合格境外投资者未在规定时间内汇满本金的，应当向中国证监会和国家外汇管理局做出口头解释</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">已批准额度和实际汇入金额的差额，在未经国家外汇局批准之前不得汇入</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">合格境外投资者应当在国家外汇管理局规定的时间内汇入本金</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">汇入的本金应当是国家外汇局批准的可兑换货币</span></div>
 </div>
-<div class="chapter-title">第四章 股票 <span class="weight">(121题 · 19%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">合格境外投资者未在规定时间内汇满本金的，应当向中国证监会和国家外汇管理局做出【书面】解释。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">合格境内机构投资者，是指经一国金融管理当局审批通过、获准直接投资境外股票或者债券市场的国内机构投资者，在一定规定下通过基金形式募集一定额度的人民币资金。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">合格境内机构投资者，是指经一国金融管理当局审批通过、获准直接投资境外股票或者债券市场的国内机构投资者，在一定规定下通过【基金】形式募集一定额度的人民币资金。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">私募基金子公司及其下设基金管理机构将自有资金投资于本机构设立的私募基金的，对单只基金的投资金额不得超过该只基金总额的20%。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">私募基金子公司及其下设基金管理机构将自有资金投资于本机构设立的私募基金的，对单只基金的投资金额不得超过该只基金总额的【20%】。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">合格投资者应在每个会计年度结束后3个月内，向国家外汇管理局报送上一年度境外投资情况报告（包括投资额度使用情况、投资收益情况等）。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">在QDII制度中，合格投资者应在每个会计年度结束后【4个月内】，向国家外汇管理局报送上一年度境外投资情况报告（包括投资额度使用情况、投资收益情况等）。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">政府机构类投资者参与证券投资的主要目的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">提高资金收益率</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">调剂资金余缺</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">实行特定产业政策</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">实施宏观调控</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">政府机构类投资者，是指进行证券投资的政府机构。政府机构类投资者的特点是，通常很少考虑盈利，参与证券投资的目的主要是为了调剂资金余缺、实施宏观调控、实行特定产业政策等要求。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第四章 股票 <span class="ch-weight">(121题 · 19%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">甲公司公开发行股票5亿股，有效报价投资者</div>
-  <div class="p">公开发行股票数量在4亿股（含）以下的，有效报价投资者的数量不少于10家；公开发行股票数量在【4亿股以上】的，有效报价投资者的数量不少于20家。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 甲公司公开发行股票5亿股，有效报价投资者的数量最少为10家。（）
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">引起股票价格变动的直接原因是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">公司经营状况的变化</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">买卖双方力量强弱的转换</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">流动性挤压</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">政治因素</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">引起股票价格变动的直接原因是供求关系的变化或者买卖双方力量强弱的转换。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">引起股票价格变动的直接原因是（）</div>
-  <div class="p">引起股票价格变动的直接原因是供求关系的变化或者买卖双方力量强弱的转换。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 引起股票价格变动的直接原因是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">A公司今年的净利润为500万元，折旧（摊销）共计20万元，本期营运资金增加50万元，长期经营性资产增加15万元，偿还债务80万元。因此当年的股权自由现金流为（）万元。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">365</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">405</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">335</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">375</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">境内上市外资股又被称为B股</div>
-  <div class="p">境内上市外资股，是指在中国境内注册的股份有限公司向境内外投资者发行并在中国境内证券交易所上市，以人民币标明其面值，以外币认购、交易和结算的股份。境内上市外资股又被称为“B股”。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 境内上市外资股又被称为B股。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">FCFE=净利润＋折旧＋摊销－营运资金的增加＋长期经营性负债的增加－长期经营性资产的增加－资本性支出＋新增付息债务－债务本金的偿还=500+20-50-15-80=375万元。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">证券账户信息中的关键信息包括</div>
-  <div class="p">证券账户信息中的关键信息包括投资者姓名或名称和投资者有效身份证明文件及号码，其他信息为非关键信息。</div>
-  <div class="example" style="display:none;">
-    <b>答案: AD</b><br>
-    真题: 证券账户信息中的关键信息包括（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">刘某是S公司的股东，所持有的股票的账面价值为200万元，2018年12月31日，S公司以每10股送2股的形式发放股票股利，送股后，刘某所持股票的账面价值为（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">200万元</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">180万元</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">240万元</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">220万元</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">股票理论价值的相关因素包括</div>
-  <div class="p">股票及其他有价证券的理论价格就是以一定的【必要收益率】计算出来的未来收入的现值。其中未来收入包括【未来股息收入、资本利得收入】。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABD</b><br>
-    真题: 股票理论价值的相关因素包括（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">发放股票股利不影响股东在公司中占有的权益比例和股票的账面价值，故刘某的账面价值还是200万不变。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">与股份公司股利政策密切相关的日期有（）</div>
-  <div class="p">与股份公司股利政策密切相关的日期有：1、除权除息日；2、派息日；3、股利宣布日；4、股权登记日。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ACD</b><br>
-    真题: 与股份公司股利政策密切相关的日期有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">证券账户信息中的关键信息包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">投资者有效身份证明文件及号码</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">投资者电话</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">投资者地址</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">投资者姓名或名称</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">普通股的红利是不固定的，它取决于股份公司</div>
-  <div class="p">认购股票后，公司派发的股息、红利数量取决于股份公司的【经营状况】和【盈利水平】。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BC</b><br>
-    真题: 普通股的红利是不固定的，它取决于股份公司的（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>AD</b></div>
+    <div class="ans-detail">证券账户信息中的关键信息包括投资者姓名或名称和投资者有效身份证明文件及号码，其他信息为非关键信息。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">股票的特征包括</div>
-  <div class="p">股票的特征：收益性、风险性、流动性、永久性、参与性。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 股票的特征包括（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">股票理论价值的相关因素包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">未来资本利得收入</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">必要收益率</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">上一期股息收入</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">未来股息收入</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABD</b></div>
+    <div class="ans-detail">股票及其他有价证券的理论价格就是以一定的【必要收益率】计算出来的未来收入的现值。其中未来收入包括【未来股息收入、资本利得收入】。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">与股份公司股利政策密切相关的日期有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">股权登记日</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">公司半年报公布日</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">除权除息日</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">派息日</span></div>
 </div>
-<div class="chapter-title">第五章 债券 <span class="weight">(120题 · 18%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ACD</b></div>
+    <div class="ans-detail">与股份公司股利政策密切相关的日期有：1、除权除息日；2、派息日；3、股利宣布日；4、股权登记日。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">甲公司公开发行股票5亿股，有效报价投资者的数量最少为10家。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">公开发行股票数量在4亿股（含）以下的，有效报价投资者的数量不少于10家；公开发行股票数量在【4亿股以上】的，有效报价投资者的数量不少于20家。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">境内上市外资股又被称为B股。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">境内上市外资股，是指在中国境内注册的股份有限公司向境内外投资者发行并在中国境内证券交易所上市，以人民币标明其面值，以外币认购、交易和结算的股份。境内上市外资股又被称为“B股”。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">首次公开发行股票采用询价方式的，网下投资者报价后，发行人和主承销商应当剔除拟申购总量中报价最高的部分，剔除部分不得低于所有网下投资者拟申购总量的10%。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">首次公开发行股票采用询价方式的，网下投资者报价后，发行人和主承销商应当剔除拟申购总量中报价最高的部分，剔除部分不得低于所有网下投资者拟申购总量的10%，然后根据剩余报价及拟申购数量协商确定发行价格。剔除部分不得参与网下申购。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">普通股的红利是不固定的，它取决于股份公司的（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">股票市值</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">盈利水平</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">经营状况</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">股票面值</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BC</b></div>
+    <div class="ans-detail">认购股票后，公司派发的股息、红利数量取决于股份公司的【经营状况】和【盈利水平】。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第五章 债券 <span class="ch-weight">(120题 · 18%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">下列属于</div>
-  <div class="p">我国金融债券品种包括：政策性金融债券、商业银行债券、证券公司债券、保险公司次级债务、财务公司债券、金融租赁公司和汽车金融公司的金融债券。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 下列属于金融债券品种的有（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于债券价值的说法，错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">付息间隔越短的债券，风险相对越小</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">债券条款中包含发行人提前赎回权不会影响债券价值</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">短期债券一般到期一次性还本，因此要折价交易</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">免税债券与可比的纳税债券相比价值更大</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">凡是有利于发行人的条款都会相应降低债券价值；反之，有利于持有人的条款则会提高债券价值。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于债券价值的说法，错误的是（）</div>
-  <div class="p">凡是有利于发行人的条款都会相应降低债券价值；反之，有利于持有人的条款则会提高债券价值。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 下列关于债券价值的说法，错误的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">银行业金融机构发行资本补充债券，应满足的条件不包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">偿债能力良好，且成立满一年</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">具有完善的公司治理机制</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">经营稳健，资产结构符合行业特征</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">遵守国家产业政策和信贷政策</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">银行业金融机构发行资本补充债券，应满足的</div>
-  <div class="p">根据中国人民银行2018年第3号公告，银行业金融机构发行资本补充债券，应满足以下条件：具有完善的公司治理机制；偿债能力良好，且成立满【三年】；经营稳健，资产结构符合行业特征，以服务实体经济为导向，遵守国家产业政策和信贷政策；满足宏观审慎管理要求，且主要金融监管指标符合监管部门的有关规定。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 银行业金融机构发行资本补充债券，应满足的条件不包括（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">根据中国人民银行2018年第3号公告，银行业金融机构发行资本补充债券，应满足以下条件：具有完善的公司治理机制；偿债能力良好，且成立满【三年】；经营稳健，资产结构符合行业特征，以服务实体经济为导向，遵守国家产业政策和信贷政策；满足宏观审慎管理要求，且主要金融监管指标符合监管部门的有关规定。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">一般来说，具有高度流动性的债券同时也是较</div>
-  <div class="p">一般来说，政府债券不履行债务的风险最低，D说法错误。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 一般来说，具有高度流动性的债券同时也是较安全的，因为它不仅可以迅速地转换为货币，还可以按一个较稳定的价格转换。关于债券不能收回投资的风险的说法有误的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">一般来说，具有高度流动性的债券同时也是较安全的，因为它不仅可以迅速地转换为货币，还可以按一个较稳定的价格转换。关于债券不能收回投资的风险的说法有误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">政府债券不履行债务的风险较高</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">不同的债务人不履行债务的风险程度是不一样的</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">债务人不履行债务导致债券不能收回投资</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">市场利率水平影响债券的转让价格</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于流通国债的特征</div>
-  <div class="p">流通国债的特征有：投资者可以自由认购、自由转让、通常不记名、转让价格取决于对该国债的供给与需求。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 下列关于流通国债的特征，说法错误的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">一般来说，政府债券不履行债务的风险最低，D说法错误。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于外国债券的说法，正确的是（）</div>
-  <div class="p">外国债券是指某一国家借款人在本国以外的某一国家发行以该国货币为面值的债券。它的特点是债券发行人属于一个国家，债券的面值货币和发行市场属于另一个国家。如在英国发行以英镑计价的外国债券被称为“猛犬债券”。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 下列关于外国债券的说法，正确的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">下列关于债券贴现率的说法，正确的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">信用债的风险溢价一般比浮动利率债的风险溢价低</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">债券贴现率是投资者对债券要求的最低回报率</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">一般用相同期限零息国债的到期收益率来近似表示名义无风险收益率</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">债券必要回报率=真实无风险收益率+预期通货膨胀率+风险溢价</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于债券的说法，错误的是（）</div>
-  <div class="p">凭证式债券的形式是债权人认购债券的一种收款凭证，而不是债券发行人制定的标准格式的债券。故A说法错误。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 下列关于债券的说法，错误的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">信用债的风险溢价一般比浮动利率债的风险溢价高，D错误。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">（）是指</div>
-  <div class="p">【商业银行资本补充债券】是指银行业金融机构为满足资本监管要求而发行的、对特定触发事件下债券偿付事宜作出约定的金融债券，包括但不限于无固定期限资本债券和二级资本债券。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: （）是指银行业金融机构为满足资本监管要求而发行的、对特定触发事件下债券偿付事宜作出约定的金融债券，包括但不限于无固定期限资本债券和二级资本债券。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">下列属于金融债券品种的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">证券公司债券</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">政策性金融债券</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">保险公司次级债</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">商业银行债券</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">我国金融债券品种包括：政策性金融债券、商业银行债券、证券公司债券、保险公司次级债务、财务公司债券、金融租赁公司和汽车金融公司的金融债券。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">影响债券现金流的因素包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">计付息间隔</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">债券的税收待遇</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">票面利率</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">债券的嵌入式期权条款</span></div>
 </div>
-<div class="chapter-title">第六章 证券投资基金 <span class="weight">(88题 · 14%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">债券发行条款规定了债券的现金流，具体包括：①债券的面值和票面利率；②计付息间隔；③债券的嵌入式期权条款；④债券的税收待遇；⑤其他因素。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">地方政府债券按资金用途和偿还资金来源不同可以分为普通债券、特种债券。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">地方政府债券按资金用途和偿还资金来源不同，通常可以分为一般债券（普通债券）和专项债券（收入债券）。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">规定了票面利率、在到期时一次性获得本息、存续期间没有利息支付的债券，称之为附息债券。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">根据债券发行条款中是否规定在约定期限向债券持有人支付利息，债券可分为贴现债券、附息债券、息票累积债券三类。其中，息票累积债券规定了票面利率，但是，债券持有人必须在债券到期时一次性获得本息，存续期间没有利息支付。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">传统的证券发行是以企业为基础，而资产证券化是以特定的资产池为基础发行证券。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">资产证券化是以【特定资产组合或特定现金流】为支持，发行可交易证券的一种融资形式。传统的证券发行是以【企业】为基础，而资产证券化是以【特定的资产池】为基础发行证券。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于流通国债的特征，说法错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">转让价格取决于对该国债的供给与需求</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">通常记名</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">投资者可以自由认购</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">投资者可以自由转让</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">流通国债的特征有：投资者可以自由认购、自由转让、通常不记名、转让价格取决于对该国债的供给与需求。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第六章 证券投资基金 <span class="ch-weight">(88题 · 14%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">私募基金运行期间，信息披露义务人应当在每</div>
-  <div class="p">私募基金运行期间，信息披露义务人应当在每季度结束之日起【10个工作日以内】向投资者披露基金净值、主要财务指标以及投资组合情况等信息。单只私募证券投资基金管理规模金额达到5000万元以上的，应当持续在每月结束之日起5个工作日以内向投资者披露基金净值信息。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 私募基金运行期间，信息披露义务人应当在每季度结束之日起（）个工作日以内向投资者披露基金净值、主要财务指标以及投资组合情况等信息。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">关于投资者申购、赎回一般开放式基金时的价格，下列说法正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">债券基金的申赎遵循“已知价”原则进行申赎</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">有时能即时获知买卖的成交价格</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">只能以申、赎日交易时间结束后基金管理人公布的基金份额净值为基准进行计算</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">与封闭式基金一样，按“已知价”原则进行申赎</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">对一般开放式基金（股票基金、债券基金、混合基金等）而言，在申购、赎回时则遵循“未知价”交易原则，投资者在申购、赎回一般开放式基金份额时并不能即时获知买卖的成交价格。申购、赎回价格只能以申购、赎回日交易时间结束后基金管理人公布的基金份额净值为基准进行计算，这与股票、封闭式基金等金融产品按”已知价”原则进行买卖不同。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">基金的交易实行集体交易管理制度，以保证公</div>
-  <div class="p">基金的交易实行【集中交易管理】制度，基金管理人设有中央交易室，以保证公正、公平为原则，实行统一交易、统一管理，确保各投资组合享有公平的交易执行机会。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 基金的交易实行集体交易管理制度，以保证公正、公平为原则，实行统一交易、统一管理，确保各投资组合享有公平的交易执行机会。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">如果预期某种信息可能对基金份额持有人权益或者基金份额的价格产生重大影响，则该信息为重大信息，相关事件为重大事件，信息披露义务人应当在重大事件发生之日起（）内编制并披露临时报告书。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">3日</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">5日</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">2日</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">1日</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">关于投资者申购、赎回一般开放式基金时的价</div>
-  <div class="p">对一般开放式基金（股票基金、债券基金、混合基金等）而言，在申购、赎回时则遵循“未知价”交易原则，投资者在申购、赎回一般开放式基金份额时并不能即时获知买卖的成交价格。申购、赎回价格只能以申购、赎回日交易时间结束后基金管理人公布的基金份额净值为基准进行计算，这与股票、封闭式基金等金融产品按”已知价”原则进行买卖不同。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 关于投资者申购、赎回一般开放式基金时的价格，下列说法正确的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">如果预期某种信息可能对基金份额持有人权益或者基金份额的价格产生重大影响，则该信息为重大信息，相关事件为重大事件，信息披露义务人应当在重大事件发生之日起2日内编制并披露临时报告书。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">如果预期某种信息可能对基金份额持有人权益</div>
-  <div class="p">如果预期某种信息可能对基金份额持有人权益或者基金份额的价格产生重大影响，则该信息为重大信息，相关事件为重大事件，信息披露义务人应当在重大事件发生之日起2日内编制并披露临时报告书。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 如果预期某种信息可能对基金份额持有人权益或者基金份额的价格产生重大影响，则该信息为重大信息，相关事件为重大事件，信息披露义务人应当在重大事件发生之日起（）内编制...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">存续期募集信息披露主要指开放式基金在基金合同生效后每（）披露一次更新的招募说明书。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">6个月</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">1年</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">3个月</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">9个月</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">开放式基金的特点有（）</div>
-  <div class="p">开放式基金是指基金份额总额不固定，基金份额可以在合同约定的时间和场所内申请申购或者赎回的基金，基金份额资产净值每个交易日公布一次，募集资金需要保持一定的流动性，不能全部用来做长期投资。</div>
-  <div class="example" style="display:none;">
-    <b>答案: AB</b><br>
-    真题: 开放式基金的特点有（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">存续期募集信息披露主要指开放式基金在基金合同生效后每【6个月】披露一次更新的招募说明书。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">投资者适当性管理通常采用的方法有（）</div>
-  <div class="p">投资者适当性管理通常采用【客户调查问卷、产品风险评估与充分披露】等方法，根据客户分级和资产分级匹配原则，避免误导投资者和错误销售。</div>
-  <div class="example" style="display:none;">
-    <b>答案: CD</b><br>
-    真题: 投资者适当性管理通常采用的方法有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">开放式基金的特点有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">没有发行规模限制</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">没有固定期限</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">全部资金可用于长期投资</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">基金份额资产净值每周公布一次</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">以下关于私募基金的说法正确的有（）</div>
-  <div class="p">私募基金的投资金额高，风险较大。C错误。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABC</b><br>
-    真题: 以下关于私募基金的说法正确的有（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>AB</b></div>
+    <div class="ans-detail">开放式基金是指基金份额总额不固定，基金份额可以在合同约定的时间和场所内申请申购或者赎回的基金，基金份额资产净值每个交易日公布一次，募集资金需要保持一定的流动性，不能全部用来做长期投资。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">存续期募集信息披露主要指开放式基金在基金</div>
-  <div class="p">存续期募集信息披露主要指开放式基金在基金合同生效后每【6个月】披露一次更新的招募说明书。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 存续期募集信息披露主要指开放式基金在基金合同生效后每（）披露一次更新的招募说明书。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">投资者适当性管理通常采用的方法有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">承诺收益</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">组合管理</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">产品风险评估</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">客户调查问卷</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>CD</b></div>
+    <div class="ans-detail">投资者适当性管理通常采用【客户调查问卷、产品风险评估与充分披露】等方法，根据客户分级和资产分级匹配原则，避免误导投资者和错误销售。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">以下关于私募基金的说法正确的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">私募基金只能采取非公开方式发行</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">私募基金向特定合格投资者发售</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">私募基金的投资范围广</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">私募基金的投资金额较小，风险较小</span></div>
 </div>
-<div class="chapter-title">第七章 金融衍生工具 <span class="weight">(54题 · 8%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABC</b></div>
+    <div class="ans-detail">私募基金的投资金额高，风险较大。C错误。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">基金的交易实行集体交易管理制度，以保证公正、公平为原则，实行统一交易、统一管理，确保各投资组合享有公平的交易执行机会。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">基金的交易实行【集中交易管理】制度，基金管理人设有中央交易室，以保证公正、公平为原则，实行统一交易、统一管理，确保各投资组合享有公平的交易执行机会。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">基金销售支付机构是指从事基金销售支付活动的机构。基金销售支付机构应按规定在中国证监会备案并取得中国银监会的支付业务许可证资格。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">基金销售支付机构应按规定在中国证监会备案并取得【中国人民银行】的支付业务许可证资格。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">对货币基金而言，基金份额价格固定为1元人民币，故按照固定价格申购赎回。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">对【货币基金】而言，基金份额价格固定为1元人民币，故按照固定价格申购赎回。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">在我国，非公开募集证券投资基金合格投资者累计不得超过（）人。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">250</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">200</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">150</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">100</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">在我国，非公开募集证券投资基金合格投资者累计不得超过200人。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第七章 金融衍生工具 <span class="ch-weight">(54题 · 8%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">按照《中国金融期货交易所交易规则》及相关</div>
-  <div class="p">保证金分为结算准备金和交易保证金。结算准备金是指未被合约占用的保证金；交易保证金是指已被合约占用的保证金。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 按照《中国金融期货交易所交易规则》及相关细则，下列关于金融期货的主要交易规则的说法错误的是（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">自1981年美国所罗门兄弟公司为IBM和世界银行办理了首笔（）之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">美元与马克和瑞士法郎</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">美元与英镑和瑞士法郎</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">美元与英镑和法郎</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">美元与日元和英镑</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">自1981年美国所罗门兄弟公司为IBM和世界银行办理首笔【美元与马克和瑞士法郎】之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">自1981年美国所罗门兄弟公司为IBM和</div>
-  <div class="p">自1981年美国所罗门兄弟公司为IBM和世界银行办理首笔【美元与马克和瑞士法郎】之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 自1981年美国所罗门兄弟公司为IBM和世界银行办理了首笔（）之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">金融衍生工具可以按照（）分为独立衍生工具和嵌入式衍生工具。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">自身交易方式</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">交易场所</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">基础工具种类</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">产品形态</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">从理论上说，潜在盈利有可能无限大的交易者</div>
-  <div class="p">期货交易双方潜在的盈利和亏损都是无限的，而期权购买者潜在的盈利无限大，期权卖方的潜在损失无限大。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABD</b><br>
-    真题: 从理论上说，潜在盈利有可能无限大的交易者有（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">金融衍生工具根据【产品形态】可分为独立衍生工具和嵌入式衍生工具。&amp;lt;br&amp;gt;按照【自身交易的方法和特点】可以分为金融远期合约、金融期货、金融期权、金融互换和结构化金融衍生工具；&amp;lt;br&amp;gt;按照【基础工具种类】，可以分为股权类产品的衍生工具、货币衍生工具、利率衍生工具、信用衍生工具以及其他衍生工具；&amp;lt;br&amp;gt;按照【交易场所】可分为交易所交易的衍生工具和场外交易市场交易的衍生工具。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">根据交易合约的签订与实际交割之间的关系，</div>
-  <div class="p">根据交易合约的签订与实际交割之间的关系，可以将市场交易的组织形态分为现货交易、远期交易及期货交易。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 根据交易合约的签订与实际交割之间的关系，可以将市场交易的组织形态分为（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">以政府债券、欧洲美元债券、大面额可转让存单为基础资产的期权属于（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">股票期权</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">货币期权</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">利率期权</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">互换期权</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">沪深300股指期货合约交易代码为SH</div>
-  <div class="p">沪深300股指期货合约交易代码为IF，中证500股指期货合约代码为IC，上证50股指期货合约代码为IH。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 沪深300股指期货合约交易代码为SH。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">利率期权合约通常以政府短期、中期、长期债券，欧洲美元债券，大面额可转让存单等利率工具为标的物。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">对投资者而言，美国存托凭证ADR的优点包</div>
-  <div class="p">上市公司发放股利时，ADR投资者能及时获得，而且是以【美元】支付。A错误，其余均正确。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ACD</b><br>
-    真题: 对投资者而言，美国存托凭证ADR的优点包括（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">从理论上说，潜在盈利有可能无限大的交易者有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">期货出售者</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">期货购买者</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">期权出售者</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">期权购买者</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">强制减仓制度是指</div>
-  <div class="p">【强制减仓制度】是指交易所将当日以涨跌停板价格申报的未成交平仓报单，以当日涨跌停板价格与该合约净持仓盈利客户按照持仓比例自动撮合成交。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 强制减仓制度是指交易所将当日以涨跌停板价格申报的未成交平仓报单，以当日涨跌停板价格与该合约净持仓盈利客户按照持仓比例自动撮合成交。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABD</b></div>
+    <div class="ans-detail">期货交易双方潜在的盈利和亏损都是无限的，而期权购买者潜在的盈利无限大，期权卖方的潜在损失无限大。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">与金融现货交易相比，金融期货的特征</div>
-  <div class="p">与金融现货交易相比，金融期货的特征具体表现在：交易对象不同、交易目的不同、交易价格的含义不同、交易方式不同、结算方式不同。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 与金融现货交易相比，金融期货的特征具体表现在（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据交易合约的签订与实际交割之间的关系，可以将市场交易的组织形态分为（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">期权交易</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">期货交易</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">远期交易</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">现货交易</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">根据交易合约的签订与实际交割之间的关系，可以将市场交易的组织形态分为现货交易、远期交易及期货交易。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">对投资者而言，美国存托凭证ADR的优点包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">以美元交易，且通过投资者熟悉的当地清算公司进行清算</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">上市公司发放股利时，ADR投资者能及时获得，且以当地货币支付</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">上市交易的ADR需经美国证券交易委员会注册，有助于保障投资者权益</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">某些机构投资者受投资政策限制，不能投资非美国上市证券，ADR可以规避相关限制</span></div>
 </div>
-<div class="chapter-title">第八章 金融风险管理 <span class="weight">(70题 · 11%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ACD</b></div>
+    <div class="ans-detail">上市公司发放股利时，ADR投资者能及时获得，而且是以【美元】支付。A错误，其余均正确。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">沪深300股指期货合约交易代码为SH。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">沪深300股指期货合约交易代码为IF，中证500股指期货合约代码为IC，上证50股指期货合约代码为IH。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">强制减仓制度是指交易所将当日以涨跌停板价格申报的未成交平仓报单，以当日涨跌停板价格与该合约净持仓盈利客户按照持仓比例自动撮合成交。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">【强制减仓制度】是指交易所将当日以涨跌停板价格申报的未成交平仓报单，以当日涨跌停板价格与该合约净持仓盈利客户按照持仓比例自动撮合成交。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">美式期权则可在期权到期日或到期日之前的任何一个营业日执行。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">欧式期权只能在期权到期日执行；美式期权则可在期权到期日或到期日之前的任何一个营业日执行；修正的美式期权也被称为“百慕大期权”或“大西洋期权”，可以在期权到期日之前的一系列规定日期执行。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">与金融现货交易相比，金融期货的特征具体表现在（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">交易目的不同</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">交易价格的含义不同</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">交易方式不同</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">交易对象不同</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">与金融现货交易相比，金融期货的特征具体表现在：交易对象不同、交易目的不同、交易价格的含义不同、交易方式不同、结算方式不同。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第八章 金融风险管理 <span class="ch-weight">(70题 · 11%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">下列属于</div>
-  <div class="p">传统信用风险评估方法包括：专家系统、5Cs和信用打分模型。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ACD</b><br>
-    真题: 下列属于传统信用风险评估方法的是（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">（）可以管理系统性风险和非系统性风险。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">风险对冲</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">风险控制</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">风险分散</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">风险转业</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">与风险分散策略不同，风险对冲可以管理系统性风险和非系统性风险，还可以根据投资者的风险承受能力和偏好，通过对冲比率的调节，将风险降低到预期水平。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">（）是指</div>
-  <div class="p">冲击成本是机构大户面临的流动性成本的重要表现，是指在交易中需要迅速而且大规模地买进或者卖出证券，不能按照预定价位成交而多支付的成本。国际上通常用它来衡量股市、期市的流动性。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: （）是指在交易中需要迅速而且大规模地买进或者卖出证券，不能按照预定价位成交而多支付的成本。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">（）通常被定义为公司融资类客户、交易对手或公司持有证券的发行人在无法履行合同义务的情况下，给公司造成损失的可能性，或者相关信用质量发生恶化情况下，给公司造成损失的可能性。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">操作风险</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">信用风险</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">违约风险</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">市场风险</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">（）可以管理系统性风险和非系统性风险</div>
-  <div class="p">与风险分散策略不同，风险对冲可以管理系统性风险和非系统性风险，还可以根据投资者的风险承受能力和偏好，通过对冲比率的调节，将风险降低到预期水平。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: （）可以管理系统性风险和非系统性风险。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">【信用风险】通常被定义为公司融资类客户、交易对手或公司持有证券的发行人在无法履行合同义务的情况下，给公司造成损失的可能性，或者相关信用质量发生恶化情况下，给公司造成损失的可能性。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">操作风险损失数据收集主要基于（）等几个方</div>
-  <div class="p">操作风险损失数据收集主要基于：（1）内部损失数据；（2）外部损失数据；（3）情景分析；（4）业务环境和内部控制因素。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 操作风险损失数据收集主要基于（）等几个方面。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">如果某金融机构风险管理部门计算得到其资产组合在持有期100天内，在99%的置信水平下的VaR值为1000万人民币，那么这意味着该金融机构的资产组合可以被预期（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">在未来的100天中有1%的概率至多损失1000万人民币</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">在未来的100天中有99%的概率至少损失1000万人民币</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">在未来的100天中有1%的概率至少损失1000万人民币</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">在未来的100天中有99%的概率至多损失1000万人民币</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">（）通常被定义为公司融资类客户、交易对手</div>
-  <div class="p">【信用风险】通常被定义为公司融资类客户、交易对手或公司持有证券的发行人在无法履行合同义务的情况下，给公司造成损失的可能性，或者相关信用质量发生恶化情况下，给公司造成损失的可能性。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: （）通常被定义为公司融资类客户、交易对手或公司持有证券的发行人在无法履行合同义务的情况下，给公司造成损失的可能性，或者相关信用质量发生恶化情况下，给公司造成损失...
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">本题考查单选知识点，需掌握相关概念。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">内部评级所反映的被评级对象的风险特征主要</div>
-  <div class="p">内部评级所反映的被评级对象的风险特征主要是借款者的违约概率和交易工具的违约损失率。</div>
-  <div class="example" style="display:none;">
-    <b>答案: AB</b><br>
-    真题: 内部评级所反映的被评级对象的风险特征主要是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">操作风险损失数据收集主要基于（）等几个方面。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">外部损失数据</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">情景分析</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">业务环境和内部控制因素</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">内部损失数据</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">如果某金融机构风险管理部门计算得到其资产</div>
-  <div class="p">略。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 如果某金融机构风险管理部门计算得到其资产组合在持有期100天内，在99%的置信水平下的VaR值为1000万人民币，那么这意味着该金融机构的资产组合可以被预期（）...
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">操作风险损失数据收集主要基于：（1）内部损失数据；（2）外部损失数据；（3）情景分析；（4）业务环境和内部控制因素。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">风险识别是指</div>
-  <div class="p">风险识别是指对影响各类目标实现的潜在事项或因素予以全面识别、依据风险定义进行系统分类、鉴定风险性质并找出风险原因的过程。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 风险识别是指（）的过程。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">内部评级所反映的被评级对象的风险特征主要是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">交易工具的违约损失率</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">借款者的违约概率</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">预期损失和非预期损失</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">违约风险暴露</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>AB</b></div>
+    <div class="ans-detail">内部评级所反映的被评级对象的风险特征主要是借款者的违约概率和交易工具的违约损失率。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">风险识别是指（）的过程。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">找出风险原因</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">鉴定风险性质</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">对影响各类目标实现的潜在事项或因素予以全面识别</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">依据风险定义进行系统分类</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">风险识别是指对影响各类目标实现的潜在事项或因素予以全面识别、依据风险定义进行系统分类、鉴定风险性质并找出风险原因的过程。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">风险分散是指通过投资或购买与标的资产收益波动负相关的某种资产或衍生产品，来冲销标的资产潜在损失的一种策略性选择。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
 </div>
-
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">【风险对冲】是指通过投资或购买与标的资产收益波动负相关的某种资产或衍生产品，来冲销标的资产潜在损失的一种策略性选择。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">风险控制是金融机构的核心竞争力。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">风险管理是金融机构的核心竞争力。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">风险预警是风险偏好、风险限额以及日常风险管理得以有效实施的重要保障。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">风险监测是风险管理的重要一环，是风险偏好、风险限额以及日常风险管理得以有效实施的重要保障。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据导致市场风险因素的不同，市场风险一般划分为（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">外汇风险</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">股票价格风险</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">商品风险</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">利率风险</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">根据导致市场风险他因素的不同，市场风险一般划分为利率风险、外汇风险、股票价格风险与商品风险。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+</div>
 <div class="subject-section" id="sec-law">
-<div class="no-print" style="text-align:center;font-size:0.85rem;color:var(--dim);margin-bottom:0.8rem;">共 5 章 · 572 题 · 点击卡片展开解析</div>
-<div class="chapter-title">第一章 证券市场基本法律法规 <span class="weight">(161题 · 28%)</span></div>
+<div class="section-desc">共 5 章 · 572 道高频题 · 先看题自测，再点"显示答案"</div>
+<div class="ch-title">第一章 证券市场基本法律法规 <span class="ch-weight">(161题 · 28%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">下列不属于</div>
-  <div class="p">期货交易所履行下列职责：1.提供交易的场所、设施和服务；2.设计合约，安排合约上市；3.组织并监督交易、结算和交割；4.为期货交易提供集中履约担保；5.按照章程和交易规则对会员进行监督管理；6.国务院期货监督管理机构规定的其他职责。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 下列不属于期货交易所职责的是（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">证券的代销、包销期限最长不得超过（）日。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">45</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">30</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">180</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">90</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">证券的代销、包销期限最长不得超过90日。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">下列选项中，不属于</div>
-  <div class="p">公开募集基金的基金管理人应当履行下列职责：（一）依法募集资金，办理基金份额的发售和登记事宜；（二）办理基金备案手续；（三）对所管理的不同基金财产分别管理、分别记账，进行证券投资；（四）按照基金合同的约定确定基金收益分配方案，及时向基金份额持有人分配收益；（五）进行基金会计核算并编制基金财务会计报告；（六）编制中期和年度基金报告；（七）计算并公告基金资产净值，确定基金份额申购、赎回价格；（八）办理与</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 下列选项中，不属于基金管理人职责的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于公司税后利润分配的顺序，正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">提取法定公积金、弥补公司以前年度亏损、提取任意公积金、向股东分配股利</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">弥补公司以前年度亏损、向股东分配股利、提取法定公积金、提取任意公积金</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">提取法定公积金、提取任意公积金、弥补公司以前年度亏损、向股东分配股利</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">弥补公司以前年度亏损、提取法定公积金、提取任意公积金、向股东分配股利</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">要约收购人甲公司拟要约收购上市公司乙股份</div>
-  <div class="p">在收购要约确定的承诺期限内，收购人不得撤销其收购要约。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 要约收购人甲公司拟要约收购上市公司乙股份，根据上市公司乙披露的“要约收购报告书”，甲公司发出要约收购前持有乙公司15万股股份，约占乙公司总股本的28%。本次为甲...
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">根据我国《公司法》的规定，公司税后利润分配的顺序是：（1）弥补亏损；（2）提取法定盈余公积金；（3）提取任意盈余公积金；（4）支付普通股股利（分配利润）。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">下列属于</div>
-  <div class="p">根据公司法的规定，监事会、不设监事会的公司的监事行使下列职权：1、检查公司财务；2、对董事、高级管理人员执行公司职务的行为进行监督，对违反法律、行政法规、公司章程或者股东会决议的董事、高级管理人员提出罢免的建议；3、当董事、高级管理人员的行为损害公司的利益时，要求董事、高级管理人员予以纠正；4、提议召开临时股东会会议，在董事会不履行本法规定的召集和主持股东会会议职责时召集和主持股东会会议；5、向股</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABD</b><br>
-    真题: 下列属于有限责任公司监事会职权的有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于上市公司收购方式的说法，错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">采取要约收购方式的，收购人在收购期限内不得采取要约规定以外的形式和超出要约的条件买入被收购公司的股票</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">采取要约收购方式的，收购人在收购期限内不得卖出被收购公司的股票</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">收购要约约定的收购期限不得少于30日，并不得超过60日</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">采取协议收购方式的，协议双方必须委托证券登记结算机构保管协议转让的资金</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">根据《中华人民共和国证券法》，下列关于证</div>
-  <div class="p">非公开发行的证券，可以在证券交易所、国务院批准的其他全国性证券交易场所、按照【国务院】规定设立的区域性股权市场转让。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABD</b><br>
-    真题: 根据《中华人民共和国证券法》，下列关于证券转让的说法，正确的有（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">采取协议收购方式的，协议双方可以临时委托证券登记结算机构保管协议转让的股票，并将资金存放于指定的银行。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">2019年12月4日，因行情波动，交易者</div>
-  <div class="p">交易者的保证金不符合结算参与人与交易者约定标准的，结算参与人应当按照约定通知交易者在约定时间内追加保证金或者自行平仓；交易者未在约定时间内追加保证金或者自行平仓的，按照约定强行平仓。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 2019年12月4日，因行情波动，交易者赵某账号持仓的X手的某商品期货合约出现涨停，行情走势与赵某的该期货合约持仓方向相反。当日结算显示赵某的账户风险率已经高于...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">下列关于普通合伙企业与有限合伙企业主要区别的说法，正确的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">利润分配方面不同</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">合伙人拥有的权利方面不同</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">合伙人对企业债务的责任方面不同</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">关联交易方面不同</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">证券的代销、包销期限最长不得超过（）日</div>
-  <div class="p">证券的代销、包销期限最长不得超过90日。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 证券的代销、包销期限最长不得超过（）日。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">普通合伙企业和有限合伙企业的主要区别：1、合伙人对企业债务的责任方面；2、合伙人数量方面；3、合伙人权利方面；4、利润分配方面；5、竞业禁止方面；6、关联交易方面；7、出资份额出质方面</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">设立管理公开募集基金的基金管理公司，注册</div>
-  <div class="p">根据《证券投资基金法》第十三条的规定，设立管理公开募集基金的基金管理公司，应当具备的条件之一：注册资本不低于1亿元人民币，且必须为实缴货币资本。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 设立管理公开募集基金的基金管理公司，注册资本不低于法定要求，且资本金可以认缴出资。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据《期货交易管理条例》，有下列情形之一，自被解除职务或被撤销资格之日起未逾5年，则不得担任期货交易所的负责人、财务会计的人员包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">因违法行为或者违纪行为被撤销资格的律师</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">因违法行为或者违纪行为被撤销资格的资产评估机构的专业人员</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">因违法行为或者违纪行为被解除职务的期货交易所的负责人</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">因违法行为或者违纪行为被解除职务的证券公司董事</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">有下列情形之一的人员不得担任期货交易所的负责人、财务会计人员：①因违法行为或者违纪行为被解除职务的期货交易所、证券交易所、证券登记结算机构的负责人，或者期货公司、证券公司的董事、监事、高级管理人员，以及国务院期货监督管理机构规定的其他人员，自被解除职务之日起未逾5年。②因违法行为或者违纪行为被撤销资格的律师、注册会计师或者投资咨询机构、财务顾问机构、资信评级机构、资产评估机构、验证机构的专业人员，自被撤销资格之日起未逾5年。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">关于法的国家意志性，下列说法正确的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">法对人们的行为或者社会关系具有指引、评价、预测、教育及强制的作用</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">在国家主权范围内法具有高度的统一性与最高的权威性</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">国家将之前司法机关对具体案件的裁决赋予其普遍使用的效力属于法的认可</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">法的制定，是指由国家司法机关按照法定程序创制规范性法律文件的活动</span></div>
 </div>
-<div class="chapter-title">第二章 证券经营机构管理规范 <span class="weight">(112题 · 20%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BC</b></div>
+    <div class="ans-detail">法的制定，是指由国家【立法】机关按照法定程序创制规范性法律文件的活动，A错误。法的规范性是法的基本特征，正是基于法的规范性，使法对人们的行为或社会关系具有指引、评价、预测、教育及强制的作用。C错误。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">设立管理公开募集基金的基金管理公司，注册资本不低于法定要求，且资本金可以认缴出资。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">根据《证券投资基金法》第十三条的规定，设立管理公开募集基金的基金管理公司，应当具备的条件之一：注册资本不低于1亿元人民币，且必须为实缴货币资本。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">我国《证券法》规定的证券种类的品种有包括股票、公司债券、存托凭证、汇票。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">在中华人民共和国境内，股票、公司债券、存托凭证和国务院依法认定的其他证券的发行和交易，适用证券法</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">股份有限公司发行新股募足股款后，必须向证券交易所办理变更登记，并公告。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">公司发行新股募足股款后，必须向公司登记机关办理变更登记，并公告。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于《证券法》的适用范围的说法，错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">政府债券、证券投资基金份额的上市交易</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">在中华人民共和国境内，股票、公司债券、存托凭证和国务院依法认定的其他证券的发行和交易</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">在中华人民共和国境外的证券发行和交易活动，扰乱中华人民共和国境内市场秩序，损害境内投资者合法权益的，依照境外相关规定处理并追究责任</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">资产支持证券、资产管理产品发行、交易的管理办法，由国务院依照《证券法》的原则规定</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">《证券法》的适用范围包括：1、在中华人民共和国境内，股票、公司债券、存托凭证和国务院依法认定的其他证券的发行和交易，适用本法；本法未规定的，适用《中华人民共和国公司法》和其他法律、行政法规的规定。2、政府债券、证券投资基金份额的上市交易，适用本法；其他法律、行政法规另有规定的，适用其规定。3、资产支持证券、资产管理产品发行、交易的管理办法，由国务院依照本法的原则规定。在中华人民共和国境外的证券发行和交易活动，扰乱中华人民共和国境内市场秩序，损害境内投资者合法权益的，依照本法有关规定处理并追究法律责任。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第二章 证券经营机构管理规范 <span class="ch-weight">(112题 · 20%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 7次</span>
-  <div class="k">根据《证券基金经营机构信息技术管理办法》</div>
-  <div class="p">信息技术服务的范围如下：1、重要信息系统的开发、测试、集成及测评；2、重要信息系统的运维及日常安全管理；3、中国证监会规定的其他情形。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 根据《证券基金经营机构信息技术管理办法》，信息技术服务的范围包括（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">根据《证券公司信用风险管理指引》，下列关于证券公司信用风险业务类型的说法，正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">包括互换、场外期权、远期等场外衍生品业务（不包括信用衍生品）</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">包括股票投资、约定购回式证券交易、融资融券等融资类业务</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">包括债券投资交易业务（不包括国债、地方债、金融债、政府支持机构债）</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">包括非标准化债权资产投资业务</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">按照业务类型分类，包括但不限于：【股票质押式回购交易】、约定购回式证券交易、融资融券等融资类业务；互换、场外期权、远期、【信用衍生品】等场外衍生品业务；债券投资交易（包括债券现券交易、债券回购交易、债券远期交易、债券借贷业务等债券相关交易业务），债券包括但不限于【国债】、地方债、金融债、政府支持机构债、企业债、非金融企业债务融资工具、公司债、资产支持证券、同业存单；【非标准化债权资产投资】；其他涉及信用风险的自有资金出资业务。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">赵某为乙证券公司独立董事，工作勤勉尽责、</div>
-  <div class="p">任何人员最多可以在2家证券公司担任独立董事。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 赵某为乙证券公司独立董事，工作勤勉尽责、廉洁从业、专业能力强。乙证券公司拟聘请赵某分管公司某业务，丙证券公司、丁基金公司均欲邀请赵某兼职独立董事。根据该案例，回...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于证券公司投资者适当性留痕的说法，正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">通过互联网等非现场方式进行的，由专业投资者通过符合规定的电子方式进行确认</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">通过营业部网点向专业投资者进行警示的，应当全过程录音录像</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">通过互联网等非现场方式进行的，由普通投资者通过符合规定的电子方式进行确认</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">通过营业部网点向普通投资者进行告知的，必须全程录像</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">根据《证券期货投资者适当性管理办法》，下</div>
-  <div class="p">应保护投资者的合法权益，无需保护收益的持续性和平稳性。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 根据《证券期货投资者适当性管理办法》，下列关于落实投资者适当性应遵循的原则，错误的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">通过营业网点向普通投资者进行告知、警示的，应当全过程录音或者录像；通过互联网等非现场方式进行的，应当完善配套留痕安排，由普通投资者通过符合法律、行政法规要求的电子方式进行确认。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">根据《证券公司流动性风险管理指引》，下列</div>
-  <div class="p">证券公司流动性风险管理的目标，是建立健全流动性风险管理体系，对流动性风险实施有效识别、计量、监测和控制，确保其流动性需求能够及时以合理成本得到满足。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 根据《证券公司流动性风险管理指引》，下列关于证券公司流动性风险管理目标的说法，正确的有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">当可疑交易明显涉嫌洗钱、恐怖融资等犯罪活动的，证券公司应当在向中国反洗钱监测分析中心提交可疑交易报告的同时，以电子形式或书面形式向（）或者其分支机构报告，并配合反洗钱调查。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">所在地中国人民银行</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">中国反洗钱监测分析中心</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">所在地中国证监会</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">注册地中国证监会</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">证券公司应当按照法律、行政法规和中国证监</div>
-  <div class="p">证券公司应当按照法律、行政法规和中国证监会的规定建立完备的【合规管理、风险管理和内部控制体系】，故选B。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 证券公司应当按照法律、行政法规和中国证监会的规定建立完备的盈利评估体系。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">当可疑交易明显涉嫌洗钱、恐怖融资等犯罪活动的，证券公司应当在向中国反洗钱监测分析中心提交可疑交易报告的同时，以电子形式或书面形式向【所在地中国人民银行】或者其分支机构报告，并配合反洗钱调查。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">根据《证券公司流动性风险管理指引》，证券</div>
-  <div class="p">证券公司应对流动性风险实施限额管理，根据其业务规模、性质、复杂程度、流动性风险偏好和外部市场发展变化、监管要求等情况，设定流动性风险限额并对其执行情况进行监控。证券公司应至少【每年】对流动性风险限额进行【一次】评估，必要时进行调整。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 根据《证券公司流动性风险管理指引》，证券公司应至少（）对流动性风险限额进行一次评估，必要时进行调整。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">甲证券公司营销人员王某拟向某70岁以上的高龄退休客户张某主动推介代销的某私募基金，根据张某在营业部填写的风险承受能力测评问卷，显示张某的风险承受能力结果为R1，但营销人员王某拟推荐的私募基金产品风险等级结果为R5，于是营销人员王某放弃了主动向张某超风险推荐该私募基金的计划。（1）关于证券公司向客户推介金融产品的行为，下列说法错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">应当了解客户的身份、财产和收入状况</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">应当了解客户的金融知识和投资经验、投资目标、风险偏好等</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券公司认为客户购买金融产品不适当或者无法判断其适当性的，可以向其主动推介，但应由客户签字确认</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">委托人明确约定购买人范围的，证券公司不得超出委托人确定的购买人范围</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">证券公司应当委托外部专业机构开展信息技术</div>
-  <div class="p">证券公司应当委托外部专业机构开展信息技术管理工作的全面审计，频率不低于每3年一次。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 证券公司应当委托外部专业机构开展信息技术管理工作的全面审计，频率为不低于每半年一次。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">证券公司认为客户购买金融产品不适当或者无法判断其适当性的，【不可以】向其主动推介。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">洗钱风险管理工作基本原则中，（）是指</div>
-  <div class="p">【同一性原则】是指证券公司应赋予同一客户在本金融机构唯一的风险等级。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 洗钱风险管理工作基本原则中，（）是指证券公司应赋予同一客户在本金融机构唯一的风险等级。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据《证券公司流动性风险管理指引》，证券公司的融资管理应符合的要求包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">加强融资渠道管理，积极维护与主要融资交易对手的关系，保持在市场上的适当活跃程度，不定期评估市场融资和资产变现能力</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">分析正常和压力情景下未来不同时间段的融资需求和来源</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">密切监测主要金融市场的交易量和价格等变动情况，评估市场流动性对公司融资能力的影响</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">加强负债品种、期限、交易对手、融资抵（质）押品和融资市场等的集中度管理，适当设置集中度限额</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">证券公司的融资管理应符合以下要求：1、分析正常和压力情景下未来不同时间段的融资需求和来源。2、加强负债品种、期限、交易对手、融资抵（质）押品和融资市场等的集中度管理，适当设置集中度限额。3、加强融资渠道管理，积极维护与主要融资交易对手的关系，保持在市场上的适当活跃程度，【并定期】评估市场融资和资产变现能力。4、密切监测主要金融市场的交易量和价格等变动情况，评估市场流动性对公司融资能力的影响。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据《证券公司投资银行类业务内部控制指引》，下列说法错误的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">通过委托外部机构对投资银行类业务内部控制有效性进行评估的，证券公司依法应当承担的责任可以免除</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对投资银行类项目负有主要管理责任人员的收入递延支付年限原则上不得多于3年</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">投资银行类业务专职内部控制人员数量不得低于投资银行类业务人员总数的1/10</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">投资银行内部控制执行效果评估每两年评估1次</span></div>
 </div>
-<div class="chapter-title">第三章 证券公司业务规范 <span class="weight">(161题 · 28%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABD</b></div>
+    <div class="ans-detail">对投资银行类项目负有主要管理或执行责任人员的收入递延支付年限原则上不得【少】于3年。应当根据监管要求、业务发展等情况的需要，建立内部控制执行效果定期评估机制。证券公司应当自行或委托外部专业机构对投资银行类业务内部控制的有效性进行全面评估。内部控制执行效果评估【每年】不得少于1次。委托外部机构对投资银行类业务内部控制有效性进行评估的，应当对外部机构的独立性和专业性进行审慎调查，避免发生利益冲突。证券公司依法应当承担的责任【不因】委托外部机构而免除。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">委托信息技术服务机构提供产品或服务的，证券公司依法应当承担的责任可因委托而免除或减轻。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">证券公司借助信息技术手段从事证券基金业务活动的，可以委托信息技术服务机构提供产品或服务，【但证券公司依法应当承担的责任不因委托而免除或减轻。】</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">根据《证券期货投资者适当性管理办法》，专业投资者可以划分为三类。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">依据《证券期货投资者适当性管理办法》，专业投资者可以划分为三类。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">证券公司应当按照法律、行政法规和中国证监会的规定建立完备的盈利评估体系。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">证券公司应当按照法律、行政法规和中国证监会的规定建立完备的【合规管理、风险管理和内部控制体系】，故选B。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于证券公司分支机构的说法，正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">证券公司设立分支机构具有法人资格</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">分支机构负责人资格无需证监局审批</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券公司设立分支机构需要证监局审批</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">证券公司某营业部负责人可以兼任其他营业部的负责人</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">分支机构负责人资格无需审批，A选项正确。【国务院证券监督管理机构】审批证券公司及其分支机构的设立申请。设立申请，由【证监会】审批，B选项错误。证券公司某营业部负责人不可以兼任其他营业部的负责人，C选项错误。证券公司设立分支机构不具有法人资格，D选项错误。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第三章 证券公司业务规范 <span class="ch-weight">(161题 · 28%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 6次</span>
-  <div class="k">下列不属于</div>
-  <div class="p">中国证监会建立监管信息系统，对财务顾问及其财务顾问主办人进行持续动态监管，并将以下事项记入其诚信档案：1、财务顾问及其财务顾问主办人被中国证监会采取监管措施的；2、在持续督导期间，上市公司或者其他委托人违反公司治理有关规定、相关资产状况及上市公司经营成果等与财务顾问的专业意见出现较大差异的；3、中国证监会认定的其他事项。</div>
-  <div class="example" style="display:none;">
-    <b>答案: D</b><br>
-    真题: 下列不属于对财务顾问及其财务顾问主办人进行持续动态监管，并应计入其诚信档案的事项是（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">中国证监会对违反《证券公司融资融券业务管理办法》的证券公司可采取的监管措施不包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">暂停部分业务</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">暂停全部业务</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">追究刑事责任</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">撤销业务许可</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">证券公司或其分支机构违反《证券公司融资融券业务管理办法》，中国证监会或者其派出机构可采取责令改正、监管谈话、出具警示函、责令公开说明、责令参加培训、责令定期报告、暂不受理与行政许可有关的文件、暂停部分或者全部业务、撤销业务许可等相关监管措施。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 4次</span>
-  <div class="k">下列属于</div>
-  <div class="p">质押式报价回购交易的异常情况一般包括：1、证券公司质押专用账户中质押券或质押现金被司法等机关冻结或强制执行的；2、证券公司被暂停或终止报价回购业务权限的；3、证券公司进入风险处置或破产程序的；4、客户资金账户被司法等机关冻结或强制执行的；5、质押券中的债券到期的。D标的证券暂停上市或终止上市属于约定购回式证券交易的异常情况。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABD</b><br>
-    真题: 下列属于质押式报价回购交易异常情况的情形有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">私募基金子公司应当于（）结束后10个工作日内编制并向协会报送私募基金业务（）度报告。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">每季；季</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">每周；周</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">每年；年</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">每月；月</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">某证券投资咨询公司开发了一款荐股软件，具</div>
-  <div class="p">证券投资咨询机构开展“荐股软件”销售，应将销售（服务）协议格式、营销宣传、产品推介等营销推介材料报【住所地证监局和中国证券业协会】备案。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 某证券投资咨询公司开发了一款荐股软件，具有提供具体证券投资品种的买卖时机建议等功能，该公司利用其开展证券投资咨询业务。根据该案例，回答以下问题：（2）证券投资咨...
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">私募基金子公司应当于【每月】结束后10个工作日内编制并向协会报送私募基金业务【月】度报告。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">根据《证券期货经营机构私募资产管理业务管</div>
-  <div class="p">金融机构对资产管理产品应当实行净值化管理。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 根据《证券期货经营机构私募资产管理业务管理办法》有关规定，证券公司应当对资产管理计划实行滚动发行、分离定价管理。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">私募基金子公司根据税收、政策、监管、合作方需求等需要下设基金管理机构等特殊目的机构的，应当持有该机构（）以上的股权或出资，且拥有管理控制权。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">35%</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">10%</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">50%</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">20%</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">在客户交易结算资金第三方存管模式下的客户</div>
-  <div class="p">客户资金存取应当以银证转账方式通过本人银行结算账户进行。【指定商业银行】根据客户指令，负责在客户银行结算账户与客户资金汇总账户之间划转资金，无须证券公司介入，从而防止证券公司假借客户提款挪用资金。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 在客户交易结算资金第三方存管模式下的客户资金存入过程中，指定商业银行根据客户转账指令，负责在客户银行结算账户与客户资金汇总账户之间划转资金。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">私募基金子公司根据税收、政策、监管、合作方需求等需要下设基金管理机构等特殊目的机构的，应当持有该机构【35%以上】的股权或出资，且拥有管理控制权。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">证券公司（）合计持有一家上市公司股票及其</div>
-  <div class="p">证券公司通过其自营证券账户、融券专用证券账户和转融通担保证券明细账户合计持有一家上市公司股票及其权益的数量或者其增减变动达到规定的比例时，应当依法履行信息报告、披露或者要约收购义务。</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 证券公司（）合计持有一家上市公司股票及其权益的数量或者其增减变动达到规定的比例时，应当依法履行信息报告、披露或者要约收购义务。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">证券公司（）合计持有一家上市公司股票及其权益的数量或者其增减变动达到规定的比例时，应当依法履行信息报告、披露或者要约收购义务。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">客户普通证券账户</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">自营证券账户</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">融券专用证券账户</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">转融通担保证券明细账户</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">证券公司受期货公司委托从事中间介绍业务，</div>
-  <div class="p">证券公司受期货公司委托从事介绍业务，应当提供下列服务：（1）协助办理开户手续；（2）提供期货行情信息、交易设施；（3）中国证监会规定的其他服务。证券公司不得代理客户进行期货交易、结算或者交割，不得代期货公司、客户收付期货保证金，不得利用证券资金账户为客户存取、划转期货保证金。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 证券公司受期货公司委托从事中间介绍业务，应当提供协助客户办理开户手续、代理客户进行期货交易、提供期货行情信息、交易设施等服务。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">证券公司通过其自营证券账户、融券专用证券账户和转融通担保证券明细账户合计持有一家上市公司股票及其权益的数量或者其增减变动达到规定的比例时，应当依法履行信息报告、披露或者要约收购义务。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">《证券公司融资融券业务管理办法》的证券公</div>
-  <div class="p">证券公司或其分支机构违反《证券公司融资融券业务管理办法》，中国证监会或者其派出机构可采取责令改正、监管谈话、出具警示函、责令公开说明、责令参加培训、责令定期报告、暂不受理与行政许可有关的文件、暂停部分或者全部业务、撤销业务许可等相关监管措施。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 中国证监会对违反《证券公司融资融券业务管理办法》的证券公司可采取的监管措施不包括（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据《证券公司融资融券业务管理办法》的规定，除（）情形外，任何人不得动用证券公司客户信用交易担保证券账户内的证券和客户信用交易担保资金账户内的资金。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">收取客户应当支付的违约金</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">收取客户应当支付的利息、费用、税款</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">收取客户应当归还的资金、证券</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">为客户进行融资融券交易的结算</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">除上述答案外，还有按照该办法的规定以及客户的约定处分担保物；客户提取还本付息、支付税费及违约金后的剩余证券和资金；法律法规和该办法规定的其他情形。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">金融机构将本机构的资产管理产品资金委托给其他机构进行投资的，该受托机构应当（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">切实履行主动管理责任、不具备条件的情况下再进行转委托</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">可以再投资公募证券投资基金以外的资产管理产品</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">接受金融监督管理部门监管</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">具有专业投资能力和资质</span></div>
 </div>
-<div class="chapter-title">第四章 违法违规行为及法律责任 <span class="weight">(39题 · 7%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>CD</b></div>
+    <div class="ans-detail">该受托机构应当为具有专业投资能力和资质的受金融监督管理部门监管的机构。受托机构应当切实履行主动管理职责，不得进行转委托，不得再投资公募证券投资基金以外的资产管理产品。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">证券公司受期货公司委托从事中间介绍业务，应当提供协助客户办理开户手续、代理客户进行期货交易、提供期货行情信息、交易设施等服务。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">证券公司受期货公司委托从事介绍业务，应当提供下列服务：（1）协助办理开户手续；（2）提供期货行情信息、交易设施；（3）中国证监会规定的其他服务。证券公司不得代理客户进行期货交易、结算或者交割，不得代期货公司、客户收付期货保证金，不得利用证券资金账户为客户存取、划转期货保证金。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">不具备承销业务资格的证券公司只能以对冲风险为目的，从事金融衍生品交易。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">具备证券自营业务资格的证券公司可以从事金融衍生产品交易，不具备证券自营业务资格的证券公司只能以对冲风险为目的，从事金融衍生产品交易。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">证券、期货投资咨询机构与报刊、电台、电视台合办或者协办证券、期货投资咨询版面、节目或者与电信服务部门进行业务合作时，应当向地方证管办（中国证监会）备案，备案材料包括版面安排或者节目时间段、项目负责人等。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">证券、期货投资咨询机构与报刊、电台、电视台合办或者协办证券、期货投资咨询版面、节目或者与电信服务部门进行业务合作时，应当向地方证管办（中国证监会）备案，备案材料包括：合作内容、起止时间、版面安排或者节目时间段、项目负责人等，并加盖双方单位的印鉴。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于证券公司柜台市场信息披露的相关说法，错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">根据信息性质及私募业务相关规定分类披露，信息披露义务人按照约定向投资者披露的信息包括公开披露信息和向特定对象披露信息</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">证券公司应当通过本公司网站、机构间私募产品报价与服务系统等信息披露平台，披露私募产品相关信息</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">涉及证券公司客户隐私的信息、涉及第三方商业秘密的信息均为证券公司不得向公众披露的私募业务信息</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">证券公司应当制定明确的柜台市场信息披露规则，并由证券公司对柜台市场所披露信息的真实性、准确性、完整性负责</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">证券公司应当制定明确的柜台市场信息披露规则，【信息披露义务人】应当对所披露信息的真实性、准确性、完整性负责。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第四章 违法违规及法律责任 <span class="ch-weight">(39题 · 7%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">2019年10月至2022年2月间，李某</div>
-  <div class="p">利用未公开信息交易，是指证券交易所、期货交易所、证券公司、期货经纪公司、基金管理公司、商业银行、保险公司等金融机构的从业人员以及有关监管部门或者行业协会的工作人员，利用因职务便利获取的内幕信息以外的其他未公开的信息，违反规定，从事与该信息相关的证券、期货交易活动，或者明示、暗示他人从事相关交易活动，情节严重的行为。内幕交易、泄露内幕信息，是指证券、期货交易内幕信息的知情人员或者非法获取证券、期货交</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 2019年10月至2022年2月间，李某担任甲基金管理有限责任公司基金经理，将负责管理该公司“A基金”账户的投资决策信息告诉其夫蒋某，并与蒋某共同出资10万元，...
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">2019年10月至2022年2月间，李某担任甲基金管理有限责任公司基金经理，将负责管理该公司“A基金”账户的投资决策信息告诉其夫蒋某，并与蒋某共同出资10万元，利用其大学同学陈某账户先于“A基金”买入股票并获利1万余元。关于李某的行为，以下说法正确有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">不构成犯罪，但是应当承担行政责任</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">构成利用未公开信息交易罪</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">构成泄露内幕信息罪</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">构成内幕交易罪</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">利用未公开信息交易，是指证券交易所、期货交易所、证券公司、期货经纪公司、基金管理公司、商业银行、保险公司等金融机构的从业人员以及有关监管部门或者行业协会的工作人员，利用因职务便利获取的内幕信息以外的其他未公开的信息，违反规定，从事与该信息相关的证券、期货交易活动，或者明示、暗示他人从事相关交易活动，情节严重的行为。内幕交易、泄露内幕信息，是指证券、期货交易内幕信息的知情人员或者非法获取证券、期货交易内幕信息的人员，在涉及证券的发行，证券、期货交易或者其他对证券、期货交易价格有重大影响的信息尚未公开前，买入或者卖出该证券，或者从事与该内幕信息有关的期货交易，或者泄露该信息，或者明示、暗示他人从事上述交易活动，情节严重的行为。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">根据《证券法》，下列属于</div>
-  <div class="p">A选项违反了相关从业规定</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 根据《证券法》，下列属于证券公司及其从业人员从事的损害客户利益的行为的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">根据《证券法》，下列属于证券公司及其从业人员从事的损害客户利益的行为的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">根据客户的真实意思表示，维护客户利益</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">为牟取佣金收入，诱使客户进行不必要的证券买卖</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">根据客户的委托为其买卖证券</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">在规定的时间内向客户提供交易的确认文件</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于集资诈骗罪的说法，正确的有（）</div>
-  <div class="p">集资诈骗罪是指以非法占有为目的，使用诈骗方法非法集资的行为。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ACD</b><br>
-    真题: 下列关于集资诈骗罪的说法，正确的有（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">A选项违反了相关从业规定</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">根据《证券法》，下列关于上市公司收购相关</div>
-  <div class="p">收购人未按照规定履行上市公司收购的公告、发出收购要约义务的，责令改正，给予警告，并处以50万元以上500万元以下的罚款。对直接负责的主管人员和其他直接责任人员给予警告，并处以20万元以上200万元以下的罚款。D错误；收购人及其控股股东、实际控制人利用上市公司收购，给被收购公司及其股东造成损失的，应当依法承担赔偿责任。A、B错误。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABC</b><br>
-    真题: 根据《证券法》，下列关于上市公司收购相关法律责任的说法，错误的有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列说法不属于变相公开发行股票情形的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">向特定对象转让股票，未经中国证监会核准，转让后公司股东139人</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">非公开发行股票及其股权转让采用推介会的方式向社会公众发行</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">公司股东自行以公开方式向社会公众转让股票</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">公司股东委托他人以公开方式向社会公众转让股票</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">是否存在责任人有专业背景，对于信息披露中</div>
-  <div class="p">略。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 是否存在责任人有专业背景，对于信息披露中与其专业背景有关违法事项应当发现而未予指出的情况，是影响信息披露违法责任人员责任大小的认定因素之一。（）
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">变相公开发行包括但不限于以下几种情形：1、非公开发行股票及其股权转让，采用广告、公告、广播、电话、传真、信函、推介会、说明会、网络、短信、公开劝诱等公开方式或变相公开方式向社会公众发行；2、公司股东自行或委托他人以公开方式向社会公众转让股票，亦构成变相公开发行股票；3、向特定对象转让股票，未经中国证监会核准，转让后公司股东累计超过200人。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">。根据该案例，回答以下问题：（2）证券从</div>
-  <div class="p">证券从业人员不得从事以下活动：（1）从事内幕交易或利用未公开信息交易活动，泄露利用工作便利获取的内幕信息或其他未公开信息，或明示、暗示他人从事内幕交易活动；（2）利用资金优势、持股优势和信息优势，单独或者合谋串通，影响证券交易价格或交易量，误导和干扰市场；（3）编造、传播虚假信息，作出虚假陈述或信息误导，扰乱证券市场；（4）损害社会公共利益、所在机构或者他人的合法权益；（5）从事与其履行职责有利益</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 2019年10月至2022年2月间，李某担任甲基金管理有限责任公司基金经理，利用管理该公司“某优选成长基金”账户而掌握有关投资决策、交易等方面信息的职务便利，使...
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">下列关于集资诈骗罪的说法，正确的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">集资诈骗罪的犯罪客观方面为使用诈骗手段实施非法集资，且数额较大的行为</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">集资诈骗罪的犯罪主观方面是故意，无需以非法占有为目的</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">单位犯集资诈骗罪的，对单位判处罚金，并对其直接负责的主管人员和其他直接责任人员依照《刑法》相关规定进行处罚</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">个人集资诈骗，数额在10万元以上的；单位集资诈骗，数额在50万元以上的，应予以立案追诉</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">在证券、期货市场上，操纵市场的行为方式主</div>
-  <div class="p">期货市场上操纵市场行为包括：1、单独或者合谋，集中资金优势、持股或者持仓优势或者利用信息优势联合或者连续买卖，操纵证券、期货交易价格或者证券、期货交易量的；2、与他人串通，以事先约定的时间、价格和方式相互进行证券、期货交易，影响证券、期货交易价格或者证券、期货交易量的；3、在自己实际控制的账户之间进行证券交易，或者以自己为交易对象，自买自卖期货合约，影响证券、期货交易价格或者证券、期货交易量的；4</div>
-  <div class="example" style="display:none;">
-    <b>答案: BCD</b><br>
-    真题: 在证券、期货市场上，操纵市场的行为方式主要有（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ACD</b></div>
+    <div class="ans-detail">集资诈骗罪是指以非法占有为目的，使用诈骗方法非法集资的行为。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 1次</span>
-  <div class="k">下列关于在证券交易活动中作出虚假陈述或者</div>
-  <div class="p">在证券交易活动中作出虚假陈述或者信息误导的，责令改正，处以20万元以上200万元以下的罚款；属于国家工作人员的，还应当依法给予行政处分。</div>
-  <div class="example" style="display:none;">
-    <b>答案: CD</b><br>
-    真题: 下列关于在证券交易活动中作出虚假陈述或者信息误导的法律责任的说法，错误的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">根据《证券法》，下列关于上市公司收购相关法律责任的说法，错误的有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">收购人利用上市公司收购，损害被收购公司股东的合法权益，无需承担赔偿责任</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">收购人控股股东未按照规定履行上市公司收购的公告、发出收购要约义务的，责令改正，给予警告，并处以罚款</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">收购人的控股股东利用上市公司收购，损害被收购公司及其股东的合法权益，应当由被收购公司承担赔偿责任</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">收购人未按照规定履行上市公司收购的公告、发出收购要约义务的，责令改正，给予警告，并处以罚款</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABC</b></div>
+    <div class="ans-detail">收购人未按照规定履行上市公司收购的公告、发出收购要约义务的，责令改正，给予警告，并处以50万元以上500万元以下的罚款。对直接负责的主管人员和其他直接责任人员给予警告，并处以20万元以上200万元以下的罚款。D错误；收购人及其控股股东、实际控制人利用上市公司收购，给被收购公司及其股东造成损失的，应当依法承担赔偿责任。A、B错误。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">2019年10月至2022年2月间，李某担任甲基金管理有限责任公司基金经理，利用管理该公司“某优选成长基金”账户而掌握有关投资决策、交易等方面信息的职务便利，使用其实际控制的“左某”证券账户，先于或同期于基金账户买入或卖出相同股票103支，买入金额共计人民币8067万元（以下币种均为人民币），卖出金额共计3841万元，获利金额共计18万元。根据该案例，回答以下问题：（2）证券从业人员不得从事的活动包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">编造、传播虚假信息</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">隐匿、伪造、篡改或者毁损交易记录</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">接受利益相关方的贿赂或对其进行贿赂</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">从事与其履行职责有利益冲突的业务</span></div>
 </div>
-<div class="chapter-title">第五章 行业文化与职业道德 <span class="weight">(99题 · 17%)</span></div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ABCD</b></div>
+    <div class="ans-detail">证券从业人员不得从事以下活动：（1）从事内幕交易或利用未公开信息交易活动，泄露利用工作便利获取的内幕信息或其他未公开信息，或明示、暗示他人从事内幕交易活动；（2）利用资金优势、持股优势和信息优势，单独或者合谋串通，影响证券交易价格或交易量，误导和干扰市场；（3）编造、传播虚假信息，作出虚假陈述或信息误导，扰乱证券市场；（4）损害社会公共利益、所在机构或者他人的合法权益；（5）从事与其履行职责有利益冲突的业务；（6）接受利益相关方的贿赂或对其进行贿赂，如接受或赠送礼物、回扣、补偿或报酬等，或从事可能导致与投资者或所在机构之间产生利益冲突的活动；（7）买卖法律明文禁止买卖的证券；（8）利用工作之便向任何机构和个人输送利益，损害客户和所在机构利益；（9）违规向客户作出投资不受损失或保证最低收益的承诺；（10）隐匿、伪造、篡改或者毁损交易记录；（11）中国证监会、中国证券业协会禁止的其他行为。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">是否存在责任人有专业背景，对于信息披露中与其专业背景有关违法事项应当发现而未予指出的情况，是影响信息披露违法责任人员责任大小的认定因素之一。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">本题考查判断知识点，需掌握相关概念。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">证券交易所不能成为背信运用受托财产罪主体。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">该罪的主体是特殊主体，为商业银行、证券交易所、期货交易所、证券公式、期货经纪公司、保险公司或者其他金融机构。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">操纵证券市场行为给投资者造成损失的，行为人应当依法承担赔偿责任。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">操纵证券市场行为给投资者造成损失的，应当依法承担赔偿责任。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">在证券、期货市场上，操纵市场的行为方式主要有（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">内幕交易</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">与他人串通，以约定的价格进行交易</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">自买自卖期货合约</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">合谋操纵证券交易价格或数量</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>BCD</b></div>
+    <div class="ans-detail">期货市场上操纵市场行为包括：1、单独或者合谋，集中资金优势、持股或者持仓优势或者利用信息优势联合或者连续买卖，操纵证券、期货交易价格或者证券、期货交易量的；2、与他人串通，以事先约定的时间、价格和方式相互进行证券、期货交易，影响证券、期货交易价格或者证券、期货交易量的；3、在自己实际控制的账户之间进行证券交易，或者以自己为交易对象，自买自卖期货合约，影响证券、期货交易价格或者证券、期货交易量的；4、以其他方法操纵证券、期货市场的。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+<div class="ch-title">第五章 行业文化与职业道德 <span class="ch-weight">(99题 · 17%)</span></div>
 <div class="card-grid">
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 3次</span>
-  <div class="k">根据《关于证券业从业人员登记管理有关事项</div>
-  <div class="p">从业人员应当通过所在机构进行登记，机构应当自从业人员入职（含试用期）之日起7个工作日内，通过协会从业人员管理平台，将经本机构审核过的从业人员登记信息提交至协会进行登记。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 根据《关于证券业从业人员登记管理有关事项的通知》，下列关于证券业从业人员的登记程序的说法，错误的是（）。
+<div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于执行《证券经营机构及其工作人员廉洁从业实施细则》的说法，不正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">在证券业协会进行业务注册并接受协会自律管理的非证券期货经营机构在从事证券相关业务时应参照执行</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">已成为证券业协会会员的证券公司境内子公司应当执行</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券投资咨询公司可自行决定是否执行</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">证券资信评级公司在从事证券相关业务时应参照执行</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>C</b></div>
+    <div class="ans-detail">证券经营机构是指证券公司及其境内子公司会员；工作人员是指以公司名义开展业务的人员，包括与公司建立劳动关系的正式员工、与公司签署委托协议的经纪人、劳务派遣至公司的其他人员等。证券投资咨询公司、证券资信评级公司等中国证券业协会（以下简称协会）会员，以及在协会进行业务注册或者备案并接受协会自律管理的其他机构及个人，在从事证券相关业务时参照本细则执行。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">下列关于执行《证券经营机构及其工作人员廉</div>
-  <div class="p">证券经营机构是指证券公司及其境内子公司会员；工作人员是指以公司名义开展业务的人员，包括与公司建立劳动关系的正式员工、与公司签署委托协议的经纪人、劳务派遣至公司的其他人员等。证券投资咨询公司、证券资信评级公司等中国证券业协会（以下简称协会）会员，以及在协会进行业务注册或者备案并接受协会自律管理的其他机构及个人，在从事证券相关业务时参照本细则执行。</div>
-  <div class="example" style="display:none;">
-    <b>答案: C</b><br>
-    真题: 下列关于执行《证券经营机构及其工作人员廉洁从业实施细则》的说法，不正确的是（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">根据《证券业从业人员资格管理办法》，从事证券业务的专业人员不包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">证券资信评估机构中从事证券资信评估业务的专业人员</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">信托机构业务部门的管理人员</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">证券公司从事证券经纪业务部门的管理人员</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">证券投资咨询机构从事证券投资咨询业务的专业人员</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">根据《证券业从业人员资格管理办法》，从事</div>
-  <div class="p">根据《证券业从业人员资格管理办法》，从事证券业务的专业人员是指：1.证券公司中从事自营、经纪、承销、投资咨询、受托投资管理等业务的专业人员，包括相关业务部门的管理人员；2.基金管理公司、基金托管机构中从事基金销售、研究分析、投资管理、交易、监察稽核等业务的专业人员，包括相关业务部门的管理人员；基金销售机构中从事基金宣传、推销、咨询等业务的专业人员，包括相关业务部门的管理人员；3.证券投资咨询机构中</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 根据《证券业从业人员资格管理办法》，从事证券业务的专业人员不包括（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">根据《证券业从业人员资格管理办法》，从事证券业务的专业人员是指：1.证券公司中从事自营、经纪、承销、投资咨询、受托投资管理等业务的专业人员，包括相关业务部门的管理人员；2.基金管理公司、基金托管机构中从事基金销售、研究分析、投资管理、交易、监察稽核等业务的专业人员，包括相关业务部门的管理人员；基金销售机构中从事基金宣传、推销、咨询等业务的专业人员，包括相关业务部门的管理人员；3.证券投资咨询机构中从事证券投资咨询业务的专业人员及其管理人员；4.证券资信评估机构中从事证券资信评估业务的专业人员及其管理人员；5.中国证监会规定需要取得从业资格和执业证书的其他人员。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">下列属于</div>
-  <div class="p">行业文化建设的基本要求：1、坚持依法合规，筑牢发展基础；2、坚持诚实守信，恪守职业操守；3、坚持专业精神，提升服务能力；4、坚持稳健经营，促进健康发展；5、坚持廉洁自律，弘扬清风正气；6、牢记社会责任，展现良好形象。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABC</b><br>
-    真题: 下列属于证券行业文化建设的基本要求的有（）。
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">下列关于证券公司对从事证券经纪业务相关人员的管理要求的说法，错误的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">客户证券账户转托管和撤销指定交易等业务可由同一人完成操作与复核</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">涉及客户资金账户及证券账户的开立、信息修改、注销等业务应当一人操作、一人复核，复核应当留痕</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">与客户权益变动相关业务的经办人员之间，应当建立制衡机制</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">涉及客户账户资产变动记录的差错确认与调整等非常规性业务操作，应当事前审批，事后复核，审批及复核均应留痕</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 多">多选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">证券期货经营机构及其工作人员违反《证券期</div>
-  <div class="p">从重处理的情形：1、直接、间接或者唆使、协助他人向监管人员输送利益；2、连续或者多次违反本规定；3、涉及金额较大或者涉及人员较多；4、产生恶劣社会影响；5、曾为公职人员特别是监管人员，以及曾任证券期货经营机构合规风控职务的人员违反本规定；6、中国证监会认定应当从重处理的其他情形。</div>
-  <div class="example" style="display:none;">
-    <b>答案: ABCD</b><br>
-    真题: 证券期货经营机构及其工作人员违反《证券期货经营机构及其工作人员廉洁从业规定》，有下列（）情形的，中国证监会应当从重处理。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">与客户权益变动相关业务的经办人员之间，应当建立制衡机制。涉及客户资金账户及证券账户的开立、信息修改、注销，建立及变更客户资金存管关系，客户证券账户转托管和撤销指定交易等与客户权益直接相关的业务应当一人操作、一人复核，复核应当留痕。涉及限制客户资产转移、改变客户证券账户和资金账户的对应关系、客户账户资产变动记录的差错确认与调整等非常规性业务操作，应当事先审批，事后复核，审批及复核均应留痕。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">根据《关于加强证券经纪业务管理的规定</div>
-  <div class="p">根据《关于加强证券经纪业务管理的规定》，从事【技术】、风险监控、合规管理的人员不得从事营销、客户账户及客户资金存管等业务活动。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 根据《关于加强证券经纪业务管理的规定》，证券公司技术人员可以从事客户账户及客户资金存管业务活动。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">被采取市场禁入措施的人员，应当遵循的规定包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">由所在机构按规定程序解除其被禁止担任的职务</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">不得在任何公司担任董事、监事、高级管理人员职务</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">立即停止从事证券业务</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">立即停止履行上市公司董事、监事、高级管理人员职务</span></div>
 </div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 单">单选</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">根据《证券期货经营机构私募资产管理业务管</div>
-  <div class="p">根据《证券期货经营机构私募资产管理业务管理办法》《关于证券期货经营机构从事私募资产管理业务投资经理登记的通知》，证券公司投资经理应当具备从事证券业务所需的专业能力，具有三年以上投资管理、投资研究、投资咨询等相关业务经验，具备良好的诚信记录和职业操守，且最近三年未被监管机构采取重大行政监管措施、行政处罚，符合法律法规规定的其他条件。</div>
-  <div class="example" style="display:none;">
-    <b>答案: A</b><br>
-    真题: 根据《证券期货经营机构私募资产管理业务管理办法》，下列关于证券公司从事私募资产管理业务的投资经理应具备的条件，错误的是（）。
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ACD</b></div>
+    <div class="ans-detail">被采取证券市场禁入措施的人员：1、在禁入期间内，除不得继续在原机构从事证券业务或者担任原上市公司董事、监事、高级管理人员职务外，也不得在其他任何机构中从事证券业务或者担任其他上市公司董事、监事、高级管理人员职务。2、应当在收到中国证监会作出的证券市场禁入决定后，立即停止从事证券业务或者停止履行上市公司董事、监事、高级管理人员职务，并由其所在机构按规定的程序解除其被禁止担任的职务。</div>
   </div>
-</div>
-<div class="card" onclick="toggleDetail(this)">
-  <span class="tag 判">判断</span>
-  <span class="freq">⭐ 2次</span>
-  <div class="k">根据《证券业从业人员执业行为准则》，对证</div>
-  <div class="p">根据《证券业从业人员执业行为准则》，对证券业从业人员的执业行为进行自律管理的主体是中国证券业协会。</div>
-  <div class="example" style="display:none;">
-    <b>答案: B</b><br>
-    真题: 根据《证券业从业人员执业行为准则》，对证券业从业人员的执业行为进行自律管理的主体是中国证券业协会。（）
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
   </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">（3）保荐代表人违反《证券发行上市保荐业务管理办法》，中国证监会可以采取的监管措施包括（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">重点关注</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">公开谴责</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">监管谈话</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">责令进行业务学习</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>ACD</b></div>
+    <div class="ans-detail">保荐机构、保荐代表人、保荐业务负责人和内核负责人违反本办法，未诚实守信、勤勉尽责地履行相关义务的，中国证监会【责令改正，并对其采取监管谈话、重点关注、责令进行业务学习、出具警示函、责令公开说明、认定为不适当人选】等监管措施；依法应给予行政处罚的，依照有关规定进行处罚；情节严重涉嫌犯罪的，依法移送司法机关，追究其刑事责任。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag m">多选</div>
+  <div class="q-text">有关保荐代表人制作或者出具的文件不齐备或者不符合要求的，下列说法正确的是（）。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">情节严重的，中国证监会可以在3个月到12个月内不受理保荐机构，保荐代表人具体负责的推荐</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">中国证监会会视情节轻重，采取责令改正、监管谈话、出具警示函等监管措施</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">情节严重的，中国证监会可以在6个月到24个月内不受理保荐机构，保荐代表人具体负责的推荐</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">中国证监会会视情节轻重，采取监管或者市场禁入措施</span></div>
 </div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>AB</b></div>
+    <div class="ans-detail">保荐代表人出现下列情形之一的，中国证监会可以视情节轻重，采取责令改正、监管谈话、出具警示函等监管措施；情节严重的，中国证监会可以在3个月到12个月内不受理保荐机构、保荐代表人具体负责的推荐：1、制作或者出具的文件不齐备或者不符合要求；2、擅自改动申请文件、信息披露资料或者其他已提交文件；3、申请文件或者信息披露资料存在相互矛盾或者同一事实表述不一致且有实质性差异；4、文件披露的内容表述不清，逻辑混乱，严重影响投资者理解；5、未及时报告或者未及时披露重大事项；6、指定不符合《办法》第四条规定要求的人员具体负责保荐工作；7、未通过内核程序，以公司名义对外提交或披露保荐业务项目文件；8、采取业务包干等承包方式或其他形式进行过度激励；9、以显著低于行业定价水平等不正当竞争方式招揽业务，违反公平竞争、破坏市场秩序。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">证券评级机构从事证券评级业务，应当制定科学的评级方法和完善的质量控制制度。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
 </div>
-
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>B</b></div>
+    <div class="ans-detail">本题考查判断知识点，需掌握相关概念。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">机构或者其管理人员对从业人员发出指令涉嫌违法违规的，从业人员可按照所在机构内部程序向高级管理人员、中国证监会报告。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">机构或者其管理人员对从业人员发出指令涉嫌违法违规的，从业人员应及时按照所在机构内部程序向高级管理人员或者董事会报告。机构未妥善处理的，从业人员应及时向中国证监会或者中国证券业协会报告。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag j">判断</div>
+  <div class="q-text">向投资者销售或者提供“荐股软件”，并直接或者间接获取经济利益的，属于从事证券公司中间介绍业务，应当经中国证监会许可，取得相关业务资格。（）</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>A</b></div>
+    <div class="ans-detail">向投资者销售或者提供“荐股软件”，并直接或者间接获取经济利益的，属于从事【证券投资咨询业务】，应当经中国证监会许可，取得证券投资咨询业务资格。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div><div class="card">
+  <div class="ch-tag s">单选</div>
+  <div class="q-text">证券期货经营机构在内部检查中，发现存在违反规定行为的，证券期货经营机构应当在（）个工作日内，向中国证券业协会有关派出机构报告。</div>
+  <div class="opts"><div class="co"><span class="ck">A</span><span class="cv">7</span></div>
+<div class="co"><span class="ck">B</span><span class="cv">10</span></div>
+<div class="co"><span class="ck">C</span><span class="cv">12</span></div>
+<div class="co"><span class="ck">D</span><span class="cv">5</span></div>
+</div>
+  <div class="ans-area" style="display:none;">
+    <div class="ans-label">✅ 正确答案：<b>D</b></div>
+    <div class="ans-detail">证券期货经营机构在内部检查中，发现存在违反规定行为的，证券期货经营机构应当在【5】个工作日内，向中国证券业协会有关派出机构报告。</div>
+  </div>
+  <div class="card-actions">
+    <span class="show-ans" onclick="toggleAns(this)">👁 显示答案</span>
+  </div>
+</div></div>
+</div>
 
 </div>
 <script>
-function switchSubject(key, el) {
-  document.querySelectorAll('.subject-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('sec-' + key).classList.add('active');
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+function sw(key) {
+  document.querySelectorAll('.subject-section').forEach(s => s.classList.remove('on'));
+  document.getElementById('sec-' + key).classList.add('on');
+  document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('sw-' + key).classList.add('on');
 }
-function toggleDetail(el) {
-  var ex = el.querySelector('.example');
-  var p = el.querySelector('.p');
-  if (ex) {
-    var isHidden = ex.style.display === 'none';
-    ex.style.display = isHidden ? '' : 'none';
-    p.style.display = isHidden ? 'none' : '';
-  }
+function toggleAns(el) {
+  var card = el.closest('.card');
+  var ans = card.querySelector('.ans-area');
+  var isShow = ans.classList.contains('show');
+  ans.classList.toggle('show');
+  el.textContent = isShow ? '👁 显示答案' : '🙈 隐藏答案';
+  el.classList.toggle('done', !isShow);
 }
-// 默认显示金融基础
+// Default show fin
 </script>
-<div class="footer">⚡ 知而不行，只是未知 · 点击卡片展开真题示例</div>
+<div class="footer">⚡ 知而不行，只是未知 · 点击「显示答案」自测 · 打印自动展开答案</div>
 </body>
 </html>
