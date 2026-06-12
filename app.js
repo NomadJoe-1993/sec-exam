@@ -379,3 +379,4 @@ function showPage(id) {
   document.getElementById(id).classList.add('active');
 }
 function goHome() { showPage('page-home'); renderHome(); }
+function openStudyCards() { window.open('study_cards.html', '_blank'); }
