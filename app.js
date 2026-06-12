@@ -181,7 +181,7 @@ function renderQ() {
   if (!q) return;
   const total = curExam.questions.length;
 
-  document.getElementById('q-num').textContent = q.id;
+  document.getElementById('q-num').textContent = q.id || (curIdx + 1);
   const tag = document.getElementById('q-tag');
   const tmap = { single:'单选', multi:'多选', judge:'判断' };
   tag.textContent = tmap[q.type] || q.type; tag.className = 'q-tag ' + q.type;
