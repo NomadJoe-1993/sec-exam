@@ -3,1344 +3,748 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#f5efe6">
 <title>证券从业 · 高频考点速记</title>
 <style>
-:root { --bg:#0b1120; --card:#1a2332; --border:rgba(148,163,184,0.12); --text:#f1f5f9; --dim:#94a3b8; --accent:#38bdf8; --green:#34d399; --green-bg:rgba(52,211,153,0.12); --red:#f87171; --red-bg:rgba(248,113,113,0.12); --yellow:#fbbf24; --yellow-bg:rgba(251,191,36,0.12); }
+:root {
+  --bg: #f5efe6;
+  --card: #faf6f0;
+  --blue: #1e5b8a;
+  --red: #c23b22;
+  --green: #3d7246;
+  --gold: #c9a96e;
+  --border: #d4c9b8;
+  --text: #3d3229;
+  --dim: #8b7e6e;
+  --tag-bg: #efe9df;
+  --shadow: rgba(62, 50, 41, 0.08);
+}
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; padding:0.8rem; }
-.container { max-width:820px; margin:0 auto; }
-/* Header */
-.hd { text-align:center; padding:0.8rem 0; border-bottom:1px solid var(--border); margin-bottom:0.6rem; }
-.hd h1 { font-size:1.2rem; font-weight:800; background:linear-gradient(135deg,var(--accent),var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.hd .sub { color:var(--dim); font-size:0.75rem; }
-.sw { display:flex; gap:5px; justify-content:center; margin:0.5rem 0; }
-.swb { padding:0.3rem 0.9rem; border-radius:999px; font-size:0.8rem; font-weight:600; border:1px solid var(--border); cursor:pointer; background:var(--card); color:var(--dim); }
-.swb.on { background:linear-gradient(135deg,var(--accent),var(--green)); color:#0b1120; border-color:transparent; }
-/* Sections */
-.sec { display:none; }
-.sec.on { display:block; }
-.ch-title { font-size:0.95rem; font-weight:700; padding:0.4rem 0; margin:0.6rem 0 0.2rem; border-bottom:1px solid var(--border); color:var(--accent); }
-.ch-w { font-size:0.7rem; color:var(--dim); font-weight:400; }
-/* Knowledge Points */
-.kp-list { display:flex; flex-direction:column; gap:2px; margin-bottom:0.5rem; }
-.kp-item { background:var(--card); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
-.kp-item.h3 { border-left:3px solid var(--red); }
-.kp-item.h2 { border-left:3px solid var(--yellow); }
-.kp-item.h1 { border-left:3px solid var(--green); }
-.kp-head { display:grid; grid-template-columns:28px 50px 1fr; gap:6px; align-items:center; padding:5px 8px; cursor:pointer; }
-.kp-rank { font-size:0.7rem; color:var(--dim); font-weight:600; text-align:center; }
-.kp-bar { height:8px; background:rgba(148,163,184,0.06); border-radius:4px; overflow:hidden; }
-.kp-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--accent),var(--green)); }
-.kp-body { display:flex; align-items:center; justify-content:space-between; gap:6px; }
-.kp-name { font-size:0.82rem; font-weight:600; }
-.kp-count { font-size:0.7rem; color:var(--dim); white-space:nowrap; }
-.kp-count b { font-size:0.95rem; color:var(--accent); }
-/* Detail (hidden by default) */
-.kp-detail { display:none; padding:0 8px 8px; }
-.kp-item.exp .kp-detail { display:block; }
-.kp-explain { font-size:0.78rem; color:var(--dim); padding:6px 8px; background:rgba(148,163,184,0.04); border-radius:6px; margin-bottom:6px; line-height:1.6; }
-.kp-sample { background:rgba(56,189,248,0.03); border:1px solid rgba(56,189,248,0.1); border-radius:8px; padding:8px; }
-.sm-head { font-size:0.7rem; color:var(--dim); margin-bottom:4px; display:flex; align-items:center; gap:6px; }
-.ch-tag { font-size:0.6rem; padding:1px 6px; border-radius:3px; font-weight:600; }
-.ch-tag.s { background:var(--green-bg); color:var(--green); }
-.ch-tag.m { background:var(--red-bg); color:var(--red); }
-.ch-tag.j { background:var(--yellow-bg); color:var(--yellow); }
-.sm-q { font-size:0.82rem; line-height:1.6; margin-bottom:4px; }
-.sm-opts { display:flex; flex-direction:column; gap:3px; }
-.co { display:flex; align-items:flex-start; gap:5px; padding:2px 5px; border-radius:4px; font-size:0.78rem; background:rgba(148,163,184,0.02); }
-.ck { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; font-size:0.65rem; font-weight:700; flex-shrink:0; background:rgba(148,163,184,0.1); color:var(--dim); }
-.cv { flex:1; line-height:1.4; }
-.sm-ans { font-size:0.82rem; color:var(--green); margin-top:4px; padding-top:4px; border-top:1px dashed var(--border); }
-/* Footer */
-.footer { text-align:center; padding:0.8rem; color:var(--dim); font-size:0.7rem; border-top:1px solid var(--border); margin-top:0.6rem; }
-/* Print */
-@media print {
-  @page { size:A4; margin:0.5cm; }
-  body { background:#fff; color:#000; padding:0; font-size:9px; }
-  .hd h1 { -webkit-text-fill-color:#000; color:#000; background:none; }
-  .sw { display:none; }
-  .sec { display:block !important; }
-  .kp-item { background:#f8f9fa; border:1px solid #ddd; }
-  .kp-detail { display:block !important; }
-  .kp-explain { color:#555; }
-  .kp-count b { color:#1976d2; }
-  .ch-title { color:#1976d2; }
-  .sm-ans { color:#2e7d32; }
+html { font-size:16px; }
+body {
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.container { max-width: 820px; margin: 0 auto; padding: 0 0.75rem 1rem; }
+
+/* ====== Header ====== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 85%, transparent 100%);
+  padding: 0.6rem 0 0.3rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.back-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--blue);
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.back-btn:active { background: var(--tag-bg); }
+.header h1 {
+  flex: 1;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+}
+
+/* ====== Subject Tabs ====== */
+.sw { display: flex; gap: 6px; }
+.swb {
+  flex: 1;
+  padding: 0.45rem 0.3rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: var(--card);
+  color: var(--dim);
+  text-align: center;
+  transition: all 0.2s;
+  user-select: none;
+}
+.swb:active { transform: scale(0.97); }
+.swb.on {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  box-shadow: 0 2px 8px rgba(30,91,138,0.25);
+}
+
+/* ====== Subject Sections ====== */
+.sec { display: none; }
+.sec.on { display: block; }
+
+/* ====== Chapter Title ====== */
+.ch-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.5rem 0 0.3rem;
+  margin: 0.6rem 0 0.3rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.ch-w {
+  font-size: 0.68rem;
+  color: var(--dim);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ====== Knowledge Point List ====== */
+.kp-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 0.6rem; }
+.kp-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.kp-item:active { box-shadow: 0 1px 4px var(--shadow); }
+
+/* Left border indicator: heat level */
+.kp-item.h3 { border-left: 4px solid var(--red); }
+.kp-item.h2 { border-left: 4px solid var(--blue); }
+.kp-item.h1 { border-left: 4px solid var(--gold); }
+
+/* Head row */
+.kp-head {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.kp-rank {
+  font-size: 0.68rem;
+  color: var(--dim);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.kp-body {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.kp-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.kp-count {
+  font-size: 0.7rem;
+  color: var(--dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.kp-count b { font-size: 0.95rem; color: var(--blue); }
+
+/* Bar row */
+.kp-bar-wrap {
+  grid-column: 1 / -1;
+  padding: 0 10px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.kp-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--tag-bg);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.kp-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.kp-fill.high { background: linear-gradient(90deg, var(--red), #d45a4a); }
+.kp-fill.mid { background: linear-gradient(90deg, var(--blue), #3a7ab5); }
+.kp-fill.low { background: linear-gradient(90deg, var(--gold), #daac6e); }
+
+/* Collapse indicator */
+.kp-arrow {
+  font-size: 0.6rem;
+  color: var(--dim);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.kp-item.exp .kp-arrow { transform: rotate(180deg); }
+
+/* ====== Detail Section ====== */
+.kp-detail {
+  display: none;
+  padding: 0 10px 10px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  padding-top: 8px;
+}
+.kp-item.exp .kp-detail { display: block; }
+
+/* Analysis / 考点精讲 */
+.kp-explain {
+  font-size: 0.78rem;
+  color: var(--text);
+  padding: 8px 10px;
+  background: var(--tag-bg);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  line-height: 1.7;
+  border-left: 3px solid var(--gold);
+}
+.kp-explain-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+
+/* Practice section / 真题演练 */
+.kp-practice {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+}
+.practice-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.ch-tag {
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.ch-tag.s { background: #e3f0fa; color: var(--blue); }
+.ch-tag.m { background: #fde8e6; color: var(--red); }
+.ch-tag.j { background: #f5efe0; color: var(--gold); }
+.practice-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--dim);
+}
+.pq {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* ====== Options ====== */
+.opts { display: flex; flex-direction: column; gap: 5px; }
+.co {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  border: 1.5px solid transparent;
+  background: var(--tag-bg);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.co:active { transform: scale(0.98); }
+.co .ck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: var(--card);
+  color: var(--dim);
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.co.selected {
+  border-color: var(--blue);
+  background: #e8f0f8;
+}
+.co.selected .ck {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.co.correct {
+  border-color: var(--green) !important;
+  background: #eaf5ec !important;
+}
+.co.correct .ck {
+  background: var(--green) !important;
+  color: #fff !important;
+  border-color: var(--green) !important;
+}
+.co.wrong {
+  border-color: var(--red) !important;
+  background: #fde8e6 !important;
+}
+.co.wrong .ck {
+  background: var(--red) !important;
+  color: #fff !important;
+  border-color: var(--red) !important;
+}
+.co.disabled { pointer-events: none; opacity: 0.85; }
+
+/* ====== Result Area ====== */
+.result-area {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  display: none;
+}
+.result-area.show { display: block; }
+.result-area.correct {
+  background: #eaf5ec;
+  border: 1px solid var(--green);
+  color: #2a5a35;
+}
+.result-area.wrong {
+  background: #fde8e6;
+  border: 1px solid var(--red);
+  color: #8a2a1e;
+}
+.result-area .ra-answer { font-weight: 700; margin-bottom: 2px; }
+.result-area .ra-explain { color: var(--text); margin-top: 4px; }
+
+/* ====== Action Buttons ====== */
+.practice-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.practice-btn {
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  background: var(--card);
+  color: var(--text);
+  text-align: center;
+  flex: 1;
+}
+.practice-btn:active { transform: scale(0.97); }
+.practice-btn.primary {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.practice-btn.primary:active { opacity: 0.85; }
+.practice-btn.reset { color: var(--dim); }
+.practice-btn.reset:active { background: var(--tag-bg); }
+
+/* ====== Footer ====== */
+.footer {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  color: var(--dim);
+  font-size: 0.7rem;
+  margin-top: 0.8rem;
+  position: relative;
+}
+.footer::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue), var(--gold), var(--blue), transparent);
+  margin-bottom: 0.6rem;
+  border-radius: 1px;
+}
+
+/* ====== Loading & Empty States ====== */
+.loading-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--dim);
+  font-size: 0.9rem;
+}
+.loading-state .spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-bottom: 0.5rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--dim);
+  font-size: 0.85rem;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 480px) {
+  .container { padding: 0 0.5rem 1rem; }
+  .header h1 { font-size: 1rem; }
+  .swb { font-size: 0.75rem; padding: 0.4rem 0.2rem; }
+  .kp-name { font-size: 0.78rem; }
+  .kp-head { padding: 6px 8px; grid-template-columns: 24px 1fr; }
+  .co { font-size: 0.76rem; padding: 6px; }
+  .kp-explain { font-size: 0.75rem; padding: 6px 8px; }
+  .pq { font-size: 0.78rem; }
+  .practice-btn { font-size: 0.74rem; padding: 0.4rem 0.6rem; }
+}
+@media (min-width: 640px) {
+  .kp-head { padding: 9px 12px; }
+  .kp-name { font-size: 0.88rem; }
+  .co { padding: 8px 10px; }
+  .ch-title { font-size: 0.98rem; }
 }
 </style>
 </head>
 <body>
+
 <div class="container">
-<div class="hd">
-  <h1>📊 证券从业 · 高频考点速记</h1>
-  <div class="sub">考点按考频排序 · 点击展开代表考题 · <span style="color:var(--red)">红=高频</span> <span style="color:var(--yellow)">黄=中频</span> <span style="color:var(--green)">绿=低频</span></div>
-  <div class="sw">
-    <span class="swb on" onclick="sw('fin',this)">📈 金融市场基础知识</span>
-    <span class="swb" onclick="sw('law',this)">⚖️ 证券市场基本法律法规</span>
-  </div>
-</div>
-<div class="sec on" id="sec-fin">
-<div class="ch-title">第一章 金融市场体系 <span class="ch-w">(30题 · 1个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">国际长期资金流动</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">国际长期资金流动是指期限在1年以上的资金的跨国流动，包括国际直接投资、国际间接投资和国际信贷。D属于国际短期资金流动。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">下列属于国际资金流动方式中的“国际长期资金流动”的活动有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">美国的A公司为从英国B公司进口商品，预付了20万英镑的货款</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">美国的A公司以合资形式在英国投资设立了B公司</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">美国的A公司将其从位于英国的控股子公司分到的年度利润再投资于这家子公司</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">美国的A公司购买了位于英国B公司2%的股权</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：BCD</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第二章 中国的金融体系与多层次资本市场 <span class="ch-w">(78题 · 1个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">中央银行是代表一国政</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">中央银行作为证券发行主体，主要涉及两类证券：1、中央银行【股票】。在一些国家（如美国），中央银行采取了股份制组织结构，通过发行股票募集资金，但是，中央银行的股东并不享有决定中央银行政策的权利，只能按期收取固定的红利，其股票类似于优先股。2、中央银行出于调控货币供给量目的而发行的【特殊债券】。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">中央银行是代表一国政府发行法偿货币、制定和执行货币政策、实施金融监管的重要机构。中央银行作为证券发行主体，既可以发行股票，也可以发行债券。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第三章 证券市场主体 <span class="ch-w">(90题 · 6个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券公司私募投资基</span>
-      <span class="kp-count"><b>3</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">按照《证券公司私募投资基金子公司管理规范》，私募基金子公司不得从事与私募基金无关的业务。私募基金子公司及其下设特殊目的机构可以以现金管理为目的管理闲置资金，但应当坚持有效控制风险、保证流动性的原则，且只能投资于依法公开发行的国债、央行票据、短期融资券、投资级公司债、货币市场基金及保本型银行理财产品等风险较低、流动性较强的证券。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">按照《证券公司私募投资基金子公司管理规范》，下列说法正确的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">私募基金子公司管理的闲置资金只能投资于风险较低的证券</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">私募基金子公司管理的闲置资金只能投资于流动性较弱的证券</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">私募基金子公司及其下设特殊目的机构可以以任何合法目的管理闲置资金</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">私募基金子公司从事P2P平台网贷的业务</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#2</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:67%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">政府机构类投资者</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">政府机构类投资者包括：（1）中央银行以公开市场操作作为政策手段，通过买卖政府债券或金融债券，影响货币供应量进行宏观调控。（2）我国国有资产管理部门或其授权部门持有国有股，履行国有资产的保值增值和通过国家控股、参股来支配更多社会资源的职责。包括中央汇金投资有限责任公司（中央汇金）、中国证券金融股份有限公司（证金公司）等。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">下列属于政府机构类投资者的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">中国证券金融股份有限公司</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">商业银行</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">中央汇金投资有限责任公司</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">中央银行</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ACD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#3</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:67%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券经纪业务</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券经纪业务分为柜台代理买卖证券业务和通过证券交易所代理买卖证券业务。我国证券公司从事的证券经纪业务以通过证券交易所代理买卖证券业务为主。在证券经纪业务中，经纪委托关系的建立表现为开户和委托两个环节。经纪关系的建立只是确立了投资者和证券公司直接的代理关系，还没有形成实质上的委托关系。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">关于证券经纪业务的表述正确的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">经纪关系的建立形成实质上的委托关系</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">我国证券公司从事的证券经纪业务以证券公司的柜台代理买卖证券业务为主</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">经纪委托关系的建立表现为开户和委托两个环节</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">不可以通过证券交易所代理买卖证券业务</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#4</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:67%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">企业年金基金按照规定</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">企业年金基金按照规定不得直接投资于权证，但因投资股票、分离交易可转换债等投资品种而衍生获得的权证，应当在权证上市交易之日起10个交易日内卖出。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">企业年金基金按照规定不得直接投资于（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">权证</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">国债</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">股票基金</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">金融债</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#5</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:67%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《律师事务所从事证券</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">按照《律师事务所从事证券法律业务管理办法》规定，律师事务所及其指派的律师从事证券法律业务，应当遵守法律、行政法规及其相关规定，遵循诚实、守信、独立、勤勉、尽责的原则，恪守律师职业道德和执业纪律，严格履行法定职责，保证其所出具文件的【真实性、准确性、完整性】。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">按照《律师事务所从事证券法律业务管理办法》规定，律师事务所及其指派的律师从事证券法律业务，应当遵守法律、行政法规及其相关规定，遵循诚实、守信、独立、勤勉、尽责的原则，恪守律师职业道德和执业纪律，严格履行法定职责，保证其所出具文件的（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">准确性</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">完整性</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">及时性</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">真实性</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#6</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:67%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券服务机构为证券的</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券服务机构为证券的发行、上市、交易等证券业务活动制作、出具审计报告、资产评估报告、财务顾问报告、资信评级报告或者法律意见书等文件，应当勤勉尽责，对所依据的文件资料内容的真实性、准确性、完整性进行核查和验证。其制作、出具的文件有虚假记载、误导性陈述或者重大遗漏，给他人造成损失的，应当与发行人、上市公司承担连带赔偿责任，但是，能够证明自己没有过错的除外。如果与被服务机构有利益冲突，需要建立严格的防火</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">证券服务机构为证券的发行、上市、交易等证券业务活动提供相关服务时，关于其法律责任，下列说法正确的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">如果与被服务机构有利益冲突，只要做好防火墙即可</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">其出具的相关文件资料不得有虚假记载、误导性陈述或重大遗漏</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">如果给他人造成损失，即使能够证明自己没有过错，也必须承担带赔偿责任</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">若造成他人损失的，应当与发行人、上市公司承担连带赔偿责任</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：BD</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第四章 股票 <span class="ch-w">(121题 · 1个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">首次公开发行股票采用</span>
-      <span class="kp-count"><b>4</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">首次公开发行股票采用询价方式的，网下投资者报价后，发行人和主承销商应当剔除拟申购总量中报价最高的部分，剔除部分不得低于所有网下投资者拟申购总量的10%，然后根据剩余报价及拟申购数量协商确定发行价格。剔除部分不得参与网下申购。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">首次公开发行股票采用询价方式的，网下投资者报价后，发行人和主承销商应当剔除拟申购总量中报价最高的部分，剔除部分不得低于所有网下投资者拟申购总量的10%。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第五章 债券 <span class="ch-w">(120题 · 1个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">债券</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">凭证式债券的形式是债权人认购债券的一种收款凭证，而不是债券发行人制定的标准格式的债券。故A说法错误。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">下列关于债券的说法，错误的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">实物债券是一种具有标准格式实物券面的债券</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">凭证式债券是由债券发行人制定的标准格式的债券</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">我国的凭证式国债券面上不印刷票面金额</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">发行人可以利用证券交易所的交易系统发行记账式债券</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第六章 证券投资基金 <span class="ch-w">(88题 · 1个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">私募基金运行期间，信</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">私募基金运行期间，信息披露义务人应当在每年结束之日起【4个月】以内向投资者披露以下信息：报告期末基金净值和基金份额总额；基金的财务情况；基金投资运作情况和运用杠杆情况；投资者账户信息，包括实缴出资额、未缴出资额以及报告期末所持有基金份额总额等；投资收益分配和损失承担情况；基金管理人取得的管理费和业绩报酬，包括计提基准、计提方式和支付方式；基金合同约定的其他信息。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">私募基金运行期间，信息披露义务人应当在每年结束之日起（）个月以内向投资者披露基金净值、财务情况以及投资运作情况等信息。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">2</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">1</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">4</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">3</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第七章 金融衍生工具 <span class="ch-w">(54题 · 1个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">金融期权</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">一般地说，凡可作期货交易的金融工具都可作期权交易；然而，可作期权交易的金融工具却未必可作期货交易。A错误，其余正确。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">下列关于金融期权的说法，正确的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">期权的购买者，无需开立保证金账户</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">期权的购买者，无需缴纳保证金</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">可作期权交易的金融工具未必可作期货交易</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">可作期权交易的金融工具都可作期货交易</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABC</b></div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-<div class="sec" id="sec-law">
-<div class="ch-title">第一章 证券市场基本法律法规 <span class="ch-w">(161题 · 8个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">设立管理公开募集基金</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">设立管理公开募集基金的基金管理公司，应当具备的条件有：1、有符合《证券投资基金法》和《公司法》规定的章程；（D错误）2、注册资本不低于1亿元人民币，且必须为实缴货币资本；3、主要股东应当具有经营金融业务或者管理金融机构的良好业绩、良好的财务状况和社会信誉，资产规模达到国务院规定的标准，最近3年没有违法记录；4、取得基金从业资格的人员达到法定人数；5、董事、监事、高级管理人员具备相应的任职条件；6、</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">设立管理公开募集基金的基金管理公司，应当具备的条件正确的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">取得基金从业资格的人员达到法定人数</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">注册资本不低于1亿元人民币，且必须为实缴货币资本</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">有符合《证券法》和《公司法》规定的章程</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">董事、监事、高级管理人员具备相应的任职条件</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#2</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《合伙企业法》，关于</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">以专业知识和专门技能为客户提供有偿服务的专业服务机构，可以设立为特殊的普通合伙企业。特殊的普通合伙企业名称中【应当】标明“特殊普通合伙”字样，B错误，在法律术语中，应当是必须的意思表示。1个合伙人或者数个合伙人在执业活动中因故意或者重大过失造成合伙企业债务的，应当承担无限责任或者无限连带责任，其他合伙人以其在合伙企业中的财产份额为限承担责任。合伙人在执业活动中非因故意或者重大过失造成的合伙企业债务</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">根据《合伙企业法》，关于特殊普通合伙企业的说法，不正确的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">一个合伙人或者数个合伙人在执业活动中因故意或者重大过失造成合伙企业债务的，应当承担无限责任或者无限连带责任，其他合伙人以其在合伙企业中的财产份额为限承担责任</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">合伙人在执业活动中非因故意或者重大过失造成的合伙企业债务以及合伙企业的其他债务，由全体合伙人承担无限连带责任</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">特殊的普通合伙企业名称中可以标明“特殊普通合伙”字样</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">以专业知识和专门技能为客户提供有偿服务的专业服务机构，可以设立为特殊的普通合伙企业</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#3</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券公司监督管理条</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">根据《证券公司监督管理条例》规定，证券公司未指定专人向客户讲解有关业务规则和合同内容，并以书面方式向其揭示投资风险或未按照规定与客户签订业务合同，或者未在与客户签订的业务合同中载入规定的必备条款的，责令改正，给予警告，没收违法所得，并处以违法所得1倍以上5倍以下的罚款；没有违法所得或者违法所得不足3万元的，处以3万元以上30万元以下的罚款。对直接负责的主管人员和其他直接责任人员单处或者并处警告、3</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">根据《证券公司监督管理条例》，证券公司未按照规定与客户签订业务合同，中国证监会可以采取的措施是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">责令定期报告</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">责令公开说明</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">责令改正</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">出具警示函</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#4</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">基金托管人</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">基金托管人应当履行下列职责：（1）安全保管基金财产；（2）按照规定开设基金财产的资金账户和证券账户；（3）对所托管的不同基金财产分别设置账户，确保基金财产的完整与独立；（4）保存基金托管业务活动的记录、账册、报表和其他相关资料；（5）按照基金合同的约定，根据基金管理人的投资指令，及时办理清算、交割事宜；（6）办理与基金托管业务活动有关的信息披露事项；（7）对基金财务会计报告、中期和年度基金报告出具</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">证券投资基金托管人应当履行的职责包括（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">按照规定开设基金财产的资金账户和证券账户</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">按照规定召集基金份额持有人大会</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">负责办理基金名下的资金往来</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">复核、审查基金管理人计算的基金资产净值</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#5</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券登记结算机构</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券登记结算机构应当妥善保存登记、存管和结算的原始凭证及有关文件资料。其保存期限不得少于20年。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">证券登记结算机构应当妥善保存登记、存管和结算的原始凭证及有关文件资料，其保存期限不得少于（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">永久</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">20年</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">10年</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">15年</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#6</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">某非上市证券公司通过</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">根据《证券公司监督管理条例》的规定，证券公司应当依法向社会公开披露其基本情况、参股及控股情况、负债及或有负债情况、经营管理状况、财务收支状况、高级管理人员薪酬和其他有关信息。具体办法由国务院证券监督管理机构制定。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">某非上市证券公司通过中国证券业协会网站公开披露上一年度的审计报告、经审计的财务报表及附注。根据该案例，回答以下问题：（2）证券公司应当依法向社会公开披露其基本情况、负债及或有负债情况、（）、高级管理人员薪酬和其他有关信息。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">参股及控股情况</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">财务收支状况</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">经营管理状况</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">人均薪酬情况</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABC</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#7</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">合伙企业</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">合伙企业与公司的区别主要有：1、法律地位不同。公司具有独立的法人主体资格，是企业法人；合伙企业不是法人，是非法人企业。2、财产独立性不同。公司的财产独立于股东；合伙企业的财产与合伙人仅相对独立，合伙企业的财产属于合伙人共有。3、承担的责任不同。股东对公司的责任以出资为限，承担有限责任；而合伙企业中，普通合伙人对合伙企业承担无限责任。此外，与公司相比，合伙企业具有高度的人合性，因此合伙企业的加入、退</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">下列关于合伙企业的说法，正确的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">合伙企业的财产属于合伙人共有</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">普通合伙人对合伙企业承担有限责任</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">合伙企业与公司一样，具有高度的人合性</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">合伙企业具有独立的法人主体资格</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#8</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">2019年12月4日</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">交易者的保证金不符合结算参与人与交易者约定标准的，结算参与人应当按照约定通知交易者在约定时间内追加保证金或者自行平仓；交易者未在约定时间内追加保证金或者自行平仓的，按照约定强行平仓。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">2019年12月4日，因行情波动，交易者赵某账号持仓的X手的某商品期货合约出现涨停，行情走势与赵某的该期货合约持仓方向相反。当日结算显示赵某的账户风险率已经高于交易所规定的风险率，赵某账户的保证金已经低于交易所规定的保证金标准。A期货公司要求赵某在下一交易日开盘前追加保证金。甲某要求期货公司允许其透支交易，并许诺资金到位立即追加保证金，公司予以拒绝。第二天交易开始后赵某没有及时追加保证金。根据该案例，回答以下问题：（1）期货公司应（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">劝说赵某自行平仓</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对赵某持有的头寸进行强行平仓</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">有权就其未平仓的头寸强行平仓</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">允许赵某继续持仓</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第二章 证券经营机构管理规范 <span class="ch-w">(112题 · 13个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司</span>
-      <span class="kp-count"><b>13</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司应当严格按照公安部发布的恐怖活动组织及恐怖活动人员名单、冻结资产的【决定】，依法对相关资产采取冻结措施。证券公司发现恐怖活动组织及恐怖活动人员拥有或者控制的资产，应立即采取冻结措施。证券公司采取冻结措施后，除【中国人民银行及其分支机构、公安机关、国家安全机关】另有要求外，应当及时告知客户，并说明采取冻结措施的依据和理由。境外有关部门以涉及恐怖活动为由，要求证券公司冻结相关资产、提供客户身份</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">下列关于恐怖活动资产冻结工作的说法，正确的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">证券公司发现恐怖活动组织及恐怖活动人员拥有或者控制的资产，应立即采取冻结措施</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">证券公司可以自行解除冻结措施</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">证券公司应当严格按照公安部发布的恐怖活动组织名单，依法对相关资产进行查封</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">证券公司只能依据公安机关的相关规定对被采取冻结措施的资产进行管理及处置</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#2</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:31%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券期货投资者适当</span>
-      <span class="kp-count"><b>4</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">产品或者服务存在下列因素的，应当审慎评估其风险等级：（l）存在本金损失的可能性，因杠杆交易等因素容易导致本金大部分或者全部损失的产品或者服务；2、产品或者服务的流动变现能力，因无公开交易市场、参与投资者少等因素导致难以在短期内以合理价格顺利变现的产品或者服务；3、产品或者服务的可理解性，因结构复杂、不易估值等因素导致普通人难以理解其条款和特征的产品或者服务；4、产品或者服务的募集方式，涉及面广、影</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">根据《证券期货投资者适当性管理办法》，产品或服务存在下列（）因素的，经营机构应当审慎评估其风险等级。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">存在收益损失的可能性，因杠杆交易等因素容易导致收益大部分或者全部损失的产品或者服务</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">自律组织认定的中风险产品或者服务</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">产品或者服务的可理解性，因结构单一、易估值等因素导致普通人简单化理解其条款和特征的产品或者服务</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">产品或者服务的募集方式，涉及面广、影响力大的公募产品或者相关服务</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：D</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#3</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:31%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券基金经营机构信</span>
-      <span class="kp-count"><b>4</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司是从事证券基金业务活动的责任主体，应当保障充足的信息技术投入，在依法合规、有效防范风险的前提下，充分利用现代信息技术手段完善客户服务体系、改进业务运营模式、提升内部管理水平、增强合规风控能力，持续强化现代信息技术对证券基金业务活动的支撑作用。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">根据《证券基金经营机构信息技术管理办法》，证券基金经营机构是从事证券基金业务活动的责任主体，应当保障充足的信息技术投入，在依法合规、有效防范风险的前提下，充分利用现代信息技术手段实现完善客户服务体系、改进业务运营模式、增强合规风控能力、提升内部管理水平等功能。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#4</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">甲证券公司营销人员王</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司认为客户购买金融产品不适当或者无法判断其适当性的，【不可以】向其主动推介。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">甲证券公司营销人员王某拟向某70岁以上的高龄退休客户张某主动推介代销的某私募基金，根据张某在营业部填写的风险承受能力测评问卷，显示张某的风险承受能力结果为R1，但营销人员王某拟推荐的私募基金产品风险等级结果为R5，于是营销人员王某放弃了主动向张某超风险推荐该私募基金的计划。（1）关于证券公司向客户推介金融产品的行为，下列说法错误的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">应当了解客户的身份、财产和收入状况</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">应当了解客户的金融知识和投资经验、投资目标、风险偏好等</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">证券公司认为客户购买金融产品不适当或者无法判断其适当性的，可以向其主动推介，但应由客户签字确认</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">委托人明确约定购买人范围的，证券公司不得超出委托人确定的购买人范围</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#5</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券公司流动性风险</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司的融资管理应符合以下要求：1、分析正常和压力情景下未来不同时间段的融资需求和来源。2、加强负债品种、期限、交易对手、融资抵（质）押品和融资市场等的集中度管理，适当设置集中度限额。3、加强融资渠道管理，积极维护与主要融资交易对手的关系，保持在市场上的适当活跃程度，【并定期】评估市场融资和资产变现能力。4、密切监测主要金融市场的交易量和价格等变动情况，评估市场流动性对公司融资能力的影响。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">根据《证券公司流动性风险管理指引》，证券公司的融资管理应符合的要求包括（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">加强融资渠道管理，积极维护与主要融资交易对手的关系，保持在市场上的适当活跃程度，不定期评估市场融资和资产变现能力</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">分析正常和压力情景下未来不同时间段的融资需求和来源</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">密切监测主要金融市场的交易量和价格等变动情况，评估市场流动性对公司融资能力的影响</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">加强负债品种、期限、交易对手、融资抵（质）押品和融资市场等的集中度管理，适当设置集中度限额</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：BCD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#6</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">赵某为乙证券公司独立</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">任何人员最多可以在2家证券公司担任独立董事。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">赵某为乙证券公司独立董事，工作勤勉尽责、廉洁从业、专业能力强。乙证券公司拟聘请赵某分管公司某业务，丙证券公司、丁基金公司均欲邀请赵某兼职独立董事。根据该案例，回答以下问题：（1）赵某可在（）家证券基金经营机构担任独立董事。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">3</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">4</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">2</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">1</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#7</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司分类评价中，</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">风险管理能力主要根据【资本充足、公司治理与合规管理、全面风险管理、信息技术管理、客户权益保护、信息披露】六类评价指标进行评价，体现证券公司对流动性风险、合规风险、市场风险、信用风险、技术风险及操作风险等管理能力。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">证券公司分类评价中，司法机关采取的刑事处罚措施是属于风险管理能力评价指标。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#8</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券公司全面风险管</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司董事会承担全面风险管理的最终责任，履行以下职责：（1）推进风险文化建设；（2）审议批准公司全面风险管理的基本制度；（3）审议批准公司的风险偏好、风险容忍度以及重大风险限额；（4）审议公司定期风险评估报告；（5）任免、考核首席风险官，确定其薪酬待遇；（6）建立与首席风险官的直接沟通机制；（7）公司章程规定的其他风险管理职责。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">根据《证券公司全面风险管理规范》，证券公司董事会承担全面风险管理的最终责任。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#9</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">中国证监会根据证券公</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">中国证监会根据证券公司评价计分的高低，将证券公司分为A（AAA，AA、A）、B（BBB、BB、B）、C（CCC、CC、C）、D、E五大类十一个级别。其中，C级是正常经营状态的最低等级。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">中国证监会根据证券公司评价计分的高低，将证券公司分为五大类十一个级别，其中C级是正常经营状态的最低等级。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#10</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">流动性风险</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">流动性风险，是指证券公司无法以合理成本及时获得充足资金，以偿付到期债务、履行其他支付义务和满足正常业务开展的资金需求的风险。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">证券公司无法以合理成本及时获得充足资金，以偿付到期债务、履行其他支付义务和满足正常业务开展的资金需求的风险是指流动性风险。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#11</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">关于证券公司内部控制</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">主要业务部门之间建立健全隔离墙制度，确保经纪、自营、受托投资管理、投资银行、研究咨询等业务相对独立。电脑部门、财务部门、监督检查部门与业务部门的人员不得相互兼任，资金清算人员不得由电脑部门人员和交易部门人员兼任。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">下列关于证券公司内部控制的内容，有违“隔离墙制度”要求的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">资金清算人员、电脑部门人员相互兼任</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">经纪、自营、研究咨询等业务人员相互兼任</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">资金清算人员、交易部门人员相互兼任</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">财务部门、监督检查部门与业务部门人员相互兼任</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABCD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#12</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券监督管理条例》</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司董事会决议内容违反法律、行政法规或者中国证监会的规定的，【监事会】应当要求董事会纠正，【经理层】应当拒绝执行。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">按照《证券监督管理条例》和《证券公司治理准则》的要求，证券公司董事会决议内容违反法律、行政法规或者中国证监会的规定的，监事会应当要求董事会纠正，股东会应当拒绝执行。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#13</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:15%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司净资本指标与</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">净资本指标与上月相比发生20%以上不利变化或不符合规定标准时，证券公司应当在5个工作日内向公司全体董事报告，10个工作日内向公司全体股东报告。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">证券公司净资本指标与上月相比发生30%以上不利变化的，证券公司应当及时向全体董事、股东报告。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第三章 证券公司业务规范 <span class="ch-w">(161题 · 8个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司</span>
-      <span class="kp-count"><b>5</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司应当统一组织回访客户，对新开户客户应当在1个月内完成回访，对原有客户的回访比例应当不低于上年末客户总数（不含休眠账户及中止交易账户客户）的10%。客户回访应当留痕，相关资料应当保存不少于3年。回访内容包括但不限于：①确认客户身份，如客户委托他人代理开户的，应向客户确认代理人身份及代理权限。②确认客户已阅读各类风险揭示文件并理解相关条款。③确认客户开户为其真实意愿。④提醒客户自行设置和妥善保</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">根据《证券公司开立客户账户规范》，以下符合证券公司对客户回访要求的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">客户回访应当留痕，相关资料应当保存不少于2年</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">证券公司应当统一组织回访客户，对新开户客户应当在1个月内完成回访</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">回访内容应当包括但不限于确认客户身份、确认客户已阅读各类风险揭示文件并理解相关条款等</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">对原有客户的回访比例应当不低于上年末客户总数（不含休眠账户及中止交易账户客户）的10%</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：BCD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#2</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:60%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">某证券投资咨询公司开</span>
-      <span class="kp-count"><b>3</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券投资咨询机构利用“荐股软件”从事证券投资咨询业务监管要求之一：产品销售、协议签订、服务提供、客户回访、投诉处理等业务环节均应当自行开展，不得委托未取得证券投资咨询业务资格的机构和个人代理。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">某证券投资咨询公司开发了一款荐股软件，具有提供具体证券投资品种的买卖时机建议等功能，该公司利用其开展证券投资咨询业务。根据该案例，回答以下问题：（3）下列证券投资咨询机构利用“荐股软件”从事证券投资咨询业务的做法，错误的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">对“荐股软件”产品进行分类分级，销售给适当的客户</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">委托无证券投资咨询业务资格的机构和个人代理客户回访</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">自行开展产品销售、协议签订等业务环节</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">自行开展服务，提供投诉处理等业务环节</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#3</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:40%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券公司融资融券业</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">对客户信用交易担保证券账户记录的证券，由证券公司以自己的名义，为客户的利益，行使对证券发行人的权利。客户未表达意见的，证券公司不得行使对发行人的权利。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">根据《证券公司融资融券业务管理办法》，下列关于对证券发行人权利的行使，错误的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">证券公司行使对证券发行人的权利，在征求客户意见时客户未表达意见的，证券公司可在行使内部审批程序后行使对发行人的权利</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对客户信用交易担保证券账户记录的证券，由证券公司以证券登记结算机构的名义为客户的利益行使对证券发行人的权利</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">证券公司行使对证券发行人的权利，应当事先征求客户的意见，并按照其意见办理</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">对客户信用交易担保证券账户记录的证券，由证券公司以客户的名义，为客户的利益，行使对证券发行人的权利</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#4</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:40%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">对转融通担保证券账户</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">对转融通担保证券账户内记录的证券，由证券金融公司以自己的名义，行使对证券发行人的权利。证券金融公司行使对证券发行人的权利，应当事先征求委托其持有该证券的证券公司意见，并按照其意见办理。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">对转融通担保证券账户内记录的证券，由（）以自己的名义，行使对证券发行人的权利。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">证券登记结算机构</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">商业银行</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">证券金融公司</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">证券公司</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#5</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:40%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司、证券投资咨</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">应当说明软件工具、终端设备所使用数据的信息来源，选项C错误。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">证券公司、证券投资咨询机构以软件工具、终端设备等为载体提供建议的，下列说法，不符合要求的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">表示软件工具、终端设备具有选择证券投资品种或者提示买卖时机功能的，应当说明其方法和局限</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">客观说明软件工具、终端设备的功能，不得对其功能进行虚假、不实、误导性宣传</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">揭示软件工具、终端设备的固有缺陷和使用风险，不得隐瞒或者有重大</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">对软件工具、终端设备所使用的数据信息来源要保密</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：D</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#6</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:40%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">在客户交易结算资金第</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">客户资金存取应当以银证转账方式通过本人银行结算账户进行。【指定商业银行】根据客户指令，负责在客户银行结算账户与客户资金汇总账户之间划转资金，无须证券公司介入，从而防止证券公司假借客户提款挪用资金。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">在客户交易结算资金第三方存管模式下的客户资金存入过程中，指定商业银行根据客户转账指令，负责在客户银行结算账户与客户资金汇总账户之间划转资金。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#7</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:40%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司进行柜台交易</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司进行柜台交易，应当与特定交易对手方或投资者以【书面或电子（邮件）方式】签订柜台交易合同，约定双方的权利义务。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">证券公司进行柜台交易，应当与特定交易对手方或投资者签订柜台交易合同，约定双方的权利义务。不能采用（）的方式签订交易合同。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">电子</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">书面</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">口头</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">邮件</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#8</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:40%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券期货经营机构私</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">【证券公司、托管人、销售机构和投资顾问】等服务机构的相关从业人员违反法律、行政法规和相关规定，情节严重的，中国证监会可以依法采取市场禁入措施。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">根据《证券期货经营机构私募资产管理业务管理办法》，违反法律、行政法规和相关规定，情节严重，中国证监会可以对证券公司相关从业人员依法采取市场禁入措施。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第四章 违法违规及法律责任 <span class="ch-w">(39题 · 2个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">甲在不同证券公司以不</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">禁止任何人以下列手段操纵证券市场，影响或者意图影响证券交易价格或者证券交易量：（1）单独或者通过合谋，集中资金优势、持股优势或者利用信息优势联合或者连续买卖；（2）与他人串通，以事先约定的时间、价格和方式相互进行证券交易；（3）【在自己实际控制的账户之间进行证券交易】；（4）不以成交为目的，频繁或者大量申报并撤销申报；（5）利用虚假或者不确定的重大信息，诱导投资者进行证券交易；（6）对证券、发行人</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">甲在不同证券公司以不同身份开设了十余个账户，并且以自己为交易对象，自买自卖相关股票，严重影响上述股票的价格，获得巨大非法收益。根据该案例，回答以下问题：（1）则甲的行为构成（）罪。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">内幕交易</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">诱骗消费者购买证券</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">操纵证券市场</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">利用未公开信息交易</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#2</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">公开发行证券，必须符合法律、行</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">公开发行证券，必须符合法律、行政法规规定的条件，并依法报经【国务院证券监督管理机构或者国务院授权的部门】注册。未经依法注册，任何单位和个人不得公开发行证券。证券发行注册制的具体范围、实施步骤，由国务院规定。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">公开发行证券，必须符合法律、行政法规规定的条件，并依法报经（）注册；未经依法注册，任何单位和个人不得公开发行证券。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">国务院授权的部门</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">中国证券业协会</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">国务院证券监督管理机构</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">证券交易所</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：AC</b></div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="ch-title">第五章 行业文化与职业道德 <span class="ch-w">(99题 · 11个考点)</span></div>
-<div class="kp-list">
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#1</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:100%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券经营机构</span>
-      <span class="kp-count"><b>4</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券经营机构是指证券公司及其境内子公司会员；工作人员是指以公司名义开展业务的人员，包括与公司建立劳动关系的正式员工、与公司签署委托协议的经纪人、劳务派遣至公司的其他人员等。证券投资咨询公司、证券资信评级公司等中国证券业协会（以下简称协会）会员，以及在协会进行业务注册或者备案并接受协会自律管理的其他机构及个人，在从事证券相关业务时参照本细则执行。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">下列关于执行《证券经营机构及其工作人员廉洁从业实施细则》的说法，不正确的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">在证券业协会进行业务注册并接受协会自律管理的非证券期货经营机构在从事证券相关业务时应参照执行</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">已成为证券业协会会员的证券公司境内子公司应当执行</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">证券投资咨询公司可自行决定是否执行</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">证券资信评级公司在从事证券相关业务时应参照执行</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h3" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#2</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:75%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司</span>
-      <span class="kp-count"><b>3</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券公司应当将公司总部、证券营业部中签订劳动合同、取得证券投资咨询执业资格且【实际从事证券投资顾问业务】的人员，申请注册登记为证券投资顾问；将研究部门或者研究子公司中签订劳动合同、取得证券投资咨询执业资格且【实际从事发布证券研究报告业务】的人员，申请注册登记为证券分析师。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">证券公司应当将公司总部、证券营业部中实际从事发布证券研究报告业务的人员，申请注册登记为证券投资顾问。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#3</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券评级机构从事证券</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">本题考查证券评级机构从事证券相关知识。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">证券评级机构从事证券评级业务，应当制定科学的评级方法和完善的质量控制制度。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#4</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券期货经营机构及其</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">从重处理的情形：1、直接、间接或者唆使、协助他人向监管人员输送利益；2、连续或者多次违反本规定；3、涉及金额较大或者涉及人员较多；4、产生恶劣社会影响；5、曾为公职人员特别是监管人员，以及曾任证券期货经营机构合规风控职务的人员违反本规定；6、中国证监会认定应当从重处理的其他情形。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">证券期货经营机构及其工作人员违反《证券期货经营机构及其工作人员廉洁从业规定》，有下列（）情形的，中国证监会应当从重处理。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">连续或者多次违反该规定</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">直接、间接或唆使、协助他人向监管人员输送利益</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">涉及金额较大或涉及人员较多、产生恶劣社会影响</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">曾为公职人员特别是监管人员，以及曾任证券期货经营机构合规风控职务的人员违反该规定</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABCD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#5</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《上市公司并购重组财</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">根据《上市公司并购重组财务顾问业务管理办法》，财务顾问主办人应当具备下列条件：（1）具备中国证监会规定的投资银行业务经历；（2）具备从事相关业务的专业能力；（3）所任职机构同意推荐其担任本机构的财务顾问主办人；（4）未负有数额较大到期未清偿的债务；（5）最近24个月无违反诚信的不良记录；（6）最近24个月未因执业行为违反行业规范而受到行业自律组织的纪律处分；（7）最近36个月未因执业行为违法违规受</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">根据《上市公司并购重组财务顾问业务管理办法》，证券公司从事上市公司并购重组财务顾问业务，以下属于应当具备的条件的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">实缴注册资本和净资产不低于人民币500万元</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">最近2年每年财务顾问业务收入不低于100万元</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">公司净资本符合中国证监会的规定</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">具有2年以上从事公司并购重组财务顾问业务活动的执业经历</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#6</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券业从业人员执业</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">根据《证券业从业人员执业行为准则》，对证券业从业人员的执业行为进行自律管理的主体是中国证券业协会。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">根据《证券业从业人员执业行为准则》，对证券业从业人员的执业行为进行自律管理的主体是中国证券业协会。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#7</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">《证券市场禁入规定》</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">行为恶劣、严重扰乱证券市场秩序、严重损害投资者利益或者在重大违法活动中起主要作用等情节较为严重的，可以对有关责任人员采取6年至10年的证券市场禁入措施。B错误。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">根据《证券市场禁入规定》，下列说法正确的有（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">组织、策划、领导或者实施重大违反法律、行政法规或者中国证监会有关规定的活动的，可以对有关责任人员采取终身的证券市场禁入措施</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">严重违反法律、行政法规或者中国证监会有关规定，构成犯罪的，可以对有关责任人员采取终身的证券市场禁入措施</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">违反法律、行政法规或者中国证监会有关规定，情节严重的，可以对有关责任人员采取3至5年的证券市场禁入措施</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">行为恶劣、严重扰乱证券市场秩序、严重损害投资者利益或者在重大违法活动中起主要作用等情节较为严重的，可以对有关责任人员采取3至5年的证券市场禁入措施</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：ABC</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#8</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券期货经营机构</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券期货经营机构应当制定工作人员廉洁从业规范，明确廉洁从业要求，加强从业人员廉洁培训和教育，培育廉洁从业文化，【每年】开展覆盖全体工作人员的廉洁培训和教育，确保工作人员熟悉廉洁从业的相关规定。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">证券期货经营机构应当制定工作人员廉洁从业规范，明确廉洁从业要求，加强从业人员廉洁培训和教育，培育廉洁从业文化，（）开展覆盖全体工作人员的连接培训与教育，确保工作人员熟悉廉洁从业的相关规定。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">每月</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">每个季度</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">每年</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">每周</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：C</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#9</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">中国证监会可依据违法</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">证券市场禁入措施的实施对象根据《证券市场禁入规定》，下列人员违反法律、行政法规或者中国证监会有关规定，情节严重的，中国证监会可以根据情节严重的程度，采取证券市场禁入措施：（1）发行人、上市公司、非上市公众公司的董事、监事、高级管理人员，其他信息披露义务人或者其他信息披露义务人的董事、监事、高级管理人员；（2）发行人、上市公司、非上市公众公司的控股股东、实际控制人，或者发行人、上市公司、非上市公众公</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag j">判断</span> 代表考题</div>
-      <div class="sm-q">中国证监会可依据违法违规情节的严重程度，对其采取证券市场禁入措施的人员包括证券公司的董事、监事、高级管理人员。（）</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">错</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">对</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：B</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#10</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">证券公司某营业部根据</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">涉及限制客户资产转移、改变客户证券账户和资金账户的对应关系、客户账户资产变动记录的差错确认与调整等非常规性业务操作，应当【事先审批，事后复核，审批及复核均应留痕】。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag m">多选</span> 代表考题</div>
-      <div class="sm-q">证券公司某营业部根据司法机关作出的裁定书以及协助执行通知书，对该营业部甲客户账户进行限制资金转出、限制撤销指定交易以及限制转托管操作。在开展恐怖活动资产冻结工作中，对该营业部乙客户账户采取冻结措施。根据该案例，回答以下问题：（1）根据《关于加强证券经纪业务管理的规定》，该营业部应当采取的操作包括（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">第一时间通知客户</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">事先报营业部领导及公司总部批准</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">事后按规定流程进行复核</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">对审批及复核做好留痕备查</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：BCD</b></div>
-    </div>
-  </div>
-</div>
-<div class="kp-item h2" onclick="this.classList.toggle('exp')">
-  <div class="kp-head">
-    <div class="kp-rank">#11</div>
-    <div class="kp-bar"><div class="kp-fill" style="width:50%"></div></div>
-    <div class="kp-body">
-      <span class="kp-name">保荐代表人的执业行为规范</span>
-      <span class="kp-count"><b>2</b>次</span>
-    </div>
-  </div>
-  <div class="kp-detail">
-    <div class="kp-explain">保荐机构应当建立健全工作底稿制度，为每个项目建立独立的保荐工作底稿。保荐代表人及其配偶不可以间接持有发行人的股份。保荐代表人履行保荐职责，不可免除其发行人及其董事、监事、高级管理人员的责任。</div>
-    <div class="kp-sample">
-      <div class="sm-head"><span class="ch-tag s">单选</span> 代表考题</div>
-      <div class="sm-q">下列关于保荐代表人的执业行为规范的说法，正确的是（）。</div>
-      <div class="sm-opts"><div class="co"><span class="ck">A</span><span class="cv">保荐机构应当指定2名保荐代表人具体负责1家发行人的保荐工作</span></div>
-<div class="co"><span class="ck">B</span><span class="cv">保荐代表人履行保荐职责，可免除其发行人及其董事、监事、高级管理人员的责任</span></div>
-<div class="co"><span class="ck">C</span><span class="cv">保荐代表人仅需为其主要负责项目建立尽职调查工作日志</span></div>
-<div class="co"><span class="ck">D</span><span class="cv">保荐代表人及其配偶可以间接持有发行人的股份</span></div>
-</div>
-      <div class="sm-ans">✅ <b>答案：A</b></div>
-    </div>
-  </div>
-</div>
-</div>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <a class="back-btn" href="index.html" onclick="if(window.parent&&window.parent.goHome){window.parent.goHome();return false}">‹</a>
+      <h1>📊 高频考点速记</h1>
+    </div>
+    <div class="sw" id="subject-tabs">
+      <span class="swb on" data-subject="fin" onclick="switchSubject('fin')">📈 金融基础</span>
+      <span class="swb" data-subject="law" onclick="switchSubject('law')">⚖️ 法律法规</span>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading" class="loading-state">
+    <div class="spinner"></div>
+    <div>加载考点数据中…</div>
+  </div>
+
+  <!-- Content -->
+  <div id="sec-fin" class="sec" style="display:none"></div>
+  <div id="sec-law" class="sec" style="display:none"></div>
+
+  <!-- Footer -->
+  <div class="footer">高频考点速记 · 数据基于V4考频聚类</div>
 </div>
 
-</div>
 <script>
-function sw(key, el) {
-  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
-  document.getElementById('sec-' + key).classList.add('on');
-  document.querySelectorAll('.swb').forEach(b => b.classList.remove('on'));
-  el.classList.add('on');
+// ====== State ======
+let dataFin = null;
+let dataLaw = null;
+let currentSubject = 'fin';
+
+// ====== Load Data ======
+async function loadData() {
+  try {
+    const [finResp, lawResp] = await Promise.all([
+      fetch('gw_fin.json'),
+      fetch('gw_law.json')
+    ]);
+    if (!finResp.ok) throw new Error('gw_fin.json 加载失败: ' + finResp.status);
+    if (!lawResp.ok) throw new Error('gw_law.json 加载失败: ' + lawResp.status);
+    dataFin = await finResp.json();
+    dataLaw = await lawResp.json();
+    document.getElementById('loading').style.display = 'none';
+    renderSubject('fin');
+    renderSubject('law');
+    document.getElementById('sec-fin').style.display = 'block';
+  } catch (e) {
+    document.getElementById('loading').innerHTML =
+      '<div style="color:var(--red);font-size:1rem">❌ ' + e.message + '</div>' +
+      '<div style="font-size:0.8rem;margin-top:0.5rem;color:var(--dim)">请确认 gw_fin.json 和 gw_law.json 文件存在</div>';
+  }
 }
+
+// ====== Subject Switch ======
+function switchSubject(subject) {
+  currentSubject = subject;
+  document.querySelectorAll('.swb').forEach(el => el.classList.toggle('on', el.dataset.subject === subject));
+  document.querySelectorAll('.sec').forEach(el => el.style.display = 'none');
+  const sec = document.getElementById('sec-' + subject);
+  if (sec) sec.style.display = 'block';
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ====== Render ======
+function renderSubject(subject) {
+  const data = subject === 'fin' ? dataFin : dataLaw;
+  const container = document.getElementById('sec-' + subject);
+  if (!data || data.length === 0) {
+    container.innerHTML = '<div class="empty-state">暂无考点数据</div>';
+    return;
+  }
+
+  let html = '';
+  let pointTotal = 0;
+  data.forEach(ch => { pointTotal += ch.points.length; });
+
+  data.forEach((ch, ci) => {
+    const chLabel = ch.chapter.replace(/^\s+/, '').replace(/\s+$/, '');
+    const pTotal = ch.total || ch.points.length;
+    html += '<div class="ch-title">' + chLabel +
+      ' <span class="ch-w">' + pTotal + '题 · ' + ch.points.length + '个考点</span></div>';
+    html += '<div class="kp-list">';
+
+    ch.points.forEach((pt, pi) => {
+      const heatClass = pt.count >= 4 ? 'h3' : (pt.count >= 2 ? 'h2' : 'h1');
+      const barClass = pt.count >= 4 ? 'high' : (pt.count >= 2 ? 'mid' : 'low');
+      const barPct = Math.min(Math.max(pt.bar_pct || 0, 10), 100);
+      const uniqueId = subject + '-' + ci + '-' + pi;
+
+      html += '<div class="kp-item ' + heatClass + '" id="kp-' + uniqueId + '">';
+      html += '<div class="kp-head" onclick="toggleExpand(\'' + uniqueId + '\')">';
+      html += '  <div class="kp-rank">#' + pt.rank + '</div>';
+      html += '  <div class="kp-body">';
+      html += '    <span class="kp-name">' + escapeHtml(pt.name) + '</span>';
+      html += '    <span class="kp-count"><b>' + pt.count + '</b>次</span>';
+      html += '    <span class="kp-arrow">▼</span>';
+      html += '  </div>';
+      html += '</div>';
+      html += '<div class="kp-bar-wrap">';
+      html += '  <div class="kp-bar"><div class="kp-fill ' + barClass + '" style="width:' + barPct + '%"></div></div>';
+      html += '</div>';
+
+      // Detail
+      html += '<div class="kp-detail">';
+      // Analysis
+      if (pt.analysis && pt.analysis !== '略。' && pt.analysis !== '略' && pt.analysis.trim() !== '') {
+        html += '<div class="kp-explain"><div class="kp-explain-title">📝 考点精讲</div>' + escapeHtml(pt.analysis) + '</div>';
+      }
+      // Practice question
+      if (pt.question && pt.choices) {
+        html += renderPractice(pt, uniqueId);
+      }
+      html += '</div></div>';
+    });
+
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+function renderPractice(pt, uniqueId) {
+  const choiceKeys = Object.keys(pt.choices);
+  const isMulti = pt.type === 'm';
+  const label = isMulti ? '多选' : (pt.type === 'j' ? '判断' : '单选');
+
+  let html = '<div class="kp-practice">';
+  html += '<div class="practice-head">';
+  html += '  <span class="ch-tag ' + pt.type + '">' + label + '</span>';
+  html += '  <span class="practice-label">真题演练</span>';
+  html += '</div>';
+  html += '<div class="pq">' + escapeHtml(pt.question) + '</div>';
+  html += '<div class="opts" id="opts-' + uniqueId + '" data-type="' + pt.type + '" data-answer="' + escapeHtml(pt.answer) + '">';
+
+  choiceKeys.forEach(key => {
+    const val = pt.choices[key];
+    if (val === undefined || val === null) return;
+    html += '<div class="co" data-key="' + key + '" onclick="selectOption(this,\'' + uniqueId + '\')">';
+    html += '  <span class="ck">' + key + '</span>';
+    html += '  <span class="cv">' + escapeHtml(String(val)) + '</span>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+
+  // Action buttons + result area
+  html += '<div class="practice-actions">';
+  html += '  <button class="practice-btn primary" onclick="checkAnswer(\'' + uniqueId + '\')">🔍 核对答案</button>';
+  html += '  <button class="practice-btn reset" onclick="resetPractice(\'' + uniqueId + '\')">🔄 重选</button>';
+  html += '</div>';
+  html += '<div class="result-area" id="result-' + uniqueId + '"></div>';
+  html += '</div>';
+
+  return html;
+}
+
+// ====== Interactive Functions ======
+function toggleExpand(uniqueId) {
+  const item = document.getElementById('kp-' + uniqueId);
+  if (item) item.classList.toggle('exp');
+}
+
+function selectOption(el, uniqueId) {
+  const optsContainer = document.getElementById('opts-' + uniqueId);
+  if (!optsContainer) return;
+  const type = optsContainer.dataset.type;
+
+  // Don't allow interaction if already checked
+  if (optsContainer.classList.contains('checked')) return;
+
+  if (type === 'm') {
+    // Multi-select: toggle
+    el.classList.toggle('selected');
+  } else {
+    // Single select / judgment: mutually exclusive
+    optsContainer.querySelectorAll('.co').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+}
+
+function checkAnswer(uniqueId) {
+  const optsContainer = document.getElementById('opts-' + uniqueId);
+  if (!optsContainer) return;
+  const correctAnswer = optsContainer.dataset.answer;
+  const type = optsContainer.dataset.type;
+  const resultDiv = document.getElementById('result-' + uniqueId);
+  if (!resultDiv) return;
+
+  // Disable further interaction
+  optsContainer.classList.add('checked');
+  const options = optsContainer.querySelectorAll('.co');
+
+  // Map correct answers
+  const correctKeys = correctAnswer.split('').map(k => k.trim()).filter(k => k.length === 1);
+
+  // Mark each option
+  let allCorrect = true;
+  let anySelected = false;
+
+  // First pass: mark selections
+  options.forEach(opt => {
+    const key = opt.dataset.key;
+    const isSelected = opt.classList.contains('selected');
+    const isCorrect = correctKeys.includes(key);
+
+    if (isSelected) anySelected = true;
+
+    if (isSelected && isCorrect) {
+      opt.classList.add('correct');
+    } else if (isSelected && !isCorrect) {
+      opt.classList.add('wrong');
+      allCorrect = false;
+    }
+  });
+
+  // Highlight correct answers that weren't selected (for learning)
+  options.forEach(opt => {
+    const key = opt.dataset.key;
+    const isSelected = opt.classList.contains('selected');
+    const isCorrect = correctKeys.includes(key);
+
+    if (isCorrect && !isSelected) {
+      opt.classList.add('correct');
+    }
+    opt.classList.add('disabled');
+  });
+
+  // Check if all correct options are selected and no wrong options selected
+  let fullyCorrect = allCorrect;
+  if (type === 'm') {
+    const selectedKeys = [];
+    options.forEach(opt => {
+      if (opt.classList.contains('selected')) selectedKeys.push(opt.dataset.key);
+    });
+    selectedKeys.sort();
+    const sortedCorrect = [...correctKeys].sort();
+    if (selectedKeys.length !== sortedCorrect.length ||
+        selectedKeys.some((k, i) => k !== sortedCorrect[i])) {
+      fullyCorrect = false;
+    }
+  }
+
+  // Show result
+  if (!anySelected) {
+    resultDiv.className = 'result-area show wrong';
+    resultDiv.innerHTML = '<div class="ra-answer">⚠️ 请先选择答案</div>';
+    // Re-enable
+    optsContainer.classList.remove('checked');
+    options.forEach(opt => opt.classList.remove('disabled'));
+    return;
+  }
+
+  const isCorrect = fullyCorrect;
+  resultDiv.className = 'result-area show ' + (isCorrect ? 'correct' : 'wrong');
+  resultDiv.innerHTML = '<div class="ra-answer">' + (isCorrect ? '✅ 回答正确！' : '❌ 回答错误') + '</div>' +
+    '<div>正确答案：<b>' + correctAnswer + '</b></div>' +
+    '<div class="ra-explain"><i>' + (type === 'm' ? '多选题需全部选对才计为正确' : '') + '</i></div>';
+}
+
+function resetPractice(uniqueId) {
+  const optsContainer = document.getElementById('opts-' + uniqueId);
+  const resultDiv = document.getElementById('result-' + uniqueId);
+  if (!optsContainer) return;
+
+  optsContainer.classList.remove('checked');
+  optsContainer.querySelectorAll('.co').forEach(opt => {
+    opt.classList.remove('selected', 'correct', 'wrong', 'disabled');
+  });
+  if (resultDiv) {
+    resultDiv.className = 'result-area';
+    resultDiv.innerHTML = '';
+  }
+}
+
+// ====== Helper ======
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// ====== Init ======
+document.addEventListener('DOMContentLoaded', loadData);
 </script>
-<div class="footer">⚡ 知而不行，只是未知 · 点击考点展开考题 · 打印自动展开全部</div>
 </body>
 </html>
