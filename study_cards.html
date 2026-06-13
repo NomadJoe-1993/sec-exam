@@ -517,10 +517,9 @@ body {
   <div id="loading" class="loading-state">
     <div class="spinner"></div>
     <div>加载考点数据中…</div>
-    <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap;">
-      <button onclick="window.ExamRecorder && downloadRecords()" style="padding:2px 8px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--blue);font-size:10px;cursor:pointer;">💾 导出记录</button>
-      <button onclick="document.getElementById('importTopBtn').click()" style="padding:2px 8px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--blue);font-size:10px;cursor:pointer;">📥 导入记录</button>
-      <span style="font-size:9px;color:var(--dim);line-height:24px;">数据在手机本地，记得备份</span>
+    <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;">
+      <button onclick="window.ExamRecorder && downloadRecords()" style="padding:2px 10px;border-radius:6px;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:10px;cursor:pointer;font-weight:600;">💾 导出</button>
+      <button onclick="document.getElementById('importTopBtn').click()" style="padding:2px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--blue);font-size:10px;cursor:pointer;">📥 导入</button>
     </div>
     <input type="file" id="importTopBtn" accept=".json" style="display:none" onchange="
       var f=this.files[0];if(!f)return;
@@ -558,11 +557,6 @@ body {
 </div>
 
 <script>
-window.onerror = function(msg, url, line) {
-  document.getElementById("container") && (document.getElementById("container").innerHTML =
-    '<div style="text-align:center;padding:2rem;color:var(--red)"><div style="font-size:2rem">❌</div><div style="margin-top:0.5rem">页面加载异常</div><div style="font-size:0.75rem;color:var(--dim);margin-top:0.3rem">' + msg + '</div><button onclick="location.reload()" style="margin-top:0.8rem;padding:6px 20px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:0.85rem;cursor:pointer">重新加载</button></div>');
-  return true;
-};
 // ====== State ======
 let dataFin = null;
 let dataLaw = null;
