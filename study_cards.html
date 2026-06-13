@@ -496,6 +496,7 @@ body {
   .ch-title { font-size: 0.98rem; }
 }
 </style>
+<script src="recorder.js"></script>
 </head>
 <body>
 
@@ -523,7 +524,23 @@ body {
   <div id="sec-law" class="sec" style="display:none"></div>
 
   <!-- Footer -->
-  <div class="footer">高频考点速记 · 数据基于V4考频聚类</div>
+  <div class="footer">
+  <div style="margin-bottom:6px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap;">
+    <button onclick="window.ExamRecorder && downloadRecords()" style="padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--dim);font-size:11px;cursor:pointer;">💾 导出答题记录</button>
+    <button onclick="document.getElementById('importH5Input').click()" style="padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--dim);font-size:11px;cursor:pointer;">📥 导入记录</button>
+    <button onclick="window.ExamRecorder && window.ExamRecorder.clear()" style="padding:3px 10px;border-radius:6px;border:1px solid var(--red);background:var(--red-bg);color:var(--red);font-size:11px;cursor:pointer;">🗑️ 清空</button>
+  </div>
+  高频考点速记 · 数据基于V4考频聚类
+</div>
+<input type="file" id="importH5Input" accept=".json" style="display:none" onchange="
+  var f=this.files[0];if(!f)return;
+  var r=new FileReader();r.onload=function(e){
+    if(window.ExamRecorder){
+      var res=window.ExamRecorder.importFromJSON(e.target.result);
+      alert(res.success?'✅ 导入'+res.count+'条记录':'❌ 失败：'+res.error);
+    }
+  };r.readAsText(f);this.value='';
+">
 </div>
 
 <script>
@@ -823,6 +840,29 @@ function checkAnswer(uniqueId) {
   resultDiv.innerHTML = '<div class="ra-answer">' + (isCorrect ? '✅ 回答正确！' : '❌ 回答错误') + '</div>' +
     '<div>正确答案：<b>' + correctAnswer + '</b></div>' +
     '<div class="ra-explain"><i>' + (type === 'm' ? '多选题需全部选对才计为正确' : '') + '</i></div>';
+
+  // ── ──
+  if (window.ExamRecorder) {
+    const qCard = document.getElementById('kp-' + uniqueId);
+    const chGroup = qCard ? qCard.closest('.ch-group') : null;
+    const chapterEl = chGroup ? chGroup.querySelector('.ch-title') : null;
+    const chapter = chapterEl ? chapterEl.textContent.replace(/\(.*?\)/g,'').trim() : '';
+    const qText = qCard ? (qCard.querySelector('.pq') ? qCard.querySelector('.pq').textContent : '') : '';
+    const selectedKeys = [];
+    options.forEach(function(o) { if (o.classList.contains('selected')) selectedKeys.push(o.dataset.key); });
+    window.ExamRecorder.record({
+      questionId: 'h5-' + uniqueId,
+      subject: (document.querySelector('.swb.on') ? (document.querySelector('.swb.on').textContent.indexOf('金融') >= 0 ? '金融市场基础知识' : '证券市场基本法律法规') : ''),
+      chapter: chapter,
+      type: type,
+      typeCn: type === 'm' ? '多选' : (type === 'j' ? '判断' : '单选'),
+      question: qText,
+      userAnswer: selectedKeys.sort().join(''),
+      correctAnswer: correctAnswer,
+      isCorrect: isCorrect,
+      source: 'H5速记'
+    });
+  }
 }
 
 function resetPractice(uniqueId) {
