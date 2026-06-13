@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>证券从业 · 学情看板</title>
+<style>
+:root {
+  --bg: #f5efe6; --card: #faf6f0; --border: #d4c9b8;
+  --border-light: #e8dfd0; --text: #3d3229; --text-dim: #8a7e6f;
+  --blue: #1e5b8a; --blue-bg: rgba(30,91,138,0.06);
+  --red: #c23b22; --red-bg: rgba(194,59,34,0.08);
+  --green: #3d7246; --green-bg: rgba(61,114,70,0.08);
+  --gold: #c9a96e; --shadow: rgba(61,50,41,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Serif SC', serif;
+  background: var(--bg); color: var(--text); line-height: 1.7;
+  padding: 0.8rem; min-height: 100vh;
+}
+.container { max-width: 860px; margin: 0 auto; }
+
+/* ── 头部 ── */
+.hd { text-align:center; padding:1rem 0; position:relative; }
+.hd::after { content:''; display:block; width:60px; height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--gold));
+  margin:0.6rem auto 0; border-radius:2px; }
+.hd h1 { font-size:1.3rem; font-weight:800; color:var(--blue); letter-spacing:2px; }
+.hd .sub { color:var(--text-dim); font-size:0.75rem; margin-top:0.2rem; }
+
+/* ── 统计卡片 ── */
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:8px; margin-bottom:1rem; }
+.card {
+  background:var(--card); border:1px solid var(--border-light); border-radius:10px;
+  padding:0.8rem; text-align:center; box-shadow:0 2px 6px var(--shadow);
+}
+.card-num { font-size:2rem; font-weight:800; }
+.card-label { font-size:0.72rem; color:var(--text-dim); margin-top:2px; }
+.card-num.green { color:var(--green); }
+.card-num.red { color:var(--red); }
+.card-num.blue { color:var(--blue); }
+.card-num.gold { color:var(--gold); }
+
+/* ── 分区标题 ── */
+.sec-title {
+  font-size:0.95rem; font-weight:700; color:var(--blue);
+  padding:0.4rem 0; margin:0.8rem 0 0.3rem;
+  border-bottom:1.5px solid var(--border-light);
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+}
+.sec-title .badge {
+  font-size:0.65rem; font-weight:400; color:var(--text-dim);
+  background:var(--blue-bg); padding:2px 8px; border-radius:999px;
+}
+
+/* ── 列表 ── */
+.list { display:flex; flex-direction:column; gap:3px; }
+.item {
+  background:var(--card); border:1px solid var(--border-light); border-radius:8px;
+  padding:8px 12px; display:flex; align-items:center; gap:8px;
+  transition:box-shadow 0.2s;
+}
+.item:hover { box-shadow:0 2px 8px var(--shadow); }
+.item .bar-wrap { flex:1; height:6px; background:var(--bg); border-radius:3px; overflow:hidden; }
+.item .bar-fill { height:100%; border-radius:3px; transition:width 0.3s; }
+.item .bar-fill.good { background:var(--green); }
+.item .bar-fill.ok { background:var(--gold); }
+.item .bar-fill.poor { background:var(--red); }
+.item .label { font-size:0.82rem; font-weight:500; min-width:140px; }
+.item .stat { font-size:0.72rem; color:var(--text-dim); min-width:80px; text-align:right; }
+.item .stat b { font-size:0.85rem; }
+
+/* ── 类型统计 ── */
+.type-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:0.5rem; }
+.type-card {
+  background:var(--card); border:1px solid var(--border-light); border-radius:8px;
+  padding:0.6rem; text-align:center;
+}
+.type-card .tc-num { font-size:1.2rem; font-weight:700; }
+.type-card .tc-label { font-size:0.68rem; color:var(--text-dim); }
+.type-card .tc-rate { font-size:0.9rem; margin-top:2px; }
+
+/* ── 空状态 ── */
+.empty {
+  text-align:center; padding:2rem; color:var(--text-dim);
+  background:var(--card); border:1px dashed var(--border); border-radius:10px;
+  font-size:0.85rem;
+}
+.empty .big { font-size:2.5rem; margin-bottom:0.5rem; }
+
+/* ── 按钮 ── */
+.actions { display:flex; gap:6px; flex-wrap:wrap; margin:0.6rem 0; justify-content:center; }
+.btn {
+  padding:0.4rem 1rem; border-radius:999px; font-size:0.78rem; font-weight:600;
+  cursor:pointer; border:1.5px solid var(--border); background:var(--card);
+  color:var(--text-dim); transition:all 0.15s;
+}
+.btn:hover { border-color:var(--blue-dim); color:var(--blue); }
+.btn.primary { background:var(--blue); color:#fff; border-color:var(--blue); }
+.btn.primary:hover { opacity:0.85; }
+.btn.danger { background:var(--red); color:#fff; border-color:var(--red); }
+.btn.danger:hover { opacity:0.85; }
+
+/* ── 详细记录 ── */
+.detail-toggle {
+  text-align:center; margin:0.5rem 0; font-size:0.78rem;
+  color:var(--blue); cursor:pointer; text-decoration:underline;
+}
+.detail-table { display:none; width:100%; border-collapse:collapse; font-size:0.75rem; }
+.detail-table.show { display:table; }
+.detail-table th { background:var(--blue); color:#fff; padding:4px 6px; text-align:left; font-weight:600; }
+.detail-table td { padding:4px 6px; border-bottom:1px solid var(--border-light); }
+.detail-table tr:nth-child(even) { background:var(--blue-bg); }
+.detail-table .ok { color:var(--green); font-weight:700; }
+.detail-table .fail { color:var(--red); font-weight:700; }
+
+/* ── 文件导入 ── */
+#importInput { display:none; }
+
+@media (max-width:480px) {
+  .cards { grid-template-columns:repeat(2,1fr); }
+  .type-grid { grid-template-columns:1fr; }
+  .item .label { min-width:100px; font-size:0.78rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hd">
+    <h1>📊 学情看板</h1>
+    <div class="sub">记录你的每一道题 · 精准定位薄弱环节</div>
+  </div>
+
+  <div id="empty-state" class="empty" style="display:none;">
+    <div class="big">📝</div>
+    <div>还没有答题记录</div>
+    <div style="margin:0.5rem 0;font-size:0.8rem;">
+      打开试卷做题，每核对一题自动记录。<br>
+      若已有备份记录文件，点下方「导入记录」恢复。
+    </div>
+    <div class="actions" style="margin-top:0.5rem;">
+      <button class="btn primary" onclick="document.getElementById('importInput').click()">📥 导入记录</button>
+    </div>
+  </div>
+
+  <div id="main-content">
+    <!-- 统计卡片 -->
+    <div class="cards" id="stat-cards"></div>
+
+    <!-- 操作按钮 -->
+    <div class="actions">
+      <button class="btn primary" onclick="document.getElementById('importInput').click()">📥 导入记录</button>
+      <button class="btn" onclick="downloadRecords()">💾 导出备份</button>
+      <button class="btn danger" onclick="ExamRecorder.clear()">🗑️ 清空记录</button>
+    </div>
+
+    <!-- 题型统计 -->
+    <div class="sec-title">📌 题型正确率</div>
+    <div class="type-grid" id="type-stats"></div>
+
+    <!-- 章节统计 -->
+    <div class="sec-title">📖 各章薄弱点 <span class="badge">从弱到强排序</span></div>
+    <div class="list" id="chapter-list"></div>
+
+    <!-- 近期答题 -->
+    <div class="sec-title">🕐 最近答题 <span class="badge" id="recent-count"></span></div>
+    <div id="recent-questions"></div>
+
+    <!-- 详细记录开关 -->
+    <div class="detail-toggle" id="detail-toggle" onclick="toggleDetail()">📋 查看全部记录</div>
+    <table class="detail-table" id="detail-table">
+      <thead><tr><th>时间</th><th>来源</th><th>章节</th><th>题型</th><th>结果</th></tr></thead>
+      <tbody id="detail-body"></tbody>
+    </table>
+  </div>
+
+  <input type="file" id="importInput" accept=".json" onchange="importRecords(event)">
+
+  <div class="footer" style="text-align:center;padding:1rem;color:var(--text-dim);font-size:0.68rem;border-top:1px solid var(--border-light);margin-top:0.8rem;">
+    数据存储于浏览器本地 · 导出备份以防丢失
+  </div>
+</div>
+
+<script src="recorder.js"></script>
+<script>
+function renderDashboard() {
+  if (!window.ExamRecorder) return;
+  const stats = window.ExamRecorder.getStats();
+  const main = document.getElementById('main-content');
+  const empty = document.getElementById('empty-state');
+
+  if (stats.total === 0) {
+    main.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+  main.style.display = 'block';
+  empty.style.display = 'none';
+
+  // ── 统计卡片 ──
+  document.getElementById('stat-cards').innerHTML = `
+    <div class="card"><div class="card-num blue">${stats.total}</div><div class="card-label">已答题数</div></div>
+    <div class="card"><div class="card-num ${stats.accuracy >= 60 ? 'green' : 'red'}">${stats.accuracy}%</div><div class="card-label">总正确率</div></div>
+    <div class="card"><div class="card-num green">${stats.correct}</div><div class="card-label">正确</div></div>
+    <div class="card"><div class="card-num red">${stats.total - stats.correct}</div><div class="card-label">错误</div></div>
+  `;
+
+  // ── 题型统计 ──
+  const bt = stats.byType;
+  document.getElementById('type-stats').innerHTML = `
+    <div class="type-card">
+      <div class="tc-num" style="color:${bt.single.rate >= 60 ? 'var(--green)' : 'var(--red)'}">${bt.single.rate}%</div>
+      <div class="tc-label">单选题</div>
+      <div style="font-size:0.65rem;color:var(--text-dim)">${bt.single.correct}/${bt.single.total}</div>
+    </div>
+    <div class="type-card">
+      <div class="tc-num" style="color:${bt.multi.rate >= 60 ? 'var(--green)' : 'var(--red)'}">${bt.multi.rate}%</div>
+      <div class="tc-label">多选题</div>
+      <div style="font-size:0.65rem;color:var(--text-dim)">${bt.multi.correct}/${bt.multi.total}</div>
+    </div>
+    <div class="type-card">
+      <div class="tc-num" style="color:${bt.judge.rate >= 60 ? 'var(--green)' : 'var(--red)'}">${bt.judge.rate}%</div>
+      <div class="tc-label">判断题</div>
+      <div style="font-size:0.65rem;color:var(--text-dim)">${bt.judge.correct}/${bt.judge.total}</div>
+    </div>
+  `;
+
+  // ── 章节统计（从弱到强） ──
+  const chList = document.getElementById('chapter-list');
+  if (stats.byChapter.length === 0) {
+    chList.innerHTML = '<div class="empty">暂无章节数据</div>';
+  } else {
+    chList.innerHTML = stats.byChapter.map(ch => {
+      const rate = parseFloat(ch.rate);
+      const cls = rate >= 70 ? 'good' : (rate >= 50 ? 'ok' : 'poor');
+      return `<div class="item">
+        <span class="label">${ch.chapter}</span>
+        <div class="bar-wrap"><div class="bar-fill ${cls}" style="width:${ch.rate}%"></div></div>
+        <span class="stat"><b>${ch.rate}%</b> (${ch.correct}/${ch.total})</span>
+      </div>`;
+    }).join('');
+  }
+
+  // ── 最近答题 ──
+  const records = ExamRecorder.getStats().total > 0 ? (function() {
+    try { return JSON.parse(localStorage.getItem('sec_exam_records') || '[]'); } catch(e) { return []; }
+  })() : [];
+  const recent = records.slice(-10).reverse();
+  document.getElementById('recent-count').textContent = `最近${recent.length}条`;
+  document.getElementById('recent-questions').innerHTML = recent.length === 0
+    ? '<div class="empty" style="padding:0.8rem">暂无</div>'
+    : recent.map(r => {
+        const time = new Date(r.timestamp).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+        const icon = r.isCorrect ? '✅' : '❌';
+        const qText = (r.question || '').substring(0, 50);
+        return `<div class="item">
+          <span style="font-size:0.72rem;color:var(--text-dim);min-width:40px;">${time}</span>
+          <span style="font-size:0.72rem;color:var(--text-dim);min-width:55px;">${r.source || ''}</span>
+          <span style="flex:1;font-size:0.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${qText}...</span>
+          <span style="font-size:0.85rem;">${icon}</span>
+          <span style="font-size:0.7rem;color:var(--text-dim);min-width:55px;">${r.correctAnswer || ''}</span>
+        </div>`;
+    }).join('');
+
+  // ── 全部记录表格 ──
+  document.getElementById('detail-body').innerHTML = records.slice().reverse().map(r => {
+    const time = new Date(r.timestamp).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const cls = r.isCorrect ? 'ok' : 'fail';
+    const icon = r.isCorrect ? '✅' : '❌';
+    return `<tr>
+      <td>${time}</td>
+      <td>${r.source || ''}</td>
+      <td>${(r.chapter || '').substring(0,25)}</td>
+      <td>${r.typeCn || r.type || ''}</td>
+      <td class="${cls}">${icon} ${r.isCorrect ? '正确' : '错误'} (${r.correctAnswer || ''})</td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleDetail() {
+  const table = document.getElementById('detail-table');
+  table.classList.toggle('show');
+}
+
+function importRecords(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const result = window.ExamRecorder.importFromJSON(e.target.result);
+    if (result.success) {
+      alert(`✅ 成功导入 ${result.count} 条记录`);
+      renderDashboard();
+    } else {
+      alert('❌ 导入失败：' + result.error);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+// 初始渲染
+document.addEventListener('DOMContentLoaded', renderDashboard);
+
+// 实时更新：监听新记录
+document.addEventListener('exam-record', function() {
+  renderDashboard();
+});
+</script>
+</body>
+</html>
