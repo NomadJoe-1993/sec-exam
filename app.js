@@ -380,3 +380,4 @@ function showPage(id) {
 }
 function goHome() { showPage('page-home'); renderHome(); }
 function openStudyCards() { window.location.href = 'study_cards.html'; }
+function openDashboard() { window.location.href = 'dashboard.html'; }
