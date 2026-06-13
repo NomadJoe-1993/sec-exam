@@ -517,7 +517,21 @@ body {
   <div id="loading" class="loading-state">
     <div class="spinner"></div>
     <div>加载考点数据中…</div>
-  </div>
+    <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap;">
+      <button onclick="window.ExamRecorder && downloadRecords()" style="padding:2px 8px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--blue);font-size:10px;cursor:pointer;">💾 导出记录</button>
+      <button onclick="document.getElementById('importTopBtn').click()" style="padding:2px 8px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--blue);font-size:10px;cursor:pointer;">📥 导入记录</button>
+      <span style="font-size:9px;color:var(--dim);line-height:24px;">数据在手机本地，记得备份</span>
+    </div>
+    <input type="file" id="importTopBtn" accept=".json" style="display:none" onchange="
+      var f=this.files[0];if(!f)return;
+      var r=new FileReader();r.onload=function(e){
+        if(window.ExamRecorder){
+          var res=window.ExamRecorder.importFromJSON(e.target.result);
+          alert(res.success?'✅ 导入'+res.count+'条记录':'❌ 失败：'+res.error);
+          location.reload();
+        }
+      };r.readAsText(f);this.value='';
+    ">
 
   <!-- Content -->
   <div id="sec-fin" class="sec" style="display:none"></div>
