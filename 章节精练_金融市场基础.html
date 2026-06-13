@@ -37,85 +37,40 @@ body {
   min-height: 100vh;
 }
 .container { max-width: 820px; margin: 0 auto; }
-
-/* ── Header ── */
-.hd {
-  text-align: center; padding: 1rem 0.5rem 0.6rem;
-  margin-bottom: 0.5rem; position: relative;
-}
-.hd::after {
-  content: ''; display: block; width: 50px; height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--gold));
-  margin: 0.5rem auto 0; border-radius: 2px;
-}
+.hd { text-align: center; padding: 1rem 0.5rem 0.6rem; margin-bottom: 0.5rem; position: relative; }
+.hd::after { content: ''; display: block; width: 50px; height: 3px; background: linear-gradient(90deg, var(--blue), var(--gold)); margin: 0.5rem auto 0; border-radius: 2px; }
 .hd h1 { font-size: 1.2rem; font-weight: 800; color: var(--blue); letter-spacing: 1px; }
 .hd .sub { color: var(--text-dim); font-size: 0.75rem; margin-top: 0.2rem; }
 
-/* ── Chapter tabs ── */
-.ch-nav {
-  display: flex; flex-wrap: wrap; gap: 4px;
-  justify-content: center; margin: 0.4rem 0 0.8rem;
-}
-.ch-btn {
-  padding: 0.35rem 0.7rem; border-radius: 6px;
-  font-size: 0.78rem; font-weight: 600;
-  border: 1.5px solid var(--border);
-  cursor: pointer; background: var(--card); color: var(--text-dim);
-  transition: all 0.2s; white-space: nowrap;
-}
+.ch-nav { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin: 0.4rem 0 0.8rem; }
+.ch-btn { padding: 0.35rem 0.7rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; border: 1.5px solid var(--border); cursor: pointer; background: var(--card); color: var(--text-dim); transition: all 0.2s; white-space: nowrap; }
 .ch-btn:hover { border-color: var(--blue-dim); color: var(--blue); }
 .ch-btn.on { background: var(--blue); color: #fff; border-color: var(--blue); }
 .ch-btn .cnt { font-weight: 400; opacity: 0.7; font-size: 0.7rem; }
+.ch-btn .weight { font-weight: 400; opacity: 0.8; font-size: 0.65rem; margin-left: 2px; }
 
-/* ── Stats bar ── */
-.stats {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0.5rem 0.8rem; background: var(--card);
-  border-radius: 8px; margin-bottom: 0.6rem;
-  border: 1px solid var(--border-light); font-size: 0.78rem;
-}
+.stats { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.8rem; background: var(--card); border-radius: 8px; margin-bottom: 0.6rem; border: 1px solid var(--border-light); font-size: 0.78rem; }
 .stats .pct { color: var(--blue); font-weight: 700; font-size: 0.9rem; }
-.progress-bar {
-  height: 4px; background: var(--border-light); border-radius: 2px;
-  margin: 0.4rem 0 0.8rem; overflow: hidden;
-}
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-light));
-  border-radius: 2px; transition: width 0.4s ease;
-}
+.progress-bar { height: 4px; background: var(--border-light); border-radius: 2px; margin: 0.4rem 0 0.8rem; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-light)); border-radius: 2px; transition: width 0.4s ease; }
 
-/* ── Question card ── */
-.qcard {
-  background: var(--card); border-radius: 10px;
-  border: 1px solid var(--border-light);
-  padding: 1rem; margin-bottom: 0.8rem;
-  box-shadow: 0 1px 4px var(--shadow);
-}
-.qcard .q-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 0.6rem;
-}
+.qcard { background: var(--card); border-radius: 10px; border: 1px solid var(--border-light); padding: 1rem; margin-bottom: 0.8rem; box-shadow: 0 1px 4px var(--shadow); }
+.qcard .q-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
 .qcard .q-num { font-weight: 700; color: var(--blue); font-size: 0.85rem; min-width: 2rem; }
-.qcard .q-type {
-  font-size: 0.7rem; padding: 0.1rem 0.5rem; border-radius: 999px;
-  font-weight: 600; white-space: nowrap; margin-left: 0.4rem;
-}
+.qcard .q-type { font-size: 0.7rem; padding: 0.1rem 0.5rem; border-radius: 999px; font-weight: 600; white-space: nowrap; margin-left: 0.4rem; }
 .type-s { background: var(--blue-bg); color: var(--blue); }
 .type-m { background: var(--red-bg); color: var(--red); }
 .type-j { background: var(--green-bg); color: var(--green); }
+.type-c { background: var(--gold); color: #fff; }
 .qcard .q-text { font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
 .qcard .q-source { font-size: 0.65rem; color: var(--text-light); margin-bottom: 0.4rem; }
 
-/* ── Options ── */
+/* Material box for comprehensive questions */
+.material-box { background: var(--blue-bg); border-left: 3px solid var(--blue); padding: 0.7rem 0.8rem; border-radius: 6px; font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.8rem; color: var(--text); }
+.material-box .mat-label { font-size: 0.7rem; color: var(--blue); font-weight: 700; margin-bottom: 0.3rem; }
+
 .options { display: flex; flex-direction: column; gap: 6px; }
-.opt {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 0.5rem 0.7rem; border-radius: 8px;
-  border: 1.5px solid var(--border-light);
-  cursor: pointer; transition: all 0.15s;
-  font-size: 0.88rem; line-height: 1.5;
-  background: var(--bg);
-}
+.opt { display: flex; align-items: flex-start; gap: 8px; padding: 0.5rem 0.7rem; border-radius: 8px; border: 1.5px solid var(--border-light); cursor: pointer; transition: all 0.15s; font-size: 0.88rem; line-height: 1.5; background: var(--bg); }
 .opt:hover { border-color: var(--blue-dim); background: var(--blue-bg); }
 .opt .ol { font-weight: 700; color: var(--text-dim); min-width: 1.2rem; }
 .opt.selected { border-color: var(--blue); background: var(--blue-bg); }
@@ -123,33 +78,21 @@ body {
 .opt.wrong { border-color: var(--red); background: var(--red-bg); }
 .opt.omitted { border-color: var(--red-light); background: var(--red-bg); opacity: 0.6; }
 
-/* ── Action buttons ── */
 .actions { display: flex; gap: 8px; margin-top: 0.8rem; flex-wrap: wrap; }
-.btn {
-  padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.82rem;
-  font-weight: 600; border: none; cursor: pointer;
-  transition: all 0.2s;
-}
+.btn { padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
 .btn-primary { background: var(--blue); color: #fff; }
 .btn-primary:hover { background: var(--blue-light); }
 .btn-secondary { background: var(--card-alt); color: var(--text-dim); border: 1px solid var(--border); }
 .btn-secondary:hover { background: var(--border-light); }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* ── Analysis ── */
-.analysis {
-  margin-top: 0.8rem; padding: 0.8rem; border-radius: 8px;
-  background: var(--card-alt); border-left: 3px solid var(--blue);
-  font-size: 0.85rem; line-height: 1.7; display: none;
-}
+.analysis { margin-top: 0.8rem; padding: 0.8rem; border-radius: 8px; background: var(--card-alt); border-left: 3px solid var(--blue); font-size: 0.85rem; line-height: 1.7; display: none; }
 .analysis .a-label { font-weight: 700; color: var(--blue); margin-bottom: 0.3rem; }
 .analysis .a-answer { color: var(--green); font-weight: 600; }
 .analysis .a-wrong { color: var(--red); }
 .analysis .a-text { margin-top: 0.3rem; color: var(--text); }
 
-/* ── No questions ── */
 .empty { text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
-.empty .icon { font-size: 3rem; margin-bottom: 0.5rem; opacity: 0.3; }
 
 @media (max-width: 480px) {
   .ch-nav { gap: 3px; }
@@ -160,45 +103,29 @@ body {
 </head>
 <body>
 <div class="container">
-
-<!-- Header -->
 <div class="hd">
   <h1>📚 证券从业 · 章节精练</h1>
-  <div class="sub">金融市场基础 · 按章节系统刷题</div>
+  <div class="sub">金融市场基础 · 按章节系统刷题 · 含综合题</div>
 </div>
-
-<!-- Chapter navigation -->
 <div class="ch-nav" id="chNav"></div>
-
-<!-- Progress bar -->
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-
-<!-- Stats -->
 <div class="stats">
   <span>📊 已答 <strong id="doneCount">0</strong> / <span id="totalCount">0</span></span>
   <span>✅ 正确率 <span class="pct" id="accPct">0%</span></span>
 </div>
-
-<!-- Question list container -->
 <div id="qContainer"></div>
-
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════
-var SUBJECT = "金融市场基础";
-var CHAPTERS = {"code": "第1章", "name": "金融市场体系", "weight": 8, "target": 48, "questions": 59},
-  {"code": "第2章", "name": "中国的金融体系与多层次资本市场", "weight": 12, "target": 72, "questions": 63},
-  {"code": "第3章", "name": "证券市场主体", "weight": 10, "target": 60, "questions": 59},
-  {"code": "第4章", "name": "股票", "weight": 20, "target": 120, "questions": 116},
-  {"code": "第5章", "name": "债券", "weight": 15, "target": 90, "questions": 111},
-  {"code": "第6章", "name": "证券投资基金", "weight": 15, "target": 90, "questions": 73},
-  {"code": "第7章", "name": "金融衍生工具", "weight": 12, "target": 72, "questions": 61},
-  {"code": "第8章", "name": "金融风险管理", "weight": 8, "target": 48, "questions": 49};
-var CH_MAP = [{"code": "第1章", "name": "金融市场体系", "start": 0, "count": 59, "weight": 8}, {"code": "第2章", "name": "中国的金融体系与多层次资本市场", "start": 59, "count": 63, "weight": 12}, {"code": "第3章", "name": "证券市场主体", "start": 122, "count": 59, "weight": 10}, {"code": "第4章", "name": "股票", "start": 181, "count": 116, "weight": 20}, {"code": "第5章", "name": "债券", "start": 297, "count": 111, "weight": 15}, {"code": "第6章", "name": "证券投资基金", "start": 408, "count": 73, "weight": 15}, {"code": "第7章", "name": "金融衍生工具", "start": 481, "count": 61, "weight": 12}, {"code": "第8章", "name": "金融风险管理", "start": 542, "count": 49, "weight": 8}];
-
+var CHAPTERS = [{"code": "第1章", "name": "金融市场体系", "weight": "8%", "count": 63},
+  {"code": "第2章", "name": "中国的金融体系与多层次资本市场", "weight": "12%", "count": 66},
+  {"code": "第3章", "name": "证券市场主体", "weight": "10%", "count": 61},
+  {"code": "第4章", "name": "股票", "weight": "20%", "count": 120},
+  {"code": "第5章", "name": "债券", "weight": "15%", "count": 115},
+  {"code": "第6章", "name": "证券投资基金", "weight": "15%", "count": 75},
+  {"code": "第7章", "name": "金融衍生工具", "weight": "12%", "count": 64},
+  {"code": "第8章", "name": "金融风险管理", "weight": "8%", "count": 51}];
+var CH_MAP = [{"code": "第1章", "name": "金融市场体系", "weight": "8%", "start": 0, "count": 63}, {"code": "第2章", "name": "中国的金融体系与多层次资本市场", "weight": "12%", "start": 63, "count": 66}, {"code": "第3章", "name": "证券市场主体", "weight": "10%", "start": 129, "count": 61}, {"code": "第4章", "name": "股票", "weight": "20%", "start": 190, "count": 120}, {"code": "第5章", "name": "债券", "weight": "15%", "start": 310, "count": 115}, {"code": "第6章", "name": "证券投资基金", "weight": "15%", "start": 425, "count": 75}, {"code": "第7章", "name": "金融衍生工具", "weight": "12%", "start": 500, "count": 64}, {"code": "第8章", "name": "金融风险管理", "weight": "8%", "start": 564, "count": 51}];
 var ALL_QUESTIONS = [
   {"id": "cflue_zc_ch1.json_1", "q": "期限在1年以上的资金的跨国流动是国际长期资金流动。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "国际长期资金流动，是指期限在1年以上的资金的跨国流动，包括国际直接投资、国际间接投资和国际信贷三种形式。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch1.json_2", "q": "根据市场组织方式，证券市场可以分为（）。", "c": {"A": "场外市场", "B": "发行市场", "C": "流通市场", "D": "交易所市场"}, "a": "AD", "an": "按组织方式分为交易所市场和场外交易市场。", "type": "multi", "source": "cflue"},
@@ -221,7 +148,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch1.json_19", "q": "下列属于国际资金流动方式中的“国际长期资金流动”的活动有（）。", "c": {"A": "美国的A公司为从英国B公司进口商品，预付了20万英镑的货款", "B": "美国的A公司以合资形式在英国投资设立了B公司", "C": "美国的A公司将其从位于英国的控股子公司分到的年度利润再投资于这家子公司", "D": "美国的A公司购买了位于英国B公司2%的股权"}, "a": "BCD", "an": "国际长期资金流动是指期限在1年以上的资金的跨国流动，包括国际直接投资、国际间接投资和国际信贷。D属于国际短期资金流动。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch1.json_20", "q": "下列属于货币市场的有（）。", "c": {"A": "商业票据市场", "B": "股票市场", "C": "大额可转让存单市场", "D": "银行间同业拆借市场"}, "a": "ACD", "an": "货币市场包括：银行间同业拆借市场、商业票据市场、短期国库券市场、大额可转让存单市场等。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch1.json_21", "q": "在美国银行业的监管机构中，（）作为监管机构的协调机构，负责制定统一的监管准则和报告格式。", "c": {"A": "储蓄机构监管署", "B": "联邦金融机构检查委员会", "C": "联邦储备体系", "D": "货币监理署"}, "a": "B", "an": "美国实行的是“双层多头”金融监管体制。联邦金融机构检查委员会在美国银行业的监管机构中作为监管机构的协调机构，负责制定统一的监管准则和报告格式。", "type": "single", "source": "cflue"},
-    {"id": "cflue_zc_ch1.json_22", "q": "资金需求者与资金初始供应者之间不发生直接信贷关系，而是由金融中介机构起桥梁作用，两者只与金融机构发生债权债务关系。这反映了间接融资的融资的相对集中性特点。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "资金需求者与资金初始供应者之间不发生直接信贷关系，而是由金融中介机构起桥梁作用，二者只与金融机构发生债权债务关系。这反映了间接融资的资金获得的【间接性】特点&amp;amp;nbsp;&amp;amp;nbsp;。", "type": "judge", "source": "cflue"},
+    {"id": "cflue_zc_ch1.json_22", "q": "资金需求者与资金初始供应者之间不发生直接信贷关系，而是由金融中介机构起桥梁作用，两者只与金融机构发生债权债务关系。这反映了间接融资的融资的相对集中性特点。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "资金需求者与资金初始供应者之间不发生直接信贷关系，而是由金融中介机构起桥梁作用，二者只与金融机构发生债权债务关系。这反映了间接融资的资金获得的【间接性】特点&amp;nbsp;&amp;nbsp;。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch1.json_23", "q": "将有形资产产生的风险在资金供求双方之间重新配置，反映了金融市场的风险管理功能。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "略。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch1.json_24", "q": "金融市场通过金融资产交易实现货币资金在供给者和需求者之间的转移，促进有形资本形成，这是金融市场的资金融通功能。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "略。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch1.json_25", "q": "证券市场以证券发行与交易的方式实现了筹资与并购的对接，有效地解决了资本的供需矛盾。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "证券市场以证券发行与交易的方式实现了【筹资与投资】的对接，有效地解决了资本的供需矛盾。", "type": "judge", "source": "cflue"},
@@ -259,10 +186,14 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_5.json_45", "q": "下列关于城市商业银行特点的说法，错误的是（）。", "c": {"A": "各项业务均衡发展", "B": "通常在特定区域从事商业银行业务", "C": "依靠地缘优势与当地经济发展水平", "D": "主要针对当地企业和居民需求提供金融服务"}, "a": "A", "an": "城市商业银行通常在特定的区域从事商业银行业务，依靠地缘优势、当地经济发展水平，重点针对当地企业和居民的需求提供金融产品和服务。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_50", "q": "下列关于债券报价方式的说法，正确的有（）。", "c": {"A": "对话报价是指参与者为达成交易而直接向交易对手作出的、对手方确认即可成交的报价", "B": "小额报价是指在交易系统中，一次报价、规定交易数量范围和对手范围的现券双向撮合交易方式", "C": "公开报价是指参与者为表明自身交易意向而面向市场作出的、不可直接确认成交的报价", "D": "双边报价是指银行间债券市场开展双边报价业务的交易员进行现券买卖报价时，在中国人民银行核定的债券买卖差价范围内连续报出该券种的买卖实价，并同时报出该券种的买卖数量、清算速度等交易要素"}, "a": "ACD", "an": "小额报价是在交易系统中，一次报价、规定交易数量范围和对手范围的现券【单向】撮合交易方式。D错误。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_54", "q": "下列关于金融市场的说法，错误的是（）。", "c": {"A": "金融市场是政府调控经济的一个主要渠道", "B": "金融市场的发展可以促成厂商“正常存货投资”的减少", "C": "金融市场的繁荣与萧条与实体经济的兴旺与不景气存在一定的关联", "D": "金融市场使得“意愿储蓄”脱离了实物窖藏的方式，使社会可用的投资品增长。"}, "a": "B", "an": "金融市场是经济运行状态的“晴雨表”，繁荣的金融市场往往对应着实体经济的兴旺发达，而金融市场的萧条通常也意味着真实经济部门的不景气。金融市场或金融体系首先使“意愿的储蓄”脱离了实物窖藏的方式，使社会可用的投资品总量增长，同时，又将“货币形态”的储蓄提供给需要追加投资的部门，使它们能够支付得起对投资品的需要，最后促成厂商【“非正常存货投资”】的减少，最终实现全社会储蓄与投资的一种事前的或计划的均衡，增进了社会福利。由于金融市场在联系储蓄—投资以及在调整资源配置方面所具有的重要作用，再加上金融市场主体对市场变化的敏感性，金融市场逐渐成为政府调控经济的一个主要渠道。", "type": "single", "source": "cflue_paper"},
+    {"id": "comp_74567", "q": "根据上述材料，下列关于中国金融监管体系的说法，正确的是（）。", "c": {"A": "中国金融监管体系实行\\\"一委一行两会\\\"的架构", "B": "国务院金融稳定发展委员会负责统筹协调金融稳定和改革发展", "C": "中国银行保险监督管理委员会负责监管证券业", "D": "中国人民银行负责所有金融机构的微观审慎监管"}, "a": "B", "an": "中国金融监管体系是\\\"一委一行一局一会\\\"：国务院金融稳定发展委员会（一委）+ 中国人民银行（一行）+ 国家金融监督管理总局（一局）+ 中国证券监督管理委员会（一会）。选项B正确。国家金融监督管理总局负责除证券业之外的金融监管，证监会负责证券业监管。", "type": "comprehensive", "source": "comprehensive", "material": "2024年10月，中国证券业协会发布了《证券行业专业人员一般业务水平评价测试大纲（2024）》，自2024年11月1日起施行。该大纲对金融市场基础知识科目的考查范围进行了调整。其中涉及全球金融体系、中国金融体系与多层次资本市场等内容。", "sub_type": "single"},
+    {"id": "comp_68094", "q": "关于国际金融市场监管，下列说法正确的有（）。", "c": {"A": "美国证券交易委员会（SEC）负责监管美国证券市场", "B": "英国金融行为监管局（FCA）负责监管英国金融机构的行为", "C": "香港金融管理局（金管局）负责监管香港证券和期货业", "D": "日本金融厅（FSA）是日本金融监管的统一机构"}, "a": "ABD", "an": "选项C错误。香港金融管理局（金管局）负责监管银行业，证券及期货事务监察委员会（证监会）负责监管证券和期货业。其他选项均正确。", "type": "comprehensive", "source": "comprehensive", "material": "2024年10月，中国证券业协会发布了《证券行业专业人员一般业务水平评价测试大纲（2024）》，自2024年11月1日起施行。该大纲对金融市场基础知识科目的考查范围进行了调整。其中涉及全球金融体系、中国金融体系与多层次资本市场等内容。", "sub_type": "multi"},
+    {"id": "comp_15943", "q": "按上述分类，下列属于货币市场工具的是（）。", "c": {"A": "股票", "B": "10年期国债", "C": "商业票据", "D": "证券投资基金份额"}, "a": "C", "an": "货币市场是短期（1年以内）资金融通市场。商业票据是企业发行的短期无担保本票，期限通常在270天以内，属于货币市场工具。股票、10年期国债、证券投资基金均属于资本市场工具。", "type": "comprehensive", "source": "comprehensive", "material": "金融市场按照交易标的物可分为货币市场、资本市场、外汇市场和黄金市场等。货币市场是短期资金融通市场，资本市场是长期资金融通市场。金融市场的基本功能包括资金融通、价格发现、风险管理、流动性提供和降低交易成本。", "sub_type": "single"},
+    {"id": "comp_33054", "q": "金融市场通过价格信号引导资金流向效益最高的部门，这体现了金融市场的（）功能。", "c": {"A": "资金融通", "B": "价格发现", "C": "风险管理", "D": "流动性提供"}, "a": "B", "an": "价格发现功能是指金融市场通过公开竞价形成均衡价格，引导资金流向效益最高的部门。资金融通是实现资金盈余者向短缺者转移；风险管理是通过衍生工具等转移风险；流动性提供是使资产快速变现。", "type": "comprehensive", "source": "comprehensive", "material": "金融市场按照交易标的物可分为货币市场、资本市场、外汇市场和黄金市场等。货币市场是短期资金融通市场，资本市场是长期资金融通市场。金融市场的基本功能包括资金融通、价格发现、风险管理、流动性提供和降低交易成本。", "sub_type": "single"},
     {"id": "cflue_zc_ch2.json_1", "q": "国际经济环境因素作为影响我国金融市场运行的主要因素，内容不包括（）。", "c": {"A": "世界货币制度影响", "B": "放松监管和加强监管两种经济哲学的交替", "C": "汇率和国际资本流动", "D": "经济全球化"}, "a": "C", "an": "国际经济环境因素包括经济全球化、世界货币制度影响、放松监管和加强监管两种经济哲学的交替。汇率和国际资本流动属于宏观经济运行对金融市场的影响。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_2", "q": "中央银行采取宽松性货币政策，（）货币供给，促使股价（）。", "c": {"A": "减少，上升", "B": "减少，下降", "C": "增加，下降", "D": "增加，上升"}, "a": "D", "an": "中央银行采取宽松性货币政策，增加货币供给，股市资金增加，对股票的需求增加，立即促使股价上升。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_3", "q": "中央银行是代表一国政府发行法偿货币、制定和执行货币政策、实施金融监管的重要机构。中央银行作为证券发行主体，既可以发行股票，也可以发行债券。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "中央银行作为证券发行主体，主要涉及两类证券：1、中央银行【股票】。在一些国家（如美国），中央银行采取了股份制组织结构，通过发行股票募集资金，但是，中央银行的股东并不享有决定中央银行政策的权利，只能按期收取固定的红利，其股票类似于优先股。2、中央银行出于调控货币供给量目的而发行的【特殊债券】。", "type": "judge", "source": "cflue"},
-    {"id": "cflue_zc_ch2.json_4", "q": "在上海证券交易所设立科创板，坚持面向（），主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。", "c": {"A": "世界科技前沿", "B": "资本市场前沿", "C": "国家重大需求", "D": "经济主战场"}, "a": "ACD", "an": "在上海证券交易所新设科创板，坚持面向【世界科技前沿、面向经济主战场、面向国家重大需求】，主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。&amp;amp;nbsp;&amp;amp;nbsp;", "type": "multi", "source": "cflue"},
+    {"id": "cflue_zc_ch2.json_4", "q": "在上海证券交易所设立科创板，坚持面向（），主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。", "c": {"A": "世界科技前沿", "B": "资本市场前沿", "C": "国家重大需求", "D": "经济主战场"}, "a": "ACD", "an": "在上海证券交易所新设科创板，坚持面向【世界科技前沿、面向经济主战场、面向国家重大需求】，主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。&amp;nbsp;&amp;nbsp;", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_5", "q": "以下关于我国金融业主要行业的基本情况，不正确的是（）。", "c": {"A": "股份制银行资产规模增长较快", "B": "在分业监管体系下，相较于银行业和证券业，信托业务的融资活动灵活性不具有优势", "C": "证券业传统业务面临激烈的同质化竞争", "D": "大型商业银行在资产规模、资金来源和网点布局上占有主导地位"}, "a": "B", "an": "在分业监管体系下，相较于银行业和证券业，信托业务的融资活动更具灵活性优势。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_6", "q": "《创业板上市公司证券发行注册管理办法（试行）》明确发行上市审核和注册程序，深交所审核期限为（）个月，中国证监会注册期限为（）个工作日。同时，针对（）融资设置简易程序。", "c": {"A": "2；15；小额快速", "B": "2；10；小额便捷", "C": "3；15；小额便捷", "D": "2；15；小额便捷"}, "a": "A", "an": "《创业板上市公司证券发行注册管理办法（试行）》明确发行上市审核和注册程序，深交所审核期限为2个月，中国证监会注册期限为15个工作日。同时，针对“小额快速”融资设置简易程序", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_7", "q": "诚信租行是一家金融租赁公司，拟今年上市，因此聘请A投资银行进行IPO材料的编写，按照行业分类，在联合国统计署按经济活动类型分类的表里，A投资银行属于金融中介的（）子类。", "c": {"A": "辅助金融中介的活动", "B": "非银行金融中介结构", "C": "保险和养老基金", "D": "不包含保险和养老基金的金融中介活动"}, "a": "A", "an": "投资银行属于辅助金融中介的活动，选项C是按照业务特征及货币创造、交换媒介和支付手段的功能划分。", "type": "single", "source": "cflue"},
@@ -289,7 +220,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch2.json_28", "q": "国务院金融稳定发展委员会的职责有（）。", "c": {"A": "审议金融业改革发展重大规划", "B": "统筹金融改革和发展", "C": "指导中央金融改革发展与监管", "D": "落实党中央、国务院关于金融工作的决策部署"}, "a": "ABD", "an": "国务院金融稳定发展委员会的主要职责：1、落实党中央、国务院关于金融工作的决策部署；2、审议金融业改革发展重大规划；3、统筹金融改革发展与监管，协调货币政策与金融监管相关事项，统筹协调金融监管重大事项，协调金融政策与相关财政政策、产业政策等；4、分析研判国际国内金融形势，做好国际金融风险应对，研究系统性金融风险防范处置和维护金融稳定重大政策；5、指导地方金融改革发展与监管，对金融管理部门和地方政府进行业务监督和履职问责等。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_29", "q": "2020年4月27日，中央全面深化改革委员会第十三次会议审议通过了《创业板改革并试点注册制总体实施方案》。创业板在试点注册制安排方面，参照科创板的做法，在坚持规范、透明、公开，严把质量关的基础上，将审核注册程序分为（）两个相互衔接的环节。", "c": {"A": "证券业协会审核、中国证监会注册", "B": "证券业协会注册、中国证监会审核", "C": "交易所注册、中国证监会审核", "D": "交易所审核、中国证监会注册"}, "a": "D", "an": "2020年4月27日，中央全面深化改革委员会第十三次会议审议通过了《创业板改革并试点注册制总体实施方案》。创业板在试点注册制安排方面，参照科创板的做法，在坚持规范、透明、公开，严把质量关的基础上，将审核注册程序分为【交易所审核、中国证监会注册】两个相互衔接的环节。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_30", "q": "2018年7月，小王手头有一笔闲钱，正考虑将这笔钱投资于金融市场，在其进行基本面分析时，应考虑主要宏观经济变量包括（）。", "c": {"A": "经济周期", "B": "国内生产总值", "C": "国际资本流动", "D": "财政政策"}, "a": "ABC", "an": "影响我国金融市场运行的主要因素包括：经济因素。经济因素包括宏观经济环境、宏观经济政策和国际经济因素。宏观经济变量包括国内生产总值、经济周期、通货膨胀与利率、汇率和国际资本流动。财政政策属于宏观经济政策，选择不包括C的选项。", "type": "multi", "source": "cflue"},
-    {"id": "cflue_zc_ch2.json_31", "q": "目前，我国的商品期货交易所包括（）。", "c": {"A": "郑州商品交易所", "B": "广州期货交易所", "C": "上海期货交易所", "D": "大连商品交易所"}, "a": "ABCD", "an": "目前，我国成立了上海期货交易所、大连商品交易所和郑州商品交易所、广州期货交易所四大商品期货交易所。&amp;amp;nbsp;&amp;amp;nbsp;", "type": "multi", "source": "cflue"},
+    {"id": "cflue_zc_ch2.json_31", "q": "目前，我国的商品期货交易所包括（）。", "c": {"A": "郑州商品交易所", "B": "广州期货交易所", "C": "上海期货交易所", "D": "大连商品交易所"}, "a": "ABCD", "an": "目前，我国成立了上海期货交易所、大连商品交易所和郑州商品交易所、广州期货交易所四大商品期货交易所。&amp;nbsp;&amp;nbsp;", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_32", "q": "以下属于选择性货币政策的是（）。", "c": {"A": "不动产信用控制", "B": "公开市场业务", "C": "消费者信用控制", "D": "证券市场信用控制"}, "a": "ACD", "an": "选择性货币政策工具主要包括：消费者信用控制、证券市场信用控制、不动产信用控制，除此之外，还有直接信用控制和间接信用控制等。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_33", "q": "商业银行的主要业务包括（）。", "c": {"A": "负债业务", "B": "表外业务", "C": "资产业务", "D": "信托业务"}, "a": "ABC", "an": "商业银行的主要业务包括负债业务、资产业务和表外业务（担保承诺类、代理投融资服务类、中介服务类、其他类等）。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch2.json_34", "q": "区域性市场投资者可以是（）。", "c": {"A": "金融资产低于50万元人民币的个人投资者", "B": "合伙企业", "C": "具备一定条件的法人", "D": "私募股权投资基金"}, "a": "BCD", "an": "《关于规范发展区域性股权市场的通知》规定，区域性股权市场实行合格投资者制度。合格投资者应是依法设立且具备一定条件的法人机构、合伙企业，金融机构依法管理的投资性计划，以及具备较强风险承受能力且金融资产【不低于】五十万元人民币的自然人。不得通过拆分、代持等方式变相突破合格投资者标准或单只私募证券持有人数量上限。鼓励支持区域性股权市场采取措施，吸引所在省级行政区域内的合格投资者参与。根据规定，可推理出，D选项错误。", "type": "multi", "source": "cflue"},
@@ -300,7 +231,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_2.json_18", "q": "场外交易市场是我国多层次资本市场体系的重要组成部分，主要具备的功能有（）。", "c": {"A": "拓宽融资渠道，改善中小企业融资环境", "B": "为不能在证券交易所上市交易的证券提供流通转让的场所", "C": "提供风险分层的金融资产管理渠道", "D": "宏观调控"}, "a": "ABC", "an": "场外交易市场是我国多层次资本市场体系的重要组成部分，主要具备功能：1、拓宽融资渠道，改善中小企业融资环境；2、为不能在证券交易所上市交易的证券提供流通转让的场所；3、提供风险分层的金融资产管理渠道。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_35", "q": "创业板的改革，在改革思路上，把握好“（）”。", "c": {"A": "一条思路，三个统筹", "B": "一条原则，三个主线", "C": "一条主线，三个原则", "D": "一条主线，三个统筹"}, "a": "D", "an": "在改革思路上，把握好“一条主线，三个统筹”。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_53", "q": "中央银行是代表一国政府发行法偿货币、制定和执行货币政策、实施金融监管的重要机构。中央银行作为证券发行主体，既可以发行股票，也可以发行债券。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "中央银行作为证券发行主体，主要涉及两类证券：1、中央银行【股票】。在一些国家（如美国），中央银行采取了股份制组织结构，通过发行股票募集资金，但是，中央银行的股东并不享有决定中央银行政策的权利，只能按期收取固定的红利，其股票类似于优先股。2、中央银行出于调控货币供给量目的而发行的【特殊债券】。", "type": "judge", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_3.json_1", "q": "目前，我国的商品期货交易所包括（）。", "c": {"A": "郑州商品交易所", "B": "广州期货交易所", "C": "上海期货交易所", "D": "大连商品交易所"}, "a": "ABCD", "an": "目前，我国成立了上海期货交易所、大连商品交易所和郑州商品交易所、广州期货交易所四大商品期货交易所。&amp;amp;nbsp;&amp;amp;nbsp;", "type": "multi", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_3.json_1", "q": "目前，我国的商品期货交易所包括（）。", "c": {"A": "郑州商品交易所", "B": "广州期货交易所", "C": "上海期货交易所", "D": "大连商品交易所"}, "a": "ABCD", "an": "目前，我国成立了上海期货交易所、大连商品交易所和郑州商品交易所、广州期货交易所四大商品期货交易所。&amp;nbsp;&amp;nbsp;", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_14", "q": "目前，投资者在我国证券市场上进行证券交易时采用（）。", "c": {"A": "代号制", "B": "代码制", "C": "实名制", "D": "匿名制"}, "a": "C", "an": "目前，投资者在我国证券市场上进行证券交易时采用【实名制】。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_22", "q": "商业银行的主要业务包括（）。", "c": {"A": "负债业务", "B": "表外业务", "C": "资产业务", "D": "信托业务"}, "a": "ABC", "an": "商业银行的主要业务包括负债业务、资产业务和表外业务（担保承诺类、代理投融资服务类、中介服务类、其他类等）。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_48", "q": "上海证券交易所在《上海证券交易所科创板企业上市推荐指引》中指出，根据科创板定位，保荐机构优先推荐的科技创新企业所属的领域包括（）。", "c": {"A": "新能源领域", "B": "节能环保领域", "C": "生物医药领域", "D": "新型农业"}, "a": "ABC", "an": "科创板重点推荐六大领域的科技创新企业包括：新一代信息技术领域；高端装备领域；新材料领域；新能源领域；节能环保领域；生物医药领域。", "type": "multi", "source": "cflue_paper"},
@@ -322,6 +253,9 @@ var ALL_QUESTIONS = [
     {"id": "xs_4780980", "q": "国务院金融稳定发展委员会的职责有（）。Ⅰ.落实党中央、国务院关于金融工作的决策部署Ⅱ.审议金融业改革发展重大规划Ⅲ.统筹金融改革和发展Ⅳ.指导中央金融改革发展与监管", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅱ、Ⅲ、Ⅳ", "D": "Ⅰ、Ⅲ、Ⅳ"}, "a": "A", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4780981", "q": "根据2019年2月2日中央机构编制委员会办公室发布的《中国人民银行职能配置、内设机构和人员编制规定》，中国人民银行的职能，与过去相比转变主要包括（）。Ⅰ.完善宏观调控体系，创新调控方式Ⅱ.增强货币政策、宏观审慎政策、金融监管政策的协调性Ⅲ.深化行政审批制度改革和金融市场改革Ⅳ.继续完善金融法律制度体系", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅱ、Ⅲ、Ⅳ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4780982", "q": "证券公司主要业务包括（）。Ⅰ.担保业务Ⅱ.证券承销与保荐业务Ⅲ.证券资产管理业务Ⅳ.证券投资咨询业务", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅲ、Ⅳ", "C": "Ⅰ、Ⅱ、Ⅳ", "D": "Ⅱ、Ⅲ、Ⅳ"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_59538", "q": "根据材料，下列关于中国多层次资本市场的说法，错误的是（）。", "c": {"A": "科创板主要服务于符合国家战略、突破关键核心技术的科创企业", "B": "创业板对拟上市企业的行业包容性比科创板更窄", "C": "北交所服务于创新型中小企业", "D": "主板主要服务成熟期的大型企业"}, "a": "B", "an": "选项B错误。相比之下，创业板对行业的包容性更宽，不仅限于\\\"硬科技\\\"，还包括\\\"三创四新\\\"（创新、创造、创意；新技术、新产业、新业态、新模式）。科创板定位更聚焦于\\\"硬科技\\\"企业。", "type": "comprehensive", "source": "comprehensive", "material": "2023年中央金融工作会议提出要加快建设金融强国，做好科技金融、绿色金融、普惠金融、养老金融、数字金融五篇大文章。同时，中国多层次资本市场体系不断完善，包括主板、科创板、创业板、北交所和新三板等板块。", "sub_type": "single"},
+    {"id": "comp_62240", "q": "下列属于直接融资方式的有（）。", "c": {"A": "企业发行股票融资", "B": "企业向银行贷款", "C": "企业发行债券融资", "D": "企业通过融资租赁获得设备"}, "a": "AC", "an": "直接融资是指资金需求者与供给者直接形成债权债务关系的融资方式，包括股票融资和债券融资。银行贷款和融资租赁均属于间接融资，资金供需双方不直接形成债权债务关系。", "type": "comprehensive", "source": "comprehensive", "material": "2023年中央金融工作会议提出要加快建设金融强国，做好科技金融、绿色金融、普惠金融、养老金融、数字金融五篇大文章。同时，中国多层次资本市场体系不断完善，包括主板、科创板、创业板、北交所和新三板等板块。", "sub_type": "multi"},
+    {"id": "comp_15736", "q": "关于中国人民银行货币政策工具，下列说法正确的有（）。", "c": {"A": "公开市场操作是中央银行吞吐基础货币的主要工具之一", "B": "中期借贷便利（MLF）的期限通常为6个月", "C": "存款准备金率调整属于一般性货币政策工具", "D": "再贴现政策是中央银行对商业银行持有的未到期票据进行再贴现"}, "a": "ACD", "an": "选项B错误。MLF的期限通常为3个月至1年，以1年期为主。公开市场操作、存款准备金率、再贴现均属于一般性货币政策工具。MLF是央行提供中期基础货币的货币政策工具。", "type": "comprehensive", "source": "comprehensive", "material": "中国人民银行为维护银行体系流动性合理充裕，可以通过多种货币政策工具进行调控。2024年，中国人民银行多次通过公开市场操作、中期借贷便利（MLF）等工具向市场投放流动性，同时调整了贷款市场报价利率（LPR）报价机制。", "sub_type": "multi"},
     {"id": "cflue_zc_ch3.json_1", "q": "合格境内机构投资者，是指经一国金融管理当局审批通过、获准直接投资境外股票或者债券市场的国内机构投资者，在一定规定下通过基金形式募集一定额度的人民币资金。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "合格境内机构投资者，是指经一国金融管理当局审批通过、获准直接投资境外股票或者债券市场的国内机构投资者，在一定规定下通过【基金】形式募集一定额度的人民币资金。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch3.json_2", "q": "国务院证券监督管理机构依法履行职责，有权对（）进行现场检查。", "c": {"A": "证券交易所", "B": "上市公司", "C": "证券发行人", "D": "证券登记结算机构"}, "a": "ABCD", "an": "中国证监会有权对证券发行人、上市公司、证券公司、证券投资基金管理公司、证券服务机构（资产评估机构和资信评级机构属于证券服务机构。）、证券交易所、证券登记结算机构进行现场检查。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch3.json_3", "q": "证券公司为期货公司介绍客户时，应当（）。", "c": {"A": "向客户作获利保证、共担风险等承诺", "B": "不得向客户虚假宣传、误导客户", "C": "向客户解释期货交易的方式、流程及风险", "D": "向客户明示其与期货公司的介绍业务委托关系"}, "a": "BCD", "an": "证券公司为期货公司介绍客户时，应当向客户明示其与期货公司的介绍业务委托关系，解释期货交易的方式、流程及风险，不得作获利保证、共担风险等承诺，不得向客户虚假宣传、误导客户。", "type": "multi", "source": "cflue"},
@@ -378,9 +312,11 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_5.json_32", "q": "会员大会可以行使的职能不包括（）。", "c": {"A": "管理人员的聘任、解聘及薪酬事项", "B": "审议和通过理事会、监事会和总经理的工作报告", "C": "选举和罢免会员理事、会员监事", "D": "制定和修改证券交易所章程"}, "a": "A", "an": "会员大会可以行使的职能有制定和修改证券交易所章程；选举和罢免会员理事、会员监事；审议和通过理事会、监事会和总经理的工作报告；审议和通过证券交易所的财务预算、决算报告；法律、行政法规、部门规章和证券交易所章程规定的其他重大事项。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_46", "q": "证券公司为期货公司介绍客户时，应当（）。", "c": {"A": "向客户作获利保证、共担风险等承诺", "B": "不得向客户虚假宣传、误导客户", "C": "向客户解释期货交易的方式、流程及风险", "D": "向客户明示其与期货公司的介绍业务委托关系"}, "a": "BCD", "an": "证券公司为期货公司介绍客户时，应当向客户明示其与期货公司的介绍业务委托关系，解释期货交易的方式、流程及风险，不得作获利保证、共担风险等承诺，不得向客户虚假宣传、误导客户。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_48", "q": "企业年金基金按照规定不得直接投资于（）。", "c": {"A": "权证", "B": "国债", "C": "股票基金", "D": "金融债"}, "a": "A", "an": "企业年金基金按照规定不得直接投资于权证，但因投资股票、分离交易可转换债等投资品种而衍生获得的权证，应当在权证上市交易之日起10个交易日内卖出。", "type": "single", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_5.json_49", "q": "关于机构投资者买卖基金产生的税收，下列说法正确的有（）。", "c": {"A": "机构投资者从基金分配中获得的收入，暂不征收所得税", "B": "机构投资者在境内买卖基金份额获得差价收入，应并入企业的应纳税所得额，征收企业所得税", "C": "机构投资者买卖基金份额暂免征收印花税", "D": "机构投资者购入基金、信托、理财产品等各类资产管理产品持有至到期，属于金融商品转让，计征增值税"}, "a": "ABC", "an": "机构投资者投资基金的税收：&amp;amp;lt;br&amp;amp;gt;（1）机构投资者买卖基金份额属于金融商品转让，应按照卖出价扣除买入价后的余额为销售额计征增值税。但机构投资者购入基金、信托、理财产品等各类资产管理产品持有至到期，【不属于】金融商品转让。A错误。&amp;amp;lt;br&amp;amp;gt;（2）机构投资者买卖基金份额暂免征收印花税。&amp;amp;lt;br&amp;amp;gt;（3）机构投资者在境内买卖基金份额获得的差价收入，应并入企业的应纳税所得额，征收企业所得税。机构投资者从基金分配中获得的收入，暂不征收所得税。", "type": "multi", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_5.json_49", "q": "关于机构投资者买卖基金产生的税收，下列说法正确的有（）。", "c": {"A": "机构投资者从基金分配中获得的收入，暂不征收所得税", "B": "机构投资者在境内买卖基金份额获得差价收入，应并入企业的应纳税所得额，征收企业所得税", "C": "机构投资者买卖基金份额暂免征收印花税", "D": "机构投资者购入基金、信托、理财产品等各类资产管理产品持有至到期，属于金融商品转让，计征增值税"}, "a": "ABC", "an": "机构投资者投资基金的税收：&amp;lt;br&amp;gt;（1）机构投资者买卖基金份额属于金融商品转让，应按照卖出价扣除买入价后的余额为销售额计征增值税。但机构投资者购入基金、信托、理财产品等各类资产管理产品持有至到期，【不属于】金融商品转让。A错误。&amp;lt;br&amp;gt;（2）机构投资者买卖基金份额暂免征收印花税。&amp;lt;br&amp;gt;（3）机构投资者在境内买卖基金份额获得的差价收入，应并入企业的应纳税所得额，征收企业所得税。机构投资者从基金分配中获得的收入，暂不征收所得税。", "type": "multi", "source": "cflue_paper"},
     {"id": "xs_4781042", "q": "金融债券作为一种特殊类型的债券，它具有以下（）特点。Ⅰ.金融债券表示的是银行等金融机构与金融债券持有者之间的债权债务关系Ⅱ.金融债券一般不记名、不挂失，不可以抵押和转让Ⅲ.我国金融债券的发行对象主要是个人Ⅳ.金融债券的利息不记复利，不能提前支取，延期兑付亦不计逾期利息", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅰ、Ⅲ、Ⅳ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "C", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781043", "q": "下列不属于我国《公司法》规定的公司类型的有（）。Ⅰ.无限责任公司Ⅱ.两合公司Ⅲ.合伙制企业Ⅳ.股份有限公司", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅱ", "C": "Ⅰ、Ⅲ、Ⅳ", "D": "Ⅱ、Ⅲ"}, "a": "A", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_11992", "q": "关于证券公司的业务，下列说法正确的是（）。", "c": {"A": "证券经纪业务中证券公司是交易的对手方", "B": "证券自营业务是证券公司以自有资金买卖证券", "C": "资产管理业务中证券公司承担投资风险", "D": "证券承销业务只包括包销方式"}, "a": "B", "an": "选项A错误：证券经纪业务中，证券公司作为代理人不作为交易对手。选项C错误：资产管理业务中，风险由委托人（投资者）承担。选项D错误：证券承销包括包销和代销两种方式。选项B正确。", "type": "comprehensive", "source": "comprehensive", "material": "证券公司是重要的证券中介机构，其业务范围包括证券经纪、证券投资咨询、财务顾问、证券承销与保荐、证券自营、证券资产管理等。根据《证券法》，证券公司的设立需经中国证监会批准。", "sub_type": "single"},
+    {"id": "comp_70271", "q": "下列属于证券投资者保护基金制度内容的有（）。", "c": {"A": "保护基金的资金来源于证券公司缴纳的资金", "B": "保护基金对每个投资者的保护限额为50万元", "C": "保护基金公司负责基金的筹集、管理和使用", "D": "保护基金主要用于处置证券公司风险时补偿投资者"}, "a": "ACD", "an": "选项B错误。保护基金对每个投资者的保护限额为500万元（注意区分存款保险的50万元）。保护基金公司负责基金的筹集、管理和使用，在证券公司被撤销、关闭和破产或被证监会实施行政接管、托管经营等强制性监管措施时，按照国家有关政策对债权人予以偿付。", "type": "comprehensive", "source": "comprehensive", "material": "证券公司是重要的证券中介机构，其业务范围包括证券经纪、证券投资咨询、财务顾问、证券承销与保荐、证券自营、证券资产管理等。根据《证券法》，证券公司的设立需经中国证监会批准。", "sub_type": "multi"},
     {"id": "cflue_zc_ch4a.json_1", "q": "甲公司公开发行股票5亿股，有效报价投资者的数量最少为10家。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "公开发行股票数量在4亿股（含）以下的，有效报价投资者的数量不少于10家；公开发行股票数量在【4亿股以上】的，有效报价投资者的数量不少于20家。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_2", "q": "境内上市外资股又被称为B股。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "境内上市外资股，是指在中国境内注册的股份有限公司向境内外投资者发行并在中国境内证券交易所上市，以人民币标明其面值，以外币认购、交易和结算的股份。境内上市外资股又被称为“B股”。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_3", "q": "与股份公司股利政策密切相关的日期有（）。", "c": {"A": "股权登记日", "B": "公司半年报公布日", "C": "除权除息日", "D": "派息日"}, "a": "ACD", "an": "与股份公司股利政策密切相关的日期有：1、除权除息日；2、派息日；3、股利宣布日；4、股权登记日。", "type": "multi", "source": "cflue"},
@@ -399,7 +335,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch4a.json_16", "q": "公司按股东的持股比例向原股东分配公司的新股认购权，准其优先认购新股的方式，按老股一般配售若干新股，以保护原股东的权益及其对公司控制权的是定向增发。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "【配股】是公司按股东的持股比例向原股东分配公司的新股认购权，准其优先认购股份的方式。即按老股一股配售若干新股，以保护原股东的权益及其对公司的控制权。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_17", "q": "公司因业务发展需要增加资本额而发行新股，会使公司的股票价格下跌。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "公司因业务发展斋要增加资本额而发行新股，对不同公司的影响不尽相同。在没有产生相应效益前，增资可能使每股净资产下降，进而可能促使股价下跌。但对那些业绩优良、财务结构健全、具有发展潜力的公司而言，增资会增加公司经营实力，给股东带来更多回报，使得股价上涨。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_18", "q": "下列有关优先股票的说法，正确的有（）。", "c": {"A": "相对于普通股的权利，优先股股东的权利都是优先的", "B": "优先股和普通股一样，拥有对公司的所有权", "C": "优先股的股息率一般在发行时事先固定", "D": "优先股兼有债券的特点"}, "a": "BCD", "an": "相对于普通股的权利，优先股股东在股息的分配和剩余财产的索取上，是优先的，但优先股股东对公司日常经营管理的一般事项没有表决权，而普通股股东是有表决权的。", "type": "multi", "source": "cflue"},
-    {"id": "cflue_zc_ch4a.json_19", "q": "根据《公司法》，公司不得收购本公司股份，但是有下列情形之一的除外（）。", "c": {"A": "与持有本公司股份的其他公司合并", "B": "将股份奖励给本公司职工", "C": "股东因对股东大会作出的公司合并、分立决议持异议，要求公司收购其股份", "D": "减少公司注册资本"}, "a": "ABCD", "an": "公司不得收购本公司股份。但是，有下列情形之一的除外：&amp;amp;lt;br&amp;amp;gt;1、减少公司注册资本；&amp;amp;lt;br&amp;amp;gt;2、与持有本公司股份的其他公司合并；&amp;amp;lt;br&amp;amp;gt;3、将股份用于员工持股计划或者股权激励；&amp;amp;lt;br&amp;amp;gt;4、股东因对股东大会作出的公司合并、分立决议持异议，要求公司收购其股份；&amp;amp;lt;br&amp;amp;gt;5、将股份用于转换上市公司发行的可转换为股票的公司债券；&amp;amp;lt;br&amp;amp;gt;6、上市公司为维护公司价值及股东权益所必需。", "type": "multi", "source": "cflue"},
+    {"id": "cflue_zc_ch4a.json_19", "q": "根据《公司法》，公司不得收购本公司股份，但是有下列情形之一的除外（）。", "c": {"A": "与持有本公司股份的其他公司合并", "B": "将股份奖励给本公司职工", "C": "股东因对股东大会作出的公司合并、分立决议持异议，要求公司收购其股份", "D": "减少公司注册资本"}, "a": "ABCD", "an": "公司不得收购本公司股份。但是，有下列情形之一的除外：&amp;lt;br&amp;gt;1、减少公司注册资本；&amp;lt;br&amp;gt;2、与持有本公司股份的其他公司合并；&amp;lt;br&amp;gt;3、将股份用于员工持股计划或者股权激励；&amp;lt;br&amp;gt;4、股东因对股东大会作出的公司合并、分立决议持异议，要求公司收购其股份；&amp;lt;br&amp;gt;5、将股份用于转换上市公司发行的可转换为股票的公司债券；&amp;lt;br&amp;gt;6、上市公司为维护公司价值及股东权益所必需。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_20", "q": "首次公开发行股票采用询价方式定价的说法中，错误的是（）。", "c": {"A": "网下投资者不得协商报价", "B": "网下机构和个人投资者可以自主决定是否报价", "C": "网下投资者的报价应当包含每股价格和该价格对应的拟申购股数", "D": "网下投资者应当给出三个不同报价供主承销商参考"}, "a": "D", "an": "B选项说法错误，网下投资者只能有一个报价。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_21", "q": "下列（）股份变动不会影响每位股东所持股东权益占公司全部股东权益的比重。", "c": {"A": "增发股票", "B": "股份分割与合并", "C": "股份回购", "D": "资本公积转增股本"}, "a": "BCD", "an": "股份回购是公司利用自有资金购买，不影响公司内部股东份额占比；增发股票在通常情况下，由于可能有除原股东之外的其他人购入股票，或原股东并不按原持有份额比例购入相应比例的股票，极可能导致该比重的变化；资本公积、股票的分割与合并不影响每位股东占公司股份比例。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch4a.json_22", "q": "在上市公司增资发行方式中，公司发行可转换债券的主要动因是保护原股东的权益及其对公司的控制权。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "可转换公司债券是指其持有者可以在一定时期内按一定比例或价格将之转换成一定数量的另一种证券的证券，通常转化为普通股票，公司发行可转换债券的主要动因是为了【增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金】。", "type": "judge", "source": "cflue"},
@@ -446,7 +382,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch4b.json_28", "q": "沪伦通存托凭证业务包括（）两个业务方向。", "c": {"A": "南北", "B": "上下", "C": "左右", "D": "东西"}, "a": "D", "an": "沪伦通，是指上交所与伦交所的互联互通机制。初期从存托凭证起步。沪伦通存托凭证业务包括东西两个业务方向。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch4b.json_29", "q": "竞价的结果不包括（）。", "c": {"A": "不成交", "B": "部分成交", "C": "继续成交", "D": "全部成交"}, "a": "C", "an": "竞价结果有三种可能：全部成交、部分成交、不成交。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch4b.json_30", "q": "在对影响股价变动的行业因素进行分析时发现，手机的普遍采用终结了早期作为移动通信主要方式的传呼机，这对应行业因素中的（）。", "c": {"A": "抗外部冲击的能力", "B": "行业估值水平", "C": "行业竞争结构", "D": "行业可持续性"}, "a": "D", "an": "技术及其他因素的变化有可能终结某些行业的发展，故选B，手机的普遍使用影响到了传呼机的可持续性。", "type": "single", "source": "cflue"},
-    {"id": "cflue_zc_ch4b.json_31", "q": "深圳证券交易所在确定深证成份指数的深证成份股指数选取样本成分数时一般考虑的因素包括（）。", "c": {"A": "交易活跃程度", "B": "是否是行业龙头公司", "C": "平均可流动股市值", "D": "平均总市值"}, "a": "ABCD", "an": "选取样本时考虑的因素有：&amp;amp;lt;br&amp;amp;gt;1、上市交易日期的长短；&amp;amp;lt;br&amp;amp;gt;2、上市规模，按每家公司一段时期内的平均总市值和平均可流通股市值计；&amp;amp;lt;br&amp;amp;gt;3、交易活跃程度，按每家公司一段时期总成交金额计。样本调整原则：为保证指数的代表性，必须视上市公司的变动更换成份股；&amp;amp;lt;br&amp;amp;gt;4、行业代表性及其成长性；&amp;amp;lt;br&amp;amp;gt;5、公司的财务状况和经营业绩；&amp;amp;lt;br&amp;amp;gt;6、公司近两年的规范运作情况等。", "type": "multi", "source": "cflue"},
+    {"id": "cflue_zc_ch4b.json_31", "q": "深圳证券交易所在确定深证成份指数的深证成份股指数选取样本成分数时一般考虑的因素包括（）。", "c": {"A": "交易活跃程度", "B": "是否是行业龙头公司", "C": "平均可流动股市值", "D": "平均总市值"}, "a": "ABCD", "an": "选取样本时考虑的因素有：&amp;lt;br&amp;gt;1、上市交易日期的长短；&amp;lt;br&amp;gt;2、上市规模，按每家公司一段时期内的平均总市值和平均可流通股市值计；&amp;lt;br&amp;gt;3、交易活跃程度，按每家公司一段时期总成交金额计。样本调整原则：为保证指数的代表性，必须视上市公司的变动更换成份股；&amp;lt;br&amp;gt;4、行业代表性及其成长性；&amp;lt;br&amp;gt;5、公司的财务状况和经营业绩；&amp;lt;br&amp;gt;6、公司近两年的规范运作情况等。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch4b.json_32", "q": "关于沪深300指数，以下说法错误的是（）。", "c": {"A": "其成分股原则上每三个月调整一次", "B": "指数计算采用派许加权法", "C": "基点为1000点", "D": "自由流通量是计算沪深300指数时使用的一个重要指标"}, "a": "A", "an": "沪深300指数，是由沪深证券交易所于2005年4月8日联合发布的反映沪深300指数编制目标和运行状况的金融指标，并能够作为投资业绩的评价标准，为指数化投资和指数衍生产品创新提供基础条件。沪深300指数每年调整2次样本股（成分股），C错误。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch4b.json_33", "q": "证券经纪商在收到客户委托后，应当对下列（）内容进行审查。", "c": {"A": "委托卖出的实际证券数量", "B": "委托人身份", "C": "委托买入的实际证券数量", "D": "委托内容"}, "a": "ABD", "an": "证券经纪商在收到客户委托后，应当对委托人身份、委托内容、委托卖出的实际证券数量和委托买入的实际资金余额进行审查。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch4b.json_34", "q": "A公司今年的息税前利润为500万元，调整的所得税为90万元，折旧（摊销）共计20万元，本期营运资金增加50万元，长期经营性负债增加15万元，资本性支出为55万元。因此当年的企业自由现金流为（）万元。", "c": {"A": "400", "B": "440", "C": "310", "D": "340"}, "a": "D", "an": "FCFF=息税前利润－调整的所得税＋折旧＋摊销－营运资金的增加＋长期经营性负债的增加－长期经营性资产的增加－资本性支出=500-90+20-50+15-55=340万元。", "type": "single", "source": "cflue"},
@@ -465,13 +401,13 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_2.json_37", "q": "中证指数有限公司是由上海证券交易所和深圳证券交易所共同出资成立。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "中证指数有限公司是由上海证券交易所和深圳证券交易所共同出资成立。", "type": "judge", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_41", "q": "无限售条件股份是指流通转让不受限制的股份，具体包括（）。", "c": {"A": "境外上市外资股", "B": "境内上市外资股", "C": "人民币普通股", "D": "国有法人股"}, "a": "ABC", "an": "无限售条件股份是指流通转让不受限制的股份。具体包括：1、人民币普通股，即A股，含向社会公开发行股票时向公司职工配售的公司职工股。2、境内上市外资股，即B股。3、境外上市外资股，即在境外证券市场上市的普通股，如H股。4、其他。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_55", "q": "北京证券交易所上市公司向特定对象发行股票，应当符合的规定有（）。", "c": {"A": "最近3年财务会计报告无虚假记载，未被出具否定意见或无法表示意见的审计报告", "B": "最近1年财务会计报告被出具保留意见的审计报告，保留意见所涉及事项对上市公司的重大不利影响已经消除（本次发行涉及重大资产重组的除外）", "C": "具备健全且运行良好的组织机构；具有独立、稳定经营能力，不存在对持续经营有重大不利影响的情形", "D": "最近1年财务会计报告无虚假记载，未被出具否定意见或无法表示意见的审计报告"}, "a": "BCD", "an": "C属于是向【不特定】合格投资者发行时需要符合的条件。", "type": "multi", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_2.json_57", "q": "深圳证券交易所在确定深证成份指数的深证成份股指数选取样本成分数时一般考虑的因素包括（）。", "c": {"A": "交易活跃程度", "B": "是否是行业龙头公司", "C": "平均可流动股市值", "D": "平均总市值"}, "a": "ABCD", "an": "选取样本时考虑的因素有：&amp;amp;lt;br&amp;amp;gt;1、上市交易日期的长短；&amp;amp;lt;br&amp;amp;gt;2、上市规模，按每家公司一段时期内的平均总市值和平均可流通股市值计；&amp;amp;lt;br&amp;amp;gt;3、交易活跃程度，按每家公司一段时期总成交金额计。样本调整原则：为保证指数的代表性，必须视上市公司的变动更换成份股；&amp;amp;lt;br&amp;amp;gt;4、行业代表性及其成长性；&amp;amp;lt;br&amp;amp;gt;5、公司的财务状况和经营业绩；&amp;amp;lt;br&amp;amp;gt;6、公司近两年的规范运作情况等。", "type": "multi", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_2.json_57", "q": "深圳证券交易所在确定深证成份指数的深证成份股指数选取样本成分数时一般考虑的因素包括（）。", "c": {"A": "交易活跃程度", "B": "是否是行业龙头公司", "C": "平均可流动股市值", "D": "平均总市值"}, "a": "ABCD", "an": "选取样本时考虑的因素有：&amp;lt;br&amp;gt;1、上市交易日期的长短；&amp;lt;br&amp;gt;2、上市规模，按每家公司一段时期内的平均总市值和平均可流通股市值计；&amp;lt;br&amp;gt;3、交易活跃程度，按每家公司一段时期总成交金额计。样本调整原则：为保证指数的代表性，必须视上市公司的变动更换成份股；&amp;lt;br&amp;gt;4、行业代表性及其成长性；&amp;lt;br&amp;gt;5、公司的财务状况和经营业绩；&amp;lt;br&amp;gt;6、公司近两年的规范运作情况等。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_59", "q": "在上市公司增资发行方式中，公司发行可转换债券的主要动因是保护原股东的权益及其对公司的控制权。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "可转换公司债券是指其持有者可以在一定时期内按一定比例或价格将之转换成一定数量的另一种证券的证券，通常转化为普通股票，公司发行可转换债券的主要动因是为了【增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金】。", "type": "judge", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_6", "q": "下列关于买卖价差法的说法中，正确的是（）。", "c": {"A": "买卖价差是指做市商愿意买入和卖出一项金融工具的价格之差", "B": "证券买卖价差是投资收益的重要组成部分，主要包括股票买卖价差和债券买卖价差", "C": "买卖价差越大，代表该资产流动性越好，所面临的流动性风险越小", "D": "常用的价差指标包括买卖价差、有效价差与实现的价差等"}, "a": "ABD", "an": "买卖价差【越小】，代表该资产流动性越好，所面临的流动性风险越小，D错误。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_7", "q": "A公司目前的资产总额是8000万元，负债总额为3000万元，发行在外的普通股股数是1000万股，无优先股，因此A公司的股票账面价值为（）元。", "c": {"A": "11", "B": "8", "C": "3", "D": "5"}, "a": "D", "an": "每股账面价值等于公司净资产除以发行在外的普通股票的股数。净资产等于公司资产总额减去负债总额后的净值。故，每股账面价值=（8000-3000）/1000=5。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_13", "q": "核准制是证券监管机构对申报文件的真实性、准确性、完整性和及时性做合规性的形式审查，而将发行人的质量留给证券中介机构来判断和决定的股票发行监管制度。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "【注册制】的特点是证券监管机构对申报文件的真实性、准确性、完整性和及时性做合规性的形式审查，而将发行人的质量留给证券中介机构来判断和决定。", "type": "judge", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_21", "q": "在上市公司增资发行方式中，公司发行可转换债券的主要动因是保护原股东的权益及其对公司的控制权。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "可转换公司债券是指其持有者可以在一定时期内按一定比例或价格将之转换成一定数量的另一种证券的证券，通常转化为普通股票，公司发行可转换债券的主要动因是为了【增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金】。", "type": "judge", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_3.json_39", "q": "深圳证券交易所在确定深证成份指数的深证成份股指数选取样本成分数时一般考虑的因素包括（）。", "c": {"A": "交易活跃程度", "B": "是否是行业龙头公司", "C": "平均可流动股市值", "D": "平均总市值"}, "a": "ABCD", "an": "选取样本时考虑的因素有：&amp;amp;lt;br&amp;amp;gt;1、上市交易日期的长短；&amp;amp;lt;br&amp;amp;gt;2、上市规模，按每家公司一段时期内的平均总市值和平均可流通股市值计；&amp;amp;lt;br&amp;amp;gt;3、交易活跃程度，按每家公司一段时期总成交金额计。样本调整原则：为保证指数的代表性，必须视上市公司的变动更换成份股；&amp;amp;lt;br&amp;amp;gt;4、行业代表性及其成长性；&amp;amp;lt;br&amp;amp;gt;5、公司的财务状况和经营业绩；&amp;amp;lt;br&amp;amp;gt;6、公司近两年的规范运作情况等。", "type": "multi", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_3.json_39", "q": "深圳证券交易所在确定深证成份指数的深证成份股指数选取样本成分数时一般考虑的因素包括（）。", "c": {"A": "交易活跃程度", "B": "是否是行业龙头公司", "C": "平均可流动股市值", "D": "平均总市值"}, "a": "ABCD", "an": "选取样本时考虑的因素有：&amp;lt;br&amp;gt;1、上市交易日期的长短；&amp;lt;br&amp;gt;2、上市规模，按每家公司一段时期内的平均总市值和平均可流通股市值计；&amp;lt;br&amp;gt;3、交易活跃程度，按每家公司一段时期总成交金额计。样本调整原则：为保证指数的代表性，必须视上市公司的变动更换成份股；&amp;lt;br&amp;gt;4、行业代表性及其成长性；&amp;lt;br&amp;gt;5、公司的财务状况和经营业绩；&amp;lt;br&amp;gt;6、公司近两年的规范运作情况等。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_49", "q": "由于影响股票价格的因素复杂多变，股票的市场价格呈现出（）的特征。", "c": {"A": "复杂性", "B": "稳定性", "C": "波动性", "D": "灵活性"}, "a": "C", "an": "由于影响股票价格的因素复杂多变，股票的市场价格呈现出高低起伏的【波动性】特征。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_58", "q": "下列（）股票发行制度直接影响有关参与各方的利益分配。", "c": {"A": "发行方式", "B": "发行定价", "C": "发行监管制度", "D": "发行主体"}, "a": "A", "an": "股票的发行方式直接影响参与各方的利益分配。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_59", "q": "关于股票的清算价值，下列说法正确的是（）。", "c": {"A": "公司清算时每一股份所代表的实际价值", "B": "公司破产清算时，其发行的股票的交易价值", "C": "股票清仓时，股票所能获得的出售价值", "D": "股票的清算价值应与账面价值相等"}, "a": "A", "an": "股票的清算价值是公司清算时每一股份所代表的实际价值。从理论上说，股票的清算价值应与账面价值一致，实际上并非如此。只有当清算时公司资产实际出售价款与财务报表上的账面价值一致时，每一股份的清算价值才与账面价值一致。但在公司清算时，其资产往往只能压低价格出售，再加上必要的清算费用，所以大多数公司的实际清算价值低于其账面价值。", "type": "single", "source": "cflue_paper"},
@@ -497,6 +433,10 @@ var ALL_QUESTIONS = [
     {"id": "xs_4781232", "q": "我国《证券法》规定，股份有限公司申请股票上市的条件包括（）。Ⅰ.向社会公开发行的股份达到公司股份总数的25%以上Ⅱ.向社会公开发行的股份达到公司股份总额的15%以上Ⅲ.公司股本总额超过人民币4亿元的，向社会公开发行股份比例为10%以上Ⅳ.公司股本总额超过人民币4亿元的，向社会公开发行股份比例为15%以上", "c": {"A": "Ⅰ、Ⅳ", "B": "Ⅱ、Ⅲ", "C": "Ⅱ、Ⅳ", "D": "Ⅰ、Ⅲ"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781233", "q": "下列有关国有股权界定的表述，正确的有（）。Ⅰ.国家授权投资的机构或部门直接向新设成立的股份公司投资形成的股份界定为国家股Ⅱ.有权代表国家投资的机构或部门直接设立的国有企业以其部分资产（连同部分负债）改建为股份公司的界定为国家股Ⅲ.国有企业（行业性总公司和具有政府行政管理职的公司除外）或国有企业（集团公司）的全资子企业（子公司）和控股子企业（控股子公司），以其依法占用的法人资产直接向新设立的股份公司投资入股形成的股份，界定为国有法人股Ⅳ.有权代表国家投资的机构或部门直接设立的国有企业以其全部资产改建为股份有限公司的，原企业应予撤销，原企业的国家净资产折成的股份界定为国家股", "c": {"A": "Ⅰ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅱ、Ⅲ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781234", "q": "按照股息在当年未能足额分派时，能否在以后年度补发为依据，优先股可分为（）。Ⅰ.不可赎回优先股Ⅱ.非累积优先股Ⅲ.累积优先股Ⅳ.可赎回优先股", "c": {"A": "Ⅰ、Ⅳ", "B": "Ⅱ、Ⅲ", "C": "Ⅰ、Ⅱ", "D": "Ⅱ、Ⅳ"}, "a": "B", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_44201", "q": "根据《证券法》，该公司公开发行新股需要满足的条件包括（）。", "c": {"A": "具备健全且运行良好的组织机构", "B": "最近3年财务会计报告被出具无保留意见审计报告", "C": "最近3年累计向原股东配股数量不超过股本总额的30%", "D": "具有持续经营能力"}, "a": "ABD", "an": "根据《证券法》规定，公开发行新股的条件包括：（1）具备健全且运行良好的组织机构；（2）具有持续经营能力；（3）最近3年财务会计报告被出具无保留意见审计报告；（4）发行人及其控股股东、实际控制人最近3年不存在贪污、贿赂等刑事犯罪。选项C是关于配股的限制，不是公开发行新股的法定条件。", "type": "comprehensive", "source": "comprehensive", "material": "某上市公司拟公开发行新股募集资金。公司当前总股本10亿股，拟公开发行3亿股。该公司最近3年连续盈利，财务状况良好，符合公开发行条件。发行价格由主承销商通过询价方式确定。", "sub_type": "multi"},
+    {"id": "comp_04331", "q": "关于股票发行的询价制度，下列说法正确的有（）。", "c": {"A": "首次公开发行股票应当通过向特定机构投资者询价的方式确定发行价格", "B": "主承销商可以向其管理的资产管理产品配售股票", "C": "发行人和主承销商应当事先确定发行方案", "D": "所有投资者都可以参与询价"}, "a": "AC", "an": "选项B错误：主承销商不得向其管理的资产管理产品配售股票，防止利益输送。选项D错误：只有符合条件的专业机构投资者可以参与询价，不是所有投资者。", "type": "comprehensive", "source": "comprehensive", "material": "某上市公司拟公开发行新股募集资金。公司当前总股本10亿股，拟公开发行3亿股。该公司最近3年连续盈利，财务状况良好，符合公开发行条件。发行价格由主承销商通过询价方式确定。", "sub_type": "multi"},
+    {"id": "comp_96530", "q": "该投资者的持有期收益率约为（）。", "c": {"A": "20%", "B": "23%", "C": "3%", "D": "15%"}, "a": "B", "an": "持有期收益率 = [（卖出价 - 买入价）+ 持有期现金股利] / 买入价 × 100% = [（12-10）+ 0.3] / 10 × 100% = 2.3/10 × 100% = 23%。注意这里计算的是绝对收益率，未年化。", "type": "comprehensive", "source": "comprehensive", "material": "某投资者以每股10元的价格买入某股票1000股，半年后以每股12元的价格全部卖出。持有期间该股票每股分红0.3元。同期上证指数上涨5%。", "sub_type": "single"},
+    {"id": "comp_36944", "q": "某公司当前股价20元，每股收益1元，每股净资产10元，该公司的市盈率是（）。", "c": {"A": "20倍", "B": "10倍", "C": "2倍", "D": "30倍"}, "a": "A", "an": "市盈率（P/E）= 股价 / 每股收益 = 20 / 1 = 20倍。市净率（P/B）= 股价 / 每股净资产 = 20 / 10 = 2倍。两者都是常用的相对估值指标，但含义不同。", "type": "comprehensive", "source": "comprehensive", "material": "股票估值是投资者判断股票价值的重要方法。常见的估值方法包括市盈率（P/E）法、市净率（P/B）法、股利贴现模型（DDM）和自由现金流贴现模型（DCF）等。", "sub_type": "single"},
     {"id": "cflue_zc_ch5a.json_1", "q": "下列关于流通国债的特征，说法错误的是（）。", "c": {"A": "转让价格取决于对该国债的供给与需求", "B": "通常记名", "C": "投资者可以自由认购", "D": "投资者可以自由转让"}, "a": "B", "an": "流通国债的特征有：投资者可以自由认购、自由转让、通常不记名、转让价格取决于对该国债的供给与需求。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_2", "q": "下列关于外国债券的说法，正确的是（）。", "c": {"A": "它的特点是债券发行人和面值货币属于同一个国家", "B": "在英国发行以英镑计价的外国债券被称为“扬基债券”", "C": "在中国发行的以人民币计价的外国债券被称为“熊猫债券”", "D": "是借款人在本国以外的某一国家发行以本国货币为面值的债券"}, "a": "C", "an": "外国债券是指某一国家借款人在本国以外的某一国家发行以该国货币为面值的债券。它的特点是债券发行人属于一个国家，债券的面值货币和发行市场属于另一个国家。如在英国发行以英镑计价的外国债券被称为“猛犬债券”。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_3", "q": "下列关于债券的说法，错误的是（）。", "c": {"A": "实物债券是一种具有标准格式实物券面的债券", "B": "凭证式债券是由债券发行人制定的标准格式的债券", "C": "我国的凭证式国债券面上不印刷票面金额", "D": "发行人可以利用证券交易所的交易系统发行记账式债券"}, "a": "B", "an": "凭证式债券的形式是债权人认购债券的一种收款凭证，而不是债券发行人制定的标准格式的债券。故A说法错误。", "type": "single", "source": "cflue"},
@@ -516,7 +456,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch5a.json_17", "q": "按信用状况，债券可以分为（）和（）。", "c": {"A": "企业债；政府债", "B": "普通公司债；可转换公司债", "C": "国债；地方政府债", "D": "利率债；信用债"}, "a": "D", "an": "按信用状况，债券可以分为利率债和信用债，在我国，狭义的利率债包括国债和地方政府债券。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_18", "q": "规定了票面利率、在到期时一次性获得本息、存续期间没有利息支付的债券，称之为附息债券。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "根据债券发行条款中是否规定在约定期限向债券持有人支付利息，债券可分为贴现债券、附息债券、息票累积债券三类。其中，息票累积债券规定了票面利率，但是，债券持有人必须在债券到期时一次性获得本息，存续期间没有利息支付。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_19", "q": "可交换债券与可转换公司债券的相同之处有（）。", "c": {"A": "投资价值与上市公司价值无关", "B": "发行要素相似", "C": "都包括票面利率、期限、转股价格和转股比率、转股期限等", "D": "在约定期限内都可以以约定的价格交换为标的股票"}, "a": "BCD", "an": "对投资者来说，可交换债券与持有标的上市公司的可转换公司债券相同，投资价值与上市公司价值相关，在约定期限内可以以约定的价格交换为标的的股票。", "type": "multi", "source": "cflue"},
-    {"id": "cflue_zc_ch5a.json_20", "q": "与国内债券相比，国际债券具有（）等特点。", "c": {"A": "发行规模大", "B": "存在汇率风险", "C": "存在信用风险", "D": "资金来源广"}, "a": "ABD", "an": "与国内债券相比，国际债券具有：&amp;amp;lt;br&amp;amp;gt;1、资金来源广、发行规模大；&amp;amp;lt;br&amp;amp;gt;2、存在汇率风险；&amp;amp;lt;br&amp;amp;gt;3、有国家主权保障；&amp;amp;lt;br&amp;amp;gt;4、以自由兑换货币作为计量货币。", "type": "multi", "source": "cflue"},
+    {"id": "cflue_zc_ch5a.json_20", "q": "与国内债券相比，国际债券具有（）等特点。", "c": {"A": "发行规模大", "B": "存在汇率风险", "C": "存在信用风险", "D": "资金来源广"}, "a": "ABD", "an": "与国内债券相比，国际债券具有：&amp;lt;br&amp;gt;1、资金来源广、发行规模大；&amp;lt;br&amp;gt;2、存在汇率风险；&amp;lt;br&amp;gt;3、有国家主权保障；&amp;lt;br&amp;gt;4、以自由兑换货币作为计量货币。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_21", "q": "以下（）不是我国其他类型国债的种类。", "c": {"A": "保值债券", "B": "普通债券", "C": "财政债券", "D": "国家重点建设债券"}, "a": "B", "an": "我国其他类型国债的种类有：国家重点建设债券、国家建设债券、财政债券、特种债券、保值债券、基本建设债券、特别国债、长期建设国债。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_22", "q": "传统的证券发行是以企业为基础，而资产证券化是以特定的资产池为基础发行证券。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "资产证券化是以【特定资产组合或特定现金流】为支持，发行可交易证券的一种融资形式。传统的证券发行是以【企业】为基础，而资产证券化是以【特定的资产池】为基础发行证券。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch5a.json_23", "q": "有关私募债券的发行对象，说法有误的是（）。", "c": {"A": "私募债券募集对象为有限数量的专业投资机构", "B": "私募公司债的发行对象为合格投资者", "C": "私募债券可以采取公开制度向合格投资者发行债券", "D": "私募公司债每次发行对象不得超过200人"}, "a": "C", "an": "私募债券采取【非公开制度】向合格投资者发行债券。", "type": "single", "source": "cflue"},
@@ -571,7 +511,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_1.json_10", "q": "影响债券现金流的因素包括（）。", "c": {"A": "计付息间隔", "B": "债券的税收待遇", "C": "票面利率", "D": "债券的嵌入式期权条款"}, "a": "ABCD", "an": "债券发行条款规定了债券的现金流，具体包括：①债券的面值和票面利率；②计付息间隔；③债券的嵌入式期权条款；④债券的税收待遇；⑤其他因素。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_13", "q": "根据《全国银行间债券市场金融债券发行管理办法》，商业银行发行金融债券应具备的条件有（）。", "c": {"A": "最近三年没有重大违法、违规行为", "B": "最近三年连续盈利", "C": "核心资本充足率不低于3%", "D": "实行贷款五级分类，贷款五级分类偏差小"}, "a": "AB", "an": "根据《全国银行间债券市场金融债券发行管理办法》，商业银行发行金融债券应具备的条件有：具有良好的公司治理机制；核心资本充足率不低于4%；最近三年连续盈利；贷款损失准备计提充足；风险监管指标符合监管机构的有关规定；最近三年没有重大违法、违规行为；中国人民银行要求的其他条件。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_16", "q": "按信用状况，债券可以分为（）和（）。", "c": {"A": "企业债；政府债", "B": "普通公司债；可转换公司债", "C": "国债；地方政府债", "D": "利率债；信用债"}, "a": "D", "an": "按信用状况，债券可以分为利率债和信用债，在我国，狭义的利率债包括国债和地方政府债券。", "type": "single", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_1.json_17", "q": "2016年3月5日，某年息8%，每年付息1次，面值为100元的国债，上次付息日为2015年12月31日。则按实际天数计算的累计利息为（）元。", "c": {"A": "2", "B": "1.51", "C": "1.05", "D": "1.38"}, "a": "D", "an": "累计天数（算头不算尾）=31天（1月）+28天（2月）+4天（3月）=63天。累计利息=100×8%×63/365≈1.38（元）。【咪鸭温馨提示】：【附息债券】，按实际天数，算头不算尾，闰月2月29&amp;amp;nbsp;不计息，所以这里的2月是28天。", "type": "single", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_1.json_17", "q": "2016年3月5日，某年息8%，每年付息1次，面值为100元的国债，上次付息日为2015年12月31日。则按实际天数计算的累计利息为（）元。", "c": {"A": "2", "B": "1.51", "C": "1.05", "D": "1.38"}, "a": "D", "an": "累计天数（算头不算尾）=31天（1月）+28天（2月）+4天（3月）=63天。累计利息=100×8%×63/365≈1.38（元）。【咪鸭温馨提示】：【附息债券】，按实际天数，算头不算尾，闰月2月29&amp;nbsp;不计息，所以这里的2月是28天。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_20", "q": "小王报名参加了今年的证券从业资格考试，在复习《金融市场基础知识》的时候，对政府债券的有关知识出现了疑惑。请帮他选出下列有关政府债券的说法中，不正确的说法是（）。", "c": {"A": "国债的利息收入可免纳个人所得税", "B": "在各类债券中，政府债券的信用等级并非最高", "C": "购买政府债券，是一种较安全的投资选择", "D": "发达的二级市场为政府债券的转让提供了方便，使其流通性大大增强"}, "a": "B", "an": "在各类债券中，政府债券的信用等级是最高的。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_24", "q": "下列关于商业银行次级债券的说法，正确的有（）。", "c": {"A": "不属于金融债券", "B": "本金和利息的清偿顺序列于商业银行的股权资本之后", "C": "由商业银行发行", "D": "本金和利息的清偿顺序列于商业银行其他负债之后"}, "a": "CD", "an": "商业银行次级债券是指商业银行发行的、本金和利息的清偿顺序列于商业银行其他负债之后、先于商业银行股权资本的债券。属于金融债券的一种。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_47", "q": "以下（）不是我国企业债券的种类。", "c": {"A": "可续期企业债券", "B": "国际债券", "C": "普通企业债券", "D": "中小企业集合债券"}, "a": "B", "an": "国际债券是指一国借款人在国际证券市场上以外国货币为面值、向外国投资者发行的债券。它是一种跨国发行的债券，涉及两个或两个以上的国家。", "type": "single", "source": "cflue_paper"},
@@ -608,6 +548,10 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_5.json_37", "q": "根据我国财政部《地方政府专项债券发行管理暂行办法》，地方政府专项债券是指省、自治区、直辖市政府（含经省级政府批准自办债券发行的计划单列市政府）为有一定收益的公益性项目发行的，约定一定期限内主要以（）还本付息的政府债券。", "c": {"A": "中央政府收入", "B": "专项收入", "C": "金融机构收入", "D": "政府性基金"}, "a": "BD", "an": "根据财政部《地方政府专项债券发行管理暂行办法》，地方政府专项债券是指省、自治区、直辖市政府（含经省级政府批准自办债券发行的计划单列市政府）为有一定收益的公益性项目发行的、约定一定期限内以公益性项目对应的【政府性基金或专项收入】还本付息的政府债券。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_55", "q": "下列关于金融衍生工具发展现状，说法有误的是（）", "c": {"A": "按基础产品比较，利率衍生品无论在场内还是场外，均是名义金额最大的衍生品种类", "B": "近年来，由于场外利率类衍生品名义金额下降较多，场外衍生品整体呈下降趋势，而场内衍生品却大幅增长", "C": "金融衍生工具以场内交易为主", "D": "按产品形态比较，远期和互换这两类具有对称性收益的衍生产品的名义金额比收益不对称的期权类产品大得多"}, "a": "C", "an": "金融衍生工具以【场外交易】为主。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_58", "q": "银行业金融机构发行资本补充债券，应满足的条件不包括（）。", "c": {"A": "偿债能力良好，且成立满一年", "B": "具有完善的公司治理机制", "C": "经营稳健，资产结构符合行业特征", "D": "遵守国家产业政策和信贷政策"}, "a": "A", "an": "根据中国人民银行2018年第3号公告，银行业金融机构发行资本补充债券，应满足以下条件：具有完善的公司治理机制；偿债能力良好，且成立满【三年】；经营稳健，资产结构符合行业特征，以服务实体经济为导向，遵守国家产业政策和信贷政策；满足宏观审慎管理要求，且主要金融监管指标符合监管部门的有关规定。", "type": "single", "source": "cflue_paper"},
+    {"id": "comp_85756", "q": "关于中国债券市场的说法，正确的有（）。", "c": {"A": "国债是以国家信用为担保发行的债券", "B": "地方政府债券由地方政府发行，以地方政府信用为担保", "C": "金融债券的发行主体是银行或非银行金融机构", "D": "可转换债券可以在特定条件下转换为发行公司的普通股"}, "a": "ABCD", "an": "四个选项均正确。此外，公司债券的发行主体是股份有限公司或有限责任公司，企业债券的发行主体通常为中央政府部门所属机构、国有独资企业或国有控股企业。", "type": "comprehensive", "source": "comprehensive", "material": "2024年，中国债券市场总规模位居全球第二。债券品种包括国债、地方政府债、金融债、企业债和公司债等。国债收益率曲线是金融市场的重要基准利率曲线，对债券定价和货币政策传导具有重要作用。", "sub_type": "multi"},
+    {"id": "comp_67475", "q": "关于债券收益率，下列说法错误的是（）。", "c": {"A": "名义收益率是票面利息与面值的比率", "B": "当期收益率是票面利息与当前市场价格的比率", "C": "到期收益率考虑了利息再投资因素", "D": "持有期收益率等同于到期收益率"}, "a": "D", "an": "选项D错误。持有期收益率是投资者持有债券期间的收益率，取决于卖出价格和持有期间的利息收入。到期收益率是从买入持有至到期的年平均收益率，两者计算前提不同。选项ABC均正确。", "type": "comprehensive", "source": "comprehensive", "material": "2024年，中国债券市场总规模位居全球第二。债券品种包括国债、地方政府债、金融债、企业债和公司债等。国债收益率曲线是金融市场的重要基准利率曲线，对债券定价和货币政策传导具有重要作用。", "sub_type": "single"},
+    {"id": "comp_87739", "q": "关于债券发行方式的说法，正确的是（）。", "c": {"A": "公开发行债券必须进行信用评级", "B": "定向发行的债券可以公开转让", "C": "国债的发行方式包括公开招标方式", "D": "公司债券公开发行实行注册制"}, "a": "ACD", "an": "选项B错误。定向发行的债券仅限于合格投资者范围内转让，不能公开转让。公开招标是国债发行的主要方式。公司债券公开发行实行注册制，由证券交易所负责审核，证监会履行注册程序。", "type": "comprehensive", "source": "comprehensive", "material": "债券的发行与交易有特定的规则。债券发行方式包括公开发行和定向发行。债券交易市场分为银行间债券市场和交易所债券市场，其中银行间债券市场是中国债券市场的主体。", "sub_type": "multi"},
+    {"id": "comp_41736", "q": "关于银行间债券市场，下列说法正确的是（）。", "c": {"A": "银行间债券市场是场外市场（OTC）", "B": "只有银行类金融机构可以参与银行间债券市场交易", "C": "银行间债券市场的交易方式以询价交易为主", "D": "中国人民银行对银行间债券市场进行监管"}, "a": "ACD", "an": "选项B错误。银行间债券市场的参与主体包括各类金融机构（商业银行、证券公司、保险公司、基金公司等）以及非法人产品（理财产品、资管计划等），并非仅限于银行类金融机构。", "type": "comprehensive", "source": "comprehensive", "material": "债券的发行与交易有特定的规则。债券发行方式包括公开发行和定向发行。债券交易市场分为银行间债券市场和交易所债券市场，其中银行间债券市场是中国债券市场的主体。", "sub_type": "multi"},
     {"id": "cflue_zc_ch6.json_1", "q": "基金的交易实行集体交易管理制度，以保证公正、公平为原则，实行统一交易、统一管理，确保各投资组合享有公平的交易执行机会。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "基金的交易实行【集中交易管理】制度，基金管理人设有中央交易室，以保证公正、公平为原则，实行统一交易、统一管理，确保各投资组合享有公平的交易执行机会。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_2", "q": "关于投资者申购、赎回一般开放式基金时的价格，下列说法正确的是（）。", "c": {"A": "债券基金的申赎遵循“已知价”原则进行申赎", "B": "有时能即时获知买卖的成交价格", "C": "只能以申、赎日交易时间结束后基金管理人公布的基金份额净值为基准进行计算", "D": "与封闭式基金一样，按“已知价”原则进行申赎"}, "a": "C", "an": "对一般开放式基金（股票基金、债券基金、混合基金等）而言，在申购、赎回时则遵循“未知价”交易原则，投资者在申购、赎回一般开放式基金份额时并不能即时获知买卖的成交价格。申购、赎回价格只能以申购、赎回日交易时间结束后基金管理人公布的基金份额净值为基准进行计算，这与股票、封闭式基金等金融产品按”已知价”原则进行买卖不同。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_3", "q": "如果预期某种信息可能对基金份额持有人权益或者基金份额的价格产生重大影响，则该信息为重大信息，相关事件为重大事件，信息披露义务人应当在重大事件发生之日起（）内编制并披露临时报告书。", "c": {"A": "3日", "B": "5日", "C": "2日", "D": "1日"}, "a": "C", "an": "如果预期某种信息可能对基金份额持有人权益或者基金份额的价格产生重大影响，则该信息为重大信息，相关事件为重大事件，信息披露义务人应当在重大事件发生之日起2日内编制并披露临时报告书。", "type": "single", "source": "cflue"},
@@ -635,7 +579,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch6.json_25", "q": "在基金市场上存在着许多不同的参与主体，依据所承担的责任与作用的不同，可以将基金市场的参与主体分为（）。", "c": {"A": "其他机构", "B": "基金的监管机构和自律组织", "C": "基金当事人", "D": "基金市场服务机构"}, "a": "BCD", "an": "基金市场参与主体，分为三大类，即基金当事人、基金市场服务机构和基金的监管机构和自律组织。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_26", "q": "首次募集信息披露主要包括基金份额发售前至基金合同生效期间进行的信息披露。在基金份额发售前，基金管理人需要编制并披露（）。", "c": {"A": "基金份额发售公告", "B": "基金净值公告", "C": "基金招募说明书", "D": "基金合同"}, "a": "ACD", "an": "首次募集信息的披露包括的内容，除上述ABD选项外，还包括基金托管协议。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_27", "q": "以资本资产定价模型为基础的评价基金业绩的绝对指标是指（）。", "c": {"A": "标准普尔指数", "B": "詹森指数", "C": "夏普指数", "D": "特雷诺指数"}, "a": "B", "an": "1968年，迈克尔•詹森提出了一种以资本资产定价模型（CAPM）为基础的评价基金业绩的绝对指标，通常被称为詹森α。", "type": "single", "source": "cflue"},
-    {"id": "cflue_zc_ch6.json_28", "q": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对借公开信息披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为做出了禁止性规定。具体包括下列（）情形。", "c": {"A": "禁止诋毁其他基金管理人、托管人或者基金销售机构", "B": "禁止进行虚假记载、误导性陈述或者重大遗漏", "C": "禁止对基金的证券投资业绩进行预测", "D": "禁止违规承诺收益或承担损失"}, "a": "ABCD", "an": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对于借公开披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为作出了禁止性规定。具体包括：&amp;amp;lt;br&amp;amp;gt;（1）禁止进行虚假记载、误导性陈述或者重大遗漏；&amp;amp;lt;br&amp;amp;gt;（2）禁止对基金的证券投资业绩进行预测；&amp;amp;lt;br&amp;amp;gt;（3）禁止违规承诺收益或者承担损失；&amp;amp;lt;br&amp;amp;gt;（4）禁止诋毁其他基金管理人、托管人或者基金销售机构；&amp;amp;lt;br&amp;amp;gt;（5）禁止登载任何自然人、法人或者其他组织的祝贺性、恭维性或推荐性的文字。", "type": "multi", "source": "cflue"},
+    {"id": "cflue_zc_ch6.json_28", "q": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对借公开信息披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为做出了禁止性规定。具体包括下列（）情形。", "c": {"A": "禁止诋毁其他基金管理人、托管人或者基金销售机构", "B": "禁止进行虚假记载、误导性陈述或者重大遗漏", "C": "禁止对基金的证券投资业绩进行预测", "D": "禁止违规承诺收益或承担损失"}, "a": "ABCD", "an": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对于借公开披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为作出了禁止性规定。具体包括：&amp;lt;br&amp;gt;（1）禁止进行虚假记载、误导性陈述或者重大遗漏；&amp;lt;br&amp;gt;（2）禁止对基金的证券投资业绩进行预测；&amp;lt;br&amp;gt;（3）禁止违规承诺收益或者承担损失；&amp;lt;br&amp;gt;（4）禁止诋毁其他基金管理人、托管人或者基金销售机构；&amp;lt;br&amp;gt;（5）禁止登载任何自然人、法人或者其他组织的祝贺性、恭维性或推荐性的文字。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_29", "q": "下列关于佣金的说法，正确的有（）。", "c": {"A": "A股交易佣金不得低于代收的证券交易监管费和证券交易所手续费", "B": "佣金的收费标准因交易品种、交易场所的不同而有所差异", "C": "目前我国证券投资基金交易实行固定佣金制度", "D": "A股佣金标准的起点与B股相同"}, "a": "AB", "an": "按照沪、深证券交易所公布的收费标准，我国基金交易佣金不得高于成交金额的0.5%（深圳证券交易所特别规定该佣金水平不得低于代收的证券交易监管费和证券交易经手费，上海证券交易所无此规定），起点5元，由证券公司向投资者收取。B错误。A股、证券投资基金每笔交易佣金不足5元的，按5元收取；B股每笔交易佣金不足1美元或5港元的，按1美元或5港元收取；C错误。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_30", "q": "下列关于ETF的说法，正确的有（）。", "c": {"A": "ETF基金份额是变化的", "B": "ETF可能出现折价交易现象", "C": "ETF的独特之处在于实行一级市场与二级市场交易同步进行的制度安排", "D": "正常情况下，套利活动会使套利机会消失"}, "a": "ABCD", "an": "ETF是一种在交易所上市交易的、基金份额可变的一种开放式基金。同时，又可以像封闭式基金一样在二级市场上按市场价格买卖ETF份额，不过，申购赎回必须以一篮子股票换取基金份额或者以基金份额换回一篮子股票。由于同时存在证券市场交易和申购赎回机制，投资者可以在ETF市场价格与基金单位净值之间存在差价时进行套利交易。套利机制的存在，使得ETF避免了封闭式基金普遍存在的折价问题。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_31", "q": "下列关于证券投资基金的运作关系的说法，正确的有（）。", "c": {"A": "监管机构对基金市场上的各类参与主体实施全面监管", "B": "各种中介服务机构都是为基金管理人及其管理的基金服务，居于外围服务位置", "C": "监管机构在基金运作关系中居于顶层主导和核心位置", "D": "基金投资者、基金管理人和基金托管人都是基金的主要当事人"}, "a": "ABD", "an": "基金管理人是基金的募集者和管理者，在整个基金的运作中起着核心的作用。B错误。", "type": "multi", "source": "cflue"},
@@ -643,7 +587,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch6.json_33", "q": "私募基金运行期间，信息披露义务人应当在每季度结束之日起（）个工作日以内向投资者披露基金净值、主要财务指标以及投资组合情况等信息。", "c": {"A": "15", "B": "5", "C": "7", "D": "10"}, "a": "D", "an": "私募基金运行期间，信息披露义务人应当在每季度结束之日起【10个工作日以内】向投资者披露基金净值、主要财务指标以及投资组合情况等信息。单只私募证券投资基金管理规模金额达到5000万元以上的，应当持续在每月结束之日起5个工作日以内向投资者披露基金净值信息。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_34", "q": "申请公开募集基金，拟募集的基金应该具备的条件有（）。", "c": {"A": "有明确合法的投资方向和明确的基金运作方式", "B": "有清晰的风险警示内容和设置投资者购买冷静期", "C": "符合基金特征的投资者适当性管理制度", "D": "基金名称表明基金的类别和投资特征"}, "a": "ACD", "an": "【设置投资者购买冷静期】属于非公开募集基金的条件，D错误。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch6.json_35", "q": "我国的基金管理费、基金托管费及基金销售服务费均是按照前一日基金资产净值的一定比例逐日计提，按（）支付。", "c": {"A": "年", "B": "季度", "C": "周", "D": "月"}, "a": "D", "an": "我国的基金管理费、基金托管费及基金销售服务费均是按照前一日基金资产净值的一定比例逐日计提，按月支付。", "type": "single", "source": "cflue"},
-    {"id": "cflue_paper_金融基础_1.json_4", "q": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对借公开信息披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为做出了禁止性规定。具体包括下列（）情形。", "c": {"A": "禁止诋毁其他基金管理人、托管人或者基金销售机构", "B": "禁止进行虚假记载、误导性陈述或者重大遗漏", "C": "禁止对基金的证券投资业绩进行预测", "D": "禁止违规承诺收益或承担损失"}, "a": "ABCD", "an": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对于借公开披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为作出了禁止性规定。具体包括：&amp;amp;lt;br&amp;amp;gt;（1）禁止进行虚假记载、误导性陈述或者重大遗漏；&amp;amp;lt;br&amp;amp;gt;（2）禁止对基金的证券投资业绩进行预测；&amp;amp;lt;br&amp;amp;gt;（3）禁止违规承诺收益或者承担损失；&amp;amp;lt;br&amp;amp;gt;（4）禁止诋毁其他基金管理人、托管人或者基金销售机构；&amp;amp;lt;br&amp;amp;gt;（5）禁止登载任何自然人、法人或者其他组织的祝贺性、恭维性或推荐性的文字。", "type": "multi", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_1.json_4", "q": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对借公开信息披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为做出了禁止性规定。具体包括下列（）情形。", "c": {"A": "禁止诋毁其他基金管理人、托管人或者基金销售机构", "B": "禁止进行虚假记载、误导性陈述或者重大遗漏", "C": "禁止对基金的证券投资业绩进行预测", "D": "禁止违规承诺收益或承担损失"}, "a": "ABCD", "an": "为了防止信息误导给投资者造成损失，保护公众投资者的合法权益，维护证券市场的正常秩序，法律法规对于借公开披露基金信息为名编制、传播虚假基金信息，恶意进行信息误导，诋毁同行或竞争对手等行为作出了禁止性规定。具体包括：&amp;lt;br&amp;gt;（1）禁止进行虚假记载、误导性陈述或者重大遗漏；&amp;lt;br&amp;gt;（2）禁止对基金的证券投资业绩进行预测；&amp;lt;br&amp;gt;（3）禁止违规承诺收益或者承担损失；&amp;lt;br&amp;gt;（4）禁止诋毁其他基金管理人、托管人或者基金销售机构；&amp;lt;br&amp;gt;（5）禁止登载任何自然人、法人或者其他组织的祝贺性、恭维性或推荐性的文字。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_14", "q": "从事基金服务业务的机构，按照中国证监会的有关规定应进行注册或者备案，这些机构包括（）。", "c": {"A": "从事公募基金的信息技术系统服务的机构", "B": "从事公募基金的份额登记的机构", "C": "从事公募基金的投资顾问的机构", "D": "从事公募基金的销售机构"}, "a": "ABCD", "an": "从事基金服务业务的机构，应当按照国务院证券监督管理机构的规定进行注册或者备案，这些机构主要包括基金销售机构、基金销售支付机构、基金份额登记机构、基金估值核算机构、基金投资顾问机构、基金评价机构、律师事务所、会计师事务所、信息技术系统服务机构等。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_27", "q": "存续期募集信息披露主要指开放式基金在基金合同生效后每（）披露一次更新的招募说明书。", "c": {"A": "6个月", "B": "1年", "C": "3个月", "D": "9个月"}, "a": "A", "an": "存续期募集信息披露主要指开放式基金在基金合同生效后每【6个月】披露一次更新的招募说明书。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_41", "q": "下列关于佣金的说法，正确的有（）。", "c": {"A": "A股交易佣金不得低于代收的证券交易监管费和证券交易所手续费", "B": "佣金的收费标准因交易品种、交易场所的不同而有所差异", "C": "目前我国证券投资基金交易实行固定佣金制度", "D": "A股佣金标准的起点与B股相同"}, "a": "AB", "an": "按照沪、深证券交易所公布的收费标准，我国基金交易佣金不得高于成交金额的0.5%（深圳证券交易所特别规定该佣金水平不得低于代收的证券交易监管费和证券交易经手费，上海证券交易所无此规定），起点5元，由证券公司向投资者收取。B错误。A股、证券投资基金每笔交易佣金不足5元的，按5元收取；B股每笔交易佣金不足1美元或5港元的，按1美元或5港元收取；C错误。", "type": "multi", "source": "cflue_paper"},
@@ -681,6 +625,8 @@ var ALL_QUESTIONS = [
     {"id": "xs_4781608", "q": "封闭式基金的存续期应在（）以上。", "c": {"A": "10年", "B": "2年", "C": "15年", "D": "5年"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781609", "q": "公司型基金反映的经济关系是（）。", "c": {"A": "所有权关系", "B": "债务关系", "C": "信托关系", "D": "全面债权关系"}, "a": "A", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781610", "q": "公司型基金依据（）设立并营运。", "c": {"A": "基金公司章程", "B": "基金招募说明书", "C": "发起人协议", "D": "基金合同"}, "a": "A", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_20838", "q": "关于不同类型基金的特点，下列说法正确的有（）。", "c": {"A": "股票型基金的股票持仓比例不低于80%", "B": "货币市场基金主要投资于短期货币工具", "C": "ETF基金只能在场外申购和赎回", "D": "混合型基金的股票和债券持仓比例可灵活调整"}, "a": "ABD", "an": "选项C错误。ETF既可以像股票一样在交易所二级市场买卖，也可以在一级市场申购和赎回，是兼具封闭式和开放式基金特点的创新品种。", "type": "comprehensive", "source": "comprehensive", "material": "某公募基金公司的旗下基金包含股票型基金、混合型基金、债券型基金、货币市场基金和ETF。根据《证券投资基金法》，基金管理人应当依法募集资金，办理基金份额的发售和登记事宜。", "sub_type": "multi"},
+    {"id": "comp_93612", "q": "根据《证券投资基金法》，基金管理人的职责包括（）。", "c": {"A": "依法募集资金办理基金份额的发售", "B": "对所管理的不同基金财产分别管理、分别记账", "C": "按照基金合同的约定确定基金收益分配方案", "D": "办理基金份额的登记过户"}, "a": "ABC", "an": "选项D错误。办理基金份额的登记过户是基金托管人（通常是商业银行）的职责，不是基金管理人的职责。基金管理人的职责主要是基金资产的运作和管理。", "type": "comprehensive", "source": "comprehensive", "material": "某公募基金公司的旗下基金包含股票型基金、混合型基金、债券型基金、货币市场基金和ETF。根据《证券投资基金法》，基金管理人应当依法募集资金，办理基金份额的发售和登记事宜。", "sub_type": "multi"},
     {"id": "cflue_zc_ch7.json_1", "q": "自1981年美国所罗门兄弟公司为IBM和世界银行办理了首笔（）之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。", "c": {"A": "美元与马克和瑞士法郎", "B": "美元与英镑和瑞士法郎", "C": "美元与英镑和法郎", "D": "美元与日元和英镑"}, "a": "A", "an": "自1981年美国所罗门兄弟公司为IBM和世界银行办理首笔【美元与马克和瑞士法郎】之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_2", "q": "从理论上说，潜在盈利有可能无限大的交易者有（）。", "c": {"A": "期货出售者", "B": "期货购买者", "C": "期权出售者", "D": "期权购买者"}, "a": "ABD", "an": "期货交易双方潜在的盈利和亏损都是无限的，而期权购买者潜在的盈利无限大，期权卖方的潜在损失无限大。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_3", "q": "根据交易合约的签订与实际交割之间的关系，可以将市场交易的组织形态分为（）。", "c": {"A": "期权交易", "B": "期货交易", "C": "远期交易", "D": "现货交易"}, "a": "BCD", "an": "根据交易合约的签订与实际交割之间的关系，可以将市场交易的组织形态分为现货交易、远期交易及期货交易。", "type": "multi", "source": "cflue"},
@@ -692,7 +638,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch7.json_9", "q": "某大型农场为了防止农用化肥尿素市场价格变动对企业经营带来的风险，于是与某大型尿素供应商签订了以固定价格购货的长期合同。但后来考虑到合同可能存在对手违约风险，于是将规避风险的方式改为在期货市场上利用尿素期货进行套期保值操作。以上描述中，企业的行为旨在规避的风险包括（）。", "c": {"A": "信用风险", "B": "操作风险", "C": "流动性风险", "D": "市场风险"}, "a": "AD", "an": "略。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_10", "q": "关于信用违约互换（简称CDS），下列说法中，正确的有（）。", "c": {"A": "信用违约互换双方约定以某一信用工具做参考", "B": "若参考工具发生规模的信用违约事件，则信用违约出售方须向购买方支付赔偿", "C": "信用违约互换交易具有较高的杠杆性", "D": "最基本的信用违约互换涉及两个或者两个以上当事人"}, "a": "ABC", "an": "最基本的信用违约互换涉及两个当事人，双方约定以某一信用工具为参考，一方向另一方出售信用保护，若参考工具发生规定的信用违约事件，则信用保护出售方必须向购买方支付赔偿。信用违约具有较高的杠杆性。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_11", "q": "中国存托凭证是指由存托人签发、以境外证券为基础在中国境内发行、代表境外基础证券权益的证券。参与主体有（）。", "c": {"A": "发行人", "B": "存托人", "C": "持有人", "D": "托管人"}, "a": "ABC", "an": "中国存托凭证是指由存托人签发、以境外证券为基础在中国境内发行、代表境外基础证券权益的证券。参与主体：发行人、持有人、存托人。", "type": "multi", "source": "cflue"},
-    {"id": "cflue_zc_ch7.json_12", "q": "金融衍生工具可以按照（）分为独立衍生工具和嵌入式衍生工具。", "c": {"A": "自身交易方式", "B": "交易场所", "C": "基础工具种类", "D": "产品形态"}, "a": "D", "an": "金融衍生工具根据【产品形态】可分为独立衍生工具和嵌入式衍生工具。&amp;amp;lt;br&amp;amp;gt;按照【自身交易的方法和特点】可以分为金融远期合约、金融期货、金融期权、金融互换和结构化金融衍生工具；&amp;amp;lt;br&amp;amp;gt;按照【基础工具种类】，可以分为股权类产品的衍生工具、货币衍生工具、利率衍生工具、信用衍生工具以及其他衍生工具；&amp;amp;lt;br&amp;amp;gt;按照【交易场所】可分为交易所交易的衍生工具和场外交易市场交易的衍生工具。", "type": "single", "source": "cflue"},
+    {"id": "cflue_zc_ch7.json_12", "q": "金融衍生工具可以按照（）分为独立衍生工具和嵌入式衍生工具。", "c": {"A": "自身交易方式", "B": "交易场所", "C": "基础工具种类", "D": "产品形态"}, "a": "D", "an": "金融衍生工具根据【产品形态】可分为独立衍生工具和嵌入式衍生工具。&amp;lt;br&amp;gt;按照【自身交易的方法和特点】可以分为金融远期合约、金融期货、金融期权、金融互换和结构化金融衍生工具；&amp;lt;br&amp;gt;按照【基础工具种类】，可以分为股权类产品的衍生工具、货币衍生工具、利率衍生工具、信用衍生工具以及其他衍生工具；&amp;lt;br&amp;gt;按照【交易场所】可分为交易所交易的衍生工具和场外交易市场交易的衍生工具。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_13", "q": "以政府债券、欧洲美元债券、大面额可转让存单为基础资产的期权属于（）。", "c": {"A": "股票期权", "B": "货币期权", "C": "利率期权", "D": "互换期权"}, "a": "C", "an": "利率期权合约通常以政府短期、中期、长期债券，欧洲美元债券，大面额可转让存单等利率工具为标的物。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_14", "q": "下列关于沪深300股指期货交易涨跌幅限制的规定，正确的有（）。", "c": {"A": "股指期货合约最后交易日不设涨跌停板", "B": "股指期货合约的涨跌停板幅度为上一交易日结算价的±10%", "C": "季月合约上市首日涨跌停板幅度为挂盘基准价的±20%", "D": "股指期货合约最后交易日涨跌停板幅度为上一交易日结算价的±15%"}, "a": "BC", "an": "CD项，股指期货合约最后交易日涨跌停板幅度为上一交易日结算价的±20%。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch7.json_15", "q": "下列关于期货交易的说法，错误的有（）。", "c": {"A": "期货合约具备对冲机制，履约回旋余地较大，实物交割比例极低，交易价格不受最小价格变动单位限定和日交易振幅规定", "B": "期货合约在交易所内交易，具有公开性", "C": "期货合约是标准化合约", "D": "期货合约的结算通过专门的结算公司，投资者需要对对方负责，存在信用风险"}, "a": "AD", "an": "期货合约的结算通过专门的结算公司，这是独立于买卖双方的第三方，投资者无须对对方负责，不存在信用风险，而只有价格变动的风险。C错误；期货合约具备对冲机制，履约回旋余地较大，实物交割比例极低，交易价格受最小价格变动单位限定和日交易振幅限定。D错误。", "type": "multi", "source": "cflue"},
@@ -724,14 +670,14 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_2.json_47", "q": "按照合约所规定的履约时间的不同，金融期权可以分为（）。", "c": {"A": "欧式期权、美式期权和修正的美式期权", "B": "认购期权和认沽期权", "C": "单只股票期权、股票组合期权和股价指数期权", "D": "股票类期权、利率期权、货币期权、金融期货合约期权、互换期权等"}, "a": "A", "an": "A选项为金融期权按照选择权的性质划分。B选项为按照合约所规定的履约时间的不同划分。C选项为按照金融期权基础资产性质的不同划分。D选项为金融期权中股权类期权之下的分类。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_8", "q": "人民币利率互换是指交易双方约定在未来的一定期限内，根据约定的（）计算利息并进行利息交换的金融合约。", "c": {"A": "人民币资产", "B": "利率", "C": "人民币汇率", "D": "人民币本金"}, "a": "BD", "an": "人民币利率互换是指交易双方约定在未来的一定期限内，根据约定的【人民币本金和利率】计算利息并进行利息交换的金融合约。利率互换的参考利率应为经中国人民银行授权的全国银行间同业拆借中心等机构发布的银行间市场具有基准性质的市场利率或经中国人民银行公布的基准利率。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_26", "q": "沪深300股指期货合约交易代码为SH。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "沪深300股指期货合约交易代码为IF，中证500股指期货合约代码为IC，上证50股指期货合约代码为IH。", "type": "judge", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_3.json_29", "q": "金融衍生工具可以按照（）分为独立衍生工具和嵌入式衍生工具。", "c": {"A": "自身交易方式", "B": "交易场所", "C": "基础工具种类", "D": "产品形态"}, "a": "D", "an": "金融衍生工具根据【产品形态】可分为独立衍生工具和嵌入式衍生工具。&amp;amp;lt;br&amp;amp;gt;按照【自身交易的方法和特点】可以分为金融远期合约、金融期货、金融期权、金融互换和结构化金融衍生工具；&amp;amp;lt;br&amp;amp;gt;按照【基础工具种类】，可以分为股权类产品的衍生工具、货币衍生工具、利率衍生工具、信用衍生工具以及其他衍生工具；&amp;amp;lt;br&amp;amp;gt;按照【交易场所】可分为交易所交易的衍生工具和场外交易市场交易的衍生工具。", "type": "single", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_3.json_29", "q": "金融衍生工具可以按照（）分为独立衍生工具和嵌入式衍生工具。", "c": {"A": "自身交易方式", "B": "交易场所", "C": "基础工具种类", "D": "产品形态"}, "a": "D", "an": "金融衍生工具根据【产品形态】可分为独立衍生工具和嵌入式衍生工具。&amp;lt;br&amp;gt;按照【自身交易的方法和特点】可以分为金融远期合约、金融期货、金融期权、金融互换和结构化金融衍生工具；&amp;lt;br&amp;gt;按照【基础工具种类】，可以分为股权类产品的衍生工具、货币衍生工具、利率衍生工具、信用衍生工具以及其他衍生工具；&amp;lt;br&amp;gt;按照【交易场所】可分为交易所交易的衍生工具和场外交易市场交易的衍生工具。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_4.json_1", "q": "自1981年美国所罗门兄弟公司为IBM和世界银行办理了首笔（）之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。", "c": {"A": "美元与马克和瑞士法郎", "B": "美元与英镑和瑞士法郎", "C": "美元与英镑和法郎", "D": "美元与日元和英镑"}, "a": "A", "an": "自1981年美国所罗门兄弟公司为IBM和世界银行办理首笔【美元与马克和瑞士法郎】之间的货币互换业务以来，互换市场的发展非常迅速，目前，按名义金额计算的互换交易已经成为最大的衍生交易品种。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_4.json_10", "q": "下列关于金融期权的说法中错误的是（）。", "c": {"A": "市场无风险利率与认沽期权为正相关关系，与认购期权为负相关关系", "B": "标的证券价格与认购期权价值为正相关关系，与认沽期权价值为负相关关系", "C": "波动率与认购、认沽期权价值均为正相关关系", "D": "到期期限与认购、认沽期权价值均为正相关关系"}, "a": "A", "an": "市场无风险利率与认购期权为正相关关系，与认沽期权为负相关关系。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_4.json_31", "q": "关于期货交易，下列说法正确的是（）。", "c": {"A": "期货合约可以不进行实物交收", "B": "期货合约交易双方并不知道交易对手的情况", "C": "期货交易是在集中的交易所市场以公开竞价方式进行的标准化合约交易", "D": "期货合约可以进行反向交易、平仓了结"}, "a": "ABCD", "an": "期货交易是在集中的交易所市场以公开竞价方式进行的标准化合约交易，具备对冲机制（可进行方向交易）、履约回旋余地较大实物交割比例极低，交易双方不知道互相情况。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_15", "q": "大宗商品类金融衍生工具按照其自身交易的方法及特点，可以分为（）。", "c": {"A": "商品互换", "B": "商品期货", "C": "商品现货", "D": "商品期权"}, "a": "ABD", "an": "大宗商品类金融衍生工具按照其自身交易的方法及特点可以分为商品期货、商品期权、商品远期以及商品互换。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_35", "q": "按照《中国金融期货交易所交易规则》及相关细则，下列关于金融期货的主要交易规则的说法错误的是（）。", "c": {"A": "结算价是指某一合约当日一定时间内成交价格按照成交量的加权平均价", "B": "保证金分为结算准备金和交易保证金。交易保证金是指未被合约占用的保证金；结算准备金是指已被合约占用的保证金", "C": "对于沪深300股指期货合约，进行投机交易的客户某一合约单边持仓限额为5000手", "D": "股指期货竞价交易采用集合竞价交易和连续竞价交易两种方式"}, "a": "B", "an": "保证金分为结算准备金和交易保证金。结算准备金是指未被合约占用的保证金；交易保证金是指已被合约占用的保证金。", "type": "single", "source": "cflue_paper"},
     {"id": "xs_4781780", "q": "我国金融衍生工具市场分为（）。Ⅰ.银行间市场Ⅱ.银行柜台市场Ⅲ.交易所交易市场Ⅳ.创业板市场", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅳ", "C": "Ⅱ、Ⅲ、Ⅳ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "A", "an": "", "type": "single", "source": "xinshi"},
-    {"id": "xs_4781781", "q": "下列金融衍生工具中，属于交易所交易的衍生工具有（）。&amp;nbsp;Ⅰ.期权合约Ⅱ.OTC交易的衍生工具Ⅲ.期货合约Ⅳ.股票期权产品", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅰ、Ⅲ、Ⅳ", "D": "Ⅱ、Ⅲ、Ⅳ"}, "a": "C", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "xs_4781781", "q": "下列金融衍生工具中，属于交易所交易的衍生工具有（）。&nbsp;Ⅰ.期权合约Ⅱ.OTC交易的衍生工具Ⅲ.期货合约Ⅳ.股票期权产品", "c": {"A": "Ⅰ、Ⅱ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅰ、Ⅲ、Ⅳ", "D": "Ⅱ、Ⅲ、Ⅳ"}, "a": "C", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781782", "q": "按基础工具的种类，金融衍生工具可以分为（）。Ⅰ.信用衍生工具Ⅱ.股权类产品的衍生工具Ⅲ.货币衍生工具Ⅳ.利率衍生工具", "c": {"A": "Ⅰ、Ⅲ", "B": "Ⅰ、Ⅱ、Ⅲ", "C": "Ⅱ、Ⅲ、Ⅳ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781783", "q": "投资者进行金融衍生工具交易时，要想获得交易的成功，必须能较准确地预测（）等因素的未来变化趋势。Ⅰ.利率Ⅱ.汇率Ⅲ.股价Ⅳ.凸度", "c": {"A": "Ⅲ、Ⅳ", "B": "Ⅰ、Ⅱ、Ⅲ", "C": "Ⅰ、Ⅱ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "B", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781784", "q": "国际证监会组织认为，金融衍生工具的风险有（）。Ⅰ.信用风险Ⅱ.市场风险Ⅲ.结算风险Ⅳ.操作风险", "c": {"A": "Ⅱ、Ⅲ、Ⅳ", "B": "Ⅰ、Ⅱ、Ⅲ、Ⅳ", "C": "Ⅰ、Ⅲ、Ⅳ", "D": "Ⅰ、Ⅱ"}, "a": "B", "an": "", "type": "single", "source": "xinshi"},
@@ -742,6 +688,9 @@ var ALL_QUESTIONS = [
     {"id": "xs_4781789", "q": "关于金融衍生工具的说法，错误的有（）。Ⅰ.金融衍生产品的价格决定基础金融产品的价格Ⅱ.金融衍生工具是与基础金融产品相对应的一个概念Ⅲ.金融衍生工具是指建立在基础金融产品或基础变量以上，其价格取决于基础金融产品价格（或数值）变动的派生金融产品Ⅳ.温室气体排放不能成为金融衍生工具的基础变量", "c": {"A": "Ⅰ、Ⅱ、Ⅳ", "B": "Ⅰ、Ⅳ", "C": "Ⅲ、Ⅳ", "D": "Ⅱ、Ⅲ"}, "a": "B", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781790", "q": "从全球来看，场外衍生品市场的（）是最大的单个衍生品种类。", "c": {"A": "货币互换", "B": "利率互换", "C": "汇率互换", "D": "信用违约互换"}, "a": "B", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4781791", "q": "外汇期货交易在20世纪70年代由（）率先推出。", "c": {"A": "法兰克福交易所", "B": "伦敦国际金融期货交易所", "C": "纽约证券交易所", "D": "芝加哥商业交易所"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_14350", "q": "关于金融衍生工具的表述，正确的有（）。", "c": {"A": "远期合约是交易双方约定在未来某一确定时间按确定价格买卖一定数量资产的合约", "B": "期货合约是标准化合约，在交易所交易", "C": "期权买方的最大损失是期权费，但收益可以无限", "D": "互换合约主要是为了规避利率和汇率风险"}, "a": "ABCD", "an": "四个选项均正确。远期是非标准化场外合约；期货是标准化场内合约；期权买方风险有限（最多损失期权费），收益理论上无限；互换主要用于管理利率风险和汇率风险。", "type": "comprehensive", "source": "comprehensive", "material": "金融衍生工具是建立在基础金融工具或金融变量基础之上的金融合约。常见的衍生工具包括远期、期货、期权和互换。2024年，中国金融期货交易所上市了多个股指期货和国债期货品种。", "sub_type": "multi"},
+    {"id": "comp_47575", "q": "某投资者预期上证50指数将上涨，买入了一张上证50股指期货合约。如果上证50指数上涨2%，则该投资者的盈亏情况是（）。", "c": {"A": "盈利，杠杆放大收益", "B": "亏损，因为需要支付保证金", "C": "不盈不亏，因为期货是指数", "D": "盈利但需要扣除交易费用"}, "a": "A", "an": "股指期货采用保证金交易，具有杠杆效应。投资者买入期货合约（做多），指数上涨则盈利，且保证金制度会放大收益（同时也放大亏损）。选项B和C明显错误，D虽然交易费用确实存在，但核心特征是杠杆收益。", "type": "comprehensive", "source": "comprehensive", "material": "金融衍生工具是建立在基础金融工具或金融变量基础之上的金融合约。常见的衍生工具包括远期、期货、期权和互换。2024年，中国金融期货交易所上市了多个股指期货和国债期货品种。", "sub_type": "single"},
+    {"id": "comp_86154", "q": "某投资者买入一份股票看涨期权，期权费5元，行权价100元。到期日股票价格为120元，该投资者的每股收益为（）。", "c": {"A": "15元", "B": "20元", "C": "5元", "D": "25元"}, "a": "A", "an": "看涨期权收益 = 标的资产价格 - 行权价 - 期权费 = 120 - 100 - 5 = 15元。投资者以5元成本获得按100元买入股票的权利，在股价涨到120元时行权，净赚15元/股。", "type": "comprehensive", "source": "comprehensive", "material": "期权合约是赋予买方在约定日期或在此之前以约定价格买卖一定数量标的资产的权利的合约。期权分为看涨期权（Call）和看跌期权（Put），按行权时间分为欧式期权和美式期权。", "sub_type": "single"},
     {"id": "cflue_zc_ch8.json_1", "q": "（）可以管理系统性风险和非系统性风险。", "c": {"A": "风险对冲", "B": "风险控制", "C": "风险分散", "D": "风险转业"}, "a": "A", "an": "与风险分散策略不同，风险对冲可以管理系统性风险和非系统性风险，还可以根据投资者的风险承受能力和偏好，通过对冲比率的调节，将风险降低到预期水平。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_2", "q": "操作风险损失数据收集主要基于（）等几个方面。", "c": {"A": "外部损失数据", "B": "情景分析", "C": "业务环境和内部控制因素", "D": "内部损失数据"}, "a": "ABCD", "an": "操作风险损失数据收集主要基于：（1）内部损失数据；（2）外部损失数据；（3）情景分析；（4）业务环境和内部控制因素。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_3", "q": "（）通常被定义为公司融资类客户、交易对手或公司持有证券的发行人在无法履行合同义务的情况下，给公司造成损失的可能性，或者相关信用质量发生恶化情况下，给公司造成损失的可能性。", "c": {"A": "操作风险", "B": "信用风险", "C": "违约风险", "D": "市场风险"}, "a": "B", "an": "【信用风险】通常被定义为公司融资类客户、交易对手或公司持有证券的发行人在无法履行合同义务的情况下，给公司造成损失的可能性，或者相关信用质量发生恶化情况下，给公司造成损失的可能性。", "type": "single", "source": "cflue"},
@@ -759,7 +708,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_zc_ch8.json_15", "q": "中国证券业协会2016年颁布的《证券公司压力测试指引》指出，证券公司在遇到（）情形时，应当开展专项或综合压力测试。", "c": {"A": "利润分配或其他资本性支出", "B": "重大固定资产投资", "C": "重大对外投资或收购", "D": "重大对外担保"}, "a": "ABCD", "an": "中国证券业协会2016年颁布的《证券公司压力测试指引》指出，证券公司在遇到以下情形之一时，应当开展专项或综合压力测试：重大对外投资或收购、重大对外担保、重大固定资产投资、利润分配或其他资本性支出、证券公司分类评价结果负向调整、负债集中到期或赎回等可能导致净资本和流动性等风险控制指标发生明显不利变化或接近预警线的情形；确定重大业务规模和开展重大创新业务；确定经营计划和业务规模、确定自营投资规模限额、开展重大创新业务、承担重大包销责任等；预期或已经出现重大内部风险状况；自营投资大幅亏损，政府部门行政处罚、诉讼、声誉受损等；预期或已经出现重大外部风险和政策变化事件；证券市场大幅波动，监管政策发生重大变化等；其他可能或已经出现的压力情景。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_16", "q": "下列属于传统信用风险评估方法的是（）。", "c": {"A": "5Cs", "B": "信用评级", "C": "专家系统", "D": "信用打分模型"}, "a": "ACD", "an": "传统信用风险评估方法包括：专家系统、5Cs和信用打分模型。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_17", "q": "（）作为一种金融风险度量工具，可以给风险管理者提供频率分布中最坏区域平均损失大小的准确信息。", "c": {"A": "波动性分析", "B": "置信水平", "C": "VaR模型", "D": "期望损失模型"}, "a": "D", "an": "期望损失模型作为一种金融风险度量工具，可以给风险管理者提供频率分布中最坏区域平均损失大小的准确信息。", "type": "single", "source": "cflue"},
-    {"id": "cflue_zc_ch8.json_18", "q": "现代信用风险转移方法不包括（）。", "c": {"A": "信用远期协议", "B": "TRP", "C": "辛迪加贷款", "D": "信用关联票据"}, "a": "C", "an": "【现代】信用风险转移方法包括TRP、信用关联票据和信用远期协议。&amp;amp;lt;br&amp;amp;gt;【传统】信用风险转移的方法主要有信用保险、【辛迪加贷款】、贷款出售、资产互换等形式。故B错误。", "type": "single", "source": "cflue"},
+    {"id": "cflue_zc_ch8.json_18", "q": "现代信用风险转移方法不包括（）。", "c": {"A": "信用远期协议", "B": "TRP", "C": "辛迪加贷款", "D": "信用关联票据"}, "a": "C", "an": "【现代】信用风险转移方法包括TRP、信用关联票据和信用远期协议。&amp;lt;br&amp;gt;【传统】信用风险转移的方法主要有信用保险、【辛迪加贷款】、贷款出售、资产互换等形式。故B错误。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_19", "q": "证券公司声誉风险管理应遵循以下（）原则。", "c": {"A": "快速响应原则", "B": "审慎管理原则", "C": "预防第一原则", "D": "全程全员原则"}, "a": "ABCD", "an": "略。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_20", "q": "关于VaR，下列说法正确的有（）。", "c": {"A": "能够用于对整个行业的各种风险进行全面的量化", "B": "可以用于不同的金融产品", "C": "最初由摩根公司开发", "D": "可以定量地对市场总风险进行度量"}, "a": "BCD", "an": "D项，VaR方法衡量的主要是市场风险，如单纯依靠VaR方法，就会忽视其他种类的风险如信用风险。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_ch8.json_21", "q": "操作风险分为（）所引发的四类风险。", "c": {"A": "外部事件", "B": "人员", "C": "系统", "D": "流程"}, "a": "ABCD", "an": "操作风险的一种分类方法是根据定义将其划分为由人员、系统、流程和外部事件所引发的四类风险。", "type": "multi", "source": "cflue"},
@@ -781,7 +730,7 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_1.json_3", "q": "证券市场系统性风险可以来自于（）。", "c": {"A": "通货膨胀", "B": "新政策出台", "C": "证券价格日常波动", "D": "市场利率变动"}, "a": "ABD", "an": "系统性风险是指是指对整个股票市场或绝大多数股票普遍产生不利影响，由于公司外部、不为公司所预计和控制的因素造成的风险。B不属于系统性风险。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_23", "q": "内部评级所反映的被评级对象的风险特征主要是（）。", "c": {"A": "交易工具的违约损失率", "B": "借款者的违约概率", "C": "预期损失和非预期损失", "D": "违约风险暴露"}, "a": "AB", "an": "内部评级所反映的被评级对象的风险特征主要是借款者的违约概率和交易工具的违约损失率。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_1.json_34", "q": "下列各项中，不属于风险管理中的风险转移策略的有（）。", "c": {"A": "风险补偿", "B": "风险规避", "C": "风险分散", "D": "信用担保"}, "a": "ABC", "an": "风险转移可分为保险转移和非保险转移。保险转移是通过向保险公司支付保费的方式，将风险转移给保险公司。非保险转移通常采用【担保】和备用信用证等方式将风险转嫁给第三方。例如，当金融机构提供信用贷款时，通常需要借款人提供第三方担保，如不能到期偿还贷款，由担保方代为偿还。故只有C属于。答案选择ABD。", "type": "multi", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_2.json_24", "q": "现代信用风险转移方法不包括（）。", "c": {"A": "信用远期协议", "B": "TRP", "C": "辛迪加贷款", "D": "信用关联票据"}, "a": "C", "an": "【现代】信用风险转移方法包括TRP、信用关联票据和信用远期协议。&amp;amp;lt;br&amp;amp;gt;【传统】信用风险转移的方法主要有信用保险、【辛迪加贷款】、贷款出售、资产互换等形式。故B错误。", "type": "single", "source": "cflue_paper"},
+    {"id": "cflue_paper_金融基础_2.json_24", "q": "现代信用风险转移方法不包括（）。", "c": {"A": "信用远期协议", "B": "TRP", "C": "辛迪加贷款", "D": "信用关联票据"}, "a": "C", "an": "【现代】信用风险转移方法包括TRP、信用关联票据和信用远期协议。&amp;lt;br&amp;gt;【传统】信用风险转移的方法主要有信用保险、【辛迪加贷款】、贷款出售、资产互换等形式。故B错误。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_26", "q": "（）是因市场价格变量波动而给经济主体带来损益的风险。", "c": {"A": "操作风险", "B": "信用风险", "C": "流动性风险", "D": "市场风险"}, "a": "D", "an": "【市场风险】是因市场价格变量波动而给经济主体带来损益的风险。", "type": "single", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_2.json_39", "q": "下面关于风险对冲，说法正确的是（）。", "c": {"A": "为了防范和化解非系统性风险，人们需要借助于金融衍生工具进行风险对冲", "B": "风险对冲是指投资者通过购买某种金融产品或采取某些合法的手段将风险转嫁给愿意和有能力承接的主体", "C": "风险对冲对管理系统性风险和非系统性风险都有效", "D": "套期保值是常见的风险对冲工具"}, "a": "CD", "an": "为了防范和化解【系统性风险】，人们需要借助于金融衍生工具进行风险对冲。C错误；【风险转移】是指投资者通过购买某种金融产品或采取某些合法的手段将风险转嫁给愿意和有能力承接的主体。D错误。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_3.json_32", "q": "风险识别是指（）的过程。", "c": {"A": "找出风险原因", "B": "鉴定风险性质", "C": "对影响各类目标实现的潜在事项或因素予以全面识别", "D": "依据风险定义进行系统分类"}, "a": "ABCD", "an": "风险识别是指对影响各类目标实现的潜在事项或因素予以全面识别、依据风险定义进行系统分类、鉴定风险性质并找出风险原因的过程。", "type": "multi", "source": "cflue_paper"},
@@ -790,22 +739,20 @@ var ALL_QUESTIONS = [
     {"id": "cflue_paper_金融基础_4.json_30", "q": "证券公司声誉风险管理应遵循以下（）原则。", "c": {"A": "快速响应原则", "B": "审慎管理原则", "C": "预防第一原则", "D": "全程全员原则"}, "a": "ABCD", "an": "略。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_4.json_57", "q": "在一般情况下，风险管理的流程主要包括（）。", "c": {"A": "风险的应对", "B": "风险的识别", "C": "风险的监测、预警与报告", "D": "风险的衡量"}, "a": "ABCD", "an": "在一般情况下，风险管理的流程主要包括：风险的识别，风险的衡量，风险的应对，风险的监测、预警与报告。", "type": "multi", "source": "cflue_paper"},
     {"id": "cflue_paper_金融基础_5.json_16", "q": "（）是指在交易中需要迅速而且大规模地买进或者卖出证券，不能按照预定价位成交而多支付的成本。", "c": {"A": "有效价差", "B": "资料流动性风险", "C": "买卖价差法", "D": "冲击成本"}, "a": "D", "an": "冲击成本是机构大户面临的流动性成本的重要表现，是指在交易中需要迅速而且大规模地买进或者卖出证券，不能按照预定价位成交而多支付的成本。国际上通常用它来衡量股市、期市的流动性。", "type": "single", "source": "cflue_paper"},
-    {"id": "cflue_paper_金融基础_5.json_23", "q": "如果某金融机构风险管理部门计算得到其资产组合在持有期100天内，在99%的置信水平下的VaR值为1000万人民币，那么这意味着该金融机构的资产组合可以被预期（）。", "c": {"A": "在未来的100天中有1%的概率至多损失1000万人民币", "B": "在未来的100天中有99%的概率至少损失1000万人民币", "C": "在未来的100天中有1%的概率至少损失1000万人民币", "D": "在未来的100天中有99%的概率至多损失1000万人民币"}, "a": "D", "an": "略。", "type": "single", "source": "cflue_paper"}
+    {"id": "cflue_paper_金融基础_5.json_23", "q": "如果某金融机构风险管理部门计算得到其资产组合在持有期100天内，在99%的置信水平下的VaR值为1000万人民币，那么这意味着该金融机构的资产组合可以被预期（）。", "c": {"A": "在未来的100天中有1%的概率至多损失1000万人民币", "B": "在未来的100天中有99%的概率至少损失1000万人民币", "C": "在未来的100天中有1%的概率至少损失1000万人民币", "D": "在未来的100天中有99%的概率至多损失1000万人民币"}, "a": "D", "an": "略。", "type": "single", "source": "cflue_paper"},
+    {"id": "comp_89414", "q": "关于各类金融风险的说法，正确的有（）。", "c": {"A": "市场风险包括利率风险、汇率风险和股票价格风险", "B": "操作风险是由不完善或有问题的内部程序、人员或系统造成的", "C": "声誉风险是金融机构最核心的风险类型", "D": "流动性风险可能导致金融机构无法以合理成本获得充足资金"}, "a": "ABD", "an": "选项C错误。信用风险（违约风险）通常被认为是金融机构最核心的风险类型，而非声誉风险。声誉风险是次生风险，往往由其他风险引发。ABD均正确。", "type": "comprehensive", "source": "comprehensive", "material": "金融风险是指金融变量的变动所引起的资产组合未来收益的不确定性。根据巴塞尔协议和中国的监管要求，商业银行和证券公司需要建立全面的风险管理体系，覆盖信用风险、市场风险、操作风险、流动性风险和声誉风险等。", "sub_type": "multi"},
+    {"id": "comp_29110", "q": "中国证券监督管理委员会对证券公司风险控制指标的主要要求包括（）。", "c": {"A": "净资本与各项风险资本准备之和的比例不得低于100%", "B": "净资本与净资产的比例不得低于40%", "C": "净资本与负债的比例不得低于8%", "D": "净资产与负债的比例不得低于20%"}, "a": "ABCD", "an": "四个选项均正确。此外还有：流动资产与流动负债的比例不得低于100%、净资本不得低于人民币2000万元等。这些风控指标构成了证券公司风险管理的核心框架。", "type": "comprehensive", "source": "comprehensive", "material": "金融风险是指金融变量的变动所引起的资产组合未来收益的不确定性。根据巴塞尔协议和中国的监管要求，商业银行和证券公司需要建立全面的风险管理体系，覆盖信用风险、市场风险、操作风险、流动性风险和声誉风险等。", "sub_type": "multi"}
 ];
 
-// ═══════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════
+var SUBJECT = "金融市场基础";
 var STORAGE_KEY = 'sec_exam_chapter_' + SUBJECT;
 var state = loadState();
 var currentCh = parseInt(localStorage.getItem('sec_ch_current_' + SUBJECT)) || 0;
-var selected = {};  // q_idx -> selected options
+var selected = {};
 
 function getDefaultState() {
   var s = {};
-  for (var i = 0; i < ALL_QUESTIONS.length; i++) {
-    s[i] = { done: false, correct: false, answers: [] };
-  }
+  for (var i = 0; i < ALL_QUESTIONS.length; i++) s[i] = { done: false, correct: false, answers: [] };
   return s;
 }
 
@@ -814,39 +761,24 @@ function loadState() {
     var raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       var parsed = JSON.parse(raw);
-      // Merge with defaults
       var def = getDefaultState();
-      for (var k in def) {
-        if (parsed[k]) def[k] = parsed[k];
-      }
+      for (var k in def) { if (parsed[k]) def[k] = parsed[k]; }
       return def;
     }
   } catch(e) {}
   return getDefaultState();
 }
 
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
 function getChapterQuestions(chIdx) {
   var ch = CH_MAP[chIdx];
   var qs = [];
-  for (var i = ch.start; i < ch.start + ch.count; i++) {
-    qs.push({ idx: i, q: ALL_QUESTIONS[i] });
-  }
+  for (var i = ch.start; i < ch.start + ch.count; i++) qs.push({ idx: i, q: ALL_QUESTIONS[i] });
   return qs;
 }
 
-// ═══════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════
-function render() {
-  renderNav();
-  renderQuestions();
-  renderStats();
-  localStorage.setItem('sec_ch_current_' + SUBJECT, currentCh);
-}
+function render() { renderNav(); renderQuestions(); renderStats(); localStorage.setItem('sec_ch_current_' + SUBJECT, currentCh); }
 
 function renderNav() {
   var nav = document.getElementById('chNav');
@@ -855,7 +787,8 @@ function renderNav() {
     var ch = CHAPTERS[i];
     var active = i === currentCh ? 'on' : '';
     html += '<div class="ch-btn ' + active + '" onclick="switchCh(' + i + ')">'
-         + esc(ch.name) + ' <span class="cnt">' + ch.questions + '题</span></div>';
+         + esc(ch.name) + ' <span class="weight">[' + ch.weight + ']</span>'
+         + ' <span class="cnt">' + ch.count + '题</span></div>';
   }
   nav.innerHTML = html;
 }
@@ -864,14 +797,10 @@ function renderStats() {
   var ch = CH_MAP[currentCh];
   var done = 0, correct = 0;
   for (var i = ch.start; i < ch.start + ch.count; i++) {
-    if (state[i].done) {
-      done++;
-      if (state[i].correct) correct++;
-    }
+    if (state[i].done) { done++; if (state[i].correct) correct++; }
   }
   var pct = done > 0 ? Math.round(correct/done*100) : 0;
   var allPct = ch.count > 0 ? Math.round(done/ch.count*100) : 0;
-  
   document.getElementById('doneCount').textContent = done;
   document.getElementById('totalCount').textContent = ch.count;
   document.getElementById('accPct').textContent = pct + '%';
@@ -880,62 +809,55 @@ function renderStats() {
 
 function renderQuestions() {
   var container = document.getElementById('qContainer');
-  var ch = CH_MAP[currentCh];
-  var qs = [];
-  for (var i = ch.start; i < ch.start + ch.count; i++) {
-    qs.push({ idx: i, q: ALL_QUESTIONS[i] });
-  }
+  var qs = getChapterQuestions(currentCh);
   
-  if (qs.length === 0) {
-    container.innerHTML = '<div class="empty"><div class="icon">📝</div><div>暂无题目</div></div>';
-    return;
-  }
+  if (qs.length === 0) { container.innerHTML = '<div class="empty"><div style="font-size:3rem;margin-bottom:0.5rem">📝</div><div>暂无题目</div></div>'; return; }
   
+  var num = 0;
   var html = '';
+  var prevMaterial = '';
+  
   for (var qi = 0; qi < qs.length; qi++) {
-    var item = qs[qi];
-    var idx = item.idx;
-    var q = item.q;
-    var st = state[idx];
-    var num = qi + 1;
-    var typeClass = TYPE_CLASS[q.type] || 'type-s';
-    var typeLabel = TYPE_LABEL[q.type] || q.type;
+    var item = qs[qi], idx = item.idx, q = item.q, st = state[idx];
+    if (q.type !== 'comprehensive' || q.material !== prevMaterial) num++;
+    else { /* same material group, keep num */ }
+    prevMaterial = q.material || '';
+    
+    var typeLabel = q.type === 'comprehensive' ? '综合' : (TYPE_LABEL[q.type] || q.type);
+    var typeClass = q.type === 'comprehensive' ? 'type-c' : (TYPE_CLASS[q.type] || 'type-s');
     
     html += '<div class="qcard" id="qc-' + idx + '">';
+    
+    if (q.type === 'comprehensive' && q.material) {
+      html += '<div class="material-box"><div class="mat-label">📋 材料分析</div>' + q.material + '</div>';
+    }
+    
     html += '<div class="q-header">';
     html += '<div class="q-num">第' + num + '题</div>';
-    html += '<div style="display:flex;align-items:center;gap:6px">';
-    if (q.source === 'xinshi' && !q.an) {
-      html += '<span style="font-size:0.65rem;color:#b8a99a">欣师</span>';
-    }
     html += '<span class="q-type ' + typeClass + '">' + typeLabel + '</span>';
-    html += '</div></div>';
+    html += '</div>';
     
     html += '<div class="q-text">' + q.q + '</div>';
     
-    // Options
     var optKeys = Object.keys(q.c);
     html += '<div class="options" id="opts-' + idx + '">';
     for (var oi = 0; oi < optKeys.length; oi++) {
       var k = optKeys[oi];
-      var v = q.c[k];
       var sel = selected[idx] && selected[idx].indexOf(k) >= 0 ? 'selected' : '';
       html += '<div class="opt ' + sel + '" data-q="' + idx + '" data-key="' + k + '" onclick="toggleOpt(' + idx + ',\'' + k + '\')">';
-      html += '<span class="ol">' + k + '.</span><span>' + v + '</span></div>';
+      html += '<span class="ol">' + k + '.</span><span>' + q.c[k] + '</span></div>';
     }
     html += '</div>';
     
-    // Actions
-    var doneClass = st.done ? ' style="display:none"' : '';
-    var showAnClass = !st.done ? ' style="display:none"' : '';
+    var doneStyle = st.done ? ' style="display:none"' : '';
+    var showAn = !st.done ? ' style="display:none"' : '';
     html += '<div class="actions">';
-    html += '<button class="btn btn-primary" onclick="checkAnswer(' + idx + ')"' + doneClass + '>✅ 确认答案</button>';
-    html += '<button class="btn btn-secondary" onclick="resetQuestion(' + idx + ')"' + showAnClass + '>🔄 重做</button>';
+    html += '<button class="btn btn-primary" onclick="checkAnswer(' + idx + ')"' + doneStyle + '>✅ 确认答案</button>';
+    html += '<button class="btn btn-secondary" onclick="resetQuestion(' + idx + ')"' + showAn + '>🔄 重做</button>';
     html += '</div>';
     
-    // Analysis
     var anText = q.an || '暂无解析';
-    html += '<div class="analysis" id="an-' + idx + '"' + showAnClass + '>';
+    html += '<div class="analysis" id="an-' + idx + '"' + showAn + '>';
     html += '<div class="a-label">📖 解析</div>';
     if (st.done) {
       var ansStr = Array.isArray(st.answers) ? st.answers.join(', ') : st.answers;
@@ -943,56 +865,40 @@ function renderQuestions() {
       html += '<div class="' + (isCorrect ? 'a-answer' : 'a-wrong') + '">'
            + (isCorrect ? '✅ 回答正确' : '❌ 回答错误')
            + ' · 正确答案：' + esc(q.a);
-      if (!isCorrect && st.answers && st.answers.length > 0) {
-        html += ' · 你的答案：' + esc(ansStr);
-      }
+      if (!isCorrect && st.answers && st.answers.length > 0) html += ' · 你的答案：' + esc(ansStr);
       html += '</div>';
     }
-    html += '<div class="a-text">' + anText + '</div>';
-    html += '</div>';
-    
+    html += '<div class="a-text">' + anText + '</div></div>';
     html += '</div>';
   }
   
   container.innerHTML = html;
 }
 
-// ═══════════════════════════════════════════════
-// INTERACTION
-// ═══════════════════════════════════════════════
 function toggleOpt(idx, key) {
   var q = ALL_QUESTIONS[idx];
   if (state[idx].done) return;
-  
   if (!selected[idx]) selected[idx] = [];
   var arr = selected[idx];
   var pos = arr.indexOf(key);
   
-  if (q.type === 'single' || q.type === 'judge') {
-    // Single selection
+  // Determine if single or multi based on answer length
+  var isSingle = (q.type === 'comprehensive' && q.sub_type === 'single') || q.type === 'single' || q.type === 'judge';
+  
+  if (isSingle) {
     selected[idx] = [key];
-    // Update UI
     var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
     for (var i = 0; i < opts.length; i++) {
       opts[i].classList.remove('selected');
       if (opts[i].dataset.key === key) opts[i].classList.add('selected');
     }
   } else {
-    // Multi selection
-    if (pos >= 0) {
-      arr.splice(pos, 1);
-    } else {
-      arr.push(key);
-    }
-    // Update UI
+    if (pos >= 0) { arr.splice(pos, 1); } else { arr.push(key); }
     var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
     for (var i = 0; i < opts.length; i++) {
       var k = opts[i].dataset.key;
-      if (selected[idx].indexOf(k) >= 0) {
-        opts[i].classList.add('selected');
-      } else {
-        opts[i].classList.remove('selected');
-      }
+      if (selected[idx].indexOf(k) >= 0) opts[i].classList.add('selected');
+      else opts[i].classList.remove('selected');
     }
   }
 }
@@ -1000,34 +906,26 @@ function toggleOpt(idx, key) {
 function checkAnswer(idx) {
   var q = ALL_QUESTIONS[idx];
   if (state[idx].done) return;
-  
   var sel = selected[idx] || [];
   if (sel.length === 0) return;
   
-  // Normalize answer
   var correctAns = q.a;
   var userAns = sel.sort().join('');
   var isCorrect = userAns === correctAns;
   
-  // Update state
   state[idx].done = true;
   state[idx].correct = isCorrect;
   state[idx].answers = sel.slice();
   saveState();
   
-  // Update UI
   var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
   for (var i = 0; i < opts.length; i++) {
     var k = opts[i].dataset.key;
     opts[i].classList.remove('selected');
-    if (correctAns.indexOf(k) >= 0) {
-      opts[i].classList.add('correct');
-    } else if (sel.indexOf(k) >= 0) {
-      opts[i].classList.add('wrong');
-    }
+    if (correctAns.indexOf(k) >= 0) opts[i].classList.add('correct');
+    else if (sel.indexOf(k) >= 0) opts[i].classList.add('wrong');
   }
   
-  // Show analysis, hide check button
   document.querySelector('#qc-' + idx + ' .btn-primary').style.display = 'none';
   var an = document.getElementById('an-' + idx);
   var ansStr = sel.sort().join(', ');
@@ -1035,58 +933,32 @@ function checkAnswer(idx) {
   an.innerHTML = '<div class="a-label">📖 解析</div>'
     + '<div class="' + (isCorrect ? 'a-answer' : 'a-wrong') + '">'
     + (isCorrect ? '✅ 回答正确' : '❌ 回答错误')
-    + ' · 正确答案：' + esc(correctAns);
-  if (!isCorrect) {
-    an.innerHTML += ' · 你的答案：' + esc(ansStr);
-  }
-  an.innerHTML += '</div>'
-    + '<div class="a-text">' + (q.an || '暂无解析') + '</div>';
-  
-  // Show redo button
+    + ' · 正确答案：' + esc(correctAns)
+    + (!isCorrect ? ' · 你的答案：' + esc(ansStr) : '')
+    + '</div><div class="a-text">' + (q.an || '暂无解析') + '</div>';
   document.querySelector('#qc-' + idx + ' .btn-secondary').style.display = '';
-  
   renderStats();
 }
 
 function resetQuestion(idx) {
-  state[idx].done = false;
-  state[idx].correct = false;
-  state[idx].answers = [];
+  state[idx] = { done: false, correct: false, answers: [] };
   selected[idx] = [];
   saveState();
-  
-  // Re-render this specific question
   var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
-  for (var i = 0; i < opts.length; i++) {
-    opts[i].classList.remove('correct', 'wrong', 'selected');
-  }
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('correct', 'wrong', 'selected');
   document.getElementById('an-' + idx).style.display = 'none';
   document.querySelector('#qc-' + idx + ' .btn-primary').style.display = '';
   document.querySelector('#qc-' + idx + ' .btn-secondary').style.display = 'none';
   renderStats();
 }
 
-function switchCh(idx) {
-  currentCh = idx;
-  selected = {};
-  render();
-}
+function switchCh(idx) { currentCh = idx; selected = {}; render(); }
 
-// ═══════════════════════════════════════════════
-// UTILITIES
-// ═══════════════════════════════════════════════
-var TYPE_LABEL = { single: '单选', multi: '多选', judge: '判断' };
-var TYPE_CLASS = { single: 'type-s', multi: 'type-m', judge: 'type-j' };
+var TYPE_LABEL = { single: '单选', multi: '多选', judge: '判断', comprehensive: '综合' };
+var TYPE_CLASS = { single: 'type-s', multi: 'type-m', judge: 'type-j', comprehensive: 'type-c' };
 
-function esc(s) {
-  var d = document.createElement('div');
-  d.textContent = s;
-  return d.innerHTML;
-}
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-// ═══════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════
 render();
 </script>
 </body>

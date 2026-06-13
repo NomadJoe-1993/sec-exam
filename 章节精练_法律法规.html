@@ -37,85 +37,40 @@ body {
   min-height: 100vh;
 }
 .container { max-width: 820px; margin: 0 auto; }
-
-/* ── Header ── */
-.hd {
-  text-align: center; padding: 1rem 0.5rem 0.6rem;
-  margin-bottom: 0.5rem; position: relative;
-}
-.hd::after {
-  content: ''; display: block; width: 50px; height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--gold));
-  margin: 0.5rem auto 0; border-radius: 2px;
-}
+.hd { text-align: center; padding: 1rem 0.5rem 0.6rem; margin-bottom: 0.5rem; position: relative; }
+.hd::after { content: ''; display: block; width: 50px; height: 3px; background: linear-gradient(90deg, var(--blue), var(--gold)); margin: 0.5rem auto 0; border-radius: 2px; }
 .hd h1 { font-size: 1.2rem; font-weight: 800; color: var(--blue); letter-spacing: 1px; }
 .hd .sub { color: var(--text-dim); font-size: 0.75rem; margin-top: 0.2rem; }
 
-/* ── Chapter tabs ── */
-.ch-nav {
-  display: flex; flex-wrap: wrap; gap: 4px;
-  justify-content: center; margin: 0.4rem 0 0.8rem;
-}
-.ch-btn {
-  padding: 0.35rem 0.7rem; border-radius: 6px;
-  font-size: 0.78rem; font-weight: 600;
-  border: 1.5px solid var(--border);
-  cursor: pointer; background: var(--card); color: var(--text-dim);
-  transition: all 0.2s; white-space: nowrap;
-}
+.ch-nav { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin: 0.4rem 0 0.8rem; }
+.ch-btn { padding: 0.35rem 0.7rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; border: 1.5px solid var(--border); cursor: pointer; background: var(--card); color: var(--text-dim); transition: all 0.2s; white-space: nowrap; }
 .ch-btn:hover { border-color: var(--blue-dim); color: var(--blue); }
 .ch-btn.on { background: var(--blue); color: #fff; border-color: var(--blue); }
 .ch-btn .cnt { font-weight: 400; opacity: 0.7; font-size: 0.7rem; }
+.ch-btn .weight { font-weight: 400; opacity: 0.8; font-size: 0.65rem; margin-left: 2px; }
 
-/* ── Stats bar ── */
-.stats {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0.5rem 0.8rem; background: var(--card);
-  border-radius: 8px; margin-bottom: 0.6rem;
-  border: 1px solid var(--border-light); font-size: 0.78rem;
-}
+.stats { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.8rem; background: var(--card); border-radius: 8px; margin-bottom: 0.6rem; border: 1px solid var(--border-light); font-size: 0.78rem; }
 .stats .pct { color: var(--blue); font-weight: 700; font-size: 0.9rem; }
-.progress-bar {
-  height: 4px; background: var(--border-light); border-radius: 2px;
-  margin: 0.4rem 0 0.8rem; overflow: hidden;
-}
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-light));
-  border-radius: 2px; transition: width 0.4s ease;
-}
+.progress-bar { height: 4px; background: var(--border-light); border-radius: 2px; margin: 0.4rem 0 0.8rem; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--blue-light)); border-radius: 2px; transition: width 0.4s ease; }
 
-/* ── Question card ── */
-.qcard {
-  background: var(--card); border-radius: 10px;
-  border: 1px solid var(--border-light);
-  padding: 1rem; margin-bottom: 0.8rem;
-  box-shadow: 0 1px 4px var(--shadow);
-}
-.qcard .q-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 0.6rem;
-}
+.qcard { background: var(--card); border-radius: 10px; border: 1px solid var(--border-light); padding: 1rem; margin-bottom: 0.8rem; box-shadow: 0 1px 4px var(--shadow); }
+.qcard .q-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
 .qcard .q-num { font-weight: 700; color: var(--blue); font-size: 0.85rem; min-width: 2rem; }
-.qcard .q-type {
-  font-size: 0.7rem; padding: 0.1rem 0.5rem; border-radius: 999px;
-  font-weight: 600; white-space: nowrap; margin-left: 0.4rem;
-}
+.qcard .q-type { font-size: 0.7rem; padding: 0.1rem 0.5rem; border-radius: 999px; font-weight: 600; white-space: nowrap; margin-left: 0.4rem; }
 .type-s { background: var(--blue-bg); color: var(--blue); }
 .type-m { background: var(--red-bg); color: var(--red); }
 .type-j { background: var(--green-bg); color: var(--green); }
+.type-c { background: var(--gold); color: #fff; }
 .qcard .q-text { font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
 .qcard .q-source { font-size: 0.65rem; color: var(--text-light); margin-bottom: 0.4rem; }
 
-/* ── Options ── */
+/* Material box for comprehensive questions */
+.material-box { background: var(--blue-bg); border-left: 3px solid var(--blue); padding: 0.7rem 0.8rem; border-radius: 6px; font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.8rem; color: var(--text); }
+.material-box .mat-label { font-size: 0.7rem; color: var(--blue); font-weight: 700; margin-bottom: 0.3rem; }
+
 .options { display: flex; flex-direction: column; gap: 6px; }
-.opt {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 0.5rem 0.7rem; border-radius: 8px;
-  border: 1.5px solid var(--border-light);
-  cursor: pointer; transition: all 0.15s;
-  font-size: 0.88rem; line-height: 1.5;
-  background: var(--bg);
-}
+.opt { display: flex; align-items: flex-start; gap: 8px; padding: 0.5rem 0.7rem; border-radius: 8px; border: 1.5px solid var(--border-light); cursor: pointer; transition: all 0.15s; font-size: 0.88rem; line-height: 1.5; background: var(--bg); }
 .opt:hover { border-color: var(--blue-dim); background: var(--blue-bg); }
 .opt .ol { font-weight: 700; color: var(--text-dim); min-width: 1.2rem; }
 .opt.selected { border-color: var(--blue); background: var(--blue-bg); }
@@ -123,33 +78,21 @@ body {
 .opt.wrong { border-color: var(--red); background: var(--red-bg); }
 .opt.omitted { border-color: var(--red-light); background: var(--red-bg); opacity: 0.6; }
 
-/* ── Action buttons ── */
 .actions { display: flex; gap: 8px; margin-top: 0.8rem; flex-wrap: wrap; }
-.btn {
-  padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.82rem;
-  font-weight: 600; border: none; cursor: pointer;
-  transition: all 0.2s;
-}
+.btn { padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
 .btn-primary { background: var(--blue); color: #fff; }
 .btn-primary:hover { background: var(--blue-light); }
 .btn-secondary { background: var(--card-alt); color: var(--text-dim); border: 1px solid var(--border); }
 .btn-secondary:hover { background: var(--border-light); }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* ── Analysis ── */
-.analysis {
-  margin-top: 0.8rem; padding: 0.8rem; border-radius: 8px;
-  background: var(--card-alt); border-left: 3px solid var(--blue);
-  font-size: 0.85rem; line-height: 1.7; display: none;
-}
+.analysis { margin-top: 0.8rem; padding: 0.8rem; border-radius: 8px; background: var(--card-alt); border-left: 3px solid var(--blue); font-size: 0.85rem; line-height: 1.7; display: none; }
 .analysis .a-label { font-weight: 700; color: var(--blue); margin-bottom: 0.3rem; }
 .analysis .a-answer { color: var(--green); font-weight: 600; }
 .analysis .a-wrong { color: var(--red); }
 .analysis .a-text { margin-top: 0.3rem; color: var(--text); }
 
-/* ── No questions ── */
 .empty { text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
-.empty .icon { font-size: 3rem; margin-bottom: 0.5rem; opacity: 0.3; }
 
 @media (max-width: 480px) {
   .ch-nav { gap: 3px; }
@@ -160,42 +103,26 @@ body {
 </head>
 <body>
 <div class="container">
-
-<!-- Header -->
 <div class="hd">
   <h1>📚 证券从业 · 章节精练</h1>
-  <div class="sub">法律法规 · 按章节系统刷题</div>
+  <div class="sub">法律法规 · 按章节系统刷题 · 含综合题</div>
 </div>
-
-<!-- Chapter navigation -->
 <div class="ch-nav" id="chNav"></div>
-
-<!-- Progress bar -->
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-
-<!-- Stats -->
 <div class="stats">
   <span>📊 已答 <strong id="doneCount">0</strong> / <span id="totalCount">0</span></span>
   <span>✅ 正确率 <span class="pct" id="accPct">0%</span></span>
 </div>
-
-<!-- Question list container -->
 <div id="qContainer"></div>
-
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════
-var SUBJECT = "法律法规";
-var CHAPTERS = {"code": "第1章", "name": "证券市场基本法律法规", "weight": 30, "target": 150, "questions": 222},
-  {"code": "第2章", "name": "证券经营机构管理规范", "weight": 20, "target": 100, "questions": 87},
-  {"code": "第3章", "name": "证券公司业务规范", "weight": 25, "target": 125, "questions": 141},
-  {"code": "第4章", "name": "典型违法违规行为及法律责任", "weight": 15, "target": 75, "questions": 72},
-  {"code": "第5章", "name": "行业文化与职业道德", "weight": 10, "target": 50, "questions": 82};
-var CH_MAP = [{"code": "第1章", "name": "证券市场基本法律法规", "start": 0, "count": 222, "weight": 30}, {"code": "第2章", "name": "证券经营机构管理规范", "start": 222, "count": 87, "weight": 20}, {"code": "第3章", "name": "证券公司业务规范", "start": 309, "count": 141, "weight": 25}, {"code": "第4章", "name": "典型违法违规行为及法律责任", "start": 450, "count": 72, "weight": 15}, {"code": "第5章", "name": "行业文化与职业道德", "start": 522, "count": 82, "weight": 10}];
-
+var CHAPTERS = [{"code": "第1章", "name": "证券市场基本法律法规", "weight": "30%", "count": 226},
+  {"code": "第2章", "name": "证券经营机构管理规范", "weight": "20%", "count": 89},
+  {"code": "第3章", "name": "证券公司业务规范", "weight": "25%", "count": 144},
+  {"code": "第4章", "name": "典型违法违规行为及法律责任", "weight": "15%", "count": 74},
+  {"code": "第5章", "name": "行业文化与职业道德", "weight": "10%", "count": 84}];
+var CH_MAP = [{"code": "第1章", "name": "证券市场基本法律法规", "weight": "30%", "start": 0, "count": 226}, {"code": "第2章", "name": "证券经营机构管理规范", "weight": "20%", "start": 226, "count": 89}, {"code": "第3章", "name": "证券公司业务规范", "weight": "25%", "start": 315, "count": 144}, {"code": "第4章", "name": "典型违法违规行为及法律责任", "weight": "15%", "start": 459, "count": 74}, {"code": "第5章", "name": "行业文化与职业道德", "weight": "10%", "start": 533, "count": 84}];
 var ALL_QUESTIONS = [
   {"id": "cflue_zc_fl1a.json_1", "q": "下列关于公司税后利润分配的顺序，正确的是（）。", "c": {"A": "提取法定公积金、弥补公司以前年度亏损、提取任意公积金、向股东分配股利", "B": "弥补公司以前年度亏损、向股东分配股利、提取法定公积金、提取任意公积金", "C": "提取法定公积金、提取任意公积金、弥补公司以前年度亏损、向股东分配股利", "D": "弥补公司以前年度亏损、提取法定公积金、提取任意公积金、向股东分配股利"}, "a": "D", "an": "根据我国《公司法》的规定，公司税后利润分配的顺序是：（1）弥补亏损；（2）提取法定盈余公积金；（3）提取任意盈余公积金；（4）支付普通股股利（分配利润）。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_fl1a.json_2", "q": "下列关于普通合伙企业与有限合伙企业主要区别的说法，正确的有（）。", "c": {"A": "利润分配方面不同", "B": "合伙人拥有的权利方面不同", "C": "合伙人对企业债务的责任方面不同", "D": "关联交易方面不同"}, "a": "ABCD", "an": "普通合伙企业和有限合伙企业的主要区别：1、合伙人对企业债务的责任方面；2、合伙人数量方面；3、合伙人权利方面；4、利润分配方面；5、竞业禁止方面；6、关联交易方面；7、出资份额出质方面", "type": "multi", "source": "cflue"},
@@ -419,6 +346,10 @@ var ALL_QUESTIONS = [
     {"id": "cflue_mock_2.json_107", "q": "某公司拟上市发行股票，已知股票每股面额为1元，按照我国《公司法》要求，该公司的股票发行价格可以是（）。", "c": {"A": "1元", "B": "5.4元", "C": "20元", "D": "0.5元"}, "a": "ABC", "an": "我国《公司法》规定，股票发行价格可以按票面金额，也可以超过票面金额，但不得低于票面金额。", "type": "multi", "source": "cflue_mock"},
     {"id": "cflue_mock_2.json_108", "q": "下列关于证券公司的股东和实际控制人的说法，正确的是（）。", "c": {"A": "证券公司股东可以通过关联交易占用证券公司资产", "B": "不能清偿到期债务的个人不得成为持有证券公司5%以上股权的股东、实际控制人", "C": "证券公司股东可以通过协议使用证券公司客户资金", "D": "证券公司可以为股东融资提供担保"}, "a": "B", "an": "有下列情形之一的单位或者个人，不得成为持有证券公司5%以上股权的股东、实际控制人：1、因故意犯罪被判处刑罚，刑罚执行完毕未逾3年；2、净资产低于实收资本的50%，或者或有负债达到净资产的50%；3、不能清偿到期债务。证券公司不得挪用客户交易结算资金，不得挪用客户委托管理的资产，不得挪用客户托管在公司的证券。", "type": "single", "source": "cflue_mock"},
     {"id": "cflue_mock_2.json_118", "q": "下列选项中，不属于基金管理人职责的是（）。", "c": {"A": "对基金份额持有人大会审议事项行使表决权", "B": "进行基金会计核算并编制基金财务会计报告", "C": "保存基金财产管理业务活动的记录、账册、报表和其他相关资料", "D": "按照基金合同的约定确定基金收益分配方案，及时向基金份额持有人分配收益"}, "a": "A", "an": "公开募集基金的基金管理人应当履行下列职责：（一）依法募集资金，办理基金份额的发售和登记事宜；（二）办理基金备案手续；（三）对所管理的不同基金财产分别管理、分别记账，进行证券投资；（四）按照基金合同的约定确定基金收益分配方案，及时向基金份额持有人分配收益；（五）进行基金会计核算并编制基金财务会计报告；（六）编制中期和年度基金报告；（七）计算并公告基金资产净值，确定基金份额申购、赎回价格；（八）办理与基金财产管理业务活动有关的信息披露事项；（九）按照规定召集基金份额持有人大会；（十）保存基金财产管理业务活动的记录、账册、报表和其他相关资料；（十一）以基金管理人名义，代表基金份额持有人利益行使诉讼权利或者实施其他法律行为。", "type": "single", "source": "cflue_mock"},
+    {"id": "comp_32949", "q": "关于注册制的说法，正确的有（）。", "c": {"A": "注册制下证监会不再对发行人的实质条件进行判断", "B": "证券交易所对发行申请进行审核", "C": "注册制以信息披露为核心", "D": "所有证券发行均实行注册制"}, "a": "ABC", "an": "选项D错误。并非所有证券发行都实行注册制，公开发行证券实行注册制，但非公开发行（定向发行）不适用注册制要求。注册制下，证监会关注信息披露质量，不对发行人投资价值做实质判断。", "type": "comprehensive", "source": "comprehensive", "material": "2024年修订的《中华人民共和国证券法》全面推行注册制，强化信息披露要求，提高证券违法违规成本。根据新证券法，公开发行证券实行注册制，证券交易所负责审核发行申请，中国证监会负责注册。", "sub_type": "multi"},
+    {"id": "comp_99326", "q": "根据《公司法》，下列事项中必须经出席股东大会的股东所持表决权的三分之二以上通过的有（）。", "c": {"A": "修改公司章程", "B": "增加注册资本", "C": "选举董事", "D": "公司合并"}, "a": "ABD", "an": "根据《公司法》规定，股东大会作出修改公司章程、增加或者减少注册资本、公司合并、分立、解散或者变更公司形式的决议，必须经出席会议的股东所持表决权的三分之二以上通过。选举董事属于普通决议事项，过半数通过即可。", "type": "comprehensive", "source": "comprehensive", "material": "2024年修订的《中华人民共和国证券法》全面推行注册制，强化信息披露要求，提高证券违法违规成本。根据新证券法，公开发行证券实行注册制，证券交易所负责审核发行申请，中国证监会负责注册。", "sub_type": "multi"},
+    {"id": "comp_27105", "q": "根据《合伙企业法》，下列行为中乙（有限合伙人）可以实施的有（）。", "c": {"A": "参与决定普通合伙人甲退伙", "B": "执行合伙事务，对外代表合伙企业", "C": "获取经审计的有限合伙企业财务会计报告", "D": "对企业经营管理提出建议"}, "a": "ACD", "an": "根据《合伙企业法》，有限合伙人不执行合伙事务，不得对外代表有限合伙企业。选项B错误。ACD均属于有限合伙人可以实施且不被视为执行合伙事务的行为。", "type": "comprehensive", "source": "comprehensive", "material": "合伙企业法规定了普通合伙企业和有限合伙企业两种形式。某有限合伙企业由普通合伙人甲和有限合伙人乙共同出资设立。", "sub_type": "multi"},
+    {"id": "comp_98871", "q": "关于合伙企业解散和清算的说法，正确的有（）。", "c": {"A": "合伙期限届满，合伙人决定不再经营的应当解散", "B": "清算人由全体合伙人担任", "C": "清算期间合伙企业不得开展与清算无关的经营活动", "D": "合伙企业注销后原普通合伙人对合伙企业债务不再承担责任"}, "a": "ABC", "an": "选项D错误。普通合伙人对合伙企业债务承担无限连带责任，即使合伙企业注销后，原普通合伙人对合伙企业存续期间的债务仍承担无限连带责任（法律规定诉讼时效等除外）。", "type": "comprehensive", "source": "comprehensive", "material": "合伙企业法规定了普通合伙企业和有限合伙企业两种形式。某有限合伙企业由普通合伙人甲和有限合伙人乙共同出资设立。", "sub_type": "multi"},
     {"id": "cflue_zc_fl2.json_1", "q": "根据《证券公司信用风险管理指引》，下列关于证券公司信用风险业务类型的说法，正确的是（）。", "c": {"A": "包括互换、场外期权、远期等场外衍生品业务（不包括信用衍生品）", "B": "包括股票投资、约定购回式证券交易、融资融券等融资类业务", "C": "包括债券投资交易业务（不包括国债、地方债、金融债、政府支持机构债）", "D": "包括非标准化债权资产投资业务"}, "a": "D", "an": "按照业务类型分类，包括但不限于：【股票质押式回购交易】、约定购回式证券交易、融资融券等融资类业务；互换、场外期权、远期、【信用衍生品】等场外衍生品业务；债券投资交易（包括债券现券交易、债券回购交易、债券远期交易、债券借贷业务等债券相关交易业务），债券包括但不限于【国债】、地方债、金融债、政府支持机构债、企业债、非金融企业债务融资工具、公司债、资产支持证券、同业存单；【非标准化债权资产投资】；其他涉及信用风险的自有资金出资业务。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_fl2.json_2", "q": "委托信息技术服务机构提供产品或服务的，证券公司依法应当承担的责任可因委托而免除或减轻。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "证券公司借助信息技术手段从事证券基金业务活动的，可以委托信息技术服务机构提供产品或服务，【但证券公司依法应当承担的责任不因委托而免除或减轻。】", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_fl2.json_3", "q": "下列关于证券公司投资者适当性留痕的说法，正确的是（）。", "c": {"A": "通过互联网等非现场方式进行的，由专业投资者通过符合规定的电子方式进行确认", "B": "通过营业部网点向专业投资者进行警示的，应当全过程录音录像", "C": "通过互联网等非现场方式进行的，由普通投资者通过符合规定的电子方式进行确认", "D": "通过营业部网点向普通投资者进行告知的，必须全程录像"}, "a": "C", "an": "通过营业网点向普通投资者进行告知、警示的，应当全过程录音或者录像；通过互联网等非现场方式进行的，应当完善配套留痕安排，由普通投资者通过符合法律、行政法规要求的电子方式进行确认。", "type": "single", "source": "cflue"},
@@ -506,6 +437,8 @@ var ALL_QUESTIONS = [
     {"id": "xs_4782247", "q": "下列行为可能涉嫌构成未公开信息交易罪的是（）。", "c": {"A": "某注册会计师利用上市公司财务信息买卖股票", "B": "基金经理利用所掌握的基金持仓信息买卖股票且情节严重", "C": "上市公司董事泄露该公司重组信息", "D": "投资者甲利用非法获取的内幕信息买卖股票"}, "a": "B", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4782248", "q": "证券公司的（）应当对证券公司年度合规报告签署确认意见。", "c": {"A": "财务负责人", "B": "经营管理的主要负责人", "C": "经营管理的主要负责人和财务负责人", "D": "董事、高级管理人员"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4782249", "q": "下列关于证券公司在合规负责人任期届满前免除其职务的说法中，错误的是（）。", "c": {"A": "被中国证监会责令更换", "B": "合规负责人本人申请", "C": "证券公司认为合规负责人未能勤勉尽责的", "D": "证券公司和合规负责人协商一致调整岗位"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_41345", "q": "关于证券公司合规管理的说法，正确的有（）。", "c": {"A": "合规负责人由董事会决定聘任", "B": "合规负责人发现违法违规行为应当向公司章程规定的机构报告", "C": "合规负责人可以兼任业务部门的负责人", "D": "证券公司应当建立合规管理的考核机制"}, "a": "ABD", "an": "选项C错误。合规负责人不得兼任业务部门的负责人，以确保合规管理的独立性。合规负责人直接向董事会负责，负责对公司经营管理行为的合规性进行监督。", "type": "comprehensive", "source": "comprehensive", "material": "证券公司应当建立有效的公司治理结构、内部控制机制和合规管理体系。根据《证券公司监督管理条例》和相关规定，证券公司应当设立合规负责人，对经营管理行为的合规性进行审查、监督和检查。", "sub_type": "multi"},
+    {"id": "comp_81141", "q": "根据《证券公司风险控制指标管理办法》，证券公司的风险控制指标体系中，净资本计算需要调整的项目包括（）。", "c": {"A": "金融资产的风险调整", "B": "或有负债的风险调整", "C": "长期资产的流动性折扣", "D": "应收款项的风险扣减"}, "a": "ABD", "an": "净资本是在净资产的基础上对资产等项目进行风险调整后得出的综合性风险控制指标。金融资产的风险调整、或有负债的风险调整、应收款项的风险扣减均属于调整项目。长期资产的流动性折扣与此不同。", "type": "comprehensive", "source": "comprehensive", "material": "证券公司应当建立有效的公司治理结构、内部控制机制和合规管理体系。根据《证券公司监督管理条例》和相关规定，证券公司应当设立合规负责人，对经营管理行为的合规性进行审查、监督和检查。", "sub_type": "multi"},
     {"id": "cflue_zc_fl3a.json_1", "q": "证券公司（）合计持有一家上市公司股票及其权益的数量或者其增减变动达到规定的比例时，应当依法履行信息报告、披露或者要约收购义务。", "c": {"A": "客户普通证券账户", "B": "自营证券账户", "C": "融券专用证券账户", "D": "转融通担保证券明细账户"}, "a": "BCD", "an": "证券公司通过其自营证券账户、融券专用证券账户和转融通担保证券明细账户合计持有一家上市公司股票及其权益的数量或者其增减变动达到规定的比例时，应当依法履行信息报告、披露或者要约收购义务。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_fl3a.json_2", "q": "根据《证券公司融资融券业务管理办法》的规定，除（）情形外，任何人不得动用证券公司客户信用交易担保证券账户内的证券和客户信用交易担保资金账户内的资金。", "c": {"A": "收取客户应当支付的违约金", "B": "收取客户应当支付的利息、费用、税款", "C": "收取客户应当归还的资金、证券", "D": "为客户进行融资融券交易的结算"}, "a": "ABCD", "an": "除上述答案外，还有按照该办法的规定以及客户的约定处分担保物；客户提取还本付息、支付税费及违约金后的剩余证券和资金；法律法规和该办法规定的其他情形。", "type": "multi", "source": "cflue"},
     {"id": "cflue_zc_fl3a.json_3", "q": "财务顾问应规范执业行为，提高其执业质量，下列说法中，符合要求的是（）。", "c": {"A": "财务顾问应当建立健全内部报告制度，财务顾问主办人对中国证监会提出的问题进行充分的研究、论证，审慎回复。回复意见应当由财务顾问的法定代表人或授权代表人、财务顾问主办人和项目协办人签名，并加盖上市公司单位公章", "B": "结合上市公司披露的定期报告出具持续督导意见，并在前述定期报告披露后的15日内向上市公司所在地的中国证监会派出机构报告", "C": "只要进行了充分的内部核查，财务顾问就可以按照中国证监会的相关规定，对并购重组事项出具财务顾问专业意见，并作出相关承诺", "D": "财务顾问在开始工作时可直接利用其他证券服务机构出具的专业意见，对委托人提供的资料和披露的信息进行独立判断"}, "a": "B", "an": "财务顾问在开始工作时可利用其他证券服务机构出具的专业意见，但应对其进行必要的审慎核查，对委托人提供的资料和披露的信息进行独立判断。选项A错误。进行了充分的内部核查和尽职调查基础上，财务顾问就可以按照中国证监会的相关规定，对并购重组事项出具财务顾问专业意见，并作出相关承诺，选项B错误。选项C应该加盖财务顾问单位公章。", "type": "single", "source": "cflue"},
@@ -647,6 +580,9 @@ var ALL_QUESTIONS = [
     {"id": "cflue_mock_2.json_93", "q": "关于我国基金监管的目标，下列说法中，正确的有（）。", "c": {"A": "保护投资人及相关当事人的合法权益", "B": "降低市场的系统性风险", "C": "促进基金资产估值方法的多样性", "D": "保证市场的公平、效率和透明"}, "a": "ABD", "an": "我国基金监管的目标是：保护投资人及相关当事人的合法权益；规范基金活动，保证市场的公平、效率和透明，降低系统风险；促进证券投资基金和资本市场的健康发展。", "type": "multi", "source": "cflue_mock"},
     {"id": "cflue_mock_2.json_106", "q": "不具备承销业务资格的证券公司只能以对冲风险为目的，从事金融衍生品交易。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "具备证券自营业务资格的证券公司可以从事金融衍生产品交易，不具备证券自营业务资格的证券公司只能以对冲风险为目的，从事金融衍生产品交易。", "type": "judge", "source": "cflue_mock"},
     {"id": "cflue_mock_2.json_114", "q": "根据《证券公司和证券投资基金管理公司合规管理办法》，证券公司开展各项业务，关联交易管理方面，坚决防止关联交易和利益输送。（）", "c": {"A": "错", "B": "对"}, "a": "A", "an": "可以进行关联交易，需要完善保障关联交易公允性和合规性的制度。", "type": "judge", "source": "cflue_mock"},
+    {"id": "comp_33890", "q": "关于证券经纪业务的说法，正确的有（）。", "c": {"A": "证券公司不得接受客户的全权委托而决定买卖证券", "B": "证券公司可以承诺客户买卖证券的收益", "C": "证券经纪业务是代理买卖证券的业务", "D": "客户交易结算资金应当存放在商业银行"}, "a": "ACD", "an": "选项B错误。证券公司不得以任何方式对客户证券买卖的收益或者赔偿证券买卖的损失作出承诺。证券经纪业务的本质是代理，不承担交易风险。客户交易结算资金实行第三方存管制度。", "type": "comprehensive", "source": "comprehensive", "material": "某证券公司接受客户委托进行证券交易。客户王某开立了证券账户和资金账户，欲买入某上市公司股票。根据证券经纪业务规范，证券公司应当严格履行投资者适当性管理义务，了解客户的身份、财产与收入状况、证券投资经验、风险偏好等信息。", "sub_type": "multi"},
+    {"id": "comp_21081", "q": "关于证券投资咨询业务的说法，正确的是（）。", "c": {"A": "从事证券投资咨询业务的人员应当取得证券投资咨询执业资格", "B": "证券投资咨询机构可以代理客户进行证券买卖", "C": "发布证券研究报告是证券投资咨询业务的一种形式", "D": "证券投资咨询机构及其从业人员不得利用咨询服务谋取不正当利益"}, "a": "ACD", "an": "选项B错误。证券投资咨询机构提供建议，但不得代理客户进行证券买卖。投资咨询和资产管理是两种不同的业务。发布研究报告、提供投资顾问服务均属于投资咨询业务范畴。", "type": "comprehensive", "source": "comprehensive", "material": "某证券公司接受客户委托进行证券交易。客户王某开立了证券账户和资金账户，欲买入某上市公司股票。根据证券经纪业务规范，证券公司应当严格履行投资者适当性管理义务，了解客户的身份、财产与收入状况、证券投资经验、风险偏好等信息。", "sub_type": "multi"},
+    {"id": "comp_54862", "q": "关于融资融券业务，下列说法正确的有（）。", "c": {"A": "客户融资买入证券的，应当以自有资金偿还", "B": "融资融券业务应当签订融资融券合同", "C": "客户融券卖出的资金应当存入证券公司指定的账户", "D": "证券公司向客户融资融券应当收取保证金"}, "a": "BCD", "an": "选项A错误。客户融资买入证券的，可以以卖券还款或直接还款的方式偿还，不一定使用自有资金。融券卖出的资金除买券还券外不得他用。保证金可以是现金或可充抵保证金的证券。", "type": "comprehensive", "source": "comprehensive", "material": "某证券公司接受客户委托进行证券交易。客户王某开立了证券账户和资金账户，欲买入某上市公司股票。根据证券经纪业务规范，证券公司应当严格履行投资者适当性管理义务，了解客户的身份、财产与收入状况、证券投资经验、风险偏好等信息。", "sub_type": "multi"},
     {"id": "cflue_zc_fl4.json_1", "q": "2019年10月至2022年2月间，李某担任甲基金管理有限责任公司基金经理，将负责管理该公司“A基金”账户的投资决策信息告诉其夫蒋某，并与蒋某共同出资10万元，利用其大学同学陈某账户先于“A基金”买入股票并获利1万余元。关于李某的行为，以下说法正确有（）。", "c": {"A": "不构成犯罪，但是应当承担行政责任", "B": "构成利用未公开信息交易罪", "C": "构成泄露内幕信息罪", "D": "构成内幕交易罪"}, "a": "B", "an": "利用未公开信息交易，是指证券交易所、期货交易所、证券公司、期货经纪公司、基金管理公司、商业银行、保险公司等金融机构的从业人员以及有关监管部门或者行业协会的工作人员，利用因职务便利获取的内幕信息以外的其他未公开的信息，违反规定，从事与该信息相关的证券、期货交易活动，或者明示、暗示他人从事相关交易活动，情节严重的行为。内幕交易、泄露内幕信息，是指证券、期货交易内幕信息的知情人员或者非法获取证券、期货交易内幕信息的人员，在涉及证券的发行，证券、期货交易或者其他对证券、期货交易价格有重大影响的信息尚未公开前，买入或者卖出该证券，或者从事与该内幕信息有关的期货交易，或者泄露该信息，或者明示、暗示他人从事上述交易活动，情节严重的行为。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_fl4.json_2", "q": "根据《证券法》，下列属于证券公司及其从业人员从事的损害客户利益的行为的是（）。", "c": {"A": "根据客户的真实意思表示，维护客户利益", "B": "为牟取佣金收入，诱使客户进行不必要的证券买卖", "C": "根据客户的委托为其买卖证券", "D": "在规定的时间内向客户提供交易的确认文件"}, "a": "B", "an": "A选项违反了相关从业规定", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_fl4.json_3", "q": "下列关于集资诈骗罪的说法，正确的有（）。", "c": {"A": "集资诈骗罪的犯罪客观方面为使用诈骗手段实施非法集资，且数额较大的行为", "B": "集资诈骗罪的犯罪主观方面是故意，无需以非法占有为目的", "C": "单位犯集资诈骗罪的，对单位判处罚金，并对其直接负责的主管人员和其他直接责任人员依照《刑法》相关规定进行处罚", "D": "个人集资诈骗，数额在10万元以上的；单位集资诈骗，数额在50万元以上的，应予以立案追诉"}, "a": "ACD", "an": "集资诈骗罪是指以非法占有为目的，使用诈骗方法非法集资的行为。", "type": "multi", "source": "cflue"},
@@ -719,6 +655,8 @@ var ALL_QUESTIONS = [
     {"id": "xs_4782738", "q": "欺诈发行股票、债券罪应予立案追诉的标准包括（）。Ⅰ.发行数额在500万元以上Ⅱ.伪造、变造国家机关公文、有效证明文件或者相关凭证、单据Ⅲ.利用募集的资金进行违法活动Ⅳ.转移或者隐瞒所募集资金", "c": {"A": "Ⅱ、Ⅲ、Ⅳ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅰ、Ⅲ", "D": "Ⅰ、Ⅱ、Ⅲ、Ⅳ"}, "a": "D", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4782739", "q": "在证券发行行为中，符合三公原则的做法有（）。Ⅰ.非公开发行证券，不得采用广告、公开劝诱和变相公开方式Ⅱ.发行人将公司发行信息提前告知给现有股东Ⅲ.向不超过200人的不特定对象发行证券，必须经过证监会注册Ⅳ.公开发行证券，报经国务院证券监督管理机构或者国务院授权的部门核准，可以视情况突破法律、行政法规规定的条件", "c": {"A": "Ⅰ、Ⅳ", "B": "Ⅱ、Ⅳ", "C": "Ⅰ、Ⅲ", "D": "Ⅱ、Ⅲ"}, "a": "A", "an": "", "type": "single", "source": "xinshi"},
     {"id": "xs_4782740", "q": "根据《证券法》，下列关于擅自改变公开发行证券募集资金用途的后果说法正确的是（）。Ⅰ.未作纠正或未经股东大会认可的，不得公开发行新股Ⅱ.对直接责任人员处以警告并处以十万元以上一百万元以下的罚款Ⅲ.对指使该行为的控股股东处以警告并处以五十万元以上五百万元以下的罚款Ⅳ.对负责证券承销的证券公司处以警告，责令整改", "c": {"A": "Ⅰ、Ⅲ、Ⅳ", "B": "Ⅰ、Ⅱ、Ⅳ", "C": "Ⅰ、Ⅱ、Ⅲ", "D": "Ⅱ、Ⅲ、Ⅳ"}, "a": "C", "an": "", "type": "single", "source": "xinshi"},
+    {"id": "comp_57159", "q": "根据《证券法》，对该上市公司信息披露违法行为的处罚措施包括（）。", "c": {"A": "对发行人处以100万元以上1000万元以下的罚款", "B": "对直接负责的主管人员处以50万元以上500万元以下的罚款", "C": "责令改正，给予警告", "D": "情节严重的，可以对有关责任人员采取证券市场禁入措施"}, "a": "ABCD", "an": "四个选项均正确。新证券法大幅提高了信息披露违法行为的罚款上限。同时，信息披露义务人未按照规定披露信息，或者披露的信息存在虚假记载、误导性陈述或者重大遗漏的，还应依法承担民事赔偿责任。", "type": "comprehensive", "source": "comprehensive", "material": "2023年，中国证监会对某上市公司及其高管涉嫌信息披露违法违规行为立案调查。经查，该公司未按规定披露关联交易，虚增营业收入和利润。该行为严重损害了投资者的合法权益。", "sub_type": "multi"},
+    {"id": "comp_10118", "q": "关于内幕交易，下列说法正确的有（）。", "c": {"A": "内幕信息是指证券交易活动中涉及公司的经营、财务或对其证券价格有重大影响的尚未公开信息", "B": "内幕信息知情人员包括公司董事、监事和高级管理人员", "C": "内幕交易行为给投资者造成损失的应当承担赔偿责任", "D": "内幕交易只要没有获利就不构成违法"}, "a": "ABC", "an": "选项D错误。内幕交易行为不以是否获利为构成要件，只要行为人利用内幕信息进行证券交易就构成违法。内幕交易可能面临行政处罚（罚没违法所得并罚款）和刑事追诉。", "type": "comprehensive", "source": "comprehensive", "material": "2023年，中国证监会对某上市公司及其高管涉嫌信息披露违法违规行为立案调查。经查，该公司未按规定披露关联交易，虚增营业收入和利润。该行为严重损害了投资者的合法权益。", "sub_type": "multi"},
     {"id": "cflue_zc_fl5.json_1", "q": "下列关于执行《证券经营机构及其工作人员廉洁从业实施细则》的说法，不正确的是（）。", "c": {"A": "在证券业协会进行业务注册并接受协会自律管理的非证券期货经营机构在从事证券相关业务时应参照执行", "B": "已成为证券业协会会员的证券公司境内子公司应当执行", "C": "证券投资咨询公司可自行决定是否执行", "D": "证券资信评级公司在从事证券相关业务时应参照执行"}, "a": "C", "an": "证券经营机构是指证券公司及其境内子公司会员；工作人员是指以公司名义开展业务的人员，包括与公司建立劳动关系的正式员工、与公司签署委托协议的经纪人、劳务派遣至公司的其他人员等。证券投资咨询公司、证券资信评级公司等中国证券业协会（以下简称协会）会员，以及在协会进行业务注册或者备案并接受协会自律管理的其他机构及个人，在从事证券相关业务时参照本细则执行。", "type": "single", "source": "cflue"},
     {"id": "cflue_zc_fl5.json_2", "q": "证券评级机构从事证券评级业务，应当制定科学的评级方法和完善的质量控制制度。（）", "c": {"A": "错", "B": "对"}, "a": "B", "an": "略。", "type": "judge", "source": "cflue"},
     {"id": "cflue_zc_fl5.json_3", "q": "被采取市场禁入措施的人员，应当遵循的规定包括（）。", "c": {"A": "由所在机构按规定程序解除其被禁止担任的职务", "B": "不得在任何公司担任董事、监事、高级管理人员职务", "C": "立即停止从事证券业务", "D": "立即停止履行上市公司董事、监事、高级管理人员职务"}, "a": "ACD", "an": "被采取证券市场禁入措施的人员：1、在禁入期间内，除不得继续在原机构从事证券业务或者担任原上市公司董事、监事、高级管理人员职务外，也不得在其他任何机构中从事证券业务或者担任其他上市公司董事、监事、高级管理人员职务。2、应当在收到中国证监会作出的证券市场禁入决定后，立即停止从事证券业务或者停止履行上市公司董事、监事、高级管理人员职务，并由其所在机构按规定的程序解除其被禁止担任的职务。", "type": "multi", "source": "cflue"},
@@ -800,22 +738,20 @@ var ALL_QUESTIONS = [
     {"id": "cflue_mock_2.json_67", "q": "交易所市场发行国债的分销时，下列说法正确的是（）。", "c": {"A": "证券交易所为同一期（次）国债向不同承销商提供同一承销代码", "B": "投资者通过交易所买入债券时，缴纳佣金", "C": "通过证券交易所交易后，国债不会自动过户到客户的账户内", "D": "在实际运作中，承销商可以选择场内挂牌分销或场外分销两种方式"}, "a": "D", "an": "证券交易所为每一承销商确定当期国债【各自的承销代码】，以便于场内挂牌。B错误。投资者在买入债券时，可免缴佣金，C错误。买卖成交后，客户认购的国债自动过户至客户的账户内，D错误。", "type": "single", "source": "cflue_mock"},
     {"id": "cflue_mock_2.json_82", "q": "从事证券经纪业务的人员违反《关于加强证券经纪业务管理的规定》的，中国证监会及其派出机构可视情况依法采取的监管措施包括（）。", "c": {"A": "出具警示函", "B": "暂不受理与行政许可有关的文件", "C": "监管谈话", "D": "罚款"}, "a": "ABC", "an": "证券公司及证券营业部违反《关于加强证券经纪业务管理的规定》的，中国证监会及其派出机构将视情况依法采取责令改正、监管谈话、出具警示函、暂不受理与行政许可有关的文件、责令处分有关人员、暂停核准新业务、限制业务活动等监管措施。违反法律法规的，依法进行行政处罚。构成犯罪的，移送司法机关处理。", "type": "multi", "source": "cflue_mock"},
     {"id": "cflue_mock_2.json_98", "q": "下列关于执行《证券经营机构及其工作人员廉洁从业实施细则》的说法，不正确的是（）。", "c": {"A": "在证券业协会进行业务注册并接受协会自律管理的非证券期货经营机构在从事证券相关业务时应参照执行", "B": "已成为证券业协会会员的证券公司境内子公司应当执行", "C": "证券投资咨询公司可自行决定是否执行", "D": "证券资信评级公司在从事证券相关业务时应参照执行"}, "a": "C", "an": "证券经营机构是指证券公司及其境内子公司会员；工作人员是指以公司名义开展业务的人员，包括与公司建立劳动关系的正式员工、与公司签署委托协议的经纪人、劳务派遣至公司的其他人员等。证券投资咨询公司、证券资信评级公司等中国证券业协会（以下简称协会）会员，以及在协会进行业务注册或者备案并接受协会自律管理的其他机构及个人，在从事证券相关业务时参照本细则执行。", "type": "single", "source": "cflue_mock"},
-    {"id": "cflue_mock_2.json_110", "q": "下列关于股份有限公司合并决议的说法，不正确的是（）。", "c": {"A": "必须经出席会议的2/3以上有表决权的股东通过", "B": "必须经出席会议的股东所持表决权的2/3以上通过", "C": "必须经代表2/3以上表决权的股东通过", "D": "必须经2/3以上股东通过"}, "a": "ACD", "an": "公司合并或分立，应当由公司的股东（大）会作出决议。有限责任公司，必须经代表2/3以上表决权的股东通过。股份有限公司，必须经出席会议的股东所持表决权的2/3以上通过。", "type": "multi", "source": "cflue_mock"}
+    {"id": "cflue_mock_2.json_110", "q": "下列关于股份有限公司合并决议的说法，不正确的是（）。", "c": {"A": "必须经出席会议的2/3以上有表决权的股东通过", "B": "必须经出席会议的股东所持表决权的2/3以上通过", "C": "必须经代表2/3以上表决权的股东通过", "D": "必须经2/3以上股东通过"}, "a": "ACD", "an": "公司合并或分立，应当由公司的股东（大）会作出决议。有限责任公司，必须经代表2/3以上表决权的股东通过。股份有限公司，必须经出席会议的股东所持表决权的2/3以上通过。", "type": "multi", "source": "cflue_mock"},
+    {"id": "comp_01297", "q": "下列选项中，属于证券行业文化建设基本要求的有（）。", "c": {"A": "坚持合规经营，不突破监管底线", "B": "坚持诚实守信，不损害客户利益", "C": "坚持专业精神，持续提升服务能力", "D": "坚持稳健发展，审慎控制风险"}, "a": "ABCD", "an": "四个选项均正确，对应行业文化建设的合规、诚信、专业、稳健四大基本要求。证券行业文化建设是证券行业健康发展的重要基础，各证券公司应当将文化建设融入公司治理和经营管理的各个环节。", "type": "comprehensive", "source": "comprehensive", "material": "中国证券业协会发布了《证券行业文化建设十要素》，要求证券公司形成\\\"合规、诚信、专业、稳健\\\"的行业文化。证券从业人员应当遵守职业道德，不得从事任何违法违规行为。", "sub_type": "multi"},
+    {"id": "comp_85962", "q": "根据证券从业人员行为规范，从业人员不得从事的行为包括（）。", "c": {"A": "利用内幕信息买卖证券", "B": "接受客户委托代理买卖证券", "C": "诱导客户进行不必要的证券买卖", "D": "向客户承诺投资收益"}, "a": "ACD", "an": "选项B不属于禁止行为。证券从业人员在取得执业资格后，按照公司安排接受客户委托代理买卖证券是正常的经纪业务行为。而利用内幕信息交易、诱导不必要交易、承诺收益均属于明确禁止的违法违规行为。", "type": "comprehensive", "source": "comprehensive", "material": "中国证券业协会发布了《证券行业文化建设十要素》，要求证券公司形成\\\"合规、诚信、专业、稳健\\\"的行业文化。证券从业人员应当遵守职业道德，不得从事任何违法违规行为。", "sub_type": "multi"}
 ];
 
-// ═══════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════
+var SUBJECT = "法律法规";
 var STORAGE_KEY = 'sec_exam_chapter_' + SUBJECT;
 var state = loadState();
 var currentCh = parseInt(localStorage.getItem('sec_ch_current_' + SUBJECT)) || 0;
-var selected = {};  // q_idx -> selected options
+var selected = {};
 
 function getDefaultState() {
   var s = {};
-  for (var i = 0; i < ALL_QUESTIONS.length; i++) {
-    s[i] = { done: false, correct: false, answers: [] };
-  }
+  for (var i = 0; i < ALL_QUESTIONS.length; i++) s[i] = { done: false, correct: false, answers: [] };
   return s;
 }
 
@@ -824,39 +760,24 @@ function loadState() {
     var raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       var parsed = JSON.parse(raw);
-      // Merge with defaults
       var def = getDefaultState();
-      for (var k in def) {
-        if (parsed[k]) def[k] = parsed[k];
-      }
+      for (var k in def) { if (parsed[k]) def[k] = parsed[k]; }
       return def;
     }
   } catch(e) {}
   return getDefaultState();
 }
 
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
 function getChapterQuestions(chIdx) {
   var ch = CH_MAP[chIdx];
   var qs = [];
-  for (var i = ch.start; i < ch.start + ch.count; i++) {
-    qs.push({ idx: i, q: ALL_QUESTIONS[i] });
-  }
+  for (var i = ch.start; i < ch.start + ch.count; i++) qs.push({ idx: i, q: ALL_QUESTIONS[i] });
   return qs;
 }
 
-// ═══════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════
-function render() {
-  renderNav();
-  renderQuestions();
-  renderStats();
-  localStorage.setItem('sec_ch_current_' + SUBJECT, currentCh);
-}
+function render() { renderNav(); renderQuestions(); renderStats(); localStorage.setItem('sec_ch_current_' + SUBJECT, currentCh); }
 
 function renderNav() {
   var nav = document.getElementById('chNav');
@@ -865,7 +786,8 @@ function renderNav() {
     var ch = CHAPTERS[i];
     var active = i === currentCh ? 'on' : '';
     html += '<div class="ch-btn ' + active + '" onclick="switchCh(' + i + ')">'
-         + esc(ch.name) + ' <span class="cnt">' + ch.questions + '题</span></div>';
+         + esc(ch.name) + ' <span class="weight">[' + ch.weight + ']</span>'
+         + ' <span class="cnt">' + ch.count + '题</span></div>';
   }
   nav.innerHTML = html;
 }
@@ -874,14 +796,10 @@ function renderStats() {
   var ch = CH_MAP[currentCh];
   var done = 0, correct = 0;
   for (var i = ch.start; i < ch.start + ch.count; i++) {
-    if (state[i].done) {
-      done++;
-      if (state[i].correct) correct++;
-    }
+    if (state[i].done) { done++; if (state[i].correct) correct++; }
   }
   var pct = done > 0 ? Math.round(correct/done*100) : 0;
   var allPct = ch.count > 0 ? Math.round(done/ch.count*100) : 0;
-  
   document.getElementById('doneCount').textContent = done;
   document.getElementById('totalCount').textContent = ch.count;
   document.getElementById('accPct').textContent = pct + '%';
@@ -890,62 +808,55 @@ function renderStats() {
 
 function renderQuestions() {
   var container = document.getElementById('qContainer');
-  var ch = CH_MAP[currentCh];
-  var qs = [];
-  for (var i = ch.start; i < ch.start + ch.count; i++) {
-    qs.push({ idx: i, q: ALL_QUESTIONS[i] });
-  }
+  var qs = getChapterQuestions(currentCh);
   
-  if (qs.length === 0) {
-    container.innerHTML = '<div class="empty"><div class="icon">📝</div><div>暂无题目</div></div>';
-    return;
-  }
+  if (qs.length === 0) { container.innerHTML = '<div class="empty"><div style="font-size:3rem;margin-bottom:0.5rem">📝</div><div>暂无题目</div></div>'; return; }
   
+  var num = 0;
   var html = '';
+  var prevMaterial = '';
+  
   for (var qi = 0; qi < qs.length; qi++) {
-    var item = qs[qi];
-    var idx = item.idx;
-    var q = item.q;
-    var st = state[idx];
-    var num = qi + 1;
-    var typeClass = TYPE_CLASS[q.type] || 'type-s';
-    var typeLabel = TYPE_LABEL[q.type] || q.type;
+    var item = qs[qi], idx = item.idx, q = item.q, st = state[idx];
+    if (q.type !== 'comprehensive' || q.material !== prevMaterial) num++;
+    else { /* same material group, keep num */ }
+    prevMaterial = q.material || '';
+    
+    var typeLabel = q.type === 'comprehensive' ? '综合' : (TYPE_LABEL[q.type] || q.type);
+    var typeClass = q.type === 'comprehensive' ? 'type-c' : (TYPE_CLASS[q.type] || 'type-s');
     
     html += '<div class="qcard" id="qc-' + idx + '">';
+    
+    if (q.type === 'comprehensive' && q.material) {
+      html += '<div class="material-box"><div class="mat-label">📋 材料分析</div>' + q.material + '</div>';
+    }
+    
     html += '<div class="q-header">';
     html += '<div class="q-num">第' + num + '题</div>';
-    html += '<div style="display:flex;align-items:center;gap:6px">';
-    if (q.source === 'xinshi' && !q.an) {
-      html += '<span style="font-size:0.65rem;color:#b8a99a">欣师</span>';
-    }
     html += '<span class="q-type ' + typeClass + '">' + typeLabel + '</span>';
-    html += '</div></div>';
+    html += '</div>';
     
     html += '<div class="q-text">' + q.q + '</div>';
     
-    // Options
     var optKeys = Object.keys(q.c);
     html += '<div class="options" id="opts-' + idx + '">';
     for (var oi = 0; oi < optKeys.length; oi++) {
       var k = optKeys[oi];
-      var v = q.c[k];
       var sel = selected[idx] && selected[idx].indexOf(k) >= 0 ? 'selected' : '';
       html += '<div class="opt ' + sel + '" data-q="' + idx + '" data-key="' + k + '" onclick="toggleOpt(' + idx + ',\'' + k + '\')">';
-      html += '<span class="ol">' + k + '.</span><span>' + v + '</span></div>';
+      html += '<span class="ol">' + k + '.</span><span>' + q.c[k] + '</span></div>';
     }
     html += '</div>';
     
-    // Actions
-    var doneClass = st.done ? ' style="display:none"' : '';
-    var showAnClass = !st.done ? ' style="display:none"' : '';
+    var doneStyle = st.done ? ' style="display:none"' : '';
+    var showAn = !st.done ? ' style="display:none"' : '';
     html += '<div class="actions">';
-    html += '<button class="btn btn-primary" onclick="checkAnswer(' + idx + ')"' + doneClass + '>✅ 确认答案</button>';
-    html += '<button class="btn btn-secondary" onclick="resetQuestion(' + idx + ')"' + showAnClass + '>🔄 重做</button>';
+    html += '<button class="btn btn-primary" onclick="checkAnswer(' + idx + ')"' + doneStyle + '>✅ 确认答案</button>';
+    html += '<button class="btn btn-secondary" onclick="resetQuestion(' + idx + ')"' + showAn + '>🔄 重做</button>';
     html += '</div>';
     
-    // Analysis
     var anText = q.an || '暂无解析';
-    html += '<div class="analysis" id="an-' + idx + '"' + showAnClass + '>';
+    html += '<div class="analysis" id="an-' + idx + '"' + showAn + '>';
     html += '<div class="a-label">📖 解析</div>';
     if (st.done) {
       var ansStr = Array.isArray(st.answers) ? st.answers.join(', ') : st.answers;
@@ -953,56 +864,40 @@ function renderQuestions() {
       html += '<div class="' + (isCorrect ? 'a-answer' : 'a-wrong') + '">'
            + (isCorrect ? '✅ 回答正确' : '❌ 回答错误')
            + ' · 正确答案：' + esc(q.a);
-      if (!isCorrect && st.answers && st.answers.length > 0) {
-        html += ' · 你的答案：' + esc(ansStr);
-      }
+      if (!isCorrect && st.answers && st.answers.length > 0) html += ' · 你的答案：' + esc(ansStr);
       html += '</div>';
     }
-    html += '<div class="a-text">' + anText + '</div>';
-    html += '</div>';
-    
+    html += '<div class="a-text">' + anText + '</div></div>';
     html += '</div>';
   }
   
   container.innerHTML = html;
 }
 
-// ═══════════════════════════════════════════════
-// INTERACTION
-// ═══════════════════════════════════════════════
 function toggleOpt(idx, key) {
   var q = ALL_QUESTIONS[idx];
   if (state[idx].done) return;
-  
   if (!selected[idx]) selected[idx] = [];
   var arr = selected[idx];
   var pos = arr.indexOf(key);
   
-  if (q.type === 'single' || q.type === 'judge') {
-    // Single selection
+  // Determine if single or multi based on answer length
+  var isSingle = (q.type === 'comprehensive' && q.sub_type === 'single') || q.type === 'single' || q.type === 'judge';
+  
+  if (isSingle) {
     selected[idx] = [key];
-    // Update UI
     var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
     for (var i = 0; i < opts.length; i++) {
       opts[i].classList.remove('selected');
       if (opts[i].dataset.key === key) opts[i].classList.add('selected');
     }
   } else {
-    // Multi selection
-    if (pos >= 0) {
-      arr.splice(pos, 1);
-    } else {
-      arr.push(key);
-    }
-    // Update UI
+    if (pos >= 0) { arr.splice(pos, 1); } else { arr.push(key); }
     var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
     for (var i = 0; i < opts.length; i++) {
       var k = opts[i].dataset.key;
-      if (selected[idx].indexOf(k) >= 0) {
-        opts[i].classList.add('selected');
-      } else {
-        opts[i].classList.remove('selected');
-      }
+      if (selected[idx].indexOf(k) >= 0) opts[i].classList.add('selected');
+      else opts[i].classList.remove('selected');
     }
   }
 }
@@ -1010,34 +905,26 @@ function toggleOpt(idx, key) {
 function checkAnswer(idx) {
   var q = ALL_QUESTIONS[idx];
   if (state[idx].done) return;
-  
   var sel = selected[idx] || [];
   if (sel.length === 0) return;
   
-  // Normalize answer
   var correctAns = q.a;
   var userAns = sel.sort().join('');
   var isCorrect = userAns === correctAns;
   
-  // Update state
   state[idx].done = true;
   state[idx].correct = isCorrect;
   state[idx].answers = sel.slice();
   saveState();
   
-  // Update UI
   var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
   for (var i = 0; i < opts.length; i++) {
     var k = opts[i].dataset.key;
     opts[i].classList.remove('selected');
-    if (correctAns.indexOf(k) >= 0) {
-      opts[i].classList.add('correct');
-    } else if (sel.indexOf(k) >= 0) {
-      opts[i].classList.add('wrong');
-    }
+    if (correctAns.indexOf(k) >= 0) opts[i].classList.add('correct');
+    else if (sel.indexOf(k) >= 0) opts[i].classList.add('wrong');
   }
   
-  // Show analysis, hide check button
   document.querySelector('#qc-' + idx + ' .btn-primary').style.display = 'none';
   var an = document.getElementById('an-' + idx);
   var ansStr = sel.sort().join(', ');
@@ -1045,58 +932,32 @@ function checkAnswer(idx) {
   an.innerHTML = '<div class="a-label">📖 解析</div>'
     + '<div class="' + (isCorrect ? 'a-answer' : 'a-wrong') + '">'
     + (isCorrect ? '✅ 回答正确' : '❌ 回答错误')
-    + ' · 正确答案：' + esc(correctAns);
-  if (!isCorrect) {
-    an.innerHTML += ' · 你的答案：' + esc(ansStr);
-  }
-  an.innerHTML += '</div>'
-    + '<div class="a-text">' + (q.an || '暂无解析') + '</div>';
-  
-  // Show redo button
+    + ' · 正确答案：' + esc(correctAns)
+    + (!isCorrect ? ' · 你的答案：' + esc(ansStr) : '')
+    + '</div><div class="a-text">' + (q.an || '暂无解析') + '</div>';
   document.querySelector('#qc-' + idx + ' .btn-secondary').style.display = '';
-  
   renderStats();
 }
 
 function resetQuestion(idx) {
-  state[idx].done = false;
-  state[idx].correct = false;
-  state[idx].answers = [];
+  state[idx] = { done: false, correct: false, answers: [] };
   selected[idx] = [];
   saveState();
-  
-  // Re-render this specific question
   var opts = document.getElementById('opts-' + idx).querySelectorAll('.opt');
-  for (var i = 0; i < opts.length; i++) {
-    opts[i].classList.remove('correct', 'wrong', 'selected');
-  }
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('correct', 'wrong', 'selected');
   document.getElementById('an-' + idx).style.display = 'none';
   document.querySelector('#qc-' + idx + ' .btn-primary').style.display = '';
   document.querySelector('#qc-' + idx + ' .btn-secondary').style.display = 'none';
   renderStats();
 }
 
-function switchCh(idx) {
-  currentCh = idx;
-  selected = {};
-  render();
-}
+function switchCh(idx) { currentCh = idx; selected = {}; render(); }
 
-// ═══════════════════════════════════════════════
-// UTILITIES
-// ═══════════════════════════════════════════════
-var TYPE_LABEL = { single: '单选', multi: '多选', judge: '判断' };
-var TYPE_CLASS = { single: 'type-s', multi: 'type-m', judge: 'type-j' };
+var TYPE_LABEL = { single: '单选', multi: '多选', judge: '判断', comprehensive: '综合' };
+var TYPE_CLASS = { single: 'type-s', multi: 'type-m', judge: 'type-j', comprehensive: 'type-c' };
 
-function esc(s) {
-  var d = document.createElement('div');
-  d.textContent = s;
-  return d.innerHTML;
-}
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-// ═══════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════
 render();
 </script>
 </body>
