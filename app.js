@@ -257,10 +257,12 @@ function submitExam() {
 
   submitted = true;
   let correct = 0;
+  const examSubject = curExam.subject || (curExam.title || '').includes('金融') ? '金融市场基础知识' : '证券市场基本法律法规';
   curExam.questions.forEach(q => {
     const u = (userAns[q.id]||'').split('').sort().join('');
     const c = q.a.split('').sort().join('');
-    if (u === c) correct++;
+    const isCorrect = u === c;
+    if (isCorrect) correct++;
     else {
       const exist = wrongBook.find(w => w.qid === q.id && w.examId === curExam.id);
       if (!exist) {
@@ -270,6 +272,22 @@ function submitExam() {
           correctAns: q.a, analysis: q.an, time: Date.now()
         });
       }
+    }
+    // ── 记录每题答题结果 ──
+    if (window.ExamRecorder) {
+      var typeCn = q.type === 'multi' ? '多选' : (q.type === 'judge' ? '判断' : '单选');
+      window.ExamRecorder.record({
+        questionId: curExam.id + '-' + q.id,
+        subject: examSubject,
+        chapter: curExam.title || '',
+        type: q.type === 'judge' ? 'j' : (q.type === 'multi' ? 'm' : 's'),
+        typeCn: typeCn,
+        question: q.q || '',
+        userAnswer: userAns[q.id] || '',
+        correctAnswer: q.a || '',
+        isCorrect: isCorrect,
+        source: curExam.subject === '章节高频考点' ? '章节练习' : (curExam.subject || '试卷')
+      });
     }
   });
   localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
