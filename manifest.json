@@ -1,6 +1,16 @@
 {
   "categories": [
     {
+      "id": "chapter_practice",
+      "title": "📚 章节精练",
+      "desc": "全题型刷题 · 每章按真考比例出题",
+      "color": "#1e5b8a",
+      "items": [
+        {"id": "章节精练_金融市场基础", "title": "金融市场基础 · 章节精练", "subject": "金融市场基础知识", "count": 591},
+        {"id": "章节精练_法律法规", "title": "法律法规 · 章节精练", "subject": "证券市场基本法律法规", "count": 604}
+      ]
+    },
+    {
       "id": "chapter",
       "title": "章节高频考点",
       "desc": "按章节逐章突破，打好基础",
