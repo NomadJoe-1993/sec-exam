@@ -574,12 +574,13 @@ async function loadData() {
     dataLaw = await lawResp.json();
     document.getElementById('loading').style.display = 'none';
     renderSubject('fin');
-    renderSubject('law');
     document.getElementById('sec-fin').style.display = 'block';
+    renderSubject('law');
   } catch (e) {
+    document.getElementById('loading').style.display = '';
     document.getElementById('loading').innerHTML =
       '<div style="color:var(--red);font-size:1rem">❌ ' + e.message + '</div>' +
-      '<div style="font-size:0.8rem;margin-top:0.5rem;color:var(--dim)">请确认 gw_fin.json 和 gw_law.json 文件存在</div>';
+      '<div style="font-size:0.8rem;margin-top:0.5rem;color:var(--dim)">' + e.stack + '</div>';
   }
 }
 
