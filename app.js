@@ -166,13 +166,17 @@ function openCategory(catId) {
 async function startExam(examId) {
   try {
     const r = await fetch(examId + '.json');
+    if (!r.ok) throw new Error('not found');
     curExam = await r.json();
     curIdx = 0; userAns = {}; submitted = false;
     const h = history[examId];
     if (h && h.answers) { userAns = {...h.answers}; submitted = h.submitted || false; }
     showPage('page-exam');
     renderQ();
-  } catch(e) { alert('加载失败: ' + e.message); }
+  } catch(e) {
+    // Try HTML fallback for standalone pages
+    window.location.href = examId + '.html';
+  }
 }
 
 // ====== Render Q ======
