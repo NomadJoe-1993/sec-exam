@@ -496,7 +496,6 @@ body {
   .ch-title { font-size: 0.98rem; }
 }
 </style>
-<script src="recorder.js"></script>
 </head>
 <body>
 
@@ -652,68 +651,14 @@ function renderSubject(subject) {
 }
 
 function renderStructuredExplain(pt) {
-  // 检查是否有结构化数据
-  const hasConcepts = pt.concepts && pt.concepts.length > 0;
-  const hasRules = pt.rules && pt.rules.length > 0;
-  const hasExceptions = pt.exceptions && pt.exceptions.length > 0;
-
-  // 如果完全没有结构化数据，fallback到原始analysis
-  if (!hasConcepts && !hasRules && !hasExceptions) {
-    if (pt.analysis && pt.analysis !== '略。' && pt.analysis !== '略' && pt.analysis.trim() !== '') {
-      return '<div class="kp-explain"><div class="kp-explain-title">📝 考点精讲</div>' + escapeHtml(pt.analysis) + '</div>';
-    }
-    return '';
+  // 精简版
+  if (pt.analysis && pt.analysis !== '略。' && pt.analysis !== '略' && pt.analysis.trim() !== '') {
+    return '<div class="kp-explain"><div class="kp-explain-title">📝 考点精讲</div>' + escapeHtml(pt.analysis) + '</div>';
   }
-
-  let html = '<div class="kp-explain">';
-  html += '<div class="kp-explain-title">📚 考点精讲</div>';
-
-  // 核心概念
-  if (hasConcepts) {
-    html += '<div class="kp-section">';
-    html += '  <div class="kp-section-title">📖 核心概念</div>';
-    pt.concepts.forEach(c => {
-      html += '  <div class="kp-line">' + escapeHtml(c) + '</div>';
-    });
-    html += '</div>';
-  }
-
-  // 要点提炼（含数字考点）
-  let allRules = [];
-  if (hasRules) allRules = pt.rules;
-  if (allRules.length > 0) {
-    html += '<div class="kp-section">';
-    html += '  <div class="kp-section-title">📌 要点提炼</div>';
-    html += '  <ul class="kp-ul">';
-    allRules.slice(0, 6).forEach(r => {
-      // 关键词加粗（同桌面版逻辑）
-      var bolded = escapeHtml(r);
-      var kw = ['不得','应当','必须','可以','禁止','严禁','不超过','不少于','以上','以下','由','负责','依法','按照','根据','实行','只能'];
-      kw.forEach(function(w) {
-        var re = new RegExp(escapeRegex(w), 'g');
-        bolded = bolded.replace(re, '<b class="kw">' + w + '</b>');
-      });
-      html += '    <li>' + bolded + '</li>';
-    });
-    html += '  </ul>';
-    html += '</div>';
-  }
-
-  // 注意事项/例外
-  if (hasExceptions) {
-    html += '<div class="kp-section kwarn">';
-    html += '  <div class="kp-section-title">⚠️ 注意事项</div>';
-    pt.exceptions.forEach(e => {
-      html += '  <div class="kp-line kwarn-line">' + escapeHtml(e) + '</div>';
-    });
-    html += '</div>';
-  }
-
-  html += '</div>';
-  return html;
+  return '';
 }
 
-function escapeRegex(str) {
+function escapeRegex(str)function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
@@ -908,5 +853,6 @@ function escapeHtml(str) {
 // ====== Init ======
 document.addEventListener('DOMContentLoaded', loadData);
 </script>
+<script src="recorder.js"></script>
 </body>
 </html>
