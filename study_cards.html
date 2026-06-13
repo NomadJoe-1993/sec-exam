@@ -499,7 +499,7 @@ body {
 </head>
 <body>
 
-<div id="debug-panel" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#333;color:#0f0;font:12px monospace;padding:6px;max-height:140px;overflow:auto;white-space:pre-wrap;word-break:break-all;display:none;"></div>
+<div id="debug-panel" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#333;color:#0f0;font:12px monospace;padding:6px;max-height:140px;overflow:auto;white-space:pre-wrap;word-break:break-all;">debug加载中...</div>
 <div class="container">
   <!-- Header -->
   <div class="header">
@@ -557,6 +557,11 @@ body {
 </div>
 
 <script>
+// ====== Debug ======
+const dp = document.getElementById('debug-panel');
+function debug(msg) { if(dp) { const t = new Date().toLocaleTimeString(); dp.innerHTML += '<br>['+t+'] '+msg; dp.scrollTop = dp.scrollHeight; } }
+debug('脚本开始执行');
+
 // ====== State ======
 let dataFin = null;
 let dataLaw = null;
@@ -564,20 +569,29 @@ let currentSubject = 'fin';
 
 // ====== Load Data ======
 async function loadData() {
+  debug('loadData 开始执行');
   try {
+    debug('开始 fetch JSON...');
     const [finResp, lawResp] = await Promise.all([
       fetch('gw_fin.json'),
       fetch('gw_law.json')
     ]);
+    debug('fetch 完成, fin:' + finResp.status + ' law:' + lawResp.status);
     if (!finResp.ok) throw new Error('gw_fin.json 加载失败: ' + finResp.status);
     if (!lawResp.ok) throw new Error('gw_law.json 加载失败: ' + lawResp.status);
     dataFin = await finResp.json();
     dataLaw = await lawResp.json();
+    debug('JSON 解析完成, fin=' + dataFin.length + '章 law=' + dataLaw.length + '章');
     document.getElementById('loading').style.display = 'none';
+    debug('开始渲染 fin...');
     renderSubject('fin');
+    debug('渲染 fin 完成');
     document.getElementById('sec-fin').style.display = 'block';
+    debug('开始渲染 law...');
     renderSubject('law');
+    debug('渲染 law 完成');
   } catch (e) {
+    debug('❌ 错误: ' + e.message);
     document.getElementById('loading').style.display = '';
     document.getElementById('loading').innerHTML =
       '<div style="color:var(--red);font-size:1rem">❌ ' + e.message + '</div>' +
@@ -612,6 +626,7 @@ function renderSubject(subject) {
   data.forEach((ch, ci) => {
     const chLabel = ch.chapter.replace(/^\s+/, '').replace(/\s+$/, '');
     const pTotal = ch.total || ch.points.length;
+    debug('  渲染章' + ci + ': ' + chLabel.substring(0,20) + ' (' + ch.points.length + '考点)');
     html += '<div class="ch-title">' + chLabel +
       ' <span class="ch-w">' + pTotal + '题 · ' + ch.points.length + '个考点</span></div>';
     html += '<div class="kp-list">';
