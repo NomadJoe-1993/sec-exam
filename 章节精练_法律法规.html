@@ -257,6 +257,140 @@ body {
 
 /* Hide old nav elements */
 .ch-nav, .ch-info { display: none !important; }
+
+/* ── 升级：章节卡片（重难点分析风格） ── */
+.ch-list { margin-bottom: 0.8rem; }
+.ch-card {
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.ch-card.active { border-color: var(--blue); box-shadow: 0 2px 8px rgba(30,91,138,0.12); }
+.ch-hd {
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #faf6ee, #f5ede0);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.ch-hd:active { background: linear-gradient(135deg, #f5ede0, #efe5d5); }
+.ch-name { font-weight: 600; font-size: 0.85rem; flex: 1; color: var(--text); }
+.ch-star { font-size: 0.65rem; margin-right: 0.3rem; white-space: nowrap; }
+.ch-count { font-size: 0.68rem; color: var(--text-dim); white-space: nowrap; margin-right: 0.3rem; }
+.ch-arrow { font-size: 0.55rem; color: var(--text-dim); transition: transform 0.2s; }
+.ch-arrow.open { transform: rotate(180deg); }
+.ch-bar { height: 3px; background: #f0e8d8; margin: 0 0.7rem; border-radius: 2px; }
+.ch-bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+.ch-desc {
+  font-size: 0.67rem; color: var(--text-dim);
+  padding: 0.2rem 0.7rem 0.3rem;
+  line-height: 1.4;
+}
+.ch-body { padding: 0.1rem 0.4rem 0.4rem; display: none; }
+.sec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.32rem 0.5rem;
+  font-size: 0.74rem;
+  border-radius: 6px;
+  margin: 1px 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sec-item:active { background: var(--blue-bg); }
+.sec-item.sel { background: var(--blue-bg); border-left: 3px solid var(--blue); }
+.sec-item.hot { background: #fef8e8; }
+.sec-name { flex: 1; font-size: 0.73rem; }
+.sec-count { font-size: 0.65rem; color: var(--text-dim); white-space: nowrap; }
+.sec-badge {
+  display: inline-block; font-size: 0.5rem;
+  background: #f44336; color: #fff;
+  padding: 0.04rem 0.25rem; border-radius: 2px;
+  margin-left: 0.3rem; font-weight: 600;
+}
+.ch-all-link {
+  display: block;
+  text-align: center;
+  padding: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--blue);
+  cursor: pointer;
+  border-top: 1px dashed var(--border-light);
+  font-weight: 500;
+}
+.ch-all-link:active { background: var(--blue-bg); }
+
+/* Stats bar */
+.stats-bar {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+.stats-bar .sb-item {
+  flex: 1;
+  min-width: 70px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.35rem 0.2rem;
+}
+.stats-bar .sb-num {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+.stats-bar .sb-label {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 0.05rem;
+}
+.study-tip {
+  background: linear-gradient(135deg, #fef8e8, #fdf0d8);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* ── 节筛选标记 ── */
+.sec-filter-info {
+  font-size: 0.75rem;
+  color: var(--blue);
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.5rem;
+  background: var(--blue-bg);
+  border-radius: 6px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+.sec-filter-info .clear-filter {
+  color: var(--red);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 480px) {
+  .ch-name { font-size: 0.78rem; }
+  .sec-item { font-size: 0.7rem; padding: 0.28rem 0.4rem; }
+  .stats-bar .sb-item { min-width: 60px; padding: 0.3rem 0.15rem; }
+}
+
+/* Hide old nav elements */
+.ch-nav, .ch-info { display: none !important; }
 </style>
 </head>
 <body>
@@ -297,10 +431,10 @@ var SUBJECT = "法律法规";
 var CHAPTER_INFO = [{"name": "\u8bc1\u5238\u5e02\u573a\u57fa\u672c\u6cd5\u5f8b\u6cd5\u89c4", "code": "\u7b2c1\u7ae0", "star": 5, "star_display": "\u2605\u2605\u2605\u2605\u2605", "weight": "35%", "count": 226, "desc": "\u6cd5\u5f8b\u6761\u6587\u5bc6\u96c6\uff0c\u6cd5\u89c4\u6570\u91cf\u6700\u591a\uff0c\u9700\u91cd\u70b9\u638c\u63e1\u516c\u53f8\u6cd5\u3001\u8bc1\u5238\u6cd5", "color": "#c23b22"}, {"name": "\u8bc1\u5238\u7ecf\u8425\u673a\u6784\u7ba1\u7406\u89c4\u8303", "code": "\u7b2c2\u7ae0", "star": 4, "star_display": "\u2605\u2605\u2605\u2605\u2606", "weight": "20%", "count": 89, "desc": "\u7ba1\u7406\u89c4\u8303\u4f17\u591a\uff0c\u9700\u638c\u63e1\u516c\u53f8\u6cbb\u7406\u4e0e\u98ce\u9669\u7ba1\u7406\u6846\u67b6", "color": "#c23b22"}, {"name": "\u8bc1\u5238\u516c\u53f8\u4e1a\u52a1\u89c4\u8303", "code": "\u7b2c3\u7ae0", "star": 5, "star_display": "\u2605\u2605\u2605\u2605\u2605", "weight": "30%", "count": 144, "desc": "\u4e1a\u52a1\u79cd\u7c7b\u6700\u591a\uff0c\u6db5\u76d6\u5404\u6761\u7ebf\u4e1a\u52a1\u89c4\u5219", "color": "#c23b22"}, {"name": "\u5178\u578b\u8fdd\u6cd5\u8fdd\u89c4\u884c\u4e3a\u53ca\u6cd5\u5f8b\u8d23\u4efb", "code": "\u7b2c4\u7ae0", "star": 3, "star_display": "\u2605\u2605\u2605\u2606\u2606", "weight": "10%", "count": 74, "desc": "\u8fdd\u6cd5\u8fdd\u89c4\u7c7b\u578b\u4e0e\u6cd5\u5f8b\u8d23\u4efb\uff0c\u91cd\u70b9\u638c\u63e1\u5904\u7f5a\u6807\u51c6", "color": "#c23b22"}, {"name": "\u884c\u4e1a\u6587\u5316\u4e0e\u804c\u4e1a\u9053\u5fb7", "code": "\u7b2c5\u7ae0", "star": 2, "star_display": "\u2605\u2605\u2606\u2606\u2606", "weight": "5%", "count": 84, "desc": "\u9053\u5fb7\u4e0e\u6587\u5316\u7c7b\u8003\u70b9\uff0c\u5206\u503c\u8f83\u4f4e\u4f46\u5bb9\u6613\u62ff\u5206", "color": "#c23b22"}];
 
 // 章节→节结构（含预估题数）
-var SECTION_DATA = [[["\u8bc1\u5238\u5e02\u573a\u7684\u6cd5\u5f8b\u6cd5\u89c4\u4f53\u7cfb", 25], ["\u516c\u53f8\u6cd5", 25], ["\u5408\u4f19\u4f01\u4e1a\u6cd5", 25], ["\u8bc1\u5238\u6cd5", 25], ["\u8bc1\u5238\u6295\u8d44\u57fa\u91d1\u6cd5", 25], ["\u671f\u8d27\u548c\u884d\u751f\u54c1\u6cd5", 25], ["\u8bc1\u5238\u516c\u53f8\u76d1\u7763\u7ba1\u7406\u6761\u4f8b", 25], ["\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u5904\u7f6e\u6761\u4f8b", 25], ["\u79c1\u52df\u6295\u8d44\u57fa\u91d1\u76d1\u7763\u7ba1\u7406\u6761\u4f8b", 26]], [["\u516c\u53f8\u6cbb\u7406\u3001\u5185\u90e8\u63a7\u5236\u4e0e\u5408\u89c4\u7ba1\u7406", 13], ["\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u7ba1\u7406", 13], ["\u8bc1\u5238\u516c\u53f8\u5e76\u8868\u7ba1\u7406", 13], ["\u6295\u8d44\u8005\u9002\u5f53\u6027\u7ba1\u7406", 13], ["\u8bc1\u5238\u516c\u53f8\u53cd\u6d17\u94b1\u548c\u53cd\u6050\u6016\u878d\u8d44\u5de5\u4f5c", 13], ["\u8bc1\u5238\u516c\u53f8\u4fe1\u606f\u6280\u672f\u53ca\u7f51\u7edc\u6570\u636e\u7ba1\u7406", 13], ["\u8bc1\u5238\u516c\u53f8\u7f51\u7edc\u548c\u4fe1\u606f\u5b89\u5168\u7ba1\u7406", 11]], [["\u8bc1\u5238\u7ecf\u7eaa", 16], ["\u8bc1\u5238\u6295\u8d44\u54a8\u8be2", 16], ["\u4e0e\u8bc1\u5238\u4ea4\u6613\u3001\u8bc1\u5238\u6295\u8d44\u6d3b\u52a8\u6709\u5173\u7684\u8d22\u52a1\u987e\u95ee", 16], ["\u8bc1\u5238\u627f\u9500\u4e0e\u4fdd\u8350", 16], ["\u8bc1\u5238\u516c\u53f8\u878d\u8d44\u878d\u5238\u53ca\u5176\u4ed6\u4fe1\u7528\u4e1a\u52a1", 16], ["\u8bc1\u5238\u81ea\u8425", 16], ["\u8d44\u4ea7\u7ba1\u7406\u4e1a\u52a1", 16], ["\u8bc1\u5238\u516c\u53f8\u5168\u56fd\u80a1\u4efd\u8f6c\u8ba9\u7cfb\u7edf\u4e1a\u52a1\u53ca\u67dc\u53f0\u5e02\u573a\u4e1a\u52a1", 16], ["\u5176\u4ed6\u4e1a\u52a1", 16]], [["\u8bc1\u5238\u4e00\u7ea7\u5e02\u573a", 37], ["\u8bc1\u5238\u4e8c\u7ea7\u5e02\u573a", 37]], [["\u8bc1\u5238\u884c\u4e1a\u6587\u5316\u5efa\u8bbe", 21], ["\u8bc1\u5238\u516c\u53f8\u53ca\u5176\u5de5\u4f5c\u4eba\u5458\u5ec9\u6d01\u4ece\u4e1a\u89c4\u5b9a", 21], ["\u8bc1\u5238\u5e02\u573a\u8bda\u4fe1\u7ba1\u7406\u53ca\u7981\u5165\u63aa\u65bd", 21], ["\u4ece\u4e1a\u4eba\u5458\u884c\u4e3a\u89c4\u8303", 21]]];
+var SECTION_DATA = [[["\u8bc1\u5238\u5e02\u573a\u7684\u6cd5\u5f8b\u6cd5\u89c4\u4f53\u7cfb", 17], ["\u516c\u53f8\u6cd5", 61], ["\u5408\u4f19\u4f01\u4e1a\u6cd5", 9], ["\u8bc1\u5238\u6cd5", 53], ["\u8bc1\u5238\u6295\u8d44\u57fa\u91d1\u6cd5", 28], ["\u671f\u8d27\u548c\u884d\u751f\u54c1\u6cd5", 11], ["\u8bc1\u5238\u516c\u53f8\u76d1\u7763\u7ba1\u7406\u6761\u4f8b", 38], ["\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u5904\u7f6e\u6761\u4f8b", 4], ["\u79c1\u52df\u6295\u8d44\u57fa\u91d1\u76d1\u7763\u7ba1\u7406\u6761\u4f8b", 5]], [["\u516c\u53f8\u6cbb\u7406\u3001\u5185\u90e8\u63a7\u5236\u4e0e\u5408\u89c4\u7ba1\u7406", 36], ["\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u7ba1\u7406", 22], ["\u8bc1\u5238\u516c\u53f8\u5e76\u8868\u7ba1\u7406", 5], ["\u6295\u8d44\u8005\u9002\u5f53\u6027\u7ba1\u7406", 13], ["\u8bc1\u5238\u516c\u53f8\u53cd\u6d17\u94b1\u548c\u53cd\u6050\u6016\u878d\u8d44\u5de5\u4f5c", 5], ["\u8bc1\u5238\u516c\u53f8\u4fe1\u606f\u6280\u672f\u53ca\u7f51\u7edc\u6570\u636e\u7ba1\u7406", 4], ["\u8bc1\u5238\u516c\u53f8\u7f51\u7edc\u548c\u4fe1\u606f\u5b89\u5168\u7ba1\u7406", 4]], [["\u8bc1\u5238\u7ecf\u7eaa", 8], ["\u8bc1\u5238\u6295\u8d44\u54a8\u8be2", 21], ["\u4e0e\u8bc1\u5238\u4ea4\u6613\u3001\u8bc1\u5238\u6295\u8d44\u6d3b\u52a8\u6709\u5173\u7684\u8d22\u52a1\u987e\u95ee", 10], ["\u8bc1\u5238\u627f\u9500\u4e0e\u4fdd\u8350", 14], ["\u8bc1\u5238\u516c\u53f8\u878d\u8d44\u878d\u5238\u53ca\u5176\u4ed6\u4fe1\u7528\u4e1a\u52a1", 30], ["\u8bc1\u5238\u81ea\u8425", 9], ["\u8d44\u4ea7\u7ba1\u7406\u4e1a\u52a1", 21], ["\u8bc1\u5238\u516c\u53f8\u5168\u56fd\u80a1\u4efd\u8f6c\u8ba9\u7cfb\u7edf\u4e1a\u52a1\u53ca\u67dc\u53f0\u5e02\u573a\u4e1a\u52a1", 10], ["\u5176\u4ed6\u4e1a\u52a1", 21]], [["\u8bc1\u5238\u4e00\u7ea7\u5e02\u573a", 51], ["\u8bc1\u5238\u4e8c\u7ea7\u5e02\u573a", 23]], [["\u8bc1\u5238\u884c\u4e1a\u6587\u5316\u5efa\u8bbe", 14], ["\u8bc1\u5238\u516c\u53f8\u53ca\u5176\u5de5\u4f5c\u4eba\u5458\u5ec9\u6d01\u4ece\u4e1a\u89c4\u5b9a", 14], ["\u8bc1\u5238\u5e02\u573a\u8bda\u4fe1\u7ba1\u7406\u53ca\u7981\u5165\u63aa\u65bd", 6], ["\u4ece\u4e1a\u4eba\u5458\u884c\u4e3a\u89c4\u8303", 50]]];
 
 // 每题所属节索引（-1=未分配）
-var Q_SECTION = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var Q_SECTION = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 
 // 当前选中的节（-1=全部）
 var currentSection = -1;

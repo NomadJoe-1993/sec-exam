@@ -257,6 +257,140 @@ body {
 
 /* Hide old nav elements */
 .ch-nav, .ch-info { display: none !important; }
+
+/* ── 升级：章节卡片（重难点分析风格） ── */
+.ch-list { margin-bottom: 0.8rem; }
+.ch-card {
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.ch-card.active { border-color: var(--blue); box-shadow: 0 2px 8px rgba(30,91,138,0.12); }
+.ch-hd {
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #faf6ee, #f5ede0);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.ch-hd:active { background: linear-gradient(135deg, #f5ede0, #efe5d5); }
+.ch-name { font-weight: 600; font-size: 0.85rem; flex: 1; color: var(--text); }
+.ch-star { font-size: 0.65rem; margin-right: 0.3rem; white-space: nowrap; }
+.ch-count { font-size: 0.68rem; color: var(--text-dim); white-space: nowrap; margin-right: 0.3rem; }
+.ch-arrow { font-size: 0.55rem; color: var(--text-dim); transition: transform 0.2s; }
+.ch-arrow.open { transform: rotate(180deg); }
+.ch-bar { height: 3px; background: #f0e8d8; margin: 0 0.7rem; border-radius: 2px; }
+.ch-bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+.ch-desc {
+  font-size: 0.67rem; color: var(--text-dim);
+  padding: 0.2rem 0.7rem 0.3rem;
+  line-height: 1.4;
+}
+.ch-body { padding: 0.1rem 0.4rem 0.4rem; display: none; }
+.sec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.32rem 0.5rem;
+  font-size: 0.74rem;
+  border-radius: 6px;
+  margin: 1px 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.sec-item:active { background: var(--blue-bg); }
+.sec-item.sel { background: var(--blue-bg); border-left: 3px solid var(--blue); }
+.sec-item.hot { background: #fef8e8; }
+.sec-name { flex: 1; font-size: 0.73rem; }
+.sec-count { font-size: 0.65rem; color: var(--text-dim); white-space: nowrap; }
+.sec-badge {
+  display: inline-block; font-size: 0.5rem;
+  background: #f44336; color: #fff;
+  padding: 0.04rem 0.25rem; border-radius: 2px;
+  margin-left: 0.3rem; font-weight: 600;
+}
+.ch-all-link {
+  display: block;
+  text-align: center;
+  padding: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--blue);
+  cursor: pointer;
+  border-top: 1px dashed var(--border-light);
+  font-weight: 500;
+}
+.ch-all-link:active { background: var(--blue-bg); }
+
+/* Stats bar */
+.stats-bar {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+.stats-bar .sb-item {
+  flex: 1;
+  min-width: 70px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.35rem 0.2rem;
+}
+.stats-bar .sb-num {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+.stats-bar .sb-label {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 0.05rem;
+}
+.study-tip {
+  background: linear-gradient(135deg, #fef8e8, #fdf0d8);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* ── 节筛选标记 ── */
+.sec-filter-info {
+  font-size: 0.75rem;
+  color: var(--blue);
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.5rem;
+  background: var(--blue-bg);
+  border-radius: 6px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+.sec-filter-info .clear-filter {
+  color: var(--red);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 480px) {
+  .ch-name { font-size: 0.78rem; }
+  .sec-item { font-size: 0.7rem; padding: 0.28rem 0.4rem; }
+  .stats-bar .sb-item { min-width: 60px; padding: 0.3rem 0.15rem; }
+}
+
+/* Hide old nav elements */
+.ch-nav, .ch-info { display: none !important; }
 </style>
 </head>
 <body>
@@ -297,10 +431,10 @@ var SUBJECT = "金融市场基础";
 var CHAPTER_INFO = [{"name": "\u91d1\u878d\u5e02\u573a\u4f53\u7cfb", "code": "\u7b2c1\u7ae0", "star": 2, "star_display": "\u2605\u2605\u2606\u2606\u2606", "weight": "8%", "count": 63, "desc": "\u57fa\u7840\u6982\u5ff5\u4e0e\u5206\u7c7b\u6846\u67b6\uff0c\u5927\u7eb2\u4ee5\u300c\u4e86\u89e3\u300d\u4e3a\u4e3b\uff0c\u8003\u8bd5\u5360\u6bd4\u8f83\u4f4e", "color": "#1e5b8a"}, {"name": "\u4e2d\u56fd\u7684\u91d1\u878d\u4f53\u7cfb\u4e0e\u591a\u5c42\u6b21\u8d44\u672c\u5e02\u573a", "code": "\u7b2c2\u7ae0", "star": 3, "star_display": "\u2605\u2605\u2605\u2606\u2606", "weight": "12%", "count": 66, "desc": "\u4e2d\u56fd\u91d1\u878d\u4f53\u7cfb\u67b6\u6784\u4e0e\u591a\u5c42\u6b21\u8d44\u672c\u5e02\u573a\u5b9a\u4f4d\uff0c\u9700\u300c\u719f\u6089\u300d\u5404\u677f\u5757\u7279\u70b9", "color": "#1e5b8a"}, {"name": "\u8bc1\u5238\u5e02\u573a\u4e3b\u4f53", "code": "\u7b2c3\u7ae0", "star": 3, "star_display": "\u2605\u2605\u2605\u2606\u2606", "weight": "10%", "count": 61, "desc": "\u53d1\u884c\u4eba\u3001\u6295\u8d44\u8005\u3001\u4e2d\u4ecb\u673a\u6784\u7b49\u5404\u7c7b\u4e3b\u4f53\uff0c\u9700\u8981\u300c\u719f\u6089\u300d\u5176\u89d2\u8272\u4e0e\u89c4\u5219", "color": "#1e5b8a"}, {"name": "\u80a1\u7968", "code": "\u7b2c4\u7ae0", "star": 5, "star_display": "\u2605\u2605\u2605\u2605\u2605", "weight": "20%", "count": 120, "desc": "\u5206\u503c\u5360\u6bd4\u6700\u9ad8\u7684\u6838\u5fc3\u7ae0\u8282\uff0c\u9700\u300c\u638c\u63e1\u300d\u80a1\u7968\u53d1\u884c\u3001\u4ea4\u6613\u3001\u4f30\u503c\u5168\u6d41\u7a0b", "color": "#1e5b8a"}, {"name": "\u503a\u5238", "code": "\u7b2c5\u7ae0", "star": 4, "star_display": "\u2605\u2605\u2605\u2605\u2606", "weight": "15%", "count": 115, "desc": "\u975e\u5e38\u91cd\u8981\u7684\u56fa\u5b9a\u6536\u76ca\u7ae0\u8282\uff0c\u9700\u300c\u638c\u63e1\u300d\u503a\u5238\u54c1\u79cd\u3001\u53d1\u884c\u4e0e\u5b9a\u4ef7", "color": "#1e5b8a"}, {"name": "\u8bc1\u5238\u6295\u8d44\u57fa\u91d1", "code": "\u7b2c6\u7ae0", "star": 4, "star_display": "\u2605\u2605\u2605\u2605\u2606", "weight": "15%", "count": 75, "desc": "\u5185\u5bb9\u4e30\u5bcc\u7684\u7ae0\u8282\uff0c\u9700\u300c\u638c\u63e1\u300d\u57fa\u91d1\u7c7b\u578b\u3001\u8fd0\u4f5c\u4e0e\u76d1\u7ba1\u8981\u6c42", "color": "#1e5b8a"}, {"name": "\u91d1\u878d\u884d\u751f\u5de5\u5177", "code": "\u7b2c7\u7ae0", "star": 3, "star_display": "\u2605\u2605\u2605\u2606\u2606", "weight": "12%", "count": 64, "desc": "\u7406\u89e3\u96be\u5ea6\u8f83\u5927\u4f46\u8003\u67e5\u6df1\u5ea6\u6709\u9650\uff0c\u9700\u300c\u719f\u6089\u300d\u5404\u7c7b\u884d\u751f\u54c1\u7279\u5f81", "color": "#1e5b8a"}, {"name": "\u91d1\u878d\u98ce\u9669\u7ba1\u7406", "code": "\u7b2c8\u7ae0", "star": 2, "star_display": "\u2605\u2605\u2606\u2606\u2606", "weight": "8%", "count": 51, "desc": "\u98ce\u9669\u7c7b\u578b\u4e0e\u7ba1\u7406\u6846\u67b6\uff0c\u5927\u7eb2\u4ee5\u300c\u4e86\u89e3\u300d\u4e3a\u4e3b\uff0c\u91cd\u70b9\u638c\u63e1\u4e94\u7c7b\u98ce\u9669", "color": "#1e5b8a"}];
 
 // 章节→节结构（含预估题数）
-var SECTION_DATA = [[["\u91d1\u878d\u5e02\u573a\u6982\u8ff0", 32], ["\u5168\u7403\u91d1\u878d\u5e02\u573a", 31]], [["\u4e2d\u56fd\u7684\u91d1\u878d\u4f53\u7cfb", 33], ["\u4e2d\u56fd\u7684\u591a\u5c42\u6b21\u8d44\u672c\u5e02\u573a", 33]], [["\u8bc1\u5238\u53d1\u884c\u4eba", 10], ["\u8bc1\u5238\u6295\u8d44\u8005", 10], ["\u8bc1\u5238\u4e2d\u4ecb\u673a\u6784", 10], ["\u81ea\u5f8b\u6027\u7ec4\u7ec7", 10], ["\u6295\u8d44\u8005\u4fdd\u62a4\u673a\u6784", 10], ["\u8bc1\u5238\u5e02\u573a\u76d1\u7ba1\u673a\u6784", 11]], [["\u80a1\u7968\u6982\u8ff0", 30], ["\u80a1\u7968\u53d1\u884c", 30], ["\u80a1\u7968\u4ea4\u6613", 30], ["\u80a1\u7968\u4f30\u503c", 30]], [["\u503a\u5238\u6982\u8ff0", 29], ["\u503a\u5238\u7684\u53d1\u884c", 29], ["\u503a\u5238\u4ea4\u6613", 29], ["\u503a\u5238\u4f30\u503c", 28]], [["\u8bc1\u5238\u6295\u8d44\u57fa\u91d1\u6982\u8ff0", 11], ["\u8bc1\u5238\u6295\u8d44\u57fa\u91d1\u7684\u8fd0\u4f5c\u4e0e\u4e1a\u52a1\u6d41\u7a0b", 11], ["\u57fa\u91d1\u7684\u4f30\u503c\u3001\u8d39\u7528\u4e0e\u5229\u6da6\u5206\u914d", 11], ["\u57fa\u91d1\u7684\u7ba1\u7406", 11], ["\u57fa\u91d1\u7684\u76d1\u7ba1\u4e0e\u4fe1\u606f\u62ab\u9732", 11], ["\u79c1\u52df\u8bc1\u5238\u6295\u8d44\u57fa\u91d1", 11], ["\u57fa\u7840\u8bbe\u65bd\u516c\u52dfREITs", 9]], [["\u91d1\u878d\u884d\u751f\u5de5\u5177\u6982\u8ff0", 16], ["\u671f\u8d27\u4e0e\u671f\u6743\u4ea4\u6613", 16], ["\u8fdc\u671f\u4e0e\u4e92\u6362\u4ea4\u6613", 16], ["\u5176\u4ed6\u884d\u751f\u5de5\u5177", 16]], [["\u98ce\u9669\u7ba1\u7406\u6982\u8ff0", 7], ["\u91d1\u878d\u98ce\u9669\u7ba1\u7406\u6d41\u7a0b\u4e0e\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u7ba1\u7406\u67b6\u6784", 7], ["\u5e02\u573a\u98ce\u9669\u7ba1\u7406", 7], ["\u4fe1\u7528\u98ce\u9669\u7ba1\u7406", 7], ["\u6d41\u52a8\u6027\u98ce\u9669\u7ba1\u7406", 7], ["\u64cd\u4f5c\u98ce\u9669\u548c\u58f0\u8a89\u98ce\u9669\u7ba1\u7406\u53ca\u5176\u4ed6", 7], ["\u6211\u56fd\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u7ba1\u7406\u5b9e\u8df5", 9]]];
+var SECTION_DATA = [[["\u91d1\u878d\u5e02\u573a\u6982\u8ff0", 29], ["\u5168\u7403\u91d1\u878d\u5e02\u573a", 34]], [["\u4e2d\u56fd\u7684\u91d1\u878d\u4f53\u7cfb", 47], ["\u4e2d\u56fd\u7684\u591a\u5c42\u6b21\u8d44\u672c\u5e02\u573a", 19]], [["\u8bc1\u5238\u53d1\u884c\u4eba", 4], ["\u8bc1\u5238\u6295\u8d44\u8005", 14], ["\u8bc1\u5238\u4e2d\u4ecb\u673a\u6784", 24], ["\u81ea\u5f8b\u6027\u7ec4\u7ec7", 9], ["\u6295\u8d44\u8005\u4fdd\u62a4\u673a\u6784", 5], ["\u8bc1\u5238\u5e02\u573a\u76d1\u7ba1\u673a\u6784", 5]], [["\u80a1\u7968\u6982\u8ff0", 37], ["\u80a1\u7968\u53d1\u884c", 14], ["\u80a1\u7968\u4ea4\u6613", 37], ["\u80a1\u7968\u4f30\u503c", 32]], [["\u503a\u5238\u6982\u8ff0", 55], ["\u503a\u5238\u7684\u53d1\u884c", 25], ["\u503a\u5238\u4ea4\u6613", 22], ["\u503a\u5238\u4f30\u503c", 13]], [["\u8bc1\u5238\u6295\u8d44\u57fa\u91d1\u6982\u8ff0", 22], ["\u8bc1\u5238\u6295\u8d44\u57fa\u91d1\u7684\u8fd0\u4f5c\u4e0e\u4e1a\u52a1\u6d41\u7a0b", 14], ["\u57fa\u91d1\u7684\u4f30\u503c\u3001\u8d39\u7528\u4e0e\u5229\u6da6\u5206\u914d", 12], ["\u57fa\u91d1\u7684\u7ba1\u7406", 6], ["\u57fa\u91d1\u7684\u76d1\u7ba1\u4e0e\u4fe1\u606f\u62ab\u9732", 7], ["\u79c1\u52df\u8bc1\u5238\u6295\u8d44\u57fa\u91d1", 6], ["\u57fa\u7840\u8bbe\u65bd\u516c\u52dfREITs", 8]], [["\u91d1\u878d\u884d\u751f\u5de5\u5177\u6982\u8ff0", 17], ["\u671f\u8d27\u4e0e\u671f\u6743\u4ea4\u6613", 32], ["\u8fdc\u671f\u4e0e\u4e92\u6362\u4ea4\u6613", 9], ["\u5176\u4ed6\u884d\u751f\u5de5\u5177", 6]], [["\u98ce\u9669\u7ba1\u7406\u6982\u8ff0", 9], ["\u91d1\u878d\u98ce\u9669\u7ba1\u7406\u6d41\u7a0b\u4e0e\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u7ba1\u7406\u67b6\u6784", 16], ["\u5e02\u573a\u98ce\u9669\u7ba1\u7406", 8], ["\u4fe1\u7528\u98ce\u9669\u7ba1\u7406", 4], ["\u6d41\u52a8\u6027\u98ce\u9669\u7ba1\u7406", 7], ["\u64cd\u4f5c\u98ce\u9669\u548c\u58f0\u8a89\u98ce\u9669\u7ba1\u7406\u53ca\u5176\u4ed6", 4], ["\u6211\u56fd\u8bc1\u5238\u516c\u53f8\u98ce\u9669\u7ba1\u7406\u5b9e\u8df5", 3]]];
 
 // 每题所属节索引（-1=未分配）
-var Q_SECTION = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var Q_SECTION = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6];
 
 // 当前选中的节（-1=全部）
 var currentSection = -1;
