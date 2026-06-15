@@ -131,27 +131,27 @@ body {
   margin-bottom: 0.6rem; color: var(--text);
 }
 
-/* Structured content */
+/* Structured content - unified */
 .card-body { font-size: 0.78rem; line-height: 1.7; }
-
-.card-sec {
-  margin-bottom: 0.5rem; padding: 0.4rem 0.5rem;
+.card-explain {
+  background: #f5f0e8;
+  border-left: 3px solid var(--blue);
   border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  margin-bottom: 0.5rem;
 }
-.card-sec.concepts { background: var(--blue-bg); border-left: 3px solid var(--blue); }
-.card-sec.rules { background: #f8f4ec; border-left: 3px solid var(--gold); }
-.card-sec.exceptions { background: var(--red-bg); border-left: 3px solid var(--red); }
-
-.card-sec-title {
-  font-size: 0.68rem; font-weight: 700; margin-bottom: 0.2rem;
+.card-explain-title {
+  font-size: 0.68rem; font-weight: 700; color: var(--blue);
+  margin-bottom: 0.3rem;
 }
-.card-sec.concepts .card-sec-title { color: var(--blue); }
-.card-sec.rules .card-sec-title { color: var(--dim); }
-.card-sec.exceptions .card-sec-title { color: var(--red); }
-
-.card-sec-body { font-size: 0.75rem; color: var(--text); }
-.card-sec-body ul { margin: 0; padding-left: 14px; list-style-type: disc; }
-.card-sec-body li { margin-bottom: 2px; line-height: 1.6; }
+.card-explain-body { font-size: 0.75rem; color: var(--text); }
+.card-explain-body p { margin-bottom: 0.3rem; }
+.card-explain-body ul { margin: 0; padding-left: 14px; list-style-type: disc; }
+.card-explain-body li { margin-bottom: 2px; line-height: 1.6; }
+.card-explain-body hr {
+  border: none; border-top: 1px dashed var(--border-light);
+  margin: 0.4rem 0;
+}
 
 /* Practice question in card */
 .practice-box {
@@ -415,29 +415,27 @@ function renderCard() {
   // Title
   html += '<div class="card-title">' + esc(pt.name || '') + '</div>';
 
-  // Structured content
-  if (concepts.length > 0 || rules.length > 0 || exceptions.length > 0) {
+  // Structured content - unified
+  var allContent = [];
+  concepts.forEach(function(c) { allContent.push(c); });
+  if (rules.length > 0 && concepts.length > 0) allContent.push('---');
+  rules.forEach(function(r) { allContent.push(r); });
+  if (exceptions.length > 0 && (concepts.length > 0 || rules.length > 0)) allContent.push('---');
+  exceptions.forEach(function(e) { allContent.push(e); });
+  
+  if (allContent.length > 0) {
     html += '<div class="card-body">';
-    
-    if (concepts.length > 0) {
-      html += '<div class="card-sec concepts"><div class="card-sec-title">📌 核心概念</div><div class="card-sec-body">';
-      html += formatList(concepts);
-      html += '</div></div>';
-    }
-    
-    if (rules.length > 0) {
-      html += '<div class="card-sec rules"><div class="card-sec-title">📋 规则要点</div><div class="card-sec-body">';
-      html += formatList(rules);
-      html += '</div></div>';
-    }
-    
-    if (exceptions.length > 0) {
-      html += '<div class="card-sec exceptions"><div class="card-sec-title">⚠️ 例外情况</div><div class="card-sec-body">';
-      html += formatList(exceptions);
-      html += '</div></div>';
-    }
-    
-    html += '</div>';
+    html += '<div class="card-explain">';
+    html += '<div class="card-explain-title">📝 考点精讲</div>';
+    html += '<div class="card-explain-body">';
+    allContent.forEach(function(item) {
+      if (item === '---') {
+        html += '<hr>';
+      } else {
+        html += '<p>' + esc(item) + '</p>';
+      }
+    });
+    html += '</div></div></div>';
   }
 
   // Practice question (if available)
