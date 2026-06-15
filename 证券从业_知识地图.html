@@ -9,8 +9,9 @@
   --bg: #f5efe6;
   --card: #faf6f0;
   --blue: #1e5b8a;
-  --blue-light: #4a8bc2;
+  --blue-bg: rgba(30,91,138,0.06);
   --red: #c23b22;
+  --red-bg: rgba(194,59,34,0.06);
   --green: #3d7246;
   --gold: #c9a96e;
   --border: #d4c9b8;
@@ -26,10 +27,10 @@ body {
   padding: 0.6rem;
   min-height: 100vh;
   padding-bottom: 4rem;
+  -webkit-font-smoothing: antialiased;
 }
 .container { max-width: 640px; margin: 0 auto; }
 
-/* Header */
 .hd {
   text-align: center;
   padding: 1rem 0 0.8rem;
@@ -83,7 +84,7 @@ body {
 }
 .strategy b { color: var(--blue); }
 
-/* Floor - chapter card */
+/* Floor */
 .floor {
   background: var(--card);
   border: 1px solid var(--border);
@@ -92,6 +93,7 @@ body {
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
+.floor.priority { border-left: 3px solid var(--red); }
 .floor-hd {
   padding: 0.55rem 0.7rem;
   display: flex;
@@ -102,13 +104,16 @@ body {
   user-select: none;
 }
 .floor-hd:active { background: linear-gradient(135deg, #f5ede0, #efe5d5); }
+.priority .floor-hd {
+  background: linear-gradient(135deg, #fef6f4, #fceae8);
+}
 .floor-num {
-  width: 24px; height: 24px;
+  width: 26px; height: 26px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
   color: #fff;
   flex-shrink: 0;
@@ -129,11 +134,28 @@ body {
 }
 .floor-arrow.open { transform: rotate(180deg); }
 
-/* Weight bar */
+/* Bar */
 .floor-bar { height: 3px; background: #f0e8d8; border-radius: 1px; margin: 0 0.7rem; }
 .floor-bar-fill { height: 100%; border-radius: 1px; }
 
-/* Rooms - sections */
+/* Core understanding box */
+.floor-core {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--blue-bg);
+  border-left: 3px solid var(--blue);
+  margin: 0.3rem 0.7rem;
+  border-radius: 0 6px 6px 0;
+}
+.floor-core-title {
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 0.15rem;
+}
+
+/* Body */
 .floor-body {
   padding: 0.2rem 0.6rem 0.5rem;
   display: none;
@@ -142,59 +164,59 @@ body {
 
 .room {
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.35rem;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0.45rem 0.45rem;
   border-radius: 6px;
-  font-size: 0.74rem;
-  margin: 1px 0;
-  border-bottom: 1px dashed #f0e8d8;
+  margin: 2px 0;
+  background: #faf8f4;
+  border-left: 2px solid var(--border-light);
 }
-.room:last-child { border-bottom: none; }
+.room-top {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+}
 .room-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.room-name { flex: 1; font-size: 0.73rem; }
+.room-name { flex: 1; font-weight: 600; font-size: 0.74rem; }
 .room-count { font-size: 0.62rem; color: var(--dim); white-space: nowrap; }
 .room-hot {
   font-size: 0.5rem; background: var(--red); color: #fff;
   padding: 0.04rem 0.25rem; border-radius: 2px; font-weight: 700;
 }
+.room-idea {
+  font-size: 0.68rem;
+  color: var(--dim);
+  line-height: 1.5;
+  padding-left: 0.9rem;
+}
 
-/* Floor tags */
+/* Tag */
 .tag {
   display: inline-block;
-  font-size: 0.55rem;
-  padding: 0.04rem 0.35rem;
+  font-size: 0.5rem;
+  padding: 0.04rem 0.3rem;
   border-radius: 3px;
   font-weight: 600;
-  margin-right: 0.3rem;
+  margin-right: 0.25rem;
 }
 .tag-5 { background: var(--red-bg); color: var(--red); }
 .tag-4 { background: var(--blue-bg); color: var(--blue); }
 .tag-3 { background: #f5edd6; color: var(--gold); }
 .tag-2 { background: #f0e8d8; color: var(--dim); }
-.tag-1 { background: #e8dfd0; color: var(--text-light); }
 
-/* Star display */
 .stars { font-size: 0.6rem; letter-spacing: -1px; }
 
-/* Footer */
 .footer {
   text-align: center; padding: 1rem;
   color: var(--dim); font-size: 0.65rem;
   border-top: 1px solid var(--border);
   margin-top: 1rem;
-}
-
-/* Priority highlight */
-.priority { 
-  border-left: 3px solid var(--red);
-}
-.priority .floor-hd {
-  background: linear-gradient(135deg, #fef6f4, #fceae8);
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -235,7 +257,7 @@ body {
   <div class="stat-box"><div class="num" style="color:#c23b22">5</div><div class="label">章</div></div>
   <div class="stat-box"><div class="num" style="color:#c23b22">31</div><div class="label">节</div></div>
   <div class="stat-box"><div class="num" style="color:#c23b22">2</div><div class="label">核心章</div></div>
-  <div class="stat-box"><div class="num" style="color:#3d7246">65%</div><div class="label">分值占比</div></div>
+  <div class="stat-box"><div class="num" style="color:#3d7246">85%</div><div class="label">分值占比</div></div>
 </div>
 
 <div class="strategy">
@@ -252,175 +274,165 @@ body {
 </div>
 
 <script>
-var FIN_STRUCTURE = [
+var FIN_DATA = [
   {
-    "num": 1, "name": "金融市场体系", "weight": 8, "star": 2,
-    "color": "#8b7e6e", "priority": false,
-    "sections": [
-      ["金融市场概述", 39],
-      ["全球金融市场", 45]
+    num:1, name:"金融市场体系", weight:8, star:2, color:"#8b7e6e", priority:false,
+    core:"这是整个学科的「地图章」。金融市场是什么？有哪些类型（货币/资本、一级/二级、场内/场外）？有什么功能（融通资金、价格发现、提供流动性）？先搭建概念框架，不需要深究细节。",
+    sections:[
+      ["金融市场概述",39,"理解金融市场的定义、四大功能（资金融通/价格发现/风险管理/宏观调控）、按期限/组织方式/交易标的的分类方式"],
+      ["全球金融市场",45,"了解全球金融市场的历史演变，主要国家（美/英/日/港）金融市场特点，国际金融监管体系"]
     ]
   },
   {
-    "num": 2, "name": "中国的金融体系与多层次资本市场", "weight": 12, "star": 3,
-    "color": "#4a8bc2", "priority": true,
-    "sections": [
-      ["中国的金融体系", 160],
-      ["中国的多层次资本市场", 65]
+    num:2, name:"中国的金融体系与多层次资本市场", weight:12, star:3, color:"#4a8bc2", priority:true,
+    core:"从宏观角度理解中国的金融架构：央行做什么？金融监管体系怎么组成（一委一行两会）？多层次资本市场为什么需要（不同企业在不同发展阶段需要不同的融资平台）？关键是「各板块的定位差异」。",
+    sections:[
+      ["中国的金融体系",160,"央行的职能（发行货币/制定货币政策/金融稳定）、金融机构体系（银行/证券/保险/信托）、监管框架（金融稳定委+央行+证监会+银保监会）"],
+      ["中国的多层次资本市场",65,"主板（大盘蓝筹）→科创板（硬科技）→创业板（成长型）→北交所（专精特新）→新三板（中小企业），记住各板块服务的企业类型差异"]
     ]
   },
   {
-    "num": 3, "name": "证券市场主体", "weight": 10, "star": 3,
-    "color": "#4a8bc2", "priority": true,
-    "sections": [
-      ["证券发行人", 24],
-      ["证券投资者", 84],
-      ["证券中介机构", 142],
-      ["自律性组织", 53],
-      ["投资者保护机构", 27],
-      ["证券市场监管机构", 25]
+    num:3, name:"证券市场主体", weight:10, star:3, color:"#4a8bc2", priority:true,
+    core:"证券市场里「谁在参与」——发行人（企业+政府）、投资者（机构+散户）、中介机构（券商/会所/律所）、自律组织（交易所/协会）、监管机构（证监会）。重点是各主体的角色定位和核心业务规则。",
+    sections:[
+      ["证券发行人",24,"发行人是资金需求方：企业发股票/债券融资，政府发国债/地方债。理解发行条件"],
+      ["证券投资者",84,"投资者分类（机构/个人、战略/财务），QFII/RQFII制度，投资者适当性管理（把合适的产品卖给合适的人）"],
+      ["证券中介机构",142,"证券公司业务范围（经纪/投行/资管/自营），证券服务机构（会所/律所/评估机构）的职责和法律责任"],
+      ["自律性组织",53,"证券交易所（组织交易/一线监管）、证券业协会（自律管理/培训考试）、登记结算公司（证券存管/资金清算）"],
+      ["投资者保护机构",27,"中证中小投资者服务中心（投服中心）的职能：持股行权、纠纷调解、支持诉讼"],
+      ["证券市场监管机构",25,"证监会及其派出机构的监管职责，国务院证券监督管理机构的权限"]
     ]
   },
   {
-    "num": 4, "name": "股票", "weight": 20, "star": 5,
-    "color": "#c23b22", "priority": true,
-    "sections": [
-      ["股票概述", 113],
-      ["股票发行", 44],
-      ["股票交易", 113],
-      ["股票估值", 100]
+    num:4, name:"股票", weight:20, star:5, color:"#c23b22", priority:true,
+    core:"分值最高的章节。核心逻辑是「从发行到交易到估值」的全流程。股票是什么（股份公司的所有权凭证）？怎么发出来（IPO条件+注册制）？怎么交易（竞价规则+T+1）？怎么估值（PE/PB/现金流折现）？串联起完整链条。",
+    sections:[
+      ["股票概述",113,"股票的定义、特征（收益性/风险性/流动性/永久性）、分类（普通股/优先股、A/B/H股）、股利政策（现金分红/股票分红）"],
+      ["股票发行",44,"IPO条件（盈利要求/合规要求）、注册制（以信息披露为核心）、保荐制度（证券公司推荐+持续督导）、承销方式（包销/代销/余额包销）"],
+      ["股票交易",113,"交易规则（T+1交收/涨跌幅限制）、竞价原则（价格优先时间优先）、大宗交易、融资融券交易机制"],
+      ["股票估值",100,"相对估值法（PE市盈率/PB市净率/PS市销率）、绝对估值法（DDM股利贴现模型/FCFF自由现金流模型）、理解估值逻辑而非计算"]
     ]
   },
   {
-    "num": 5, "name": "债券", "weight": 15, "star": 4,
-    "color": "#d4833a", "priority": true,
-    "sections": [
-      ["债券概述", 142],
-      ["债券的发行", 66],
-      ["债券交易", 58],
-      ["债券估值", 32]
+    num:5, name:"债券", weight:15, star:4, color:"#d4833a", priority:true,
+    core:"债券的本质是「借钱还钱的凭证」。关键是掌握不同品种（国债/地方债/金融债/公司债/可转债）的特点、发行方式（招标/簿记建档）、和定价逻辑。债券的风险比股票低，但条款更多样。",
+    sections:[
+      ["债券概述",142,"债券要素（面值/票面利率/期限/发行人）、分类（按发行主体/期限/付息方式）、信用评级的作用"],
+      ["债券的发行",66,"国债发行（公开招标/承购包销）、地方政府债、金融债、公司债的发行条件与程序"],
+      ["债券交易",58,"净价交易全价结算（理解净价=成交价、全价=净价+应计利息）、债券回购交易（质押式/买断式）"],
+      ["债券估值",32,"到期收益率（YTM）、久期（利率敏感度）、凸性（久期的修正值），理解概念即可"]
     ]
   },
   {
-    "num": 6, "name": "证券投资基金", "weight": 15, "star": 4,
-    "color": "#d4833a", "priority": true,
-    "sections": [
-      ["基金概述", 54],
-      ["运作与业务流程", 34],
-      ["估值、费用与利润分配", 29],
-      ["基金的管理", 14],
-      ["监管与信息披露", 16],
-      ["私募证券投资基金", 14],
-      ["基础设施公募REITs", 19]
+    num:6, name:"证券投资基金", weight:15, star:4, color:"#d4833a", priority:true,
+    core:"基金的核心概念是「集合投资、专业管理、分散风险」。关键区分不同维度：按投资标的（股票/债券/货币/混合）、按运作方式（开放式/封闭式）、按募集方式（公募/私募）。理解基金的运作全流程。",
+    sections:[
+      ["基金概述",54,"基金的定义、特征（集合理财/专业管理/组合投资/利益共享）、当事人（管理人/托管人/持有人）的关系"],
+      ["运作与业务流程",34,"基金的募集（核准/注册）、申购赎回、投资运作、信息披露的完整流程"],
+      ["估值、费用与利润分配",29,"基金净值计算、管理费/托管费/申赎费、基金利润来源（利息/股息/资本利得）"],
+      ["基金的管理",14,"投资范围与限制（双十规定）、基金经理的职责、基金评级"],
+      ["监管与信息披露",16,"基金信息披露的要求（招募说明书/定期报告/临时公告）、监管机构与自律管理"],
+      ["私募证券投资基金",14,"私募基金与公募的区别（合格投资者/非公开募集/灵活投资）、备案制管理"],
+      ["基础设施公募REITs",19,"REITs的定义（不动产投资信托基金）、底层资产（基础设施/保障性租赁住房）、分红要求"]
     ]
   },
   {
-    "num": 7, "name": "金融衍生工具", "weight": 12, "star": 3,
-    "color": "#4a8bc2", "priority": false,
-    "sections": [
-      ["衍生工具概述", 25],
-      ["期货与期权交易", 47],
-      ["远期与互换交易", 13],
-      ["其他衍生工具", 8]
+    num:7, name:"金融衍生工具", weight:12, star:3, color:"#4a8bc2", priority:false,
+    core:"衍生品是「价值源于其他资产」的工具，核心功能是套期保值（对冲风险）和价格发现。掌握四类基本衍生品（远期/期货/期权/互换）的定义和核心特征，不需要精通定价模型。",
+    sections:[
+      ["衍生工具概述",25,"衍生工具的定义、特征（跨期性/杠杆性/联动性/高风险性）、分类（远期/期货/期权/互换），理解四大类的基本区别"],
+      ["期货与期权交易",47,"期货（标准化合约/保证金交易/每日无负债结算）、期权（看涨/看跌、买方支付权利金、有权利无义务），重点区别期货与期权的不同"],
+      ["远期与互换交易",13,"远期（非标准化/场外交易）、互换（利率互换/货币互换），了解基本概念即可"],
+      ["其他衍生工具",8,"信用衍生品（CDS）、结构化产品，了解定义即可"]
     ]
   },
   {
-    "num": 8, "name": "金融风险管理", "weight": 8, "star": 2,
-    "color": "#8b7e6e", "priority": false,
-    "sections": [
-      ["风险管理概述", 17],
-      ["风险管理流程与架构", 30],
-      ["市场风险管理", 14],
-      ["信用风险管理", 8],
-      ["流动性风险管理", 13],
-      ["操作风险和声誉风险", 8],
-      ["证券公司风险管理实践", 5]
+    num:8, name:"金融风险管理", weight:8, star:2, color:"#8b7e6e", priority:false,
+    core:"风险是金融市场的固有属性。重点是要能识别五类风险（市场/信用/操作/流动性/声誉）并知道基本的风险管理流程（识别→度量→监测→控制）。此章分值低，扫一遍概念即可。",
+    sections:[
+      ["风险管理概述",17,"风险的定义与分类、风险管理的基本流程（风险识别/度量/监测/控制/报告）"],
+      ["风险管理流程与架构",30,"风险管理组织架构（董事会/高管层/风控部门）、风险偏好与限额管理"],
+      ["市场风险管理",14,"市场风险（利率/汇率/股价/商品价格波动导致损失），VaR概念"],
+      ["信用风险管理",8,"信用风险（交易对手违约），信用评级、授信管理"],
+      ["流动性风险管理",13,"流动性风险（无法以合理成本获取资金），流动性比率、压力测试"],
+      ["操作风险和声誉风险",8,"操作风险（内部流程/人员/系统/外部事件）、声誉风险（负面评价导致损失）"],
+      ["证券公司风险管理实践",5,"净资本管理、风控指标（流动性覆盖率/净稳定资金率），了解即可"]
     ]
   }
 ];
 
-var LAW_STRUCTURE = [
+var LAW_DATA = [
   {
-    "num": 1, "name": "证券市场基本法律法规", "weight": 35, "star": 5,
-    "color": "#c23b22", "priority": true,
-    "sections": [
-      ["法律法规体系", 32],
-      ["公司法", 114],
-      ["合伙企业法", 16],
-      ["证券法", 99],
-      ["证券投资基金法", 53],
-      ["期货和衍生品法", 20],
-      ["证券公司监督管理条例", 72],
-      ["证券公司风险处置条例", 7],
-      ["私募投资基金监督管理条例", 10]
+    num:1, name:"证券市场基本法律法规", weight:35, star:5, color:"#c23b22", priority:true,
+    core:"法规部分最重的一章。核心是三部法律：公司法（公司治理/股东权利）、证券法（发行/交易/信息披露/投资者保护）、合伙企业法（普通合伙/有限合伙的区别）。理解法条背后的立法逻辑——「为什么这样规定」比死背法条有效。",
+    sections:[
+      ["法律法规体系",32,"证券法律法规的层级（法律→行政法规→部门规章→自律规则），各层级的制定机关和效力"],
+      ["公司法(核心)",114,"公司的定义、分类（有限责任公司/股份有限公司）、治理结构（股东会/董事会/监事会/高管）、股东权利（知情权/表决权/分红权）"],
+      ["合伙企业法",16,"普通合伙（GP承担无限连带责任）与有限合伙（LP以出资额为限承担责任）的区别"],
+      ["证券法(核心)",99,"证券发行的注册制、信息披露要求、禁止的交易行为（内幕交易/操纵市场/虚假陈述）、投资者保护制度"],
+      ["证券投资基金法",53,"基金管理人/托管人的职责、基金份额持有人的权利、基金运作的监管要求"],
+      ["期货和衍生品法",20,"期货交易的基本规则、期货经营机构的业务规范、衍生品市场的监管"],
+      ["证券公司监督管理条例",72,"证券公司的设立条件、业务许可、风险控制指标、合规管理要求"],
+      ["证券公司风险处置条例",7,"证券公司风险处置的方式（停业整顿/托管/接管/行政重组/撤销），了解即可"],
+      ["私募投资基金监督管理条例",10,"私募基金的募集规则（合格投资者/非公开募集）、管理人/托管人职责"]
     ]
   },
   {
-    "num": 2, "name": "证券经营机构管理规范", "weight": 20, "star": 4,
-    "color": "#d4833a", "priority": true,
-    "sections": [
-      ["公司治理、内控与合规", 136],
-      ["证券公司风险管理", 82],
-      ["证券公司并表管理", 20],
-      ["投资者适当性管理", 47],
-      ["反洗钱和反恐怖融资", 19],
-      ["信息技术及网络数据管理", 16],
-      ["网络和信息安全管理", 12]
+    num:2, name:"证券经营机构管理规范", weight:20, star:4, color:"#d4833a", priority:true,
+    core:"证券公司怎么管自己？核心逻辑是「内控+合规+风控+适当性」。理解证券公司需要建立怎样的公司治理结构、内部控制体系、风险管理框架，以及怎么做好投资者保护。",
+    sections:[
+      ["公司治理、内控与合规",136,"证券公司治理结构（三会一层）、内部控制目标（合规经营/防范风险）、合规管理体系建设"],
+      ["证券公司风险管理",82,"全面风险管理体系、净资本管理（核心是「净资本/各项风险准备」的比例要求）"],
+      ["证券公司并表管理",20,"并表管理的范围（母子公司全部纳入）、风险隔离要求"],
+      ["投资者适当性管理",47,"了解客户（KYC）、风险测评、产品风险分级、将合适的产品卖给合适的人"],
+      ["反洗钱和反恐怖融资",19,"客户身份识别、大额交易报告、可疑交易报告、客户身份资料保存"],
+      ["信息技术及网络数据管理",16,"信息系统的安全运行、数据分类分级保护、个人信息保护要求"],
+      ["网络和信息安全管理",12,"网络安全等级保护、网络安全事件应急响应、数据跨境传输的管理"]
     ]
   },
   {
-    "num": 3, "name": "证券公司业务规范", "weight": 30, "star": 5,
-    "color": "#c23b22", "priority": true,
-    "sections": [
-      ["证券经纪", 27],
-      ["证券投资咨询", 66],
-      ["财务顾问", 33],
-      ["证券承销与保荐", 44],
-      ["融资融券及其他信用业务", 97],
-      ["证券自营", 30],
-      ["资产管理业务", 68],
-      ["全国股份转让系统及柜台业务", 31],
-      ["其他业务", 66]
+    num:3, name:"证券公司业务规范", weight:30, star:5, color:"#c23b22", priority:true,
+    core:"证券公司有哪些业务、每条业务怎么合规做。经纪（通道/代客买卖）→投行（承销保荐/财务顾问）→资管（代客理财）→自营（自有资金投资）→融资融券（借钱给你炒股）。重点是每条业务「能做什么、不能做什么」的边界。",
+    sections:[
+      ["证券经纪",27,"经纪业务的核心（接受委托/代理买卖/不垫资不担保）、佣金管理、客户交易结算资金第三方存管"],
+      ["证券投资咨询",66,"投资咨询业务的规范（不得代客理财/不得承诺收益/不得与客户约定分享收益），证券分析师的管理"],
+      ["财务顾问",33,"并购重组财务顾问的职责、独立财务顾问的独立性要求"],
+      ["证券承销与保荐",44,"保荐机构的尽职调查义务、持续督导责任、承销团组建、发行定价的基本原则"],
+      ["融资融券及其他信用业务",97,"融资融券的核心规则（保证金比例/标的证券范围/强制平仓条件）、约定购回/股票质押式回购的区别"],
+      ["证券自营",30,"自营业务的范围（股票/债券/衍生品）、持仓规模限制、禁止行为（内幕交易/操纵市场）"],
+      ["资产管理业务",68,"资管产品的分类（集合/单一、固收/权益）、禁止刚性兑付、通道业务的限制"],
+      ["全国股份转让系统及柜台业务",31,"新三板业务规则（合格投资者/交易方式/信息披露），柜台市场（私募产品发行与转让）"],
+      ["其他业务",66,"代销金融产品（销售适当性）、私募基金托管、投资顾问业务等"]
     ]
   },
   {
-    "num": 4, "name": "典型违法违规行为及法律责任", "weight": 10, "star": 3,
-    "color": "#4a8bc2", "priority": false,
-    "sections": [
-      ["证券一级市场", 82],
-      ["证券二级市场", 37]
+    num:4, name:"典型违法违规行为及法律责任", weight:10, star:3, color:"#4a8bc2", priority:false,
+    core:"哪些事做了会挨罚？核心是三种违法：内幕交易（利用内幕信息买卖证券）、操纵市场（通过交易/信息操纵价格）、虚假陈述（信息披露造假）。记住处罚标准（罚款金额/市场禁入年限）即可。",
+    sections:[
+      ["证券一级市场",82,"欺诈发行（尚未发行证券或债券/罚款20-200万已发行/罚款非法募集资金1%-5%）、虚假陈述的法律责任"],
+      ["证券二级市场",37,"内幕交易（3-5倍罚款）、操纵市场（1-5倍罚款）、老鼠仓的认定标准与处罚"]
     ]
   },
   {
-    "num": 5, "name": "行业文化与职业道德", "weight": 5, "star": 2,
-    "color": "#8b7e6e", "priority": false,
-    "sections": [
-      ["证券行业文化建设", 20],
-      ["廉洁从业规定", 19],
-      ["诚信管理及禁入措施", 8],
-      ["从业人员行为规范", 70]
+    num:5, name:"行业文化与职业道德", weight:5, star:2, color:"#8b7e6e", priority:false,
+    core:"从业人员的行为底线。核心是四个字：诚实守信、廉洁从业、合规执业。分值低，记住几个核心禁止性规定（不得收受回扣/不得利用职务谋取不正当利益/不得从事与投资者利益冲突的活动）。",
+    sections:[
+      ["证券行业文化建设",20,"行业文化理念（合规/诚信/专业/稳健）、文化建设十要素"],
+      ["廉洁从业规定",19,"不得收受礼金/不得利用职务之便谋取不正当利益/不得参与内幕交易"],
+      ["诚信管理及禁入措施",8,"证券市场诚信档案（记录违法失信行为）、市场禁入措施的类型（不得从业/不得交易）"],
+      ["从业人员行为规范",70,"证券从业人员的基本行为准则（诚实守信/勤勉尽责/保守秘密）、禁止行为（炒股限制/利益冲突的防范）"]
     ]
   }
 ];
 
-function starStr(n) {
-  return '★'.repeat(n) + '☆'.repeat(5-n);
-}
-
-function tagLabel(star) {
-  var map = {5:'核心', 4:'重要', 3:'中等', 2:'了解', 1:'次要'};
-  return map[star] || '了解';
-}
+function starStr(n) { return '★'.repeat(n) + '☆'.repeat(5-n); }
 
 function renderFloors(data, containerId) {
   var el = document.getElementById(containerId);
   var html = '';
   data.forEach(function(f) {
-    var pctClass = f.priority ? 'priority' : '';
-    var totalSec = f.sections.length;
-    var totalQ = f.sections.reduce(function(sum, s) { return sum + s[1]; }, 0);
-
-    html += '<div class="floor ' + pctClass + '">';
+    var cls = f.priority ? 'priority' : '';
+    html += '<div class="floor ' + cls + '">';
     html += '<div class="floor-hd" onclick="toggleFloor(this)">';
     html += '<div class="floor-num" style="background:' + f.color + '">' + f.num + '</div>';
     html += '<div class="floor-name">' + f.name + '</div>';
@@ -428,17 +440,21 @@ function renderFloors(data, containerId) {
     html += '<span class="floor-weight">' + f.weight + '%</span>';
     html += '<span class="floor-arrow">▼</span>';
     html += '</div>';
-    // Bar
     html += '<div class="floor-bar"><div class="floor-bar-fill" style="width:' + f.weight + '%;background:' + f.color + '"></div></div>';
+    // Core understanding
+    html += '<div class="floor-core"><div class="floor-core-title">🎯 核心理解</div>' + f.core + '</div>';
     // Body
     html += '<div class="floor-body">';
     f.sections.forEach(function(s, si) {
-      var hot = (f.star >= 4 && si < Math.min(3, f.sections.length)) ? '<span class="room-hot">🔥</span>' : '';
+      var hot = (f.star >= 4 && si < Math.min(2, f.sections.length)) ? '<span class="room-hot">🔥</span>' : '';
       html += '<div class="room">';
+      html += '<div class="room-top">';
       html += '<div class="room-dot" style="background:' + f.color + '"></div>';
       html += '<span class="room-name">' + s[0] + '</span>';
       html += hot;
       html += '<span class="room-count">' + s[1] + '题</span>';
+      html += '</div>';
+      html += '<div class="room-idea">💡 ' + s[2] + '</div>';
       html += '</div>';
     });
     html += '</div>';
@@ -463,8 +479,8 @@ function switchTab(n) {
   });
 }
 
-renderFloors(FIN_STRUCTURE, 'finFloors');
-renderFloors(LAW_STRUCTURE, 'lawFloors');
+renderFloors(FIN_DATA, 'finFloors');
+renderFloors(LAW_DATA, 'lawFloors');
 </script>
 </body>
 </html>
