@@ -21,8 +21,8 @@ def parse_old_practice(filepath):
     subject = m.group(1) if m else ''
     return {'chapters': chapters, 'ch_map': ch_map, 'questions': all_q, 'subject': subject}
 
-fin_data = parse_old_practice('章节精练_金融市场基础.html')
-law_data = parse_old_practice('章节精练_法律法规.html')
+fin_data = parse_old_practice('/tmp/fin_orig.html')
+law_data = parse_old_practice('/tmp/law_orig.html')
 print(f"原始数据: 金融 {len(fin_data['questions'])}题 {len(fin_data['chapters'])}章, 法律 {len(law_data['questions'])}题 {len(law_data['chapters'])}章")
 
 # ====== 2. Parse section structure from 备考全景 ======
@@ -92,9 +92,25 @@ gw_map_law = match_gw_to_chapters(gw_law, law_data['chapters'])
 print(f"GW匹配: 金融 {len(gw_map_fin)}章, 法律 {len(gw_map_law)}章")
 
 # ====== 4. Build streamlined question pools ======
-TARGET_PER_CHAPTER = 28  # ~28 questions per chapter
+# Target distribution based on exam weight percentage + max available
+# Max possible: 金融450 + 法律357 = 807
+TARGETS = {
+    ('fin', 0): 47,   # 金融市场体系 (max 47)
+    ('fin', 1): 48,   # 中国金融体系 (max 48)
+    ('fin', 2): 46,   # 证券市场主体 (max 46)
+    ('fin', 3): 86,   # 股票 (max 86)
+    ('fin', 4): 79,   # 债券 (max 79)
+    ('fin', 5): 56,   # 证券投资基金 (max 56)
+    ('fin', 6): 51,   # 金融衍生工具 (max 51)
+    ('fin', 7): 37,   # 金融风险管理 (max 37)
+    ('law', 0): 120,  # 证券市场基本法律法规 (max 156)
+    ('law', 1): 67,   # 证券经营机构管理规范 (max 67)
+    ('law', 2): 88,   # 证券公司业务规范 (max 88)
+    ('law', 3): 42,   # 典型违法违规行为 (max 42)
+    ('law', 4): 40,   # 行业文化与职业道德 (max 56)
+}
 
-def build_questions(gw_map, ch_map, all_questions, section_structure):
+def build_questions(gw_map, ch_map, all_questions, section_structure, subject_key):
     """Build streamlined question set with section-level indices."""
     result_questions = []  # new ALL_QUESTIONS array
     result_sections = []   # new section structure with q_start/q_count
@@ -126,8 +142,11 @@ def build_questions(gw_map, ch_map, all_questions, section_structure):
                     }
                     gw_qs.append(q)
         
-        # Calculate how many supplementary questions to take
-        target = TARGET_PER_CHAPTER
+        # Get chapter-specific target
+        target = TARGETS.get((subject_key, ch_idx), 50)
+        # Cap at available questions
+        target = min(target, ch_count)
+        
         gw_count = len(gw_qs)
         supplement_count = max(0, target - gw_count)
         
@@ -188,8 +207,8 @@ def build_questions(gw_map, ch_map, all_questions, section_structure):
     
     return result_questions, result_sections
 
-fin_qs, fin_sec = build_questions(gw_map_fin, fin_data['ch_map'], fin_data['questions'], sections['fin'])
-law_qs, law_sec = build_questions(gw_map_law, law_data['ch_map'], law_data['questions'], sections['law'])
+fin_qs, fin_sec = build_questions(gw_map_fin, fin_data['ch_map'], fin_data['questions'], sections['fin'], 'fin')
+law_qs, law_sec = build_questions(gw_map_law, law_data['ch_map'], law_data['questions'], sections['law'], 'law')
 print(f"\n精简后: 金融 {len(fin_qs)}题, 法律 {len(law_qs)}题")
 
 # ====== 5. Generate HTML ======
