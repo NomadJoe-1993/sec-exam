@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>证券从业 · 知识地图</title>
+<style>
+:root {
+  --bg: #f5efe6;
+  --card: #faf6f0;
+  --blue: #1e5b8a;
+  --blue-light: #4a8bc2;
+  --red: #c23b22;
+  --green: #3d7246;
+  --gold: #c9a96e;
+  --border: #d4c9b8;
+  --text: #3d3229;
+  --dim: #8b7e6e;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0.6rem;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+.container { max-width: 640px; margin: 0 auto; }
+
+/* Header */
+.hd {
+  text-align: center;
+  padding: 1rem 0 0.8rem;
+  border-bottom: 3px solid var(--gold);
+  margin-bottom: 0.8rem;
+}
+.hd h1 { font-size: 1.3rem; font-weight: 800; color: var(--text); }
+.hd .sub { color: var(--dim); font-size: 0.72rem; margin-top: 0.2rem; }
+
+/* Tabs */
+.tabs { display: flex; gap: 3px; margin-bottom: 0.8rem; }
+.tab {
+  flex: 1; padding: 0.5rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 8px 8px 0 0;
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--dim); background: #f0e8d8;
+  cursor: pointer; transition: all 0.2s;
+}
+.tab.on { background: var(--card); color: var(--blue); border-bottom-color: var(--card); }
+.tab-content { display: none; }
+.tab-content.on { display: block; }
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+.stat-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.4rem 0.2rem;
+  text-align: center;
+}
+.stat-box .num { font-size: 1.1rem; font-weight: 800; }
+.stat-box .label { font-size: 0.6rem; color: var(--dim); margin-top: 0.05rem; }
+
+/* Strategy box */
+.strategy {
+  background: linear-gradient(135deg, #fef8e8, #fdf0d8);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+.strategy b { color: var(--blue); }
+
+/* Floor - chapter card */
+.floor {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.floor-hd {
+  padding: 0.55rem 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, #faf6ee, #f5ede0);
+  user-select: none;
+}
+.floor-hd:active { background: linear-gradient(135deg, #f5ede0, #efe5d5); }
+.floor-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+.floor-name { flex: 1; font-weight: 600; font-size: 0.82rem; }
+.floor-weight {
+  font-size: 0.65rem; color: var(--dim);
+  white-space: nowrap; margin-right: 0.3rem;
+}
+.floor-pct {
+  font-size: 0.68rem; font-weight: 700;
+  white-space: nowrap;
+}
+.floor-arrow {
+  font-size: 0.55rem; color: var(--dim);
+  margin-left: 0.2rem;
+  transition: transform 0.2s;
+}
+.floor-arrow.open { transform: rotate(180deg); }
+
+/* Weight bar */
+.floor-bar { height: 3px; background: #f0e8d8; border-radius: 1px; margin: 0 0.7rem; }
+.floor-bar-fill { height: 100%; border-radius: 1px; }
+
+/* Rooms - sections */
+.floor-body {
+  padding: 0.2rem 0.6rem 0.5rem;
+  display: none;
+}
+.floor-body.open { display: block; }
+
+.room {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.35rem;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  margin: 1px 0;
+  border-bottom: 1px dashed #f0e8d8;
+}
+.room:last-child { border-bottom: none; }
+.room-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.room-name { flex: 1; font-size: 0.73rem; }
+.room-count { font-size: 0.62rem; color: var(--dim); white-space: nowrap; }
+.room-hot {
+  font-size: 0.5rem; background: var(--red); color: #fff;
+  padding: 0.04rem 0.25rem; border-radius: 2px; font-weight: 700;
+}
+
+/* Floor tags */
+.tag {
+  display: inline-block;
+  font-size: 0.55rem;
+  padding: 0.04rem 0.35rem;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+.tag-5 { background: var(--red-bg); color: var(--red); }
+.tag-4 { background: var(--blue-bg); color: var(--blue); }
+.tag-3 { background: #f5edd6; color: var(--gold); }
+.tag-2 { background: #f0e8d8; color: var(--dim); }
+.tag-1 { background: #e8dfd0; color: var(--text-light); }
+
+/* Star display */
+.stars { font-size: 0.6rem; letter-spacing: -1px; }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 1rem;
+  color: var(--dim); font-size: 0.65rem;
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+}
+
+/* Priority highlight */
+.priority { 
+  border-left: 3px solid var(--red);
+}
+.priority .floor-hd {
+  background: linear-gradient(135deg, #fef6f4, #fceae8);
+}
+
+@supports (-webkit-touch-callout: none) {
+  body { padding-bottom: 2rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="hd">
+  <h1>🗺️ 证券从业·知识地图</h1>
+  <div class="sub">先建楼层感，再刷题 → 闭眼能说出每章讲什么</div>
+</div>
+
+<div class="tabs">
+  <div class="tab on" onclick="switchTab(0)">📈 金融基础</div>
+  <div class="tab" onclick="switchTab(1)">⚖️ 法律法规</div>
+</div>
+
+<div class="tab-content on" id="tab0">
+<div class="stats">
+  <div class="stat-box"><div class="num" style="color:#1e5b8a">8</div><div class="label">章</div></div>
+  <div class="stat-box"><div class="num" style="color:#1e5b8a">36</div><div class="label">节</div></div>
+  <div class="stat-box"><div class="num" style="color:#c23b22">4</div><div class="label">核心章</div></div>
+  <div class="stat-box"><div class="num" style="color:#3d7246">62%</div><div class="label">分值占比</div></div>
+</div>
+
+<div class="strategy">
+  🎯 <b>攻楼顺序：</b>先打4楼(股票20%)→5楼(债券15%)→6楼(基金15%)→2楼(金融体系12%)<br>
+  这4层占卷 <b>62%</b>，拿下就及格。1楼和8楼是入门层，扫一眼就行。
+</div>
+
+<div id="finFloors"></div>
+</div>
+
+<div class="tab-content" id="tab1">
+<div class="stats">
+  <div class="stat-box"><div class="num" style="color:#c23b22">5</div><div class="label">章</div></div>
+  <div class="stat-box"><div class="num" style="color:#c23b22">31</div><div class="label">节</div></div>
+  <div class="stat-box"><div class="num" style="color:#c23b22">2</div><div class="label">核心章</div></div>
+  <div class="stat-box"><div class="num" style="color:#3d7246">65%</div><div class="label">分值占比</div></div>
+</div>
+
+<div class="strategy">
+  🎯 <b>攻楼顺序：</b>1楼法规(35%)→3楼业务(30%)→2楼管理(20%)<br>
+  这3层占卷 <b>85%</b>。4楼违法+5楼文化加起来才15%，最后扫。
+</div>
+
+<div id="lawFloors"></div>
+</div>
+
+<div class="footer">
+  <p>⚡ 知而不行，只是未知 — 主上大人必胜！</p>
+</div>
+</div>
+
+<script>
+var FIN_STRUCTURE = [
+  {
+    "num": 1, "name": "金融市场体系", "weight": 8, "star": 2,
+    "color": "#8b7e6e", "priority": false,
+    "sections": [
+      ["金融市场概述", 39],
+      ["全球金融市场", 45]
+    ]
+  },
+  {
+    "num": 2, "name": "中国的金融体系与多层次资本市场", "weight": 12, "star": 3,
+    "color": "#4a8bc2", "priority": true,
+    "sections": [
+      ["中国的金融体系", 160],
+      ["中国的多层次资本市场", 65]
+    ]
+  },
+  {
+    "num": 3, "name": "证券市场主体", "weight": 10, "star": 3,
+    "color": "#4a8bc2", "priority": true,
+    "sections": [
+      ["证券发行人", 24],
+      ["证券投资者", 84],
+      ["证券中介机构", 142],
+      ["自律性组织", 53],
+      ["投资者保护机构", 27],
+      ["证券市场监管机构", 25]
+    ]
+  },
+  {
+    "num": 4, "name": "股票", "weight": 20, "star": 5,
+    "color": "#c23b22", "priority": true,
+    "sections": [
+      ["股票概述", 113],
+      ["股票发行", 44],
+      ["股票交易", 113],
+      ["股票估值", 100]
+    ]
+  },
+  {
+    "num": 5, "name": "债券", "weight": 15, "star": 4,
+    "color": "#d4833a", "priority": true,
+    "sections": [
+      ["债券概述", 142],
+      ["债券的发行", 66],
+      ["债券交易", 58],
+      ["债券估值", 32]
+    ]
+  },
+  {
+    "num": 6, "name": "证券投资基金", "weight": 15, "star": 4,
+    "color": "#d4833a", "priority": true,
+    "sections": [
+      ["基金概述", 54],
+      ["运作与业务流程", 34],
+      ["估值、费用与利润分配", 29],
+      ["基金的管理", 14],
+      ["监管与信息披露", 16],
+      ["私募证券投资基金", 14],
+      ["基础设施公募REITs", 19]
+    ]
+  },
+  {
+    "num": 7, "name": "金融衍生工具", "weight": 12, "star": 3,
+    "color": "#4a8bc2", "priority": false,
+    "sections": [
+      ["衍生工具概述", 25],
+      ["期货与期权交易", 47],
+      ["远期与互换交易", 13],
+      ["其他衍生工具", 8]
+    ]
+  },
+  {
+    "num": 8, "name": "金融风险管理", "weight": 8, "star": 2,
+    "color": "#8b7e6e", "priority": false,
+    "sections": [
+      ["风险管理概述", 17],
+      ["风险管理流程与架构", 30],
+      ["市场风险管理", 14],
+      ["信用风险管理", 8],
+      ["流动性风险管理", 13],
+      ["操作风险和声誉风险", 8],
+      ["证券公司风险管理实践", 5]
+    ]
+  }
+];
+
+var LAW_STRUCTURE = [
+  {
+    "num": 1, "name": "证券市场基本法律法规", "weight": 35, "star": 5,
+    "color": "#c23b22", "priority": true,
+    "sections": [
+      ["法律法规体系", 32],
+      ["公司法", 114],
+      ["合伙企业法", 16],
+      ["证券法", 99],
+      ["证券投资基金法", 53],
+      ["期货和衍生品法", 20],
+      ["证券公司监督管理条例", 72],
+      ["证券公司风险处置条例", 7],
+      ["私募投资基金监督管理条例", 10]
+    ]
+  },
+  {
+    "num": 2, "name": "证券经营机构管理规范", "weight": 20, "star": 4,
+    "color": "#d4833a", "priority": true,
+    "sections": [
+      ["公司治理、内控与合规", 136],
+      ["证券公司风险管理", 82],
+      ["证券公司并表管理", 20],
+      ["投资者适当性管理", 47],
+      ["反洗钱和反恐怖融资", 19],
+      ["信息技术及网络数据管理", 16],
+      ["网络和信息安全管理", 12]
+    ]
+  },
+  {
+    "num": 3, "name": "证券公司业务规范", "weight": 30, "star": 5,
+    "color": "#c23b22", "priority": true,
+    "sections": [
+      ["证券经纪", 27],
+      ["证券投资咨询", 66],
+      ["财务顾问", 33],
+      ["证券承销与保荐", 44],
+      ["融资融券及其他信用业务", 97],
+      ["证券自营", 30],
+      ["资产管理业务", 68],
+      ["全国股份转让系统及柜台业务", 31],
+      ["其他业务", 66]
+    ]
+  },
+  {
+    "num": 4, "name": "典型违法违规行为及法律责任", "weight": 10, "star": 3,
+    "color": "#4a8bc2", "priority": false,
+    "sections": [
+      ["证券一级市场", 82],
+      ["证券二级市场", 37]
+    ]
+  },
+  {
+    "num": 5, "name": "行业文化与职业道德", "weight": 5, "star": 2,
+    "color": "#8b7e6e", "priority": false,
+    "sections": [
+      ["证券行业文化建设", 20],
+      ["廉洁从业规定", 19],
+      ["诚信管理及禁入措施", 8],
+      ["从业人员行为规范", 70]
+    ]
+  }
+];
+
+function starStr(n) {
+  return '★'.repeat(n) + '☆'.repeat(5-n);
+}
+
+function tagLabel(star) {
+  var map = {5:'核心', 4:'重要', 3:'中等', 2:'了解', 1:'次要'};
+  return map[star] || '了解';
+}
+
+function renderFloors(data, containerId) {
+  var el = document.getElementById(containerId);
+  var html = '';
+  data.forEach(function(f) {
+    var pctClass = f.priority ? 'priority' : '';
+    var totalSec = f.sections.length;
+    var totalQ = f.sections.reduce(function(sum, s) { return sum + s[1]; }, 0);
+
+    html += '<div class="floor ' + pctClass + '">';
+    html += '<div class="floor-hd" onclick="toggleFloor(this)">';
+    html += '<div class="floor-num" style="background:' + f.color + '">' + f.num + '</div>';
+    html += '<div class="floor-name">' + f.name + '</div>';
+    html += '<span class="stars">' + starStr(f.star) + '</span>';
+    html += '<span class="floor-weight">' + f.weight + '%</span>';
+    html += '<span class="floor-arrow">▼</span>';
+    html += '</div>';
+    // Bar
+    html += '<div class="floor-bar"><div class="floor-bar-fill" style="width:' + f.weight + '%;background:' + f.color + '"></div></div>';
+    // Body
+    html += '<div class="floor-body">';
+    f.sections.forEach(function(s, si) {
+      var hot = (f.star >= 4 && si < Math.min(3, f.sections.length)) ? '<span class="room-hot">🔥</span>' : '';
+      html += '<div class="room">';
+      html += '<div class="room-dot" style="background:' + f.color + '"></div>';
+      html += '<span class="room-name">' + s[0] + '</span>';
+      html += hot;
+      html += '<span class="room-count">' + s[1] + '题</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}
+
+function toggleFloor(el) {
+  var body = el.parentElement.querySelector('.floor-body');
+  var arrow = el.querySelector('.floor-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function switchTab(n) {
+  document.querySelectorAll('.tab').forEach(function(t, i) {
+    t.classList.toggle('on', i === n);
+  });
+  document.querySelectorAll('.tab-content').forEach(function(t, i) {
+    t.classList.toggle('on', i === n);
+  });
+}
+
+renderFloors(FIN_STRUCTURE, 'finFloors');
+renderFloors(LAW_STRUCTURE, 'lawFloors');
+</script>
+</body>
+</html>
