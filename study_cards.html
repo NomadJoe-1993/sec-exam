@@ -10,868 +10,580 @@
   --bg: #f5efe6;
   --card: #faf6f0;
   --blue: #1e5b8a;
+  --blue-light: #4a8bc2;
+  --blue-bg: rgba(30,91,138,0.06);
   --red: #c23b22;
+  --red-bg: rgba(194,59,34,0.06);
   --green: #3d7246;
+  --green-bg: rgba(61,114,70,0.08);
   --gold: #c9a96e;
+  --gold-light: #f5edd6;
   --border: #d4c9b8;
+  --border-light: #e8dfd0;
   --text: #3d3229;
   --dim: #8b7e6e;
-  --tag-bg: #efe9df;
   --shadow: rgba(62, 50, 41, 0.08);
+  --radius: 12px;
 }
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 html { font-size:16px; }
 body {
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  padding: 0;
   min-height: 100vh;
   padding-bottom: env(safe-area-inset-bottom);
 }
-.container { max-width: 820px; margin: 0 auto; padding: 0 0.75rem 1rem; }
+.container { max-width: 520px; margin: 0 auto; padding: 0 0.6rem 1rem; }
 
-/* ====== Header ====== */
+/* Header */
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  position: sticky; top: 0; z-index: 50;
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 85%, transparent 100%);
-  padding: 0.6rem 0 0.3rem;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.header-top {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.4rem;
-}
-.back-btn {
-  width: 2.2rem;
-  height: 2.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.4rem;
-  font-weight: 300;
-  color: var(--blue);
-  background: var(--card);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  flex-shrink: 0;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.back-btn:active { background: var(--tag-bg); }
-.header h1 {
-  flex: 1;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--blue);
-  letter-spacing: 0.02em;
-}
-
-/* ====== Subject Tabs ====== */
-.sw { display: flex; gap: 6px; }
-.swb {
-  flex: 1;
-  padding: 0.45rem 0.3rem;
-  border-radius: 8px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  background: var(--card);
-  color: var(--dim);
-  text-align: center;
-  transition: all 0.2s;
-  user-select: none;
-}
-.swb:active { transform: scale(0.97); }
-.swb.on {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
-  box-shadow: 0 2px 8px rgba(30,91,138,0.25);
-}
-
-/* ====== Subject Sections ====== */
-.sec { display: none; }
-.sec.on { display: block; }
-
-/* ====== Chapter Title ====== */
-.ch-title {
-  font-size: 0.92rem;
-  font-weight: 700;
   padding: 0.5rem 0 0.3rem;
-  margin: 0.6rem 0 0.3rem;
-  border-bottom: 2px solid var(--border);
-  color: var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.4rem;
 }
-.ch-w {
-  font-size: 0.68rem;
-  color: var(--dim);
-  font-weight: 400;
-  white-space: nowrap;
+.header h1 {
+  font-size: 1.05rem; font-weight: 700; color: var(--blue);
+  text-align: center; letter-spacing: 0.02em;
 }
 
-/* ====== Knowledge Point List ====== */
-.kp-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 0.6rem; }
-.kp-item {
+/* Subject Tabs */
+.subj-tabs { display: flex; gap: 4px; margin-bottom: 0.5rem; }
+.subj-tab {
+  flex: 1; padding: 0.35rem 0.3rem; border-radius: 8px;
+  font-size: 0.78rem; font-weight: 600;
+  border: 1px solid var(--border); cursor: pointer;
+  background: var(--card); color: var(--dim);
+  text-align: center; transition: all 0.2s;
+}
+.subj-tab.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* Progress Bar & Stats */
+.progress-area { margin-bottom: 0.5rem; }
+.progress-text {
+  display: flex; justify-content: space-between;
+  font-size: 0.7rem; color: var(--dim); margin-bottom: 3px;
+}
+.progress-bar {
+  height: 4px; background: var(--border-light);
+  border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  transition: width 0.4s;
+}
+
+/* Chapter Selector */
+.ch-selector {
+  display: flex; gap: 4px; overflow-x: auto;
+  padding-bottom: 0.4rem; margin-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+.ch-selector::-webkit-scrollbar { display: none; }
+.ch-pill {
+  flex-shrink: 0; padding: 0.25rem 0.55rem;
+  border-radius: 12px; font-size: 0.7rem; font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--card); color: var(--dim);
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.ch-pill.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* Main Card */
+.card-area { position: relative; min-height: 300px; }
+
+.card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-.kp-item:active { box-shadow: 0 1px 4px var(--shadow); }
-
-/* Left border indicator: heat level */
-.kp-item.h3 { border-left: 4px solid var(--red); }
-.kp-item.h2 { border-left: 4px solid var(--blue); }
-.kp-item.h1 { border-left: 4px solid var(--gold); }
-
-/* Head row */
-.kp-head {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 8px;
-  align-items: center;
-  padding: 7px 10px;
-  cursor: pointer;
-  user-select: none;
-}
-.kp-rank {
-  font-size: 0.68rem;
-  color: var(--dim);
-  font-weight: 600;
-  text-align: center;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.kp-body {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-}
-.kp-name {
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1.4;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.kp-count {
-  font-size: 0.7rem;
-  color: var(--dim);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.kp-count b { font-size: 0.95rem; color: var(--blue); }
-
-/* Bar row */
-.kp-bar-wrap {
-  grid-column: 1 / -1;
-  padding: 0 10px 6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.kp-bar {
-  flex: 1;
-  height: 6px;
-  background: var(--tag-bg);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.kp-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.4s ease;
-}
-.kp-fill.high { background: linear-gradient(90deg, var(--red), #d45a4a); }
-.kp-fill.mid { background: linear-gradient(90deg, var(--blue), #3a7ab5); }
-.kp-fill.low { background: linear-gradient(90deg, var(--gold), #daac6e); }
-
-/* Collapse indicator */
-.kp-arrow {
-  font-size: 0.6rem;
-  color: var(--dim);
-  transition: transform 0.25s ease;
-  flex-shrink: 0;
-}
-.kp-item.exp .kp-arrow { transform: rotate(180deg); }
-
-/* ====== Detail Section ====== */
-.kp-detail {
-  display: none;
-  padding: 0 10px 10px;
-  border-top: 1px solid var(--border);
-  margin-top: 4px;
-  padding-top: 8px;
-}
-.kp-item.exp .kp-detail { display: block; }
-
-/* ── 考点精讲 ── */
-.kp-explain {
-  font-size: 0.78rem;
-  color: var(--text);
-  padding: 8px 10px;
-  background: var(--tag-bg);
-  border-radius: 8px;
-  margin-bottom: 10px;
-  line-height: 1.7;
-  border-left: 3px solid var(--gold);
-}
-.kp-explain-title {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--blue);
-  margin-bottom: 6px;
-  padding-bottom: 4px;
-  border-bottom: 1px dashed var(--border);
-}
-/* 结构化考点精讲 */
-.kp-section {
-  margin-bottom: 6px;
-}
-.kp-section.kwarn {
-  background: rgba(194,59,34,0.05);
-  border-left: 2.5px solid var(--red);
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-.kp-section-title {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--blue);
-  margin-bottom: 2px;
-}
-.kp-section.kwarn .kp-section-title {
-  color: var(--red);
-}
-.kp-line {
-  font-size: 0.76rem;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-.kwarn-line {
-  color: #b85a4a !important;
-}
-.kp-ul {
-  margin: 0;
-  padding-left: 14px;
-  list-style-type: disc;
-}
-.kp-ul li {
-  font-size: 0.76rem;
-  color: var(--text);
-  margin-bottom: 2px;
-  line-height: 1.6;
-}
-.kp-ul li b.kw {
-  color: var(--red);
-  font-weight: 700;
+  border-radius: var(--radius);
+  padding: 1rem 1rem 0.8rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: opacity 0.25s;
 }
 
-/* Practice section / 真题演练 */
-.kp-practice {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px;
+/* Heat indicator bar at top */
+.card-heat {
+  height: 3px; border-radius: 3px; margin-bottom: 0.6rem;
 }
-.practice-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 6px;
+.card-heat.h3 { background: var(--red); }
+.card-heat.h2 { background: var(--blue); }
+.card-heat.h1 { background: var(--gold); }
+
+/* Card header: rank + heat badge */
+.card-hd {
+  display: flex; align-items: center; gap: 0.3rem;
+  margin-bottom: 0.4rem; flex-wrap: wrap;
 }
-.ch-tag {
-  font-size: 0.6rem;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 700;
-  line-height: 1.4;
+.card-rank { font-size: 0.68rem; color: var(--dim); font-weight: 600; }
+.heat-badge {
+  display: inline-block; font-size: 0.55rem; padding: 0.05rem 0.35rem;
+  border-radius: 3px; font-weight: 600;
 }
-.ch-tag.s { background: #e3f0fa; color: var(--blue); }
-.ch-tag.m { background: #fde8e6; color: var(--red); }
-.ch-tag.j { background: #f5efe0; color: var(--gold); }
-.practice-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--dim);
-}
-.pq {
-  font-size: 0.82rem;
-  line-height: 1.6;
-  margin-bottom: 8px;
-  color: var(--text);
+.heat-badge.h3 { background: var(--red-bg); color: var(--red); }
+.heat-badge.h2 { background: var(--blue-bg); color: var(--blue); }
+.heat-badge.h1 { background: #f5edd6; color: var(--gold); }
+.chapter-tag {
+  font-size: 0.6rem; color: var(--dim);
+  background: var(--border-light); padding: 0.05rem 0.35rem;
+  border-radius: 3px; margin-left: auto;
 }
 
-/* ====== Options ====== */
-.opts { display: flex; flex-direction: column; gap: 5px; }
-.co {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 7px 8px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  border: 1.5px solid transparent;
-  background: var(--tag-bg);
-  cursor: pointer;
-  transition: all 0.15s;
-  user-select: none;
+/* Card title */
+.card-title {
+  font-size: 0.9rem; font-weight: 700; line-height: 1.5;
+  margin-bottom: 0.6rem; color: var(--text);
 }
-.co:active { transform: scale(0.98); }
-.co .ck {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
+
+/* Card body - structured content */
+.card-body { font-size: 0.78rem; line-height: 1.7; }
+
+.card-sec {
+  margin-bottom: 0.5rem; padding: 0.4rem 0.5rem;
   border-radius: 6px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  background: var(--card);
-  color: var(--dim);
-  border: 1px solid var(--border);
-  transition: all 0.15s;
 }
-.co.selected {
-  border-color: var(--blue);
-  background: #e8f0f8;
-}
-.co.selected .ck {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
-}
-.co.correct {
-  border-color: var(--green) !important;
-  background: #eaf5ec !important;
-}
-.co.correct .ck {
-  background: var(--green) !important;
-  color: #fff !important;
-  border-color: var(--green) !important;
-}
-.co.wrong {
-  border-color: var(--red) !important;
-  background: #fde8e6 !important;
-}
-.co.wrong .ck {
-  background: var(--red) !important;
-  color: #fff !important;
-  border-color: var(--red) !important;
-}
-.co.disabled { pointer-events: none; opacity: 0.85; }
+.card-sec.core { background: var(--blue-bg); border-left: 3px solid var(--blue); }
+.card-sec.rule { background: #f8f4ec; border-left: 3px solid var(--gold); }
+.card-sec.except { background: var(--red-bg); border-left: 3px solid var(--red); }
+.card-sec.keypoint { background: var(--green-bg); border-left: 3px solid var(--green); }
 
-/* ====== Result Area ====== */
-.result-area {
-  margin-top: 8px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  line-height: 1.6;
-  display: none;
+.card-sec-title {
+  font-size: 0.68rem; font-weight: 700;
+  margin-bottom: 0.2rem;
 }
-.result-area.show { display: block; }
-.result-area.correct {
-  background: #eaf5ec;
-  border: 1px solid var(--green);
-  color: #2a5a35;
-}
-.result-area.wrong {
-  background: #fde8e6;
-  border: 1px solid var(--red);
-  color: #8a2a1e;
-}
-.result-area .ra-answer { font-weight: 700; margin-bottom: 2px; }
-.result-area .ra-explain { color: var(--text); margin-top: 4px; }
+.card-sec.core .card-sec-title { color: var(--blue); }
+.card-sec.rule .card-sec-title { color: var(--dim); }
+.card-sec.except .card-sec-title { color: var(--red); }
+.card-sec.keypoint .card-sec-title { color: var(--green); }
 
-/* ====== Action Buttons ====== */
-.practice-actions {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
+.card-sec-body { font-size: 0.75rem; color: var(--text); }
+.card-sec-body ul { margin: 0; padding-left: 14px; list-style-type: disc; }
+.card-sec-body li { margin-bottom: 2px; line-height: 1.6; }
+
+/* Empty card state */
+.card-empty {
+  text-align: center; padding: 3rem 1rem;
+  color: var(--dim); font-size: 0.85rem;
 }
-.practice-btn {
-  padding: 0.45rem 0.8rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.15s;
-  user-select: none;
-  background: var(--card);
-  color: var(--text);
+.card-empty .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+
+/* Card actions */
+.card-actions {
+  display: flex; gap: 6px; margin-top: 0.8rem;
+  padding-top: 0.6rem; border-top: 1px solid var(--border-light);
+}
+.card-btn {
+  flex: 1; padding: 0.4rem 0.5rem; border-radius: 8px;
+  font-size: 0.75rem; font-weight: 600; border: none;
+  cursor: pointer; transition: all 0.2s;
   text-align: center;
-  flex: 1;
 }
-.practice-btn:active { transform: scale(0.97); }
-.practice-btn.primary {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
-}
-.practice-btn.primary:active { opacity: 0.85; }
-.practice-btn.reset { color: var(--dim); }
-.practice-btn.reset:active { background: var(--tag-bg); }
+.card-btn:active { transform: scale(0.96); }
+.card-btn.primary { background: var(--blue); color: #fff; }
+.card-btn.primary:active { background: var(--blue-light); }
+.card-btn.secondary { background: var(--border-light); color: var(--dim); }
+.card-btn.secondary:active { background: var(--border); }
+.card-btn.success { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+.card-btn.success:active { background: var(--green); color: #fff; }
+.card-btn.dim { background: var(--card); color: var(--dim); border: 1px solid var(--border); }
 
-/* ====== Footer ====== */
+/* Navigation */
+.card-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 0.6rem; gap: 6px;
+}
+.nav-btn {
+  padding: 0.4rem 0.8rem; border-radius: 8px;
+  font-size: 0.75rem; font-weight: 600;
+  border: 1px solid var(--border); cursor: pointer;
+  background: var(--card); color: var(--text);
+  transition: all 0.2s; min-width: 70px;
+  text-align: center;
+}
+.nav-btn:active { background: var(--border-light); }
+.nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.nav-pos { font-size: 0.7rem; color: var(--dim); }
+
+/* Mastery indicator */
+.mastery-bar {
+  display: flex; gap: 3px; margin-bottom: 0.5rem;
+}
+.mastery-dot {
+  flex: 1; height: 4px; border-radius: 2px;
+  background: var(--border-light); transition: background 0.3s;
+}
+.mastery-dot.done { background: var(--green); }
+.mastery-dot.mastered { background: var(--blue); }
+
+/* Footer */
 .footer {
-  text-align: center;
-  padding: 1rem 0.5rem;
-  color: var(--dim);
-  font-size: 0.7rem;
-  margin-top: 0.8rem;
-  position: relative;
-}
-.footer::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--blue), var(--gold), var(--blue), transparent);
-  margin-bottom: 0.6rem;
-  border-radius: 1px;
+  text-align: center; padding: 1rem; color: var(--dim);
+  font-size: 0.65rem; border-top: 1px solid var(--border-light);
+  margin-top: 1rem;
 }
 
-/* ====== Loading & Empty States ====== */
-.loading-state {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--dim);
-  font-size: 0.9rem;
+/* Loading */
+.loading {
+  text-align: center; padding: 3rem 1rem; color: var(--dim);
 }
-.loading-state .spinner {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  border: 3px solid var(--border);
-  border-top-color: var(--blue);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  margin-bottom: 0.5rem;
+.spinner { display: inline-block; width: 24px; height: 24px;
+  border: 3px solid var(--border-light); border-top-color: var(--blue);
+  border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.empty-state {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: var(--dim);
-  font-size: 0.85rem;
-}
 
-/* ====== Responsive ====== */
-@media (max-width: 480px) {
-  .container { padding: 0 0.5rem 1rem; }
-  .header h1 { font-size: 1rem; }
-  .swb { font-size: 0.75rem; padding: 0.4rem 0.2rem; }
-  .kp-name { font-size: 0.78rem; }
-  .kp-head { padding: 6px 8px; grid-template-columns: 24px 1fr; }
-  .co { font-size: 0.76rem; padding: 6px; }
-  .kp-explain { font-size: 0.75rem; padding: 6px 8px; }
-  .pq { font-size: 0.78rem; }
-  .practice-btn { font-size: 0.74rem; padding: 0.4rem 0.6rem; }
+/* Toast */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  background: var(--text); color: #fff; padding: 0.4rem 1rem;
+  border-radius: 20px; font-size: 0.75rem;
+  opacity: 0; transition: opacity 0.3s; z-index: 100;
+  pointer-events: none;
 }
-@media (min-width: 640px) {
-  .kp-head { padding: 9px 12px; }
-  .kp-name { font-size: 0.88rem; }
-  .co { padding: 8px 10px; }
-  .ch-title { font-size: 0.98rem; }
-}
+.toast.show { opacity: 1; }
 </style>
 </head>
 <body>
-
 <div class="container">
-  <!-- Header -->
   <div class="header">
-    <div class="header-top">
-      <a class="back-btn" href="index.html" onclick="if(window.parent&&window.parent.goHome){window.parent.goHome();return false}">‹</a>
-      <h1>📊 高频考点速记</h1>
+    <h1>📚 高频考点速记</h1>
+  </div>
+
+  <div class="subj-tabs" id="subjTabs">
+    <div class="subj-tab on" onclick="switchSubject('fin')">📈 金融基础</div>
+    <div class="subj-tab" onclick="switchSubject('law')">⚖️ 法律法规</div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-area" id="progressArea">
+    <div class="progress-text">
+      <span id="progressLabel">第 0/0 个考点</span>
+      <span id="masteryCount">已掌握 0</span>
     </div>
-    <div class="sw" id="subject-tabs">
-      <span class="swb on" data-subject="fin" onclick="switchSubject('fin')">📈 金融基础</span>
-      <span class="swb" data-subject="law" onclick="switchSubject('law')">⚖️ 法律法规</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- Chapter selector -->
+  <div class="ch-selector" id="chSelector"></div>
+
+  <!-- Card -->
+  <div class="card-area" id="cardArea">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div>加载考点数据...</div>
     </div>
   </div>
 
-  <!-- Loading -->
-  <div id="loading" class="loading-state">
-    <div class="spinner"></div>
-    <div>加载考点数据中…</div>
-    <div style="display:flex;gap:4px;justify-content:center;margin-top:6px;">
-      <button onclick="window.ExamRecorder && downloadRecords()" style="padding:2px 10px;border-radius:6px;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:10px;cursor:pointer;font-weight:600;">💾 导出</button>
-      <button onclick="document.getElementById('importTopBtn').click()" style="padding:2px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--blue);font-size:10px;cursor:pointer;">📥 导入</button>
-    </div>
-    <input type="file" id="importTopBtn" accept=".json" style="display:none" onchange="
-      var f=this.files[0];if(!f)return;
-      var r=new FileReader();r.onload=function(e){
-        if(window.ExamRecorder){
-          var res=window.ExamRecorder.importFromJSON(e.target.result);
-          alert(res.success?'✅ 导入'+res.count+'条记录':'❌ 失败：'+res.error);
-          location.reload();
-        }
-      };r.readAsText(f);this.value='';
-    ">
-  </div>
-
-  <!-- Content -->
-  <div id="sec-fin" class="sec" style="display:none"></div>
-  <div id="sec-law" class="sec" style="display:none"></div>
+  <!-- Mastery dots -->
+  <div class="mastery-bar" id="masteryBar"></div>
 
   <!-- Footer -->
   <div class="footer">
-  <div style="margin-bottom:6px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap;">
-    <button onclick="window.ExamRecorder && downloadRecords()" style="padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--dim);font-size:11px;cursor:pointer;">💾 导出答题记录</button>
-    <button onclick="document.getElementById('importH5Input').click()" style="padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--dim);font-size:11px;cursor:pointer;">📥 导入记录</button>
-    <button onclick="window.ExamRecorder && window.ExamRecorder.clear()" style="padding:3px 10px;border-radius:6px;border:1px solid var(--red);background:var(--red-bg);color:var(--red);font-size:11px;cursor:pointer;">🗑️ 清空</button>
+    <p>⚡ 每天过一遍，考试不慌张</p>
   </div>
-  高频考点速记 · 数据基于V4考频聚类
 </div>
-<input type="file" id="importH5Input" accept=".json" style="display:none" onchange="
-  var f=this.files[0];if(!f)return;
-  var r=new FileReader();r.onload=function(e){
-    if(window.ExamRecorder){
-      var res=window.ExamRecorder.importFromJSON(e.target.result);
-      alert(res.success?'✅ 导入'+res.count+'条记录':'❌ 失败：'+res.error);
-    }
-  };r.readAsText(f);this.value='';
-">
-</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 // ====== State ======
-let dataFin = null;
-let dataLaw = null;
+let dataFin = null, dataLaw = null;
 let currentSubject = 'fin';
+let currentChapter = 0;       // index into knowledgePoints
+let currentPoint = 0;         // index into current chapter's points
+let mastered = {};            // "subject-chIdx-pIdx" -> true
+let knowledgePoints = [];     // flat array of {chName, chIdx, pIdx, point, heat}
 
 // ====== Load Data ======
-async function loadData() {
+async function init() {
   try {
     const [finResp, lawResp] = await Promise.all([
       fetch('gw_fin.json'),
       fetch('gw_law.json')
     ]);
-    if (!finResp.ok) throw new Error('gw_fin.json 加载失败: ' + finResp.status);
-    if (!lawResp.ok) throw new Error('gw_law.json 加载失败: ' + lawResp.status);
+    if (!finResp.ok) throw new Error('gw_fin.json 加载失败');
+    if (!lawResp.ok) throw new Error('gw_law.json 加载失败');
     dataFin = await finResp.json();
     dataLaw = await lawResp.json();
-    document.getElementById('loading').style.display = 'none';
-    renderSubject('fin');
-    document.getElementById('sec-fin').style.display = 'block';
-    renderSubject('law');
+
+    // Load mastered state
+    try {
+      const saved = localStorage.getItem('study_cards_mastered');
+      if (saved) mastered = JSON.parse(saved);
+    } catch(e) {}
+
+    buildKnowledgePoints();
+    renderAll();
   } catch (e) {
-    document.getElementById('loading').style.display = '';
     document.getElementById('loading').innerHTML =
-      '<div style="color:var(--red);font-size:1rem">❌ 加载失败: ' + e.message + '</div>';
+      '<div class="card-empty"><div class="icon">❌</div><div>加载失败: ' + e.message + '</div></div>';
   }
 }
 
-// ====== Subject Switch ======
-function switchSubject(subject) {
-  currentSubject = subject;
-  document.querySelectorAll('.swb').forEach(el => el.classList.toggle('on', el.dataset.subject === subject));
-  document.querySelectorAll('.sec').forEach(el => el.style.display = 'none');
-  const sec = document.getElementById('sec-' + subject);
-  if (sec) sec.style.display = 'block';
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function buildKnowledgePoints() {
+  const data = currentSubject === 'fin' ? dataFin : dataLaw;
+  if (!data) return;
+  knowledgePoints = [];
+  data.forEach((ch, ci) => {
+    const chLabel = ch.chapter ? ch.chapter.replace(/^\s+/, '').replace(/\s+$/, '') : ('第' + (ci+1) + '章');
+    (ch.points || []).forEach((pt, pi) => {
+      knowledgePoints.push({
+        chName: chLabel,
+        chIdx: ci,
+        pIdx: pi,
+        point: pt,
+        heat: pt.heat || 1,
+        totalPoints: (ch.points || []).length
+      });
+    });
+  });
+  // Filter to current chapter
+  updateFilteredPoints();
+}
+
+function updateFilteredPoints() {
+  // Filter: only points where chIdx === currentChapter
+  // Actually we show ALL chapters with chapter filtering
+}
+
+// Get points for current chapter
+function getChapterPoints() {
+  return knowledgePoints.filter(p => p.chIdx === currentChapter);
+}
+
+function getChapters() {
+  const data = currentSubject === 'fin' ? dataFin : dataLaw;
+  if (!data) return [];
+  return data.map((ch, i) => ({
+    index: i,
+    name: ch.chapter ? ch.chapter.replace(/^\s+/, '').replace(/\s+$/, '') : ('第' + (i+1) + '章'),
+    count: (ch.points || []).length
+  }));
 }
 
 // ====== Render ======
-function renderSubject(subject) {
-  const data = subject === 'fin' ? dataFin : dataLaw;
-  const container = document.getElementById('sec-' + subject);
-  if (!data || data.length === 0) {
-    container.innerHTML = '<div class="empty-state">暂无考点数据</div>';
+function renderAll() {
+  renderChapterSelector();
+  renderCard();
+  renderMasteryDots();
+}
+
+function renderChapterSelector() {
+  const chapters = getChapters();
+  const sel = document.getElementById('chSelector');
+  sel.innerHTML = chapters.map((ch, i) =>
+    '<div class="ch-pill' + (i === currentChapter ? ' on' : '') + '" onclick="switchChapter(' + i + ')">'
+    + ch.name + ' <span style="font-weight:400;opacity:0.7">' + ch.count + '</span></div>'
+  ).join('');
+}
+
+function switchChapter(idx) {
+  currentChapter = idx;
+  currentPoint = 0;
+  renderAll();
+}
+
+function switchSubject(subj) {
+  currentSubject = subj;
+  currentChapter = 0;
+  currentPoint = 0;
+
+  document.querySelectorAll('.subj-tab').forEach(t => t.classList.remove('on'));
+  document.querySelector('.subj-tab[onclick*="' + subj + '"]').classList.add('on');
+
+  // Rebuild points from new data
+  buildKnowledgePoints();
+  renderAll();
+}
+
+function renderCard() {
+  const pts = getChapterPoints();
+  const area = document.getElementById('cardArea');
+  const total = pts.length;
+  const pos = currentPoint;
+
+  // Update progress
+  const chPts = getChapterPoints();
+  const masteredCount = chPts.filter(p => isMastered(p)).length;
+  document.getElementById('progressLabel').textContent = total > 0
+    ? '第 ' + (pos + 1) + '/' + total + ' 个考点'
+    : '暂无考点';
+  document.getElementById('masteryCount').textContent = '已掌握 ' + masteredCount;
+  document.getElementById('progressFill').style.width = total > 0 ? ((pos + 1) / total * 100) + '%' : '0%';
+
+  if (total === 0) {
+    area.innerHTML = '<div class="card-empty"><div class="icon">📭</div><div>该章暂无考点</div></div>';
     return;
   }
 
-  let html = '';
-  let pointTotal = 0;
-  data.forEach(ch => { pointTotal += ch.points.length; });
+  const p = pts[pos];
+  if (!p) { currentPoint = 0; renderCard(); return; }
 
-  data.forEach((ch, ci) => {
-    const chLabel = ch.chapter.replace(/^\s+/, '').replace(/\s+$/, '');
-    const pTotal = ch.total || ch.points.length;
-    html += '<div class="ch-title">' + chLabel +
-      ' <span class="ch-w">' + pTotal + '题 · ' + ch.points.length + '个考点</span></div>';
-    html += '<div class="kp-list">';
+  const pt = p.point;
+  const heat = p.heat || 1;
+  const heatLabel = heat >= 3 ? '高频' : (heat >= 2 ? '中频' : '低频');
+  const heatClass = 'h' + heat;
+  const masteredClass = isMastered(p) ? 'success' : 'secondary';
+  const masteredText = isMastered(p) ? '✅ 已掌握' : '○ 标记已掌握';
 
-    ch.points.forEach((pt, pi) => {
-      const heatClass = pt.count >= 4 ? 'h3' : (pt.count >= 2 ? 'h2' : 'h1');
-      const barClass = pt.count >= 4 ? 'high' : (pt.count >= 2 ? 'mid' : 'low');
-      const barPct = Math.min(Math.max(pt.bar_pct || 0, 10), 100);
-      const uniqueId = subject + '-' + ci + '-' + pi;
+  // Parse point content
+  const explain = pt.explain || pt.name || '';
+  const sections = parseExplain(explain);
+  const relation = pt.relation || [];
+  const keywords = pt.keywords || [];
 
-      html += '<div class="kp-item ' + heatClass + '" id="kp-' + uniqueId + '">';
-      html += '<div class="kp-head" onclick="toggleExpand(\'' + uniqueId + '\')">';
-      html += '  <div class="kp-rank">#' + pt.rank + '</div>';
-      html += '  <div class="kp-body">';
-      html += '    <span class="kp-name">' + escapeHtml(pt.name) + '</span>';
-      html += '    <span class="kp-count"><b>' + pt.count + '</b>次</span>';
-      html += '    <span class="kp-arrow">▼</span>';
-      html += '  </div>';
-      html += '</div>';
-      html += '<div class="kp-bar-wrap">';
-      html += '  <div class="kp-bar"><div class="kp-fill ' + barClass + '" style="width:' + barPct + '%"></div></div>';
-      html += '</div>';
+  const heatColor = heat >= 3 ? '#c23b22' : (heat >= 2 ? '#1e5b8a' : '#c9a96e');
 
-      // Detail
-      html += '<div class="kp-detail">';
-      // V5 结构化考点精讲
-      html += renderStructuredExplain(pt);
-      // Practice question
-      if (pt.question && pt.choices) {
-        html += renderPractice(pt, uniqueId);
-      }
-      html += '</div></div>';
-    });
+  area.innerHTML =
+    '<div class="card">' +
+    '<div class="card-heat ' + heatClass + '" style="width:' + (heat * 33) + '%"></div>' +
 
-    html += '</div>';
-  });
+    '<div class="card-hd">' +
+    '<span class="card-rank">#' + (pos + 1) + '</span>' +
+    '<span class="heat-badge ' + heatClass + '">🔥 ' + heatLabel + '</span>' +
+    (keywords.length > 0 ? '<span class="chapter-tag">' + keywords.slice(0, 3).join(' · ') + '</span>' : '') +
+    '</div>' +
 
-  container.innerHTML = html;
+    '<div class="card-title">' + esc(pt.name || '') + '</div>' +
+
+    '<div class="card-body">' +
+      sections.map(s =>
+        '<div class="card-sec ' + s.type + '">' +
+        (s.title ? '<div class="card-sec-title">' + s.title + '</div>' : '') +
+        '<div class="card-sec-body">' + s.content + '</div>' +
+        '</div>'
+      ).join('') +
+    '</div>' +
+
+    '<div class="card-actions">' +
+    '<button class="card-btn ' + masteredClass + '" onclick="toggleMastered()" id="masteryBtn">' + masteredText + '</button>' +
+    (relation.length > 0 ? '<button class="card-btn dim" onclick="showRelated()">🔗 关联题</button>' : '') +
+    '</div>' +
+    '</div>' +
+
+    '<div class="card-nav">' +
+    '<button class="nav-btn" onclick="navPoint(-1)" id="prevBtn"' + (pos <= 0 ? ' disabled' : '') + '>← 上一个</button>' +
+    '<span class="nav-pos">' + (pos + 1) + '/' + total + '</span>' +
+    '<button class="nav-btn" onclick="navPoint(1)" id="nextBtn"' + (pos >= total - 1 ? ' disabled' : '') + '>下一个 →</button>' +
+    '</div>';
 }
 
-function renderStructuredExplain(pt) {
-  let html = '';
-  // 核心概念
-  if (pt.concepts && pt.concepts.length > 0) {
-    html += '<div class="kp-explain"><div class="kp-explain-title">📌 核心概念</div>';
-    pt.concepts.forEach(c => { html += '<p>' + escapeHtml(c) + '</p>'; });
-    html += '</div>';
+function parseExplain(text) {
+  // Try to split structured content
+  const sections = [];
+
+  // Core concept
+  const coreMatch = text.match(/核心[概观]念[：:]\s*([^。]*。?)/);
+  if (coreMatch) {
+    sections.push({ type: 'core', title: '📌 核心概念', content: coreMatch[1] });
   }
-  // 规则要点
-  if (pt.rules && pt.rules.length > 0) {
-    html += '<div class="kp-explain"><div class="kp-explain-title">📋 规则要点</div>';
-    pt.rules.forEach(r => { html += '<p>• ' + escapeHtml(r) + '</p>'; });
-    html += '</div>';
+
+  // Rules
+  const ruleMatch = text.match(/规则要[点点][：:]\s*([^。]*。?)/);
+  if (ruleMatch) {
+    sections.push({ type: 'rule', title: '📋 规则要点', content: ruleMatch[1] });
   }
-  // 例外情况
-  if (pt.exceptions && pt.exceptions.length > 0) {
-    html += '<div class="kp-explain"><div class="kp-explain-title">⚠️ 例外情况</div>';
-    pt.exceptions.forEach(e => { html += '<p>• ' + escapeHtml(e) + '</p>'; });
-    html += '</div>';
+
+  // Exceptions
+  const excMatch = text.match(/例外[情况情].*?[：:]\s*([^。]*。?)/);
+  if (excMatch) {
+    sections.push({ type: 'except', title: '⚠️ 例外情况', content: excMatch[1] });
   }
-  // 考点精讲（原 analysis）
-  if (pt.analysis && pt.analysis !== '略。' && pt.analysis !== '略' && pt.analysis.trim() !== '') {
-    html += '<div class="kp-explain"><div class="kp-explain-title">📝 考点精讲</div>' + escapeHtml(pt.analysis) + '</div>';
+
+  // Key points (bullet points in content)
+  const bulletPoints = text.match(/[•·\-]\s*[^。\n]+[；;。]?/g);
+  if (bulletPoints && !coreMatch && !ruleMatch) {
+    const ul = '<ul>' + bulletPoints.map(b => '<li>' + b.replace(/^[•·\-]\s*/, '') + '</li>').join('') + '</ul>';
+    sections.push({ type: 'keypoint', title: '📝 考点要点', content: ul });
   }
-  return html;
+
+  // If no structure found, show raw text
+  if (sections.length === 0 && text.trim()) {
+    sections.push({ type: 'keypoint', title: '📝 考点精要', content: esc(text) });
+  }
+
+  // If completely empty
+  if (sections.length === 0) {
+    sections.push({ type: 'keypoint', content: '暂无详细内容' });
+  }
+
+  return sections;
 }
 
-function escapeRegex(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\\\$&');
+function renderMasteryDots() {
+  const pts = getChapterPoints();
+  const bar = document.getElementById('masteryBar');
+  if (pts.length === 0) { bar.innerHTML = ''; return; }
+
+  bar.innerHTML = pts.map((p, i) => {
+    const cls = isMastered(p) ? ' mastered' : '';
+    return '<div class="mastery-dot' + cls + '" style="cursor:pointer" onclick="jumpToPoint(' + i + ')" title="' + (i+1) + '"></div>';
+  }).join('');
 }
 
-function renderPractice(pt, uniqueId) {
-  const choiceKeys = Object.keys(pt.choices);
-  const isMulti = pt.type === 'm';
-  const label = isMulti ? '多选' : (pt.type === 'j' ? '判断' : '单选');
-
-  let html = '<div class="kp-practice">';
-  html += '<div class="practice-head">';
-  html += '  <span class="ch-tag ' + pt.type + '">' + label + '</span>';
-  html += '  <span class="practice-label">真题演练</span>';
-  html += '</div>';
-  html += '<div class="pq">' + escapeHtml(pt.question) + '</div>';
-  html += '<div class="opts" id="opts-' + uniqueId + '" data-type="' + pt.type + '" data-answer="' + escapeHtml(pt.answer) + '">';
-
-  choiceKeys.forEach(key => {
-    const val = pt.choices[key];
-    if (val === undefined || val === null) return;
-    html += '<div class="co" data-key="' + key + '" onclick="selectOption(this,\'' + uniqueId + '\')">';
-    html += '  <span class="ck">' + key + '</span>';
-    html += '  <span class="cv">' + escapeHtml(String(val)) + '</span>';
-    html += '</div>';
-  });
-
-  html += '</div>';
-
-  // Action buttons + result area
-  html += '<div class="practice-actions">';
-  html += '  <button class="practice-btn primary" onclick="checkAnswer(\'' + uniqueId + '\')">🔍 核对答案</button>';
-  html += '  <button class="practice-btn reset" onclick="resetPractice(\'' + uniqueId + '\')">🔄 重选</button>';
-  html += '</div>';
-  html += '<div class="result-area" id="result-' + uniqueId + '"></div>';
-  html += '</div>';
-
-  return html;
+function jumpToPoint(idx) {
+  currentPoint = idx;
+  renderAll();
 }
 
-// ====== Interactive Functions ======
-function toggleExpand(uniqueId) {
-  const item = document.getElementById('kp-' + uniqueId);
-  if (item) item.classList.toggle('exp');
+function navPoint(dir) {
+  const pts = getChapterPoints();
+  const next = currentPoint + dir;
+  if (next < 0 || next >= pts.length) return;
+  currentPoint = next;
+  renderAll();
 }
 
-function selectOption(el, uniqueId) {
-  const optsContainer = document.getElementById('opts-' + uniqueId);
-  if (!optsContainer) return;
-  const type = optsContainer.dataset.type;
+function isMastered(p) {
+  if (!p) return false;
+  return !!mastered[currentSubject + '-' + p.chIdx + '-' + p.pIdx];
+}
 
-  // Don't allow interaction if already checked
-  if (optsContainer.classList.contains('checked')) return;
+function toggleMastered() {
+  const pts = getChapterPoints();
+  const p = pts[currentPoint];
+  if (!p) return;
 
-  if (type === 'm') {
-    // Multi-select: toggle
-    el.classList.toggle('selected');
+  const key = currentSubject + '-' + p.chIdx + '-' + p.pIdx;
+  if (mastered[key]) {
+    delete mastered[key];
+    showToast('已取消掌握');
   } else {
-    // Single select / judgment: mutually exclusive
-    optsContainer.querySelectorAll('.co').forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
+    mastered[key] = true;
+    showToast('✅ 标记为已掌握！');
+    // Auto-advance to next
+    setTimeout(() => {
+      if (currentPoint < pts.length - 1) {
+        navPoint(1);
+      }
+    }, 400);
   }
+  localStorage.setItem('study_cards_mastered', JSON.stringify(mastered));
+  renderAll();
 }
 
-function checkAnswer(uniqueId) {
-  const optsContainer = document.getElementById('opts-' + uniqueId);
-  if (!optsContainer) return;
-  const correctAnswer = optsContainer.dataset.answer;
-  const type = optsContainer.dataset.type;
-  const resultDiv = document.getElementById('result-' + uniqueId);
-  if (!resultDiv) return;
-
-  // Disable further interaction
-  optsContainer.classList.add('checked');
-  const options = optsContainer.querySelectorAll('.co');
-
-  // Map correct answers
-  const correctKeys = correctAnswer.split('').map(k => k.trim()).filter(k => k.length === 1);
-
-  // Mark each option
-  let allCorrect = true;
-  let anySelected = false;
-
-  // First pass: mark selections
-  options.forEach(opt => {
-    const key = opt.dataset.key;
-    const isSelected = opt.classList.contains('selected');
-    const isCorrect = correctKeys.includes(key);
-
-    if (isSelected) anySelected = true;
-
-    if (isSelected && isCorrect) {
-      opt.classList.add('correct');
-    } else if (isSelected && !isCorrect) {
-      opt.classList.add('wrong');
-      allCorrect = false;
-    }
-  });
-
-  // Highlight correct answers that weren't selected (for learning)
-  options.forEach(opt => {
-    const key = opt.dataset.key;
-    const isSelected = opt.classList.contains('selected');
-    const isCorrect = correctKeys.includes(key);
-
-    if (isCorrect && !isSelected) {
-      opt.classList.add('correct');
-    }
-    opt.classList.add('disabled');
-  });
-
-  // Check if all correct options are selected and no wrong options selected
-  let fullyCorrect = allCorrect;
-  if (type === 'm') {
-    const selectedKeys = [];
-    options.forEach(opt => {
-      if (opt.classList.contains('selected')) selectedKeys.push(opt.dataset.key);
-    });
-    selectedKeys.sort();
-    const sortedCorrect = [...correctKeys].sort();
-    if (selectedKeys.length !== sortedCorrect.length ||
-        selectedKeys.some((k, i) => k !== sortedCorrect[i])) {
-      fullyCorrect = false;
-    }
-  }
-
-  // Show result
-  if (!anySelected) {
-    resultDiv.className = 'result-area show wrong';
-    resultDiv.innerHTML = '<div class="ra-answer">⚠️ 请先选择答案</div>';
-    // Re-enable
-    optsContainer.classList.remove('checked');
-    options.forEach(opt => opt.classList.remove('disabled'));
-    return;
-  }
-
-  const isCorrect = fullyCorrect;
-  resultDiv.className = 'result-area show ' + (isCorrect ? 'correct' : 'wrong');
-  resultDiv.innerHTML = '<div class="ra-answer">' + (isCorrect ? '✅ 回答正确！' : '❌ 回答错误') + '</div>' +
-    '<div>正确答案：<b>' + correctAnswer + '</b></div>' +
-    '<div class="ra-explain"><i>' + (type === 'm' ? '多选题需全部选对才计为正确' : '') + '</i></div>';
-
-  // ── ──
-  if (window.ExamRecorder) {
-    const qCard = document.getElementById('kp-' + uniqueId);
-    const chGroup = qCard ? qCard.closest('.ch-group') : null;
-    const chapterEl = chGroup ? chGroup.querySelector('.ch-title') : null;
-    const chapter = chapterEl ? chapterEl.textContent.replace(/\(.*?\)/g,'').trim() : '';
-    const qText = qCard ? (qCard.querySelector('.pq') ? qCard.querySelector('.pq').textContent : '') : '';
-    const selectedKeys = [];
-    options.forEach(function(o) { if (o.classList.contains('selected')) selectedKeys.push(o.dataset.key); });
-    window.ExamRecorder.record({
-      questionId: 'h5-' + uniqueId,
-      subject: (document.querySelector('.swb.on') ? (document.querySelector('.swb.on').textContent.indexOf('金融') >= 0 ? '金融市场基础知识' : '证券市场基本法律法规') : ''),
-      chapter: chapter,
-      type: type,
-      typeCn: type === 'm' ? '多选' : (type === 'j' ? '判断' : '单选'),
-      question: qText,
-      userAnswer: selectedKeys.sort().join(''),
-      correctAnswer: correctAnswer,
-      isCorrect: isCorrect,
-      source: 'H5速记'
-    });
-  }
+function showRelated() {
+  showToast('🔗 关联题目功能开发中...');
 }
 
-function resetPractice(uniqueId) {
-  const optsContainer = document.getElementById('opts-' + uniqueId);
-  const resultDiv = document.getElementById('result-' + uniqueId);
-  if (!optsContainer) return;
-
-  optsContainer.classList.remove('checked');
-  optsContainer.querySelectorAll('.co').forEach(opt => {
-    opt.classList.remove('selected', 'correct', 'wrong', 'disabled');
-  });
-  if (resultDiv) {
-    resultDiv.className = 'result-area';
-    resultDiv.innerHTML = '';
-  }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
 }
 
-// ====== Helper ======
-function escapeHtml(str) {
-  if (str === null || str === undefined) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+function esc(s) {
+  if (!s) return '';
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
 }
 
-// ====== Init ======
-document.addEventListener('DOMContentLoaded', loadData);
+// Start
+init();
 </script>
-<script src="recorder.js"></script>
 </body>
 </html>
