@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>证券从业资格 · 备考全景系统</title>
+
+<style>
+:root{--bg:#f5efe6;--card:#fff;--border:#d4c5a9;--text:#2c1810;--dim:#8b7355;--blue:#1e5b8a;--red:#c23b22;--green:#3d7246;--gold:#c9a96e;--orange:#d4833a}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:1.5rem}
+.container{max-width:1100px;margin:0 auto}
+.header{text-align:center;padding:2rem 0;border-bottom:3px solid var(--gold);margin-bottom:2rem}
+.header h1{font-size:2rem;font-weight:800;color:var(--blue)}
+.header .sub{color:var(--dim);margin-top:.5rem;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:1rem}
+.card h2{color:var(--blue);font-size:1.2rem;margin-bottom:.8rem;border-left:4px solid var(--gold);padding-left:.8rem}
+.card h3{color:var(--text);font-size:1rem;margin:.6rem 0 .4rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.stat-box .num{font-size:1.8rem;font-weight:800;color:var(--blue)}
+.stat-box .label{font-size:.8rem;color:var(--dim)}
+.chapter{background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:.6rem;overflow:hidden}
+.chapter-header{padding:.8rem 1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#f8f4ec,#f0e8d8)}
+.chapter-header:hover{background:linear-gradient(135deg,#f0e8d8,#e8dcc8)}
+.chapter-header .name{font-weight:600;color:var(--blue)}
+.chapter-header .count{font-size:.8rem;color:var(--dim)}
+.chapter-body{padding:.5rem 1rem 1rem;display:none}
+.section{padding:.4rem 0;display:flex;justify-content:space-between;font-size:.9rem;border-bottom:1px dashed #eee}
+.section:last-child{border:none}
+.section .sname{color:var(--text)}
+.section .scount{color:var(--dim);font-size:.8rem}
+.bar{height:6px;background:#e8dcc8;border-radius:3px;margin:.3rem 0;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.tabs{display:flex;gap:2px;margin-bottom:1rem}
+.tab{padding:.6rem 1.2rem;border:1px solid var(--border);border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;background:#f0e8d8;font-size:.9rem;font-weight:600;color:var(--dim)}
+.tab.active{background:var(--card);color:var(--blue)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.paper-item{padding:.6rem;background:var(--card);border:1px solid var(--border);border-radius:6px;margin-bottom:.5rem}
+.paper-item .pname{font-weight:500;font-size:.9rem}
+.paper-item .pmeta{font-size:.8rem;color:var(--dim);margin-top:.2rem}
+.footer{text-align:center;padding:2rem;color:var(--dim);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+@media print{body{background:#fff} .chapter-body{display:block!important}}
+</style>
+</head><body>
+<div class="container">
+<div class="header">
+<h1>📚 证券从业资格 · 备考全景系统</h1>
+<div class="sub">基于233网校真实章节结构 · 精确到每节的题量分布</div>
+</div>
+
+
+<div class="stats">
+<div class="stat-box"><div class="num">3153</div><div class="label">总题库量</div></div>
+<div class="stat-box"><div class="num">13</div><div class="label">总章数</div></div>
+<div class="stat-box"><div class="num">67</div><div class="label">总节数</div></div>
+<div class="stat-box"><div class="num">60%</div><div class="label">及格线</div></div>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="switchTab(0)">金融基础</div>
+<div class="tab" onclick="switchTab(1)">法律法规</div>
+</div>
+<div class="tab-content active" id="tab0">
+
+    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+    <div class="stat-box"><div class="num">8</div><div class="label">章</div></div>
+    <div class="stat-box"><div class="num">36</div><div class="label">节</div></div>
+    <div class="stat-box"><div class="num">1700</div><div class="label">总题量</div></div>
+    <div class="stat-box"><div class="num">17</div><div class="label">试卷数</div></div>
+    </div>
+    
+<div class="card"><h2>📖 章节结构</h2>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第一章 金融市场体系</span>
+        <span class="count">84题 (2.7%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:2.7%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 金融市场概述</span><span class="scount">39题</span></div>
+<div class="section"><span class="sname">第二节 全球金融市场</span><span class="scount">45题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第二章 中国的金融体系与多层次资本市场</span>
+        <span class="count">225题 (7.1%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:7.1%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 中国的金融体系</span><span class="scount">160题</span></div>
+<div class="section"><span class="sname">第二节 中国的多层次资本市场</span><span class="scount">65题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第三章 证券市场主体</span>
+        <span class="count">355题 (11.3%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:11.3%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 证券发行人</span><span class="scount">24题</span></div>
+<div class="section"><span class="sname">第二节 证券投资者</span><span class="scount">84题</span></div>
+<div class="section"><span class="sname">第三节 证券中介机构</span><span class="scount">142题</span></div>
+<div class="section"><span class="sname">第四节 自律性组织</span><span class="scount">53题</span></div>
+<div class="section"><span class="sname">第五节 投资者保护机构</span><span class="scount">27题</span></div>
+<div class="section"><span class="sname">第六节 证券市场监管机构</span><span class="scount">25题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第四章 股票</span>
+        <span class="count">370题 (11.7%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:11.7%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 股票概述</span><span class="scount">113题</span></div>
+<div class="section"><span class="sname">第二节 股票发行</span><span class="scount">44题</span></div>
+<div class="section"><span class="sname">第三节 股票交易</span><span class="scount">113题</span></div>
+<div class="section"><span class="sname">第四节 股票估值</span><span class="scount">100题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第五章 债券</span>
+        <span class="count">298题 (9.5%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:9.5%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 债券概述</span><span class="scount">142题</span></div>
+<div class="section"><span class="sname">第二节 债券的发行</span><span class="scount">66题</span></div>
+<div class="section"><span class="sname">第三节 债券交易</span><span class="scount">58题</span></div>
+<div class="section"><span class="sname">第四节 债券估值</span><span class="scount">32题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第六章 证券投资基金</span>
+        <span class="count">180题 (5.7%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:5.7%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 证券投资基金概述</span><span class="scount">54题</span></div>
+<div class="section"><span class="sname">第二节 证券投资基金的运作与业务流程</span><span class="scount">34题</span></div>
+<div class="section"><span class="sname">第三节 基金的估值、费用与利润分配</span><span class="scount">29题</span></div>
+<div class="section"><span class="sname">第四节 基金的管理</span><span class="scount">14题</span></div>
+<div class="section"><span class="sname">第五节 基金的监管与信息披露</span><span class="scount">16题</span></div>
+<div class="section"><span class="sname">第六节 私募证券投资基金</span><span class="scount">14题</span></div>
+<div class="section"><span class="sname">第七节 基础设施公募REITs</span><span class="scount">19题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第七章 金融衍生工具</span>
+        <span class="count">93题 (2.9%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:2.9%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 金融衍生工具概述</span><span class="scount">25题</span></div>
+<div class="section"><span class="sname">第二节 期货与期权交易</span><span class="scount">47题</span></div>
+<div class="section"><span class="sname">第三节 远期与互换交易</span><span class="scount">13题</span></div>
+<div class="section"><span class="sname">第四节 其他衍生工具</span><span class="scount">8题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第八章 金融风险管理</span>
+        <span class="count">95题 (3.0%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:3.0%;background:var(--blue)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 风险管理概述</span><span class="scount">17题</span></div>
+<div class="section"><span class="sname">第二节 金融风险管理流程与证券公司风险管理架构</span><span class="scount">30题</span></div>
+<div class="section"><span class="sname">第三节 市场风险管理</span><span class="scount">14题</span></div>
+<div class="section"><span class="sname">第四节 信用风险管理</span><span class="scount">8题</span></div>
+<div class="section"><span class="sname">第五节 流动性风险管理</span><span class="scount">13题</span></div>
+<div class="section"><span class="sname">第六节 操作风险和声誉风险管理及其他</span><span class="scount">8题</span></div>
+<div class="section"><span class="sname">第七节 我国证券公司风险管理实践</span><span class="scount">5题</span></div>
+</div></div>
+</div>
+<div class="card"><h2>📝 试卷列表</h2>
+<div class="paper-item"><div class="pname">2026年4月证券《金融市场基础知识》（考生回忆版：更新107题）</div><div class="pmeta">107题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2025年11月证券《金融市场基础知识》（考生回忆版：更新73题）</div><div class="pmeta">73题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2025年6月证券《金融市场基础知识》真题（考生回忆版-117题）</div><div class="pmeta">117题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2025年8月证券《金融市场基础知识》真题（考生回忆版：更新92题）</div><div class="pmeta">92题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2025年3月证券《金融市场基础知识》考生回忆版（更新103题）</div><div class="pmeta">103题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2024年下半年证券从业《金融市场基础知识》真题卷（更新78题）</div><div class="pmeta">78题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2024年证券从业《金融市场基础知识》真题卷（更新108题）</div><div class="pmeta">108题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2023年证券从业资格考试《金融市场基础知识》真题汇编三（考生回忆版）</div><div class="pmeta">110题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2023年证券从业资格考试《金融市场基础知识》真题汇编二（考生回忆版）</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2023年证券从业资格考试《金融市场基础知识》真题汇编一（考生回忆版）</div><div class="pmeta">110题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年证券从业资格考试《金融市场基础知识》模拟卷一</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年证券从业资格考试《金融市场基础知识》冲刺卷一</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年6月证券从业资格考试《金融市场基础知识》模考大赛（王佳荣老师亲编）</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年6月证券从业资格考试《金融市场基础知识》模考大赛</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年8月证券从业资格考试《金融市场基础知识》模考大赛</div><div class="pmeta">0题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年9月证券从业资格考试《金融市场基础知识》模考大赛</div><div class="pmeta">0题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年11月证券从业资格考试《金融市场基础知识》模考大赛</div><div class="pmeta">0题 · 120分钟</div></div>
+</div>
+</div>
+<div class="tab-content" id="tab1">
+
+    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+    <div class="stat-box"><div class="num">5</div><div class="label">章</div></div>
+    <div class="stat-box"><div class="num">31</div><div class="label">节</div></div>
+    <div class="stat-box"><div class="num">1453</div><div class="label">总题量</div></div>
+    <div class="stat-box"><div class="num">8</div><div class="label">试卷数</div></div>
+    </div>
+    
+<div class="card"><h2>📖 章节结构</h2>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第一章 证券市场基本法律法规</span>
+        <span class="count">423题 (13.4%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:13.4%;background:var(--red)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 证券市场的法律法规体系</span><span class="scount">32题</span></div>
+<div class="section"><span class="sname">第二节 公司法</span><span class="scount">114题</span></div>
+<div class="section"><span class="sname">第三节 合伙企业法</span><span class="scount">16题</span></div>
+<div class="section"><span class="sname">第四节 证券法</span><span class="scount">99题</span></div>
+<div class="section"><span class="sname">第五节 证券投资基金法</span><span class="scount">53题</span></div>
+<div class="section"><span class="sname">第六节 期货和衍生品法</span><span class="scount">20题</span></div>
+<div class="section"><span class="sname">第七节 证券公司监督管理条例</span><span class="scount">72题</span></div>
+<div class="section"><span class="sname">第八节 证券公司风险处置条例</span><span class="scount">7题</span></div>
+<div class="section"><span class="sname">第九节 私募投资基金监督管理条例</span><span class="scount">10题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第二章 证券经营机构管理规范</span>
+        <span class="count">332题 (10.5%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:10.5%;background:var(--red)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 公司治理、内部控制与合规管理</span><span class="scount">136题</span></div>
+<div class="section"><span class="sname">第二节 证券公司风险管理</span><span class="scount">82题</span></div>
+<div class="section"><span class="sname">第三节 证券公司并表管理</span><span class="scount">20题</span></div>
+<div class="section"><span class="sname">第四节 投资者适当性管理</span><span class="scount">47题</span></div>
+<div class="section"><span class="sname">第五节 证券公司反洗钱和反恐怖融资工作</span><span class="scount">19题</span></div>
+<div class="section"><span class="sname">第六节 证券公司信息技术及网络数据管理</span><span class="scount">16题</span></div>
+<div class="section"><span class="sname">第七节  证券公司网络和信息安全管理</span><span class="scount">12题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第三章 证券公司业务规范</span>
+        <span class="count">462题 (14.7%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:14.7%;background:var(--red)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 证券经纪</span><span class="scount">27题</span></div>
+<div class="section"><span class="sname">第二节 证券投资咨询</span><span class="scount">66题</span></div>
+<div class="section"><span class="sname">第三节 与证券交易、证券投资活动有关的财务顾问</span><span class="scount">33题</span></div>
+<div class="section"><span class="sname">第四节 证券承销与保荐</span><span class="scount">44题</span></div>
+<div class="section"><span class="sname">第五节 证券公司融资融券及其他信用业务</span><span class="scount">97题</span></div>
+<div class="section"><span class="sname">第六节 证券自营</span><span class="scount">30题</span></div>
+<div class="section"><span class="sname">第七节 资产管理业务</span><span class="scount">68题</span></div>
+<div class="section"><span class="sname">第八节 证券公司全国股份转让系统业务及柜台市场业务</span><span class="scount">31题</span></div>
+<div class="section"><span class="sname">第九节 其他业务</span><span class="scount">66题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第四章 证券市场典型违法违规行为及法律责任</span>
+        <span class="count">119题 (3.8%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:3.8%;background:var(--red)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节 证券一级市场</span><span class="scount">82题</span></div>
+<div class="section"><span class="sname">第二节 证券二级市场</span><span class="scount">37题</span></div>
+</div></div>
+
+        <div class="chapter">
+        <div class="chapter-header" onclick="toggle(this)">
+        <span class="name">第五章  行业文化、职业道德与从业人员行为规范</span>
+        <span class="count">117题 (3.7%) <span style="margin-left:8px">▶</span></span>
+        </div>
+        <div class="bar"><div class="bar-fill" style="width:3.7%;background:var(--red)"></div></div>
+        <div class="chapter-body">
+        
+<div class="section"><span class="sname">第一节  证券行业文化建设</span><span class="scount">20题</span></div>
+<div class="section"><span class="sname">第二节 证券公司及其工作人员廉洁从业规定</span><span class="scount">19题</span></div>
+<div class="section"><span class="sname">第三节  证券市场诚信管理及禁入措施</span><span class="scount">8题</span></div>
+<div class="section"><span class="sname">第四节  从业人员行为规范</span><span class="scount">70题</span></div>
+</div></div>
+</div>
+<div class="card"><h2>📝 试卷列表</h2>
+<div class="paper-item"><div class="pname">2026年4月证券从业《证券市场基本法律法规》真题（考生回忆版-58题）</div><div class="pmeta">58题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年证券从业资格考试《证券市场基本法律法规》模拟卷一</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年证券从业资格考试《证券市场基本法律法规》冲刺卷一</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年6月证券从业资格考试《证券市场基本法律法规》模考大赛（孙婧老师亲编）</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年6月证券从业资格考试《证券市场基本法律法规》模考大赛</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年8月证券从业资格考试《证券市场基本法律法规》模考大赛【提分卷】</div><div class="pmeta">0题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年9月证券从业资格考试《证券市场基本法律法规》模考大赛</div><div class="pmeta">120题 · 120分钟</div></div>
+<div class="paper-item"><div class="pname">2026年11月证券从业资格考试《证券市场基本法律法规》模考大赛</div><div class="pmeta">0题 · 120分钟</div></div>
+</div>
+</div>
+
+<script>
+function toggle(el){
+    var body=el.parentElement.querySelector('.chapter-body');
+    var arrow=el.querySelector('.count span');
+    if(body.style.display==='block'){
+        body.style.display='none';
+        arrow.textContent='▶';
+    }else{
+        body.style.display='block';
+        arrow.textContent='▼';
+    }
+}
+function switchTab(n){
+    document.querySelectorAll('.tab').forEach((t,i)=>{
+        t.classList.toggle('active',i===n);
+    });
+    document.querySelectorAll('.tab-content').forEach((t,i)=>{
+        t.classList.toggle('active',i===n);
+    });
+}
+</script>
+<div class="footer">
+<p>📊 数据来源：233网校API · 章节结构精确到每节题量 · 持续更新</p>
+<p>⚡ 知而不行，只是未知 — 主上大人必胜！</p>
+</div>
+</div></body></html>
