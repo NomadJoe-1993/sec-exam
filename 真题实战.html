@@ -164,6 +164,8 @@ function renderQ() {
       (q.explanation ? '<div class="answer-text">📖 ' + esc(q.explanation) + '</div>' : '') +
       (q.chapter ? '<div class="answer-chapter">📌 ' + esc(q.chapter) + '</div>' : '') +
       '</div>';
+  } else if ((q.type === 'multi' || (q.answer && q.answer.length > 1)) && st.selected.length > 0) {
+    html += '<button class="btn-primary" style="margin-top:10px;width:100%" onclick="submitMulti()">✅ 确认答案</button>';
   }
   html += '</div>';
   document.getElementById('q-container').innerHTML = html;
@@ -194,20 +196,16 @@ function selectOpt(key) {
   renderQ();
 }
 
-// Multi-select submit via double-click or 确认 button
-document.addEventListener('click', function(e) {
-  var q = currentPaper ? ALL_PAPERS[currentPaper][currentIdx] : null;
-  if (!q) return;
-  var st = state[currentIdx] || {};
-  if (st.revealed || !st.selected || st.selected.length === 0) return;
-  if (q.type === 'multi' || (q.answer && q.answer.length > 1)) {
-    st.done = true;
-    st.correct = q.answer === st.selected.join('');
-    st.revealed = true;
-    state[currentIdx] = st;
-    renderQ();
-  }
-});
+function submitMulti() {
+  var q = ALL_PAPERS[currentPaper][currentIdx];
+  var st = state[currentIdx];
+  if (!st || st.selected.length === 0) return;
+  st.done = true;
+  st.correct = q.answer === st.selected.join('');
+  st.revealed = true;
+  state[currentIdx] = st;
+  renderQ();
+}
 
 // Single click on an option for single-choice submits immediately
 // Already handled in selectOpt
