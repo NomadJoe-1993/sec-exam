@@ -416,7 +416,16 @@ function closeRecordModal() {
   document.getElementById('record-modal').classList.remove('show');
 }
 
-// 初始渲染
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// 点击弹窗外部关闭
+document.addEventListener('click', function(e) {
+  var overlay = document.getElementById('record-modal');
+  if (overlay && overlay.classList.contains('show') && e.target === overlay) {
+    closeRecordModal();
+  }
+});
+
 document.addEventListener('DOMContentLoaded', renderDashboard);
 
 // 实时更新：监听新记录
