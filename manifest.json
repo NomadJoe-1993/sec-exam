@@ -16,12 +16,7 @@
       "desc": "知识框架一览 · 建立楼层感",
       "color": "#f59e0b",
       "items": [
-        {
-          "id": "证券从业_知识地图",
-          "title": "金融基础 + 法律法规",
-          "subject": "章节目录 · 知识框架",
-          "count": 13
-        }
+        {"id": "证券从业_知识地图", "title": "金融基础 + 法律法规", "subject": "章节目录 · 知识框架", "count": 13}
       ]
     },
     {
@@ -52,17 +47,25 @@
     {
       "id": "paper",
       "title": "🎯 冲刺试卷 · 题型专项",
-      "desc": "按题型突击 · 单选/多选/判断/不定项",
+      "desc": "按科目+题型突击",
       "color": "#34d399",
       "items": [
-        {"id": "sprint_单选冲刺_1", "title": "单选冲刺1 · 单选题专项", "subject": "全科", "count": 40},
-        {"id": "sprint_单选冲刺_2", "title": "单选冲刺2 · 单选题专项", "subject": "全科", "count": 40},
-        {"id": "sprint_多选冲刺_1", "title": "多选冲刺1 · 多选题专项", "subject": "全科", "count": 40},
-        {"id": "sprint_多选冲刺_2", "title": "多选冲刺2 · 多选题专项", "subject": "全科", "count": 40},
-        {"id": "sprint_判断冲刺_1", "title": "判断冲刺1 · 判断题专项", "subject": "全科", "count": 30},
-        {"id": "sprint_判断冲刺_2", "title": "判断冲刺2 · 判断题专项", "subject": "全科", "count": 30},
-        {"id": "sprint_不定项冲刺_1", "title": "不定项冲刺1 · 不定项选择专项", "subject": "全科", "count": 20},
-        {"id": "sprint_不定项冲刺_2", "title": "不定项冲刺2 · 不定项选择专项", "subject": "全科", "count": 20},
+        {"id": "sprint_金融基础_单选冲刺_1", "title": "金融基础 · 单选冲刺1", "subject": "金融市场基础知识", "count": 40},
+        {"id": "sprint_金融基础_单选冲刺_2", "title": "金融基础 · 单选冲刺2", "subject": "金融市场基础知识", "count": 40},
+        {"id": "sprint_金融基础_多选冲刺_1", "title": "金融基础 · 多选冲刺1", "subject": "金融市场基础知识", "count": 40},
+        {"id": "sprint_金融基础_多选冲刺_2", "title": "金融基础 · 多选冲刺2", "subject": "金融市场基础知识", "count": 40},
+        {"id": "sprint_金融基础_判断冲刺_1", "title": "金融基础 · 判断冲刺1", "subject": "金融市场基础知识", "count": 30},
+        {"id": "sprint_金融基础_判断冲刺_2", "title": "金融基础 · 判断冲刺2", "subject": "金融市场基础知识", "count": 30},
+        {"id": "sprint_金融基础_不定项冲刺_1", "title": "金融基础 · 不定项冲刺1", "subject": "金融市场基础知识", "count": 20},
+        {"id": "sprint_金融基础_不定项冲刺_2", "title": "金融基础 · 不定项冲刺2", "subject": "金融市场基础知识", "count": 20},
+        {"id": "sprint_法律法规_单选冲刺_1", "title": "法律法规 · 单选冲刺1", "subject": "证券市场基本法律法规", "count": 40},
+        {"id": "sprint_法律法规_单选冲刺_2", "title": "法律法规 · 单选冲刺2", "subject": "证券市场基本法律法规", "count": 40},
+        {"id": "sprint_法律法规_多选冲刺_1", "title": "法律法规 · 多选冲刺1", "subject": "证券市场基本法律法规", "count": 40},
+        {"id": "sprint_法律法规_多选冲刺_2", "title": "法律法规 · 多选冲刺2", "subject": "证券市场基本法律法规", "count": 40},
+        {"id": "sprint_法律法规_判断冲刺_1", "title": "法律法规 · 判断冲刺1", "subject": "证券市场基本法律法规", "count": 30},
+        {"id": "sprint_法律法规_判断冲刺_2", "title": "法律法规 · 判断冲刺2", "subject": "证券市场基本法律法规", "count": 30},
+        {"id": "sprint_法律法规_不定项冲刺_1", "title": "法律法规 · 不定项冲刺1", "subject": "证券市场基本法律法规", "count": 20},
+        {"id": "sprint_法律法规_不定项冲刺_2", "title": "法律法规 · 不定项冲刺2", "subject": "证券市场基本法律法规", "count": 20},
         {"id": "sprint_不定项特训", "title": "🌟 不定项特训 · 案例综合题", "subject": "全科", "count": 20}
       ]
     },
