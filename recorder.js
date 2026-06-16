@@ -44,6 +44,8 @@
         isCorrect: opts.isCorrect || false,
         timestamp: Date.now(),
         source: opts.source || '',
+        // 选项（用于详情弹窗展示）
+        choices: opts.choices || null,
         // 知识点
         knowledgePoint: opts.knowledgePoint || '',
       };
