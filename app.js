@@ -290,6 +290,7 @@ function submitExam() {
         userAnswer: userAns[q.id] || '',
         correctAnswer: q.a || '',
         isCorrect: isCorrect,
+        choices: q.c || {},
         source: curExam.subject === '章节高频考点' ? '章节练习' : (curExam.subject || '试卷')
       });
     }

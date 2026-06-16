@@ -223,6 +223,7 @@ function recordAnswer(q, st) {
     userAnswer: st.selected.join(''),
     correctAnswer: q.answer || '',
     isCorrect: st.correct,
+    choices: q.c || {},
     source: '真题实战'
   });
 }

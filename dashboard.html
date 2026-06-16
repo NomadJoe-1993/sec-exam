@@ -123,6 +123,42 @@ body {
   .type-grid { grid-template-columns:1fr; }
   .item .label { min-width:100px; font-size:0.78rem; }
 }
+
+/* ── 答题详情弹窗 ── */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(61,50,41,0.5);
+  justify-content:center; align-items:center;
+  padding:1rem;
+}
+.modal-overlay.show { display:flex; }
+.modal-box {
+  background:var(--card); border-radius:12px;
+  max-width:500px; width:100%; max-height:80vh; overflow-y:auto;
+  padding:1.2rem; box-shadow:0 8px 32px rgba(61,50,41,0.2);
+  position:relative;
+}
+.modal-close {
+  position:absolute; top:8px; right:12px;
+  font-size:1.2rem; cursor:pointer; color:var(--text-dim);
+  background:none; border:none; padding:4px 8px;
+}
+.modal-close:hover { color:var(--text); }
+.modal-box .mq { font-size:0.92rem; line-height:1.7; margin-bottom:0.6rem; }
+.modal-box .mq-meta { font-size:0.75rem; color:var(--text-dim); margin-bottom:0.8rem; }
+.modal-box .mq-opt {
+  padding:0.4rem 0.6rem; margin:3px 0; border-radius:6px;
+  font-size:0.85rem; border:1px solid var(--border-light);
+}
+.modal-box .mq-opt.correct { background:var(--green-bg); border-color:var(--green); }
+.modal-box .mq-opt.wrong { background:var(--red-bg); border-color:var(--red); }
+.modal-box .mq-opt.neutral { background:var(--card-alt); border-color:var(--border-light); }
+.modal-box .mq-result {
+  text-align:center; padding:0.6rem; border-radius:8px;
+  font-size:0.9rem; font-weight:700; margin:0.6rem 0;
+}
+.modal-box .mq-result.pass { background:var(--green-bg); color:var(--green); }
+.modal-box .mq-result.fail { background:var(--red-bg); color:var(--red); }
 </style>
 </head>
 <body>
@@ -192,6 +228,11 @@ body {
   <div class="footer" style="text-align:center;padding:1rem;color:var(--text-dim);font-size:0.68rem;border-top:1px solid var(--border-light);margin-top:0.8rem;">
     数据存储于浏览器本地 · 导出备份以防丢失
   </div>
+</div>
+
+<!-- 答题详情弹窗 -->
+<div class="modal-overlay" id="record-modal">
+  <div class="modal-box" id="record-modal-content"></div>
 </div>
 
 <script src="recorder.js"></script>
@@ -266,7 +307,7 @@ function renderDashboard() {
         const time = new Date(r.timestamp).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
         const icon = r.isCorrect ? '✅' : '❌';
         const qText = (r.question || '').substring(0, 50);
-        return `<div class="item">
+        return `<div class="item" style="cursor:pointer" onclick='showRecordDetail(${JSON.stringify(r).replace(/'/g,"\\'")})'>
           <span style="font-size:0.72rem;color:var(--text-dim);min-width:40px;">${time}</span>
           <span style="font-size:0.72rem;color:var(--text-dim);min-width:55px;">${r.source || ''}</span>
           <span style="flex:1;font-size:0.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${qText}...</span>
@@ -280,7 +321,7 @@ function renderDashboard() {
     const time = new Date(r.timestamp).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
     const cls = r.isCorrect ? 'ok' : 'fail';
     const icon = r.isCorrect ? '✅' : '❌';
-    return `<tr>
+    return `<tr style="cursor:pointer" onclick='showRecordDetail(${JSON.stringify(r).replace(/'/g,"\\'")})'>
       <td>${time}</td>
       <td>${r.source || ''}</td>
       <td>${(r.chapter || '').substring(0,25)}</td>
@@ -310,6 +351,69 @@ function importRecords(event) {
   };
   reader.readAsText(file);
   event.target.value = '';
+}
+
+function showRecordDetail(r) {
+  if (!r) return;
+  var overlay = document.getElementById('record-modal');
+  var box = document.getElementById('record-modal-content');
+  
+  var icon = r.isCorrect ? '✅' : '❌';
+  var resultCls = r.isCorrect ? 'pass' : 'fail';
+  var resultText = r.isCorrect ? '✓ 回答正确' : '✗ 回答错误';
+  var typeLabel = r.typeCn || r.type || '';
+  
+  var optHtml = '';
+  if (r.choices && typeof r.choices === 'object') {
+    var keys = Object.keys(r.choices).sort();
+    var userSet = (r.userAnswer || '').split('');
+    var corrSet = (r.correctAnswer || '').split('');
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var cls = 'neutral';
+      if (corrSet.indexOf(k) >= 0) cls = 'correct';
+      if (userSet.indexOf(k) >= 0 && corrSet.indexOf(k) < 0) cls = 'wrong';
+      optHtml += '<div class="mq-opt ' + cls + '">' + k + '. ' + esc(r.choices[k] + '') + '</div>';
+    }
+  } else if (r.options && Array.isArray(r.options)) {
+    var userSet = (r.userAnswer || '').split('');
+    var corrSet = (r.correctAnswer || '').split('');
+    for (var i = 0; i < r.options.length; i++) {
+      var opt = r.options[i];
+      var k = opt.charAt(0);
+      var cls = 'neutral';
+      if (corrSet.indexOf(k) >= 0) cls = 'correct';
+      if (userSet.indexOf(k) >= 0 && corrSet.indexOf(k) < 0) cls = 'wrong';
+      optHtml += '<div class="mq-opt ' + cls + '">' + esc(opt) + '</div>';
+    }
+  }
+  
+  var qText = (r.question || '');
+  var subj = r.subject || '';
+  var chap = r.chapter || '';
+  var time = r.timestamp ? new Date(r.timestamp).toLocaleString('zh-CN') : '';
+  
+  box.innerHTML = '<button class="modal-close" onclick="closeRecordModal()">✕</button>'
+    + '<div class="mq-result ' + resultCls + '">' + icon + ' ' + resultText + '</div>'
+    + '<div class="mq">' + esc(qText) + '</div>'
+    + '<div class="mq-meta">'
+    + (typeLabel ? '📌 ' + typeLabel + ' &nbsp;' : '')
+    + (subj ? '📖 ' + esc(subj) + ' &nbsp;' : '')
+    + (chap ? '📂 ' + esc(chap) : '')
+    + '</div>'
+    + (optHtml ? '<div style="margin:8px 0">' + optHtml + '</div>' : '')
+    + '<div style="display:flex;gap:12px;font-size:0.8rem;margin-top:10px;padding-top:8px;border-top:1px solid var(--border-light);color:var(--text-dim);flex-wrap:wrap;">'
+    + '<span>你的答案：<b>' + esc(r.userAnswer || '未选') + '</b></span>'
+    + '<span>正确答案：<b style="color:var(--green)">' + esc(r.correctAnswer || '') + '</b></span>'
+    + '<span>' + esc(r.source || '') + '</span>'
+    + (time ? '<span>' + time + '</span>' : '')
+    + '</div>';
+  
+  overlay.classList.add('show');
+}
+
+function closeRecordModal() {
+  document.getElementById('record-modal').classList.remove('show');
 }
 
 // 初始渲染
