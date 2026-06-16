@@ -187,7 +187,7 @@ function renderQ() {
 
   document.getElementById('q-num').textContent = q.id || (curIdx + 1);
   const tag = document.getElementById('q-tag');
-  const tmap = { single:'单选', multi:'多选', judge:'判断' };
+  const tmap = { single:'单选', multi:'多选', judge:'判断', comprehensive:'不定项' };
   tag.textContent = tmap[q.type] || q.type; tag.className = 'q-tag ' + q.type;
   document.getElementById('q-text').textContent = q.q;
   document.getElementById('exam-counter').textContent = q.id + ' / ' + total;
@@ -224,7 +224,7 @@ function renderQ() {
 function select(key) {
   if (submitted) return;
   const q = curExam.questions[curIdx];
-  if (q.type === 'multi') {
+  if (q.type === 'multi' || q.type === 'comprehensive') {
     const s = userAns[q.id] || '';
     userAns[q.id] = s.includes(key) ? s.replace(key,'') : (s+key).split('').sort().join('');
   } else userAns[q.id] = key;
@@ -279,7 +279,7 @@ function submitExam() {
     }
     // ── 记录每题答题结果 ──
     if (window.ExamRecorder) {
-      var typeCn = q.type === 'multi' ? '多选' : (q.type === 'judge' ? '判断' : '单选');
+      var typeCn = q.type === 'multi' ? '多选' : (q.type === 'judge' ? '判断' : (q.type === 'comprehensive' ? '不定项' : '单选'));
       window.ExamRecorder.record({
         questionId: curExam.id + '-' + q.id,
         subject: examSubject,
