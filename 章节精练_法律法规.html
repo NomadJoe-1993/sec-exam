@@ -717,6 +717,23 @@ function checkAnswer(idx) {
     + '</div><div class="a-text">' + (q.an || '暂无解析') + '</div>';
   document.querySelector('#qc-' + idx + ' .btn-secondary').style.display = '';
   renderStats();
+  
+  // ── 记录到学情看板 ──
+  if (window.ExamRecorder) {
+    var typeCn = q.type === 'multi' ? '多选' : (q.type === 'judge' ? '判断' : (q.type === 'comprehensive' ? '不定项' : '单选'));
+    window.ExamRecorder.record({
+      questionId: SUBJECT + '-' + idx,
+      subject: SUBJECT === '金融市场基础知识' ? '金融市场基础知识' : '证券市场基本法律法规',
+      chapter: '第' + (currentCh + 1) + '章',
+      type: q.type === 'judge' ? 'j' : (q.type === 'multi' ? 'm' : (q.type === 'comprehensive' ? 'c' : 's')),
+      typeCn: typeCn,
+      question: q.q || '',
+      userAnswer: userAns,
+      correctAnswer: correctAns,
+      isCorrect: isCorrect,
+      source: '章节精练'
+    });
+  }
 }
 
 function resetQuestion(idx) {
@@ -761,4 +778,6 @@ function loadState() {
 loadState();
 init();
 </script>
-
+<script src="recorder.js"></script>
+</body>
+</html>
