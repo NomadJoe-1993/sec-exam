@@ -8,7 +8,7 @@ let profile = JSON.parse(localStorage.getItem('secProfile') || 'null');
 // ====== Init ======
 (async function init() {
   try {
-    const r = await fetch('manifest.json');
+    const r = await fetch('manifest.json?_t=' + Date.now());
     MANIFEST = await r.json();
     if (!profile) { showPage('page-onboard'); return; }
     renderHome();
@@ -165,7 +165,7 @@ function openCategory(catId) {
 // ====== Start Exam ======
 async function startExam(examId) {
   try {
-    const r = await fetch(examId + '.json');
+    const r = await fetch(examId + '.json?_t=' + Date.now());
     if (!r.ok) throw new Error('not found');
     curExam = await r.json();
     curIdx = 0; userAns = {}; submitted = false;
