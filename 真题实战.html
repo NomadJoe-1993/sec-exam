@@ -4178,4 +4178,167 @@ var ALL_PAPERS = {
       "answer": "A、B、D",
       "explanation": "银行业金融机构可用自有资金买卖政府债券和金融债券，除国家另有规定外，在中国境内不得从事信托投资和证券经营业务，不得向非自用不动产投资或者向非银行金融机构和企业投资。C选项（利用自有资金买卖债券）是允许的。"
     }
-  ]};
+  ]
+};
+var SUBJECTS = {"金融基础": ["2024年6月_金融基础_真题及答案", "2024年5月_金融基础_试题（网友回忆版）", "2021年12月11日_金融基础_真题及答案", "2021年12月12日_金融基础_真题及答案", "2026年4月_金融基础_真题(233官方)", "2025年06月_金融市场基础知识_真题（考生回忆版）", "2025年03月_金融市场基础知识_真题（考生回忆版）", "2025年08月_金融市场基础知识_真题（考生回忆版）", "2026年04月_金融市场基础知识_真题（考生回忆版）", "2025年07月_金融市场基础知识_真题（考生回忆版）", "章节真题汇编"], "法律法规": ["2024年6月_法律法规_真题及答案", "2024年5月_法律法规_试题（网友回忆版）", "2025年06月_证券市场基本法律法规_真题（考生回忆版）", "2025年03月_证券市场基本法律法规_真题（考生回忆版）"]};
+var currentPaper = null;
+var currentIdx = 0;
+var state = {};
+
+function goHome() {
+  document.getElementById('page-home').style.display = '';
+  document.getElementById('page-exam').style.display = 'none';
+  document.getElementById('page-title').textContent = '📝 真题实战';
+  document.getElementById('page-sub').textContent = '318 道真实考题';
+}
+
+function enterPaper(key) {
+  currentPaper = key;
+  currentIdx = 0;
+  state = {};
+  var qs = ALL_PAPERS[key];
+  document.getElementById('page-home').style.display = 'none';
+  document.getElementById('page-exam').style.display = '';
+  document.getElementById('page-title').textContent = key.replace(/_/g, ' ');
+  document.getElementById('page-sub').textContent = qs.length + ' 题 · 真实考题';
+  renderQ();
+}
+
+function renderQ() {
+  var qs = ALL_PAPERS[currentPaper];
+  if (!qs || qs.length === 0) return;
+  var q = qs[currentIdx];
+  var st = state[currentIdx] || {done:false, correct:false, selected:[], revealed:false};
+  
+  document.getElementById('q-counter').textContent = (currentIdx+1) + ' / ' + qs.length;
+  
+  var done = Object.values(state).filter(s => s.done).length;
+  var corr = Object.values(state).filter(s => s.done && s.correct).length;
+  document.getElementById('stats-bar').innerHTML =
+    '<div class="stat-item"><span class="num">' + done + '</span><span class="label">已做</span></div>' +
+    '<div class="stat-item"><span class="num">' + corr + '</span><span class="label">正确</span></div>' +
+    '<div class="stat-item"><span class="num">' + (done-corr) + '</span><span class="label">错误</span></div>';
+  
+  var typeLabel = q.type === 'judge' ? '判断题' : (q.type === 'multi' || (q.answer && q.answer.length > 1) ? '多选题' : '单选题');
+  var html = '<div class="q-card">' +
+    '<div class="q-stem"><span class="q-num">' + (currentIdx+1) + '.</span>' + esc(q.stem) + '</div>' +
+    '<div style="font-size:11px;color:var(--text-dim);margin-bottom:8px">[' + typeLabel + ']' + (q.chapter ? ' · ' + esc(q.chapter) : '') + '</div>' +
+    '<div id="opts">';
+  
+  for (var i = 0; i < q.options.length; i++) {
+    var optKey = q.options[i][0];
+    var cls = 'opt';
+    if (st.revealed) {
+      cls += ' disabled';
+      if (q.answer.indexOf(optKey) >= 0) cls += ' correct';
+      else if (st.selected.indexOf(optKey) >= 0) cls += ' wrong';
+    } else if (st.selected.indexOf(optKey) >= 0) {
+      cls += ' selected';
+    }
+    html += '<div class="' + cls + '" onclick="selectOpt(\'' + optKey + '\')">' + esc(q.options[i]) + '</div>';
+  }
+  html += '</div>';
+  
+  if (st.revealed) {
+    var isCorrect = q.answer === st.selected.join('');
+    var ansClass = isCorrect ? 'answer-correct' : 'answer-wrong';
+    html += '<div class="answer-box show ' + ansClass + '">' +
+      (isCorrect ? '✅ 正确' : '❌ 错误') +
+      ' · 答案：' + esc(q.answer) +
+      (!isCorrect ? ' · 你的：' + esc(st.selected.join('')) : '') +
+      (q.explanation ? '<div class="answer-text">📖 ' + esc(q.explanation) + '</div>' : '') +
+      (q.chapter ? '<div class="answer-chapter">📌 ' + esc(q.chapter) + '</div>' : '') +
+      '</div>';
+  } else if ((q.type === 'multi' || (q.answer && q.answer.length > 1)) && st.selected.length > 0) {
+    html += '<button class="btn-primary" style="margin-top:10px;width:100%" onclick="submitMulti()">✅ 确认答案</button>';
+  }
+  html += '</div>';
+  document.getElementById('q-container').innerHTML = html;
+  document.getElementById('btn-prev').disabled = currentIdx <= 0;
+  document.getElementById('btn-next').disabled = currentIdx >= qs.length - 1;
+}
+
+function selectOpt(key) {
+  var st = state[currentIdx] || {done:false, correct:false, selected:[], revealed:false};
+  if (st.revealed) return;
+  var q = ALL_PAPERS[currentPaper][currentIdx];
+  var isMultiQ = q.type === 'multi' || (q.answer && q.answer.length > 1);
+  if (isMultiQ) {
+    var idx = st.selected.indexOf(key);
+    if (idx >= 0) st.selected.splice(idx, 1);
+    else st.selected.push(key);
+    st.selected.sort();
+  } else {
+    st.selected = [key];
+    st.done = true;
+    st.correct = q.answer === st.selected.join('');
+    st.revealed = true;
+    state[currentIdx] = st;
+    recordAnswer(q, st);
+    renderQ();
+    return;
+  }
+  state[currentIdx] = st;
+  renderQ();
+}
+
+function submitMulti() {
+  var q = ALL_PAPERS[currentPaper][currentIdx];
+  var st = state[currentIdx];
+  if (!st || st.selected.length === 0) return;
+  st.done = true;
+  st.correct = q.answer === st.selected.join('');
+  st.revealed = true;
+  state[currentIdx] = st;
+  recordAnswer(q, st);
+  renderQ();
+}
+
+function recordAnswer(q, st) {
+  if (!window.ExamRecorder) return;
+  var typeCn = q.type === 'multi' || (q.answer && q.answer.length > 1) ? '多选' : (q.type === 'judge' ? '判断' : '单选');
+  window.ExamRecorder.record({
+    questionId: currentPaper + '-' + q.id,
+    subject: currentPaper.indexOf('法律') >= 0 ? '证券市场基本法律法规' : '金融市场基础知识',
+    chapter: q.chapter || '',
+    type: typeCn === '判断' ? 'j' : (typeCn === '多选' ? 'm' : 's'),
+    typeCn: typeCn,
+    question: q.stem || '',
+    userAnswer: st.selected.join(''),
+    correctAnswer: q.answer || '',
+    isCorrect: st.correct,
+    choices: q.c || {},
+    source: '真题实战'
+  });
+}
+
+// Single click on an option for single-choice submits immediately
+// Already handled in selectOpt
+
+function prevQ() { if (currentIdx > 0) { currentIdx--; renderQ(); } }
+function nextQ() { var qs = ALL_PAPERS[currentPaper]; if (currentIdx < qs.length-1) { currentIdx++; renderQ(); } }
+
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// Render home
+(function() {
+  var html = '';
+  for (var subj in SUBJECTS) {
+    var items = SUBJECTS[subj];
+    // Find newest paper first
+    var sorted = [...items].sort().reverse();
+    for (var k of sorted) {
+      if (!ALL_PAPERS[k]) continue;
+      var qs = ALL_PAPERS[k];
+      var isNew = k.includes('2026');
+      html += '<div class="paper-card" onclick="enterPaper(\'' + k + '\')">' +
+        '<h3>' + esc(k.replace(/_/g, ' ')) + '</h3>' +
+        '<div class="meta">' + qs.length + ' 题' + (isNew ? ' · 🔥 最新' : '') + '</div>' +
+        '<span class="badge' + (isNew ? ' badge-new' : '') + '">' + subj + '</span></div>';
+    }
+  }
+  document.getElementById('paper-list').innerHTML = html;
+})();
+</script>
+</body>
+</html>
