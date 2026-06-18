@@ -76,7 +76,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif
 <body>
 <div class="header" id="header">
   <h1 id="page-title">📝 真题实战</h1>
-  <div class="sub" id="page-sub">268 道真实考题</div>
+  <div class="sub" id="page-sub">318 道真实考题</div>
 </div>
 <div class="content" id="page-home">
   <div class="paper-grid" id="paper-list"></div>
@@ -8126,7 +8126,7 @@ var ALL_PAPERS = {
     }
   ]
 };
-var SUBJECTS = {"金融基础": ["2024年6月_金融基础_真题及答案", "2024年5月_金融基础_试题（网友回忆版）", "2021年12月11日_金融基础_真题及答案", "2021年12月12日_金融基础_真题及答案", "2026年4月_金融基础_真题(233官方)"], "法律法规": ["2024年6月_法律法规_真题及答案", "2024年5月_法律法规_试题（网友回忆版）"]};
+var SUBJECTS = {"金融基础": ["2024年6月_金融基础_真题及答案", "2024年5月_金融基础_试题（网友回忆版）", "2021年12月11日_金融基础_真题及答案", "2021年12月12日_金融基础_真题及答案", "2026年4月_金融基础_真题(233官方)", "2025年06月_金融市场基础知识_真题（考生回忆版）", "2025年03月_金融市场基础知识_真题（考生回忆版）", "2025年08月_金融市场基础知识_真题（考生回忆版）", "2026年04月_金融市场基础知识_真题（考生回忆版）", "2025年07月_金融市场基础知识_真题（考生回忆版）", "章节真题汇编"], "法律法规": ["2024年6月_法律法规_真题及答案", "2024年5月_法律法规_试题（网友回忆版）", "2025年06月_证券市场基本法律法规_真题（考生回忆版）", "2025年03月_证券市场基本法律法规_真题（考生回忆版）"]};
 var currentPaper = null;
 var currentIdx = 0;
 var state = {};
@@ -8135,7 +8135,7 @@ function goHome() {
   document.getElementById('page-home').style.display = '';
   document.getElementById('page-exam').style.display = 'none';
   document.getElementById('page-title').textContent = '📝 真题实战';
-  document.getElementById('page-sub').textContent = '268 道真实考题';
+  document.getElementById('page-sub').textContent = '318 道真实考题';
 }
 
 function enterPaper(key) {
