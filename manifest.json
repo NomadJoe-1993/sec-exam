@@ -3,110 +3,110 @@
     {
       "id": "chapter_practice",
       "title": "📚 章节精练 (冲呀刷题)",
-      "desc": "冲呀刷题精选 · 全题型按节配比",
+      "desc": "冲呀刷题精选 · 全题型按节配比 (2391题)",
       "color": "#1e5b8a",
       "items": [
         {
           "id": "zc_fl1a",
           "title": "第1章·证券市场基本法律法规 (上)",
           "subject": "法律法规",
-          "count": 35
+          "count": 30
         },
         {
           "id": "zc_fl1b",
           "title": "第1章·证券市场基本法律法规 (下)",
           "subject": "法律法规",
-          "count": 35
+          "count": 234
         },
         {
           "id": "zc_fl2",
           "title": "第2章·证券经营机构管理规范",
           "subject": "法律法规",
-          "count": 35
+          "count": 317
         },
         {
           "id": "zc_fl3a",
           "title": "第3章·证券公司业务规范 (上)",
           "subject": "法律法规",
-          "count": 35
+          "count": 295
         },
         {
           "id": "zc_fl3b",
           "title": "第3章·证券公司业务规范 (下)",
           "subject": "法律法规",
-          "count": 35
+          "count": 137
         },
         {
           "id": "zc_fl4",
           "title": "第4章·典型违法违规行为及法律责任",
           "subject": "法律法规",
-          "count": 35
+          "count": 84
         },
         {
           "id": "zc_fl5",
           "title": "第5章·行业文化、职业道德与从业人员行为规范",
           "subject": "法律法规",
-          "count": 35
+          "count": 94
         },
         {
           "id": "zc_ch1",
           "title": "第1章·金融市场体系",
           "subject": "金融基础",
-          "count": 35
+          "count": 60
         },
         {
           "id": "zc_ch2",
           "title": "第2章·中国的金融体系与多层次资本市场",
           "subject": "金融基础",
-          "count": 35
+          "count": 142
         },
         {
           "id": "zc_ch3",
           "title": "第3章·证券市场主体",
           "subject": "金融基础",
-          "count": 35
+          "count": 254
         },
         {
           "id": "zc_ch4a",
           "title": "第4章·股票 (上)",
           "subject": "金融基础",
-          "count": 35
+          "count": 112
         },
         {
           "id": "zc_ch4b",
           "title": "第4章·股票 (下)",
           "subject": "金融基础",
-          "count": 35
+          "count": 152
         },
         {
           "id": "zc_ch5a",
           "title": "第5章·债券 (上)",
           "subject": "金融基础",
-          "count": 35
+          "count": 149
         },
         {
           "id": "zc_ch5b",
           "title": "第5章·债券 (下)",
           "subject": "金融基础",
-          "count": 35
+          "count": 64
         },
         {
           "id": "zc_ch6",
           "title": "第6章·证券投资基金",
           "subject": "金融基础",
-          "count": 35
+          "count": 129
         },
         {
           "id": "zc_ch7",
           "title": "第7章·金融衍生工具",
           "subject": "金融基础",
-          "count": 35
+          "count": 66
         },
         {
           "id": "zc_ch8",
           "title": "第8章·金融风险管理",
           "subject": "金融基础",
-          "count": 35
+          "count": 72
         }
       ]
     },
