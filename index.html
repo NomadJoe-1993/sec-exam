@@ -155,8 +155,16 @@
 
 <!-- ====== Q GRID ====== -->
 <div class="page" id="page-qgrid">
-  <div class="header"><div class="back" onclick="closeQGrid()">‹</div><h1>题目列表</h1><div></div></div>
-  <div class="qgrid" id="qgrid-items"></div>
+  <div class="header"><div class="back" onclick="closeQGrid()">‹</div><h1>题目列表</h1><div><span id="qgrid-stats" class="text-sm text-dim"></span></div></div>
+  <div class="legend-row">
+    <span><span class="ldot ldot-unanswered"></span>未答</span>
+    <span><span class="ldot ldot-answered"></span>已答</span>
+    <span><span class="ldot ldot-correct"></span>正确</span>
+    <span><span class="ldot ldot-wrong"></span>错误</span>
+  </div>
+  <div class="content" style="padding:8px 12px;">
+    <div class="qgrid" id="qgrid-items"></div>
+  </div>
 </div>
 
 <!-- ====== RESULT ====== -->

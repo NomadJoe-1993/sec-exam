@@ -348,15 +348,22 @@ function resetExam() {
 function showQGrid() {
   if (!curExam) return;
   const grid = document.getElementById('qgrid-items'); grid.innerHTML = '';
+  let answeredCount = 0;
   curExam.questions.forEach((q,i) => {
     const d = document.createElement('div'); d.className = 'qgrid-item';
     const u = userAns[q.id]||'';
-    if (submitted) d.className += u.split('').sort().join('')===q.a.split('').sort().join('')?' correct':' wrong';
-    else if (u.length>0) d.className += ' answered';
+    if (submitted) {
+      const isCor = u.split('').sort().join('')===q.a.split('').sort().join('');
+      d.className += isCor?' correct':' wrong';
+    } else if (u.length>0) { d.className += ' answered'; answeredCount++; }
     d.textContent = q.id;
     d.onclick = () => { curIdx = i; closeQGrid(); renderQ(); };
     grid.appendChild(d);
   });
+  const total = curExam.questions.length;
+  document.getElementById('qgrid-stats').textContent = submitted
+    ? '已批改'
+    : `已答 ${answeredCount}/${total}`;
   showPage('page-qgrid');
 }
 function closeQGrid() { showPage('page-exam'); }
