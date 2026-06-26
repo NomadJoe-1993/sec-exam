@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>判断题专项 · 证从刷题</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,PingFang SC,Microsoft YaHei,sans-serif;
+  background:#f5efe6;color:#3d3229;padding:12px;max-width:800px;margin:0 auto;
+}
+h1{font-size:18px;text-align:center;color:#1a3a6b;margin:4px 0 2px}
+.sub{text-align:center;font-size:12px;color:#8a7e6f;margin-bottom:10px}
+.filter-bar{
+  display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;padding-bottom:4px;
+}
+.filter-btn{
+  flex-shrink:0;padding:5px 14px;border-radius:16px;font-size:12px;font-weight:600;
+  border:1.5px solid #d4c9b8;background:#faf6f0;color:#8a7e6f;cursor:pointer;transition:all .15s;
+}
+.filter-btn.on{background:#1a3a6b;color:#fff;border-color:#1a3a6b}
+.filter-btn.wrong-only{background:#fdecea;border-color:#e74c3c;color:#e74c3c}
+.filter-btn.wrong-only.on{background:#e74c3c;color:#fff;border-color:#e74c3c}
+
+.stats{
+  display:flex;gap:12px;margin-bottom:10px;font-size:12px;color:#8a7e6f;
+  background:#faf6f0;border-radius:8px;padding:8px 14px;border:1px solid #e8dfd0;
+}
+.stats span{font-weight:600;color:#1a3a6b}
+
+.q-card{
+  background:#fff;border-radius:10px;padding:16px;margin-bottom:10px;
+  border:1.5px solid #e8dfd0;transition:all .2s;
+}
+.q-card.wrong{border-color:#e74c3c;background:#fff8f8}
+.q-card.correct{border-color:#3d7246;background:#f6fcf7}
+.q-stem{font-size:14px;line-height:1.8;margin-bottom:10px;color:#222}
+.q-source{font-size:11px;color:#bbb;margin-bottom:8px}
+.opt-row{display:flex;gap:12px;margin-bottom:8px}
+.opt-btn{
+  flex:1;padding:10px;text-align:center;border-radius:8px;font-size:14px;font-weight:600;
+  border:2px solid #d4c9b8;background:#faf6f0;cursor:pointer;transition:all .15s;
+}
+.opt-btn.selected-correct{background:#3d7246;color:#fff;border-color:#3d7246}
+.opt-btn.selected-wrong{background:#e74c3c;color:#fff;border-color:#e74c3c}
+.opt-btn.reveal-correct{border-color:#3d7246;background:#eafaf1;color:#3d7246}
+.opt-btn.reveal-wrong{border-color:#e74c3c;background:#fdecea;color:#e74c3c}
+.opt-btn.disabled{opacity:.6;cursor:default}
+
+.explanation{
+  font-size:13px;line-height:1.7;color:#555;padding:10px 14px;
+  background:#fdf8f0;border-left:3px solid #c9a96e;border-radius:6px;
+  margin-top:8px;display:none;
+}
+.explanation.show{display:block}
+.wrong-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-right:4px}
+.wrong-num{border:1px solid #e74c3c;color:#e74c3c}
+.wrong-body{border:1px solid #f39c12;color:#f39c12}
+.wrong-range{border:1px solid #3498db;color:#3498db}
+.wrong-word{border:1px solid #9b59b6;color:#9b59b6}
+.wrong-other{background:#eee;color:#666}
+
+.trap-guide{
+  background:#fff;border-radius:10px;padding:16px;margin-top:16px;border:1.5px solid #e8dfd0;
+}
+.trap-guide h3{font-size:14px;color:#1a3a6b;margin-bottom:8px}
+.trap-guide ul{font-size:13px;line-height:1.8;color:#555;padding-left:18px}
+.trap-guide b{color:#c23b22}
+</style>
+</head>
+<body>
+
+<h1>📋 判断题专项训练</h1>
+<p class="sub">点击选项立即判分 · 错题自动统计</p>
+
+<div class="filter-bar" id="filterBar"></div>
+<div class="stats" id="statsBar"></div>
+<div id="qList"></div>
+
+<div class="trap-guide">
+  <h3>🎯 判断题五大陷阱</h3>
+  <ul>
+    <li><b>数字偷换</b> — 60%→80%、10%→20%、3年→5年，数字一改对变错</li>
+    <li><b>主体张冠</b> — 证监会↔证券业协会、交易所↔证监会，换主体直接错</li>
+    <li><b>绝对化词</b> — "必须"换成"可以"、"应当"换成"可以"、"所有"换成"部分"</li>
+    <li><b>否定词消失</b> — 多了/少了"不、非、无"，整句意思反转</li>
+    <li><b>范围缩放</b> — "全部"变成"部分"、"以上"变成"以下"、"不足"变成"超过"</li>
+  </ul>
+  <p style="margin-top:6px;font-size:12px;color:#999;">做题原则：一眼看不出错的通常是对的，有明显陷阱词的通常是错的。</p>
+</div>
+
+<script>
+const SUBJECTS = ['金融基础', '法律法规'];
+const DATA = { '金融基础': [], '法律法规': [] };
+
+let currentFilter = 'all';
+let answers = {}; // qid -> userAnswer
+let wrongSet = new Set();
+
+// ── Load Data ──
+async function loadAll() {
+  const resp = await fetch('manifest.json?_t='+Date.now());
+  const manifest = await resp.json();
+
+  // Find mock exam items
+  const mock = manifest.categories.find(c => c.id === 'mock');
+  if (!mock) return;
+
+  for (const item of mock.items) {
+    try {
+      const r = await fetch(item.id + '.json?_t='+Date.now());
+      if (!r.ok) continue;
+      const data = await r.json();
+      const subject = item.subject.includes('法规') ? '法律法规' : '金融基础';
+      for (const q of data.questions) {
+        if (q.type === 'judge') {
+          DATA[subject].push({
+            id: q.id,
+            source: item.title,
+            q: q.q,
+            a: q.a,
+            an: q.an
+          });
+        }
+      }
+    } catch(e) {}
+  }
+  renderFilters();
+  renderAll();
+}
+
+// ── Render Filters ──
+function renderFilters() {
+  const bar = document.getElementById('filterBar');
+  let html = `<button class="filter-btn on" data-f="all" onclick="setFilter('all')">全部 (${getCount('all')})</button>`;
+  for (const s of SUBJECTS) {
+    html += `<button class="filter-btn" data-f="${s}" onclick="setFilter('${s}')">${s} (${getCount(s)})</button>`;
+  }
+  html += `<button class="filter-btn wrong-only" data-f="wrong" onclick="setFilter('wrong')">❌ 错题 (${wrongSet.size})</button>`;
+  bar.innerHTML = html;
+}
+
+function getCount(subject) {
+  if (subject === 'all') return DATA['金融基础'].length + DATA['法律法规'].length;
+  if (subject === 'wrong') return wrongSet.size;
+  return DATA[subject].length;
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('on', b.dataset.f === f));
+  renderAll();
+}
+
+// ── Render Questions ──
+function renderAll() {
+  const list = document.getElementById('qList');
+  let questions = [];
+  if (currentFilter === 'all') {
+    questions = [...DATA['金融基础'], ...DATA['法律法规']];
+  } else if (currentFilter === 'wrong') {
+    const qidSet = new Set(wrongSet);
+    questions = [...DATA['金融基础'], ...DATA['法律法规']].filter(q => qidSet.has(getQId(q)));
+  } else {
+    questions = DATA[currentFilter];
+  }
+  list.innerHTML = questions.map((q, i) => renderQ(q, i)).join('');
+  updateStats();
+}
+
+function getQId(q) { return q.source + '_' + q.id; }
+
+function renderQ(q, idx) {
+  const qid = getQId(q);
+  const ans = answers[qid];
+  const isWrong = wrongSet.has(qid);
+  let cardCls = 'q-card';
+  if (ans !== undefined) cardCls += ans === q.a ? ' correct' : ' wrong';
+  if (isWrong && ans === undefined) cardCls += ' wrong';
+
+  let opt1Cls = 'opt-btn', opt2Cls = 'opt-btn';
+  if (ans !== undefined) {
+    opt1Cls += ' disabled'; opt2Cls += ' disabled';
+    if (q.a === '1') opt1Cls += ans === '1' ? ' selected-correct' : ' reveal-correct';
+    else opt2Cls += ' reveal-correct';
+    if (ans === '1' && ans !== q.a) opt1Cls += ' selected-wrong';
+    if (ans === '0' && ans !== q.a) opt2Cls += ' selected-wrong';
+    if (ans === '1' && ans === q.a) opt1Cls += ' selected-correct';
+    if (ans === '0' && ans === q.a) opt2Cls += ' selected-correct';
+    if (!ans) { if(q.a==='1') opt1Cls+=' reveal-correct'; else opt2Cls+=' reveal-correct'; }
+  }
+
+  const expShow = ans !== undefined ? 'show' : '';
+
+  return `
+    <div class="${cardCls}">
+      <div class="q-source">${q.source}</div>
+      <div class="q-stem">${idx+1}. ${q.q.replace(/[（(]\s*[)）]/g,'（　）')}</div>
+      <div class="opt-row">
+        <div class="${opt1Cls}" onclick="selectAnswer('${qid}','1')">✅ 正确</div>
+        <div class="${opt2Cls}" onclick="selectAnswer('${qid}','0')">❌ 错误</div>
+      </div>
+      <div class="explanation ${expShow}">
+        ${ans !== undefined ? `<b>${q.a === '1' ? '✅ 正确' : '❌ 错误'}</b> — ${ans === q.a ? '你答对了' : '答错了'}<br>` : ''}
+        ${q.an}
+      </div>
+    </div>
+  `;
+}
+
+function selectAnswer(qid, answer) {
+  if (answers[qid] !== undefined) return;
+  answers[qid] = answer;
+  const q = [...DATA['金融基础'], ...DATA['法律法规']].find(q => getQId(q) === qid);
+  if (q) {
+    if (answer !== q.a) wrongSet.add(qid);
+  }
+  renderAll();
+}
+
+function updateStats() {
+  const total = DATA['金融基础'].length + DATA['法律法规'].length;
+  const done = Object.keys(answers).length;
+  const wrong = wrongSet.size;
+  const correct = done - wrong;
+  const pct = done > 0 ? Math.round(correct / done * 100) : 0;
+  document.getElementById('statsBar').innerHTML =
+    `<span>已做 ${done}/${total}</span><span>正确 ${correct}</span><span>错误 ${wrong}</span><span>正确率 ${pct}%</span>`;
+  // Update filter button count
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    if (b.dataset.f === 'wrong') b.textContent = `❌ 错题 (${wrongSet.size})`;
+  });
+}
+
+// ── Init ──
+loadAll();
+</script>
+</body>
+</html>
