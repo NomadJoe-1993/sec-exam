@@ -164,6 +164,9 @@ function openCategory(catId) {
 
 // ====== Start Exam ======
 async function startExam(examId) {
+  // CBT exam redirect
+  if (examId === 'cbt_exam') { window.location.href = 'cbt_exam.html?subject=金融基础_3'; return; }
+  if (examId === 'cbt_exam_law') { window.location.href = 'cbt_exam.html?subject=法律法规_3'; return; }
   try {
     const r = await fetch(examId + '.json?_t=' + Date.now());
     if (!r.ok) throw new Error('not found');
