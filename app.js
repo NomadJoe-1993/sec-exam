@@ -404,3 +404,7 @@ function showPage(id) {
 function goHome() { showPage('page-home'); renderHome(); }
 function openStudyCards() { window.location.href = 'study_cards.html'; }
 function openDashboard() { window.location.href = 'dashboard.html'; }
+function showSubjectPicker() {
+  const subject = confirm('切到金融市场基础？取消则切法律法规');
+  window.location.href = 'cbt_exam.html?subject=' + (subject ? '金融基础_3' : '法律法规_3');
+}
