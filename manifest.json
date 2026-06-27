@@ -111,6 +111,20 @@
       ]
     },
     {
+      "id": "review",
+      "title": "🔥 考前冲刺 · 高频易错50题",
+      "desc": "每套50题，精选高频考点+易错陷阱",
+      "items": [
+        {
+          "id": "fin_review_50",
+          "title": "金融基础 · 高频易错50题",
+          "count": 50,
+          "subject": "金融市场基础知识",
+          "type": "mixed"
+        }
+      ]
+    },
+    {
       "id": "knowledge_map",
       "title": "🗺️ 章节目录",
       "desc": "知识框架一览 · 建立楼层感",
