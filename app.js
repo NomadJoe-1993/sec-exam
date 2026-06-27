@@ -1,6 +1,6 @@
 // ====== State ======
 let MANIFEST = null;
-let curExam = null, curIdx = 0, userAns = {}, submitted = false;
+let curExam = null, curIdx = 0, userAns = {}, submitted = false, confirmed = {};
 let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 let profile = JSON.parse(localStorage.getItem('secProfile') || 'null');
@@ -168,9 +168,9 @@ async function startExam(examId) {
     const r = await fetch(examId + '.json?_t=' + Date.now());
     if (!r.ok) throw new Error('not found');
     curExam = await r.json();
-    curIdx = 0; userAns = {}; submitted = false;
+    curIdx = 0; userAns = {}; submitted = false; confirmed = {};
     const h = history[examId];
-    if (h && h.answers) { userAns = {...h.answers}; submitted = h.submitted || false; }
+    if (h && h.answers) { userAns = {...h.answers}; submitted = h.submitted || false; confirmed = h.confirmed || {}; }
     showPage('page-exam');
     renderQ();
   } catch(e) {
@@ -195,12 +195,13 @@ function renderQ() {
 
   const oe = document.getElementById('q-options'); oe.innerHTML = '';
   const sel = userAns[q.id] || '';
+  const isAnswered = confirmed[q.id] === true;
   Object.keys(q.c).forEach(k => {
     const d = document.createElement('div');
-    d.className = 'opt'; d.dataset.key = k;
-    if (submitted) d.classList.add('disabled');
+    d.className = 'opt';
+    if (isAnswered) d.classList.add('disabled');
     if (sel.includes(k)) d.classList.add('sel');
-    if (submitted) {
+    if (isAnswered) {
       if (q.a.includes(k)) d.classList.add('cor');
       else if (sel.includes(k)) d.classList.add('wro');
     }
@@ -209,12 +210,23 @@ function renderQ() {
     oe.appendChild(d);
   });
 
+  // ── Analysis box ──
   const ab = document.getElementById('analysis-box');
-  if (submitted) {
+  if (isAnswered) {
     document.getElementById('analysis-ans').textContent = '✅ 正确答案：' + q.a.split('').join('、');
     document.getElementById('analysis-exp').textContent = q.an || '暂无解析';
     ab.classList.add('show');
   } else ab.classList.remove('show');
+
+  // ── Confirm button for multi/comprehensive ──
+  if (!isAnswered && !submitted && (q.type === 'multi' || q.type === 'comprehensive') && (userAns[q.id] || '').length > 0) {
+    const cb = document.createElement('button');
+    cb.className = 'btn btn-primary mt-10';
+    cb.textContent = '✅ 确认答案';
+    cb.style.width = '100%';
+    cb.addEventListener('click', confirmAnswer);
+    oe.parentNode.appendChild(cb);
+  }
 
   document.getElementById('prev-btn').disabled = curIdx === 0;
   document.getElementById('next-btn').disabled = curIdx === total-1;
@@ -222,19 +234,74 @@ function renderQ() {
 }
 
 function select(key) {
-  if (submitted) return;
+  if (submitted || confirmed[curExam.questions[curIdx].id]) return;
   const q = curExam.questions[curIdx];
   if (q.type === 'multi' || q.type === 'comprehensive') {
     const s = userAns[q.id] || '';
     userAns[q.id] = s.includes(key) ? s.replace(key,'') : (s+key).split('').sort().join('');
-  } else userAns[q.id] = key;
+  } else {
+    // single/judge: immediately confirm
+    userAns[q.id] = key;
+    confirmed[q.id] = true;
+    // also save to wrong book immediately
+    const u = key;
+    const c = q.a;
+    if (u !== c) {
+      const exist = wrongBook.find(w => w.qid === q.id && w.examId === curExam.id);
+      if (!exist) {
+        wrongBook.push({ examId: curExam.id, examTitle: curExam.title, qid: q.id, q: q.q,
+          type: q.type, choices: q.c, userAns: u, correctAns: q.a, analysis: q.an, time: Date.now() });
+      }
+    }
+    // record to dashboard
+    if (window.ExamRecorder) {
+      var typeCn = q.type === 'judge' ? '判断' : '单选';
+      window.ExamRecorder.record({
+        questionId: curExam.id + '-' + q.id,
+        subject: curExam.subject || '',
+        chapter: curExam.title || '', type: q.type === 'judge' ? 'j' : 's',
+        typeCn: typeCn, question: q.q || '', userAnswer: u, correctAnswer: q.a || '',
+        isCorrect: u === q.a, choices: q.c || {}, source: curExam.subject || '试卷'
+      });
+    }
+  }
+  saveProgress(); renderQ();
+}
+
+function confirmAnswer() {
+  if (submitted) return;
+  const q = curExam.questions[curIdx];
+  if (!userAns[q.id]) return;
+  confirmed[q.id] = true;
+  // save to wrong book
+  const u = userAns[q.id];
+  const c = q.a;
+  const isCorrect = u.split('').sort().join('') === c.split('').sort().join('');
+  if (!isCorrect) {
+    const exist = wrongBook.find(w => w.qid === q.id && w.examId === curExam.id);
+    if (!exist) {
+      wrongBook.push({ examId: curExam.id, examTitle: curExam.title, qid: q.id, q: q.q,
+        type: q.type, choices: q.c, userAns: u, correctAns: q.a, analysis: q.an, time: Date.now() });
+    }
+  }
+  // record to dashboard
+  if (window.ExamRecorder) {
+    var typeCn = q.type === 'multi' ? '多选' : '不定项';
+    window.ExamRecorder.record({
+      questionId: curExam.id + '-' + q.id, subject: curExam.subject || '',
+      chapter: curExam.title || '', type: q.type === 'multi' ? 'm' : 'c',
+      typeCn: typeCn, question: q.q || '', userAnswer: u, correctAnswer: q.a || '',
+      isCorrect: isCorrect, choices: q.c || {}, source: curExam.subject || '试卷'
+    });
+  }
+  localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
   saveProgress(); renderQ();
 }
 
 function saveProgress() {
   if (!curExam) return;
   history[curExam.id] = {
-    answers: userAns, submitted: submitted,
+    answers: userAns, confirmed: confirmed, submitted: submitted,
     lastScore: history[curExam.id]?.lastScore, best: history[curExam.id]?.best
   };
   localStorage.setItem('secHistory', JSON.stringify(history));
@@ -259,6 +326,14 @@ function submitExam() {
   const a = Object.keys(userAns).length, t = curExam.questions.length;
   if (a < t && !confirm('还有 ' + (t-a) + ' 题未答，确定交卷吗？')) return;
 
+  // Confirm any multi/comprehensive not yet confirmed
+  curExam.questions.forEach(q => {
+    if (confirmed[q.id]) return;
+    if (userAns[q.id]) {
+      confirmed[q.id] = true;
+    }
+  });
+
   submitted = true;
   let correct = 0;
   const examSubject = curExam.subject || (curExam.title || '').includes('金融') ? '金融市场基础知识' : '证券市场基本法律法规';
@@ -267,6 +342,7 @@ function submitExam() {
     const c = q.a.split('').sort().join('');
     const isCorrect = u === c;
     if (isCorrect) correct++;
+    // Record wrong answer (if not already recorded by select()/confirmAnswer())
     else {
       const exist = wrongBook.find(w => w.qid === q.id && w.examId === curExam.id);
       if (!exist) {
@@ -277,8 +353,8 @@ function submitExam() {
         });
       }
     }
-    // ── 记录每题答题结果 ──
-    if (window.ExamRecorder) {
+    // Record to dashboard (only unanswered questions not yet recorded)
+    if (window.ExamRecorder && !userAns[q.id]) {
       var typeCn = q.type === 'multi' ? '多选' : (q.type === 'judge' ? '判断' : (q.type === 'comprehensive' ? '不定项' : '单选'));
       window.ExamRecorder.record({
         questionId: curExam.id + '-' + q.id,
@@ -338,7 +414,7 @@ function reviewWrong() {
 }
 
 function resetExam() {
-  submitted = false; userAns = {}; curIdx = 0;
+  submitted = false; userAns = {}; confirmed = {}; curIdx = 0;
   const h = history[curExam.id];
   if (h) { h.answers = {}; h.submitted = false; localStorage.setItem('secHistory', JSON.stringify(history)); }
   showPage('page-exam'); renderQ();
