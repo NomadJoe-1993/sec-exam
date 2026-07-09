@@ -125,30 +125,98 @@
       ]
     },
     {
-      "id": "multi_practice",
-      "title": "🎯 多选专项 · 集中突破",
-      "desc": "精选真题+高频多选题，分科训练",
+      "id": "multi_practice_fin",
+      "title": "🎯 多选专项 · 金融基础",
+      "desc": "按章节逐章攻克多选题",
       "color": "#e91e63",
       "items": [
         {
-          "id": "multi_fin",
-          "title": "金融市场基础知识 · 多选专项",
+          "id": "multi_fin_ch1",
+          "title": "第1章·金融市场体系",
           "subject": "金融市场基础知识",
-          "count": 714
+          "count": 86
         },
         {
-          "id": "multi_law",
-          "title": "证券市场基本法律法规 · 多选专项",
+          "id": "multi_fin_ch2",
+          "title": "第2章·中国的金融体系与多层次资本市场",
+          "subject": "金融市场基础知识",
+          "count": 95
+        },
+        {
+          "id": "multi_fin_ch3",
+          "title": "第3章·证券市场主体",
+          "subject": "金融市场基础知识",
+          "count": 171
+        },
+        {
+          "id": "multi_fin_ch4",
+          "title": "第4章·股票",
+          "subject": "金融市场基础知识",
+          "count": 138
+        },
+        {
+          "id": "multi_fin_ch5",
+          "title": "第5章·债券",
+          "subject": "金融市场基础知识",
+          "count": 115
+        },
+        {
+          "id": "multi_fin_ch6",
+          "title": "第6章·证券投资基金",
+          "subject": "金融市场基础知识",
+          "count": 78
+        },
+        {
+          "id": "multi_fin_ch7",
+          "title": "第7章·金融衍生工具",
+          "subject": "金融市场基础知识",
+          "count": 43
+        },
+        {
+          "id": "multi_fin_ch8",
+          "title": "第8章·金融风险管理",
+          "subject": "金融市场基础知识",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "id": "multi_practice_law",
+      "title": "🎯 多选专项 · 法律法规",
+      "desc": "按章节逐章攻克多选题",
+      "color": "#9c27b0",
+      "items": [
+        {
+          "id": "multi_law_fl1",
+          "title": "第1章·证券市场基本法律法规",
           "subject": "证券市场基本法律法规",
-          "count": 499
+          "count": 250
+        },
+        {
+          "id": "multi_law_fl2",
+          "title": "第2章·证券经营机构管理规范",
+          "subject": "证券市场基本法律法规",
+          "count": 140
+        },
+        {
+          "id": "multi_law_fl3",
+          "title": "第3章·证券公司业务规范",
+          "subject": "证券市场基本法律法规",
+          "count": 193
+        },
+        {
+          "id": "multi_law_fl4",
+          "title": "第4章·法律责任与职业道德",
+          "subject": "证券市场基本法律法规",
+          "count": 96
         }
       ]
     },
     {
       "id": "knowledge_map",
-        "title": "🗺️ 章节目录",
-        "desc": "知识框架一览 · 建立楼层感",
-        "color": "#f59e0b",
+      "title": "🗺️ 章节目录",
+      "desc": "知识框架一览 · 建立楼层感",
+      "color": "#f59e0b",
       "items": [
         {
           "id": "证券从业_知识地图",
