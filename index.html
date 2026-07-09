@@ -11,55 +11,12 @@
 <body>
 
 <!-- ====== ONBOARDING ====== -->
-<div class="page" id="page-onboard">
-  <div class="content" id="onboard-content">
-    <div class="onboard-slide">
-      <div class="icon">📚</div>
-      <h2>证券从业资格证</h2>
-      <p>智能备考 · 定制你的学习计划</p>
-      <div class="field">
-        <label>考试目标</label>
-        <select id="ob-target">
-          <option value="both">双科（金融市场基础知识 + 法律法规）</option>
-          <option value="fin">单科：金融市场基础知识</option>
-          <option value="law">单科：证券市场基本法律法规</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>当前基础</label>
-        <select id="ob-level">
-          <option value="0">零基础，第一次接触</option>
-          <option value="1">有一定基础（相关专业/从业经验）</option>
-          <option value="2">已经复习过一轮</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>每天可用学习时间</label>
-        <select id="ob-time">
-          <option value="0.5">&lt; 30分钟</option>
-          <option value="1">30分钟 ~ 1小时</option>
-          <option value="2">1 ~ 2小时</option>
-          <option value="3" selected>2 ~ 3小时</option>
-          <option value="4">&gt; 3小时</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>计划考试日期</label>
-        <input type="date" id="ob-date">
-      </div>
-      <button class="onboard-btn" onclick="saveProfile()">🎯 生成备考计划</button>
-      <p class="text-sm text-dim mt-10">可随时在首页重新设置</p>
-    </div>
-  </div>
-</div>
-
 <!-- ====== HOME ====== -->
 <div class="page active" id="page-home">
   <div class="header home-header">
     <div class="flex-1"><div class="greeting" id="home-greeting">👋 主上大人</div><div class="greeting-sub" id="home-sub">今天也要加油</div></div>
     <div class="flex gap-8">
       <div class="icon-btn" onclick="showWrongBook()">❌</div>
-      <div class="icon-btn" onclick="showSettings()">⚙️</div>
     </div>
   </div>
   <div class="content" id="home-content">
@@ -211,12 +168,6 @@
     <button class="btn-sm" onclick="clearWrongBook()" id="clear-wrong-btn" style="display:none;">🗑️ 清空</button>
   </div>
   <div class="content" id="wrong-content"></div>
-</div>
-
-<!-- ====== SETTINGS ====== -->
-<div class="page" id="page-settings">
-  <div class="header"><div class="back" onclick="goHome()">‹</div><h1>⚙️ 设置</h1><div></div></div>
-  <div class="content" id="settings-content"></div>
 </div>
 
 <script src="app.js?v=20260616"></script>

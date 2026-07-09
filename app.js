@@ -4,15 +4,14 @@ let curExam = null, curIdx = 0, userAns = {}, submitted = false, confirmed = {};
 let memorizeMode = false;
 let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
-let profile = JSON.parse(localStorage.getItem('secProfile') || 'null');
 
 // ====== Init ======
 (async function init() {
   try {
     const r = await fetch('manifest.json?_t=' + Date.now());
     MANIFEST = await r.json();
-    if (!profile) { showPage('page-onboard'); return; }
     renderHome();
+    showPage('page-home');
   } catch(e) {
     document.getElementById('home-content').innerHTML =
       `<div class="empty-state"><div class="icon">⚠️</div><p>加载失败: ${e.message}</p></div>`;
@@ -20,73 +19,17 @@ let profile = JSON.parse(localStorage.getItem('secProfile') || 'null');
 })();
 
 // ====== Profile / Onboarding ======
-function saveProfile() {
-  const target = document.getElementById('ob-target').value;
-  const level = parseInt(document.getElementById('ob-level').value);
-  const hours = parseFloat(document.getElementById('ob-time').value);
-  const date = document.getElementById('ob-date').value;
-  if (!date) { alert('请选择考试日期'); return; }
-  profile = { target, level, hours, date, created: Date.now() };
-  localStorage.setItem('secProfile', JSON.stringify(profile));
-  renderHome();
-  showPage('page-home');
-}
+// Profile module removed
 
-function showSettings() {
-  if (!profile) { showPage('page-onboard'); return; }
-  const el = document.getElementById('settings-content');
-  const d = new Date(profile.date);
-  el.innerHTML = `
-    <div class="mb-8"><h2 class="page-title">我的备考计划</h2></div>
-    <div class="plan-card">
-      <div class="row"><span>考试目标</span><span class="val">${targetLabel(profile.target)}</span></div>
-      <div class="row"><span>当前基础</span><span class="val">${['零基础','有基础','已复习一轮'][profile.level]}</span></div>
-      <div class="row"><span>每日学习</span><span class="val">${profile.hours} 小时</span></div>
-      <div class="row"><span>考试日期</span><span class="val">${d.toLocaleDateString('zh-CN')}</span></div>
-      <div class="row"><span>剩余天数</span><span class="val">${daysLeft(profile.date)} 天</span></div>
-    </div>
-    <div class="mt-14">
-      <h3 class="fw-600 mb-8 fs-15">📋 每日推荐</h3>
-      <div class="glass p-14">
-        ${renderPlan()}
-      </div>
-    </div>
-    <button class="onboard-btn mt-16" onclick="resetProfile()">🔄 重新设置</button>
-  `;
-  showPage('page-settings');
-}
+// Settings removed
 
-function resetProfile() {
-  if (confirm('重新设置将清空当前学习计划，确定吗？')) {
-    localStorage.removeItem('secProfile');
-    profile = null;
-    showPage('page-onboard');
-  }
-}
+// resetProfile removed
 
-function targetLabel(t) {
-  return { both:'双科', fin:'金融市场基础知识', law:'证券市场基本法律法规' }[t] || t;
-}
+// targetLabel removed
 
-function daysLeft(d) {
-  const diff = new Date(d) - new Date();
-  return Math.max(0, Math.ceil(diff / 86400000));
-}
+// daysLeft removed
 
-function renderPlan() {
-  if (!profile) return '<p class="text-dim">请先设置备考信息</p>';
-  const total = countAll();
-  const days = daysLeft(profile.date);
-  const daily = Math.max(10, Math.ceil(total * 1.5 / days));
-  const focus = profile.target === 'fin' ? '金融市场基础知识' :
-               profile.target === 'law' ? '证券市场基本法律法规' : '双科同步';
-  return `
-    <div class="row"><span>每日建议题量</span><span class="val text-accent fw-600 fs-16">${daily} 题</span></div>
-    <div class="row"><span>复习重点</span><span class="val">${focus}</span></div>
-    <div class="row"><span>推荐顺序</span><span class="val">章节高频 → 冲刺卷 → 模拟卷</span></div>
-    <div class="text-sm text-dim mt-6">${profile.level === 0 ? '💡 零基础建议先看一遍教材再刷题' : ''}</div>
-  `;
-}
+// renderPlan removed
 
 // ====== Home ======
 function renderHome() {
@@ -100,29 +43,11 @@ function renderHome() {
   document.getElementById('wrong-badge').textContent = wc > 0 ? wc + '题' : '';
   document.getElementById('wrong-badge').style.display = wc > 0 ? '' : 'none';
 
-  const banner = document.getElementById('plan-banner');
-  if (profile) {
-    const dl = daysLeft(profile.date);
-    banner.innerHTML = `<div class="plan-card clickable" onclick="showSettings()">
-      <div class="flex justify-between items-center">
-        <h3>📋 备考计划</h3>
-        <span class="text-sm text-dim">${dl}天后考试 ›</span>
-      </div>
-      <div class="row"><span>目标</span><span class="val">${targetLabel(profile.target)}</span></div>
-      <div class="row"><span>今日推荐</span><span class="val text-accent fw-600">${renderDailyRec()} 题</span></div>
-    </div>`;
-  } else {
-    banner.innerHTML = `<div class="plan-card clickable text-center" onclick="showPage('page-onboard')">
-      <h3>🎯 点击设置备考计划</h3>
-      <p class="text-dim">根据你的时间和目标定制学习方案</p>
-    </div>`;
-  }
+  document.getElementById('plan-banner').innerHTML = '';
 }
 
-function renderDailyRec() {
-  if (!profile) return 0;
-  return Math.max(10, Math.ceil(countAll() * 1.5 / daysLeft(profile.date)));
-}
+
+// renderDailyRec removed
 
 function calcStats() {
   const examIds = Object.keys(history).filter(k => history[k].submitted);
@@ -363,11 +288,19 @@ function submitExam() {
 
   submitted = true;
   let correct = 0;
+  let weightedScore = 0;
+  let maxWeighted = 0;
+  const isFullMock = curExam.questions.length === 120 &&
+    curExam.questions.some(q => q.type === 'comprehensive');
   const examSubject = curExam.subject || (curExam.title || '').includes('金融') ? '金融市场基础知识' : '证券市场基本法律法规';
   curExam.questions.forEach(q => {
     const u = (userAns[q.id]||'').split('').sort().join('');
     const c = q.a.split('').sort().join('');
     const isCorrect = u === c;
+    // Weighted scoring for mock exams (syllabus: single=0.5, multi/judge/comprehensive=1)
+    const weight = (isFullMock && q.type === 'single') ? 0.5 : 1;
+    maxWeighted += weight;
+    if (isCorrect) { correct++; weightedScore += weight; }
     if (isCorrect) correct++;
     // Record wrong answer (if not already recorded by select()/confirmAnswer())
     else {
@@ -400,7 +333,7 @@ function submitExam() {
   });
   localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
 
-  const pct = Math.round(correct/t*100);
+  const pct = isFullMock ? Math.round(weightedScore/maxWeighted*100) : Math.round(correct/t*100);
   const h = history[curExam.id] || {answers:{},submitted:false};
   h.answers = userAns; h.submitted = true; h.lastScore = pct;
   h.best = Math.max(pct, h.best||0);
