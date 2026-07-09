@@ -125,10 +125,30 @@
       ]
     },
     {
+      "id": "multi_practice",
+      "title": "🎯 多选专项 · 集中突破",
+      "desc": "精选真题+高频多选题，分科训练",
+      "color": "#e91e63",
+      "items": [
+        {
+          "id": "multi_fin",
+          "title": "金融市场基础知识 · 多选专项",
+          "subject": "金融市场基础知识",
+          "count": 714
+        },
+        {
+          "id": "multi_law",
+          "title": "证券市场基本法律法规 · 多选专项",
+          "subject": "证券市场基本法律法规",
+          "count": 499
+        }
+      ]
+    },
+    {
       "id": "knowledge_map",
-      "title": "🗺️ 章节目录",
-      "desc": "知识框架一览 · 建立楼层感",
-      "color": "#f59e0b",
+        "title": "🗺️ 章节目录",
+        "desc": "知识框架一览 · 建立楼层感",
+        "color": "#f59e0b",
       "items": [
         {
           "id": "证券从业_知识地图",

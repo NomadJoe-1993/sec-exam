@@ -1,6 +1,7 @@
 // ====== State ======
 let MANIFEST = null;
 let curExam = null, curIdx = 0, userAns = {}, submitted = false, confirmed = {};
+let memorizeMode = false;
 let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 let profile = JSON.parse(localStorage.getItem('secProfile') || 'null');
@@ -168,15 +169,32 @@ async function startExam(examId) {
     const r = await fetch(examId + '.json?_t=' + Date.now());
     if (!r.ok) throw new Error('not found');
     curExam = await r.json();
-    curIdx = 0; userAns = {}; submitted = false; confirmed = {};
+    curIdx = 0; userAns = {}; submitted = false; confirmed = {}; memorizeMode = false;
     const h = history[examId];
     if (h && h.answers) { userAns = {...h.answers}; submitted = h.submitted || false; confirmed = h.confirmed || {}; }
+    document.getElementById('mode-toggle').textContent = '📖 背题';
+    document.getElementById('mode-toggle').classList.remove('memorize');
     showPage('page-exam');
     renderQ();
   } catch(e) {
     // Try HTML fallback for standalone pages
     window.location.href = examId + '.html';
   }
+}
+
+// ====== Toggle Memorize Mode ======
+function toggleMode() {
+  memorizeMode = !memorizeMode;
+  const btn = document.getElementById('mode-toggle');
+  if (memorizeMode) {
+    btn.textContent = '📝 考试';
+    btn.classList.add('memorize');
+  } else {
+    btn.textContent = '📖 背题';
+    btn.classList.remove('memorize');
+  }
+  renderQ();
+  updateSubmitBtn();
 }
 
 // ====== Render Q ======
@@ -195,12 +213,19 @@ function renderQ() {
 
   const oe = document.getElementById('q-options'); oe.innerHTML = '';
   const sel = userAns[q.id] || '';
-  const isAnswered = confirmed[q.id] === true;
+  const isAnswered = confirmed[q.id] === true || memorizeMode;
+  // In memorize mode, show correct answer always
+  const displayAns = memorizeMode && !isAnswered ? q.a : (sel || '');
   Object.keys(q.c).forEach(k => {
     const d = document.createElement('div');
     d.className = 'opt';
-    if (isAnswered) d.classList.add('disabled');
-    if (sel.includes(k)) d.classList.add('sel');
+    if (isAnswered || memorizeMode) d.classList.add('disabled');
+    if (memorizeMode) {
+      // Show correct answer directly
+      if (q.a.includes(k)) d.classList.add('cor');
+    } else {
+      if (sel.includes(k)) d.classList.add('sel');
+    }
     if (isAnswered) {
       if (q.a.includes(k)) d.classList.add('cor');
       else if (sel.includes(k)) d.classList.add('wro');
@@ -212,7 +237,7 @@ function renderQ() {
 
   // ── Analysis box ──
   const ab = document.getElementById('analysis-box');
-  if (isAnswered) {
+  if (isAnswered || memorizeMode) {
     document.getElementById('analysis-ans').textContent = '✅ 正确答案：' + q.a.split('').join('、');
     document.getElementById('analysis-exp').textContent = q.an || '暂无解析';
     ab.classList.add('show');
@@ -234,7 +259,7 @@ function renderQ() {
 }
 
 function select(key) {
-  if (submitted || confirmed[curExam.questions[curIdx].id]) return;
+  if (submitted || confirmed[curExam.questions[curIdx].id] || memorizeMode) return;
   const q = curExam.questions[curIdx];
   if (q.type === 'multi' || q.type === 'comprehensive') {
     const s = userAns[q.id] || '';
@@ -314,6 +339,8 @@ function navQ(d) {
 
 function updateSubmitBtn() {
   const btn = document.getElementById('submit-btn');
+  if (memorizeMode) { btn.style.display = 'none'; return; }
+  btn.style.display = '';
   if (submitted) { btn.textContent = '✅ 已提交'; btn.disabled = true; return; }
   const a = Object.keys(userAns).length, t = curExam.questions.length;
   btn.textContent = a < t ? '📝 交卷 (' + a + '/' + t + ')' : '📝 交卷批改';

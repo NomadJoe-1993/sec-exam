@@ -66,6 +66,12 @@
     <div class="stats-row" id="home-stats"></div>
     <div id="plan-banner"></div>
     <div class="menu-grid">
+      <div class="menu-card" onclick="openCategory('multi_practice')">
+        <div class="icon">🎯</div>
+        <h3>多选专项</h3>
+        <p>1,213题 · 真题+考纲重点多选</p>
+        <div class="badge" style="background:#e91e63;color:white;font-size:10px;margin-top:4px;">1,213题</div>
+      </div>
       <div class="menu-card" onclick="openCategory('knowledge_map')">
         <div class="icon">🗺️</div>
         <h3>章节目录</h3>
@@ -148,6 +154,7 @@
     <button class="btn-sm" onclick="goHome()" style="margin-right:8px;">‹ 退出</button>
     <span id="exam-counter">1 / 60</span>
     <span id="exam-score" style="display:none;"></span>
+    <button class="btn-sm mode-btn" id="mode-toggle" onclick="toggleMode()">📖 背题</button>
     <button class="btn-sm" onclick="showQGrid()">📋 题号</button>
   </div>
   <div class="q-area" id="q-area">
