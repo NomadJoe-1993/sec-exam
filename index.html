@@ -66,6 +66,65 @@
     <div class="stats-row" id="home-stats"></div>
     <div id="plan-banner"></div>
     <div class="menu-grid">
+      <!-- ===== TOP: 学习入口 ===== -->
+      <div class="menu-card" onclick="openCategory('knowledge_map')">
+        <div class="icon">🗺️</div>
+        <h3>章节目录</h3>
+        <p>知识框架 · 建立楼层感</p>
+      </div>
+      <div class="menu-card" onclick="openStudyCards()">
+        <div class="icon">📚</div>
+        <h3>考点速记</h3>
+        <p>高频考点 · 随时记忆</p>
+      </div>
+      <div class="menu-card" onclick="openCategory('new_zhenti')">
+        <div class="icon">📋</div>
+        <h3>真题实战</h3>
+        <p>1,062道真题·2021-2026年全覆盖</p>
+        <div class="badge" style="background:var(--red-bg);color:var(--red);font-size:10px;margin-top:4px;">1,062题</div>
+      </div>
+      <div class="menu-card" onclick="showWrongBook()">
+        <div class="icon">📕</div>
+        <h3>错题集</h3>
+        <p id="wrong-count-badge">回顾薄弱点</p>
+        <div class="badge" id="wrong-badge" style="background:var(--red-bg);color:var(--red);display:none;"></div>
+      </div>
+
+      <!-- ===== MID: 实战训练 ===== -->
+      <div class="menu-card" onclick="openCategory('mock')">
+        <div class="icon">🎯</div>
+        <h3>全真模拟</h3>
+        <p>120题 · 新大纲题型分布</p>
+      </div>
+      <div class="menu-card" onclick="openCategory('review')" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ff9800;">
+        <div class="icon">🔥</div>
+        <h3 style="color:#e65100;">考前冲刺</h3>
+        <p>金融基础 · 高频易错50题</p>
+        <div class="badge" style="background:#ff9800;color:white;font-size:10px;margin-top:4px;">50题</div>
+      </div>
+      <div class="menu-card" onclick="openCategory('jxtk')">
+        <div class="icon">⭐</div>
+        <h3>精选题库</h3>
+        <p>VIP精选·法律法规按章刷</p>
+        <div class="badge" style="background:var(--gold);color:white;font-size:10px;margin-top:4px;">500题</div>
+      </div>
+      <div class="menu-card" onclick="openDashboard()">
+        <div class="icon">📊</div>
+        <h3>学情看板</h3>
+        <p>答题统计 · 薄弱分析</p>
+      </div>
+
+      <!-- ===== BOTTOM: 专项突破 ===== -->
+      <div class="menu-card" onclick="openCategory('chapter_practice')">
+        <div class="icon">🎯</div>
+        <h3>章节精练</h3>
+        <p>全题型 · 按分值配比</p>
+      </div>
+      <div class="menu-card" onclick="openCategory('paper')">
+        <div class="icon">📝</div>
+        <h3>冲刺试卷</h3>
+        <p>单选/多选/判断/不定项专项</p>
+      </div>
       <div class="menu-card" onclick="openCategory('multi_practice_fin')">
         <div class="icon" style="color:#e91e63;">🎯</div>
         <h3>多选专项·金融基础</h3>
@@ -78,65 +137,11 @@
         <p>679题 · 4章按章突破</p>
         <div class="badge" style="background:#9c27b0;color:white;font-size:10px;margin-top:4px;">679题</div>
       </div>
-      <div class="menu-card" onclick="openCategory('knowledge_map')">
-        <div class="icon">🗺️</div>
-        <h3>章节目录</h3>
-        <p>知识框架 · 建立楼层感</p>
-      </div>
-      <div class="menu-card" onclick="openCategory('chapter_practice')">
-        <div class="icon">🎯</div>
-        <h3>章节精练</h3>
-        <p>全题型 · 按分值配比</p>
-      </div>
-      <div class="menu-card" onclick="openCategory('paper')">
-        <div class="icon">📝</div>
-        <h3>冲刺试卷</h3>
-        <p>单选/多选/判断/不定项专项</p>
-      </div>
-      <div class="menu-card" onclick="openCategory('mock')">
-        <div class="icon">🎯</div>
-        <h3>全真模拟</h3>
-        <p>120题 · 新大纲题型分布</p>
-      </div>
-      <div class="menu-card" onclick="openCategory('review')" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ff9800;">
-        <div class="icon">🔥</div>
-        <h3 style="color:#e65100;">考前冲刺</h3>
-        <p>金融基础 · 高频易错50题</p>
-        <div class="badge" style="background:#ff9800;color:white;font-size:10px;margin-top:4px;">50题</div>
-      </div>
       <div class="menu-card" onclick="window.location.href='judge_practice.html'">
         <div class="icon">🎯</div>
         <h3>判断专项</h3>
         <p>180题集中突破 · 五大陷阱识别</p>
         <div class="badge" style="background:var(--red-bg);color:var(--red);font-size:10px;margin-top:4px;">🔥 新</div>
-      </div>
-      <div class="menu-card" onclick="openCategory('new_zhenti')">
-        <div class="icon">📋</div>
-        <h3>真题实战</h3>
-        <p>1,062道真题·2021-2026年全覆盖</p>
-        <div class="badge" style="background:var(--red-bg);color:var(--red);font-size:10px;margin-top:4px;">1,062题</div>
-      </div>
-      <div class="menu-card" onclick="openCategory('jxtk')">
-        <div class="icon">⭐</div>
-        <h3>精选题库</h3>
-        <p>VIP精选·法律法规按章刷</p>
-        <div class="badge" style="background:var(--gold);color:white;font-size:10px;margin-top:4px;">500题</div>
-      </div>
-      <div class="menu-card" onclick="showWrongBook()">
-        <div class="icon">📕</div>
-        <h3>错题集</h3>
-        <p id="wrong-count-badge">回顾薄弱点</p>
-        <div class="badge" id="wrong-badge" style="background:var(--red-bg);color:var(--red);display:none;"></div>
-      </div>
-      <div class="menu-card" onclick="openStudyCards()">
-        <div class="icon">📚</div>
-        <h3>考点速记</h3>
-        <p>高频考点 · 随时记忆</p>
-      </div>
-      <div class="menu-card" onclick="openDashboard()">
-        <div class="icon">📊</div>
-        <h3>学情看板</h3>
-        <p>答题统计 · 薄弱分析</p>
       </div>
     </div>
     <div class="text-sm text-dim text-center p-8-0">⚡ 知而不行，只是未知 · 练到70，考到60</div>
