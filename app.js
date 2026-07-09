@@ -5,13 +5,115 @@ let memorizeMode = false;
 let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 
+// ====== API Config ======
+const API_BASE = localStorage.getItem('secApiBase') || 'http://localhost:8000';
+let authToken = localStorage.getItem('secToken') || null;
+let currentUser = JSON.parse(localStorage.getItem('secUser') || 'null');
+
+// ====== Auth ======
+async function apiFetch(path, options = {}) {
+  const headers = { 'Content-Type': 'application/json', ...options.headers };
+  if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
+  try {
+    const r = await fetch(API_BASE + path, { ...options, headers });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.detail || '请求失败');
+    return data;
+  } catch(e) {
+    if (e.message.includes('Failed to fetch')) throw new Error('服务器连接失败');
+    throw e;
+  }
+}
+
+async function register() {
+  const username = document.getElementById('reg-username').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+  if (!username || !password) { showAuthError('请填写用户名和密码'); return; }
+  if (password !== confirm) { showAuthError('两次密码不一致'); return; }
+  if (password.length < 4) { showAuthError('密码至少4位'); return; }
+  try {
+    const data = await apiFetch('/api/register', {
+      method: 'POST', body: JSON.stringify({ username, password })
+    });
+    authToken = data.token; currentUser = data;
+    localStorage.setItem('secToken', data.token);
+    localStorage.setItem('secUser', JSON.stringify(data));
+    showPage('page-home'); renderHome();
+  } catch(e) { showAuthError(e.message); }
+}
+
+async function login() {
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  if (!username || !password) { showAuthError('请填写用户名和密码'); return; }
+  try {
+    const data = await apiFetch('/api/login', {
+      method: 'POST', body: JSON.stringify({ username, password })
+    });
+    authToken = data.token; currentUser = data;
+    localStorage.setItem('secToken', data.token);
+    localStorage.setItem('secUser', JSON.stringify(data));
+    showPage('page-home'); renderHome();
+  } catch(e) { showAuthError(e.message); }
+}
+
+function logout() {
+  authToken = null; currentUser = null;
+  localStorage.removeItem('secToken');
+  localStorage.removeItem('secUser');
+  showPage('page-auth');
+}
+
+async function activateCode() {
+  const code = document.getElementById('activate-code').value.trim();
+  if (!code) { document.getElementById('activate-error').textContent = '请输入会员码'; return; }
+  try {
+    const data = await apiFetch('/api/activate', {
+      method: 'POST', body: JSON.stringify({ code })
+    });
+    currentUser.is_member = true;
+    currentUser.member_expires = data.member_expires;
+    localStorage.setItem('secUser', JSON.stringify(currentUser));
+    document.getElementById('activate-error').textContent = '';
+    document.getElementById('activate-success').style.display = 'block';
+    document.getElementById('activate-success').textContent = '✅ 会员激活成功！有效期至 ' + data.member_expires.slice(0,10);
+  } catch(e) { document.getElementById('activate-error').textContent = e.message; }
+}
+
+function showAuthError(msg) {
+  document.getElementById('auth-error').textContent = msg;
+}
+
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.getElementById('auth-tab-' + tab).classList.add('active');
+  document.getElementById('auth-form-' + tab).classList.add('active');
+  document.getElementById('auth-error').textContent = '';
+}
+
+function isMember() {
+  return currentUser && currentUser.is_member === true;
+}
+
+function requireMember(callback) {
+  if (isMember()) { callback(); return; }
+  showPage('page-activate');
+}
+
 // ====== Init ======
 (async function init() {
   try {
     const r = await fetch('manifest.json?_t=' + Date.now());
     MANIFEST = await r.json();
-    renderHome();
-    showPage('page-home');
+    // Show auth page if not logged in, otherwise home
+    if (authToken && currentUser) {
+      showPage('page-home');
+      renderHome();
+    } else {
+      showPage('page-auth');
+    }
   } catch(e) {
     document.getElementById('home-content').innerHTML =
       `<div class="empty-state"><div class="icon">⚠️</div><p>加载失败: ${e.message}</p></div>`;
@@ -34,6 +136,16 @@ let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 // ====== Home ======
 function renderHome() {
   const data = calcStats();
+  // Show username and member badge
+  if (currentUser) {
+    document.getElementById('home-username').textContent = currentUser.username;
+    const badge = document.getElementById('member-badge');
+    if (currentUser.is_member) {
+      badge.style.display = '';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
   document.getElementById('home-stats').innerHTML = `
     <div class="stat-card" onclick="openCategory('chapter')"><div class="num text-accent">${data.done}</div><div class="lbl">已做试卷</div></div>
     <div class="stat-card" onclick="showWrongBook()"><div class="num text-red">${data.wrong}</div><div class="lbl">错题总数</div></div>
@@ -66,6 +178,11 @@ function countAll() {
 function openCategory(catId) {
   const cat = MANIFEST.categories.find(c => c.id === catId);
   if (!cat) return;
+  // Check membership for premium content
+  if (cat.tier === 'premium' && !isMember()) {
+    showPage('page-activate');
+    return;
+  }
   document.getElementById('list-title').textContent = cat.title;
   let done = 0, total = cat.items.length;
   cat.items.forEach(i => { if (history[i.id] && history[i.id].submitted) done++; });

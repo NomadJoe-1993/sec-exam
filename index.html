@@ -10,13 +10,15 @@
 </head>
 <body>
 
-<!-- ====== ONBOARDING ====== -->
 <!-- ====== HOME ====== -->
+<div class="page" id="page-home">
 <div class="page active" id="page-home">
   <div class="header home-header">
-    <div class="flex-1"><div class="greeting" id="home-greeting">👋 主上大人</div><div class="greeting-sub" id="home-sub">今天也要加油</div></div>
+    <div class="flex-1"><div class="greeting" id="home-greeting">👋 <span id="home-username"></span></div><div class="greeting-sub" id="home-sub">今天也要加油</div></div>
     <div class="flex gap-8">
+      <div class="member-badge" id="member-badge" style="display:none;font-size:11px;background:linear-gradient(135deg,#ff9800,#e65100);color:white;padding:4px 10px;border-radius:20px;font-weight:600;white-space:nowrap;">VIP</div>
       <div class="icon-btn" onclick="showWrongBook()">❌</div>
+      <div class="icon-btn" onclick="logout()" title="退出登录">🚪</div>
     </div>
   </div>
   <div class="content" id="home-content">
@@ -24,23 +26,23 @@
     <div id="plan-banner"></div>
     <div class="menu-grid">
       <!-- ===== TOP: 学习入口 ===== -->
-      <div class="menu-card" onclick="openCategory('knowledge_map')">
+      <div class="menu-card premium" onclick="openCategory('knowledge_map')">
         <div class="icon">🗺️</div>
         <h3>章节目录</h3>
         <p>知识框架 · 建立楼层感</p>
       </div>
-      <div class="menu-card" onclick="openStudyCards()">
+      <div class="menu-card premium" onclick="openStudyCards()">
         <div class="icon">📚</div>
         <h3>考点速记</h3>
         <p>高频考点 · 随时记忆</p>
       </div>
-      <div class="menu-card" onclick="openCategory('new_zhenti')">
+      <div class="menu-card premium" onclick="openCategory('new_zhenti')">
         <div class="icon">📋</div>
         <h3>真题实战</h3>
         <p>1,062道真题·2021-2026年全覆盖</p>
         <div class="badge" style="background:var(--red-bg);color:var(--red);font-size:10px;margin-top:4px;">1,062题</div>
       </div>
-      <div class="menu-card" onclick="showWrongBook()">
+      <div class="menu-card free" onclick="showWrongBook()">
         <div class="icon">📕</div>
         <h3>错题集</h3>
         <p id="wrong-count-badge">回顾薄弱点</p>
@@ -48,53 +50,53 @@
       </div>
 
       <!-- ===== MID: 实战训练 ===== -->
-      <div class="menu-card" onclick="openCategory('mock')">
+      <div class="menu-card premium" onclick="openCategory('mock')">
         <div class="icon">🎯</div>
         <h3>全真模拟</h3>
         <p>120题 · 新大纲题型分布</p>
       </div>
-      <div class="menu-card" onclick="openCategory('review')" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ff9800;">
+      <div class="menu-card premium" onclick="openCategory('review')" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ff9800;">
         <div class="icon">🔥</div>
         <h3 style="color:#e65100;">考前冲刺</h3>
         <p>金融基础 · 高频易错50题</p>
         <div class="badge" style="background:#ff9800;color:white;font-size:10px;margin-top:4px;">50题</div>
       </div>
-      <div class="menu-card" onclick="openCategory('jxtk')">
+      <div class="menu-card premium" onclick="openCategory('jxtk')">
         <div class="icon">⭐</div>
         <h3>精选题库</h3>
         <p>VIP精选·法律法规按章刷</p>
         <div class="badge" style="background:var(--gold);color:white;font-size:10px;margin-top:4px;">500题</div>
       </div>
-      <div class="menu-card" onclick="openDashboard()">
+      <div class="menu-card free" onclick="openDashboard()">
         <div class="icon">📊</div>
         <h3>学情看板</h3>
         <p>答题统计 · 薄弱分析</p>
       </div>
 
       <!-- ===== BOTTOM: 专项突破 ===== -->
-      <div class="menu-card" onclick="openCategory('chapter_practice')">
+      <div class="menu-card free" onclick="openCategory('chapter_practice')">
         <div class="icon">🎯</div>
         <h3>章节精练</h3>
         <p>全题型 · 按分值配比</p>
       </div>
-      <div class="menu-card" onclick="openCategory('paper')">
+      <div class="menu-card premium" onclick="openCategory('paper')">
         <div class="icon">📝</div>
         <h3>冲刺试卷</h3>
         <p>单选/多选/判断/不定项专项</p>
       </div>
-      <div class="menu-card" onclick="openCategory('multi_practice_fin')">
+      <div class="menu-card premium" onclick="openCategory('multi_practice_fin')">
         <div class="icon" style="color:#e91e63;">🎯</div>
         <h3>多选专项·金融基础</h3>
         <p>776题 · 8章按章突破</p>
         <div class="badge" style="background:#e91e63;color:white;font-size:10px;margin-top:4px;">776题</div>
       </div>
-      <div class="menu-card" onclick="openCategory('multi_practice_law')">
+      <div class="menu-card premium" onclick="openCategory('multi_practice_law')">
         <div class="icon" style="color:#9c27b0;">🎯</div>
         <h3>多选专项·法律法规</h3>
         <p>679题 · 4章按章突破</p>
         <div class="badge" style="background:#9c27b0;color:white;font-size:10px;margin-top:4px;">679题</div>
       </div>
-      <div class="menu-card" onclick="window.location.href='judge_practice.html'">
+      <div class="menu-card premium" onclick="window.location.href='judge_practice.html'">
         <div class="icon">🎯</div>
         <h3>判断专项</h3>
         <p>180题集中突破 · 五大陷阱识别</p>
@@ -171,5 +173,65 @@
 </div>
 
 <script src="app.js?v=20260616"></script>
+
+<!-- ====== AUTH ====== -->
+<div class="page" id="page-auth">
+  <div class="gate-wrap" style="background:linear-gradient(135deg,#f5efe6,#e8ddd0)">
+    <div class="gate-box" style="padding:28px 24px">
+      <div class="gate-icon">📚</div>
+      <h2>证从刷题</h2>
+      <p class="gate-desc">登录/注册后即可使用免费题库</p>
+      
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="auth-tab-login" onclick="switchAuthTab('login')">登录</div>
+        <div class="auth-tab" id="auth-tab-reg" onclick="switchAuthTab('reg')">注册</div>
+      </div>
+      
+      <div id="auth-error" class="gate-error"></div>
+      
+      <!-- Login Form -->
+      <div class="auth-form active" id="auth-form-login">
+        <div class="gate-field"><input type="text" id="login-username" placeholder="用户名" maxlength="20" autocomplete="username"></div>
+        <div class="gate-field"><input type="password" id="login-password" placeholder="密码" autocomplete="current-password"></div>
+        <button class="gate-btn" onclick="login()">🔐 登录</button>
+      </div>
+      
+      <!-- Register Form -->
+      <div class="auth-form" id="auth-form-reg">
+        <div class="gate-field"><input type="text" id="reg-username" placeholder="用户名" maxlength="20" autocomplete="username"></div>
+        <div class="gate-field"><input type="password" id="reg-password" placeholder="密码" autocomplete="new-password"></div>
+        <div class="gate-field"><input type="password" id="reg-confirm" placeholder="确认密码" autocomplete="new-password"></div>
+        <button class="gate-btn" onclick="register()">📋 注册</button>
+      </div>
+      
+      <p class="gate-footer">注册即可免费使用部分题库，付费题库需要会员码解锁</p>
+    </div>
+  </div>
+</div>
+
+<!-- ====== ACTIVATE ====== -->
+<div class="page" id="page-activate">
+  <div class="gate-wrap" style="background:linear-gradient(135deg,#f5efe6,#e8ddd0)">
+    <div class="gate-box" style="padding:28px 24px">
+      <div class="gate-icon">🔑</div>
+      <h2>会员解锁</h2>
+      <p class="gate-desc">输入会员码即可解锁全部题库<br>包含真题实战、全真模拟、多选专项等</p>
+      <div class="gate-field"><input type="text" id="activate-code" placeholder="输入会员码" maxlength="20" autocomplete="off" style="letter-spacing:2px"></div>
+      <button class="gate-btn" onclick="activateCode()">🔓 激活</button>
+      <p class="gate-error" id="activate-error"></p>
+      <p id="activate-success" class="gate-error" style="color:var(--green);display:none"></p>
+      <p class="gate-footer"><span style="cursor:pointer;color:var(--accent)" onclick="showPage('page-home')">暂时不解锁，先用免费题库</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+.auth-tabs{display:flex;gap:0;margin-bottom:16px;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.auth-tab{flex:1;padding:10px;text-align:center;font-size:14px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--dim);transition:all 0.2s}
+.auth-tab.active{background:var(--accent);color:white}
+.auth-form{display:none}
+.auth-form.active{display:block}
+</style>
+
 </body>
 </html>

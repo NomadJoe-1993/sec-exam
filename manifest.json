@@ -108,7 +108,8 @@
           "subject": "金融基础",
           "count": 72
         }
-      ]
+      ],
+      "tier": "free"
     },
     {
       "id": "review",
@@ -122,7 +123,8 @@
           "subject": "金融市场基础知识",
           "type": "mixed"
         }
-      ]
+      ],
+      "tier": "premium"
     },
     {
       "id": "multi_practice_fin",
@@ -178,7 +180,8 @@
           "subject": "金融市场基础知识",
           "count": 50
         }
-      ]
+      ],
+      "tier": "premium"
     },
     {
       "id": "multi_practice_law",
@@ -210,7 +213,8 @@
           "subject": "证券市场基本法律法规",
           "count": 96
         }
-      ]
+      ],
+      "tier": "premium"
     },
     {
       "id": "knowledge_map",
@@ -224,7 +228,8 @@
           "subject": "章节目录 · 知识框架",
           "count": 13
         }
-      ]
+      ],
+      "tier": "free"
     },
     {
       "id": "chapter",
@@ -334,7 +339,8 @@
           "subject": "章节高频考点",
           "count": 35
         }
-      ]
+      ],
+      "tier": "free"
     },
     {
       "id": "paper",
@@ -444,7 +450,8 @@
           "subject": "全科",
           "count": 20
         }
-      ]
+      ],
+      "tier": "premium"
     },
     {
       "id": "mock",
@@ -488,7 +495,8 @@
           "subject": "证券市场基本法律法规",
           "count": 120
         }
-      ]
+      ],
+      "tier": "premium"
     },
     {
       "id": "new_zhenti",
@@ -640,7 +648,8 @@
           "subject": "金融市场基础知识",
           "count": 1
         }
-      ]
+      ],
+      "tier": "premium"
     },
     {
       "id": "jxtk",
@@ -690,7 +699,8 @@
           "subject": "法律法规",
           "count": 19
         }
-      ]
+      ],
+      "tier": "premium"
     }
   ]
 }

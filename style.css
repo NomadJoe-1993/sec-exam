@@ -60,6 +60,10 @@ body {
 .btn-sm:active { border-color:var(--accent); color:var(--accent); }
 .mode-btn { min-width:58px; text-align:center; font-size:11px; }
 .mode-btn.memorize { background:var(--accent); color:white; border-color:var(--accent); }
+/* ====== Card Tiers ====== */
+.menu-card.premium::after { content:"VIP"; position:absolute; top:8px; right:8px; font-size:9px; background:linear-gradient(135deg,#ff9800,#e65100); color:white; padding:1px 6px; border-radius:4px; font-weight:600; }
+.menu-card.free::after { content:"免费"; position:absolute; top:8px; right:8px; font-size:9px; background:var(--green); color:white; padding:1px 6px; border-radius:4px; font-weight:600; }
+.menu-card { position:relative; }
 /* ====== Content ====== */
 .content { flex:1; overflow-y:auto; padding:16px 18px; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
 /* ====== Glass Card ====== */
