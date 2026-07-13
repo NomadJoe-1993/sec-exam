@@ -5,80 +5,68 @@ let memorizeMode = false;
 let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 
-// ====== API Config ======
-const API_BASE = localStorage.getItem('secApiBase') || 'http://localhost:8000';
-let authToken = localStorage.getItem('secToken') || null;
+// ====== Auth (Local) ======
+const MEMBER_CODES = ['TEST-001', 'TEST-002'];
+const USERS_KEY = 'secUsersDb';
+
+function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || '{}'); }
+function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+
 let currentUser = JSON.parse(localStorage.getItem('secUser') || 'null');
 
-// ====== Auth ======
-async function apiFetch(path, options = {}) {
-  const headers = { 'Content-Type': 'application/json', ...options.headers };
-  if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
-  try {
-    const r = await fetch(API_BASE + path, { ...options, headers });
-    const data = await r.json();
-    if (!r.ok) throw new Error(data.detail || '请求失败');
-    return data;
-  } catch(e) {
-    if (e.message.includes('Failed to fetch')) throw new Error('服务器连接失败');
-    throw e;
-  }
-}
-
-async function register() {
+function register() {
   const username = document.getElementById('reg-username').value.trim();
   const password = document.getElementById('reg-password').value;
   const confirm = document.getElementById('reg-confirm').value;
   if (!username || !password) { showAuthError('请填写用户名和密码'); return; }
   if (password !== confirm) { showAuthError('两次密码不一致'); return; }
   if (password.length < 4) { showAuthError('密码至少4位'); return; }
-  try {
-    const data = await apiFetch('/api/register', {
-      method: 'POST', body: JSON.stringify({ username, password })
-    });
-    authToken = data.token; currentUser = data;
-    localStorage.setItem('secToken', data.token);
-    localStorage.setItem('secUser', JSON.stringify(data));
-    showPage('page-home'); renderHome();
-  } catch(e) { showAuthError(e.message); }
+  const users = getUsers();
+  if (users[username]) { showAuthError('用户名已被注册'); return; }
+  users[username] = { password, is_member: false, member_expires: null, createdAt: new Date().toISOString() };
+  saveUsers(users);
+  currentUser = { username, is_member: false, member_expires: null };
+  localStorage.setItem('secUser', JSON.stringify(currentUser));
+  showPage('page-home'); renderHome();
 }
 
-async function login() {
+function login() {
   const username = document.getElementById('login-username').value.trim();
   const password = document.getElementById('login-password').value;
   if (!username || !password) { showAuthError('请填写用户名和密码'); return; }
-  try {
-    const data = await apiFetch('/api/login', {
-      method: 'POST', body: JSON.stringify({ username, password })
-    });
-    authToken = data.token; currentUser = data;
-    localStorage.setItem('secToken', data.token);
-    localStorage.setItem('secUser', JSON.stringify(data));
-    showPage('page-home'); renderHome();
-  } catch(e) { showAuthError(e.message); }
+  const users = getUsers();
+  const user = users[username];
+  if (!user || user.password !== password) { showAuthError('用户名或密码错误'); return; }
+  currentUser = { username, is_member: user.is_member, member_expires: user.member_expires };
+  localStorage.setItem('secUser', JSON.stringify(currentUser));
+  showPage('page-home'); renderHome();
 }
 
 function logout() {
-  authToken = null; currentUser = null;
-  localStorage.removeItem('secToken');
+  currentUser = null;
   localStorage.removeItem('secUser');
   showPage('page-auth');
 }
 
-async function activateCode() {
+function activateCode() {
   const code = document.getElementById('activate-code').value.trim();
   if (!code) { document.getElementById('activate-error').textContent = '请输入会员码'; return; }
-  try {
-    const data = await apiFetch('/api/activate', {
-      method: 'POST', body: JSON.stringify({ code })
-    });
+  const idx = MEMBER_CODES.indexOf(code);
+  if (idx === -1) { document.getElementById('activate-error').textContent = '会员码无效'; return; }
+  MEMBER_CODES.splice(idx, 1);
+  const users = getUsers();
+  if (currentUser && users[currentUser.username]) {
+    users[currentUser.username].is_member = true;
+    const expires = new Date(Date.now() + 365*24*60*60*1000).toISOString();
+    users[currentUser.username].member_expires = expires;
+    saveUsers(users);
     currentUser.is_member = true;
-    currentUser.member_expires = data.member_expires;
+    currentUser.member_expires = expires;
     localStorage.setItem('secUser', JSON.stringify(currentUser));
     document.getElementById('activate-error').textContent = '';
     document.getElementById('activate-success').style.display = 'block';
-    document.getElementById('activate-success').textContent = '✅ 会员激活成功！有效期至 ' + data.member_expires.slice(0,10);
-  } catch(e) { document.getElementById('activate-error').textContent = e.message; }
+    document.getElementById('activate-success').textContent = '✅ 会员激活成功！有效期至 ' + expires.slice(0,10);
+  }
 }
 
 function showAuthError(msg) {
@@ -108,7 +96,7 @@ function requireMember(callback) {
     const r = await fetch('manifest.json?_t=' + Date.now());
     MANIFEST = await r.json();
     // Show auth page if not logged in, otherwise home
-    if (authToken && currentUser) {
+    if (currentUser) {
       showPage('page-home');
       renderHome();
     } else {
