@@ -25,12 +25,12 @@
     <div id="plan-banner"></div>
     <div class="menu-grid">
       <!-- ===== TOP: 学习入口 ===== -->
-      <div class="menu-card premium" onclick="openCategory('knowledge_map')">
+      <div class="menu-card free" onclick="openCategory('knowledge_map')">
         <div class="icon">🗺️</div>
         <h3>章节目录</h3>
         <p>知识框架 · 建立楼层感</p>
       </div>
-      <div class="menu-card premium" onclick="openStudyCards()">
+      <div class="menu-card free" onclick="openStudyCards()">
         <div class="icon">📚</div>
         <h3>考点速记</h3>
         <p>高频考点 · 随时记忆</p>
@@ -171,7 +171,12 @@
   <div class="content" id="wrong-content"></div>
 </div>
 
-<script src="app.js?v=20260616"></script>
+<script>
+// ── 后端 API 地址 ──
+// 部署到 Koyeb 后改成你的域名: https://xxx.koyeb.app
+window.API_BASE = window.API_BASE || 'http://localhost:5000';
+</script>
+<script src="app.js?v=20260715"></script>
 
 <!-- ====== AUTH ====== -->
 <div class="page" id="page-auth">

@@ -98,6 +98,21 @@ let currentFilter = 'all';
 let answers = {}; // qid -> userAnswer
 let wrongSet = new Set();
 
+// ── Membership Check ──
+(function() {
+  const user = JSON.parse(localStorage.getItem('secUser') || 'null');
+  if (!user || user.is_member !== true) {
+    document.body.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;text-align:center;padding:20px">
+        <div style="font-size:48px;margin-bottom:16px">🔒</div>
+        <h2 style="color:#1e5b8a;margin-bottom:8px">需要会员权限</h2>
+        <p style="color:#8b7e6e;margin-bottom:20px;font-size:14px">判断专项训练属于VIP功能，请激活会员后使用</p>
+        <a href="index.html" style="display:inline-block;padding:10px 32px;background:#1e5b8a;color:white;border-radius:8px;text-decoration:none;font-weight:600">返回首页激活</a>
+      </div>`;
+    throw new Error('membership required');
+  }
+})();
+
 // ── Load Data ──
 async function loadAll() {
   const resp = await fetch('manifest.json?_t='+Date.now());

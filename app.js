@@ -5,8 +5,10 @@ let memorizeMode = false;
 let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 
-// ====== Auth (Local) ======
-const MEMBER_CODES = ['TEST-001', 'TEST-002'];
+// ====== Backend API ======
+const API_BASE = window.API_BASE || 'http://localhost:5000';  // 部署时改这个地址
+
+// ====== Auth (Local + Server) ======
 const USERS_KEY = 'secUsersDb';
 
 function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || '{}'); }
@@ -40,6 +42,7 @@ function login() {
   currentUser = { username, is_member: user.is_member, member_expires: user.member_expires };
   localStorage.setItem('secUser', JSON.stringify(currentUser));
   showPage('page-home'); renderHome();
+  syncMembership(); // 跨设备登录时同步会员状态
 }
 
 function logout() {
@@ -48,24 +51,44 @@ function logout() {
   showPage('page-auth');
 }
 
-function activateCode() {
+async function activateCode() {
   const code = document.getElementById('activate-code').value.trim();
-  if (!code) { document.getElementById('activate-error').textContent = '请输入会员码'; return; }
-  const idx = MEMBER_CODES.indexOf(code);
-  if (idx === -1) { document.getElementById('activate-error').textContent = '会员码无效'; return; }
-  MEMBER_CODES.splice(idx, 1);
-  const users = getUsers();
-  if (currentUser && users[currentUser.username]) {
-    users[currentUser.username].is_member = true;
-    const expires = new Date(Date.now() + 365*24*60*60*1000).toISOString();
-    users[currentUser.username].member_expires = expires;
-    saveUsers(users);
+  const errEl = document.getElementById('activate-error');
+  const sucEl = document.getElementById('activate-success');
+  errEl.textContent = ''; sucEl.style.display = 'none';
+
+  if (!code) { errEl.textContent = '请输入会员码'; return; }
+  if (!currentUser) { errEl.textContent = '请先登录'; return; }
+
+  try {
+    const r = await fetch(API_BASE + '/api/activate', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ code: code.toUpperCase(), username: currentUser.username })
+    });
+    const data = await r.json();
+
+    if (!data.success) {
+      errEl.textContent = data.error || '激活失败';
+      return;
+    }
+
+    // 激活成功 → 存 localStorage
+    const users = getUsers();
+    if (users[currentUser.username]) {
+      users[currentUser.username].is_member = true;
+      users[currentUser.username].member_expires = data.expires_at;
+      saveUsers(users);
+    }
     currentUser.is_member = true;
-    currentUser.member_expires = expires;
+    currentUser.member_expires = data.expires_at;
     localStorage.setItem('secUser', JSON.stringify(currentUser));
-    document.getElementById('activate-error').textContent = '';
-    document.getElementById('activate-success').style.display = 'block';
-    document.getElementById('activate-success').textContent = '✅ 会员激活成功！有效期至 ' + expires.slice(0,10);
+
+    sucEl.style.display = 'block';
+    sucEl.textContent = data.message || '✅ 会员激活成功！';
+    document.getElementById('activate-code').value = '';
+  } catch(e) {
+    errEl.textContent = '网络错误，请检查后端服务是否启动: ' + e.message;
   }
 }
 
@@ -85,6 +108,30 @@ function isMember() {
   return currentUser && currentUser.is_member === true;
 }
 
+async function syncMembership() {
+  if (!currentUser) return;
+  try {
+    const r = await fetch(API_BASE + '/api/user/status?username=' + encodeURIComponent(currentUser.username));
+    const data = await r.json();
+    if (data.is_member !== undefined) {
+      currentUser.is_member = data.is_member;
+      currentUser.member_expires = data.expires_at;
+      localStorage.setItem('secUser', JSON.stringify(currentUser));
+      // 也更新 users DB
+      const users = getUsers();
+      if (users[currentUser.username]) {
+        users[currentUser.username].is_member = data.is_member;
+        users[currentUser.username].member_expires = data.expires_at;
+        saveUsers(users);
+      }
+      renderHome();
+    }
+  } catch(e) {
+    // 后端不可达时，沿用本地缓存
+    console.log('syncMembership: backend unreachable, using cached status');
+  }
+}
+
 function requireMember(callback) {
   if (isMember()) { callback(); return; }
   showPage('page-activate');
@@ -99,6 +146,7 @@ function requireMember(callback) {
     if (currentUser) {
       showPage('page-home');
       renderHome();
+      syncMembership(); // 后台同步会员状态
     } else {
       showPage('page-auth');
     }

@@ -1,0 +1,32 @@
+# 项目：证从刷题 · 智能备考
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+
+# 后端数据 (token、密钥、数据库 — 不提交到 Git)
+backend/data/
+backend/data.db
+backend/__pycache__/
+
+# 环境
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.log
+*.bak
