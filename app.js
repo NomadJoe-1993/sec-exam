@@ -183,7 +183,7 @@ function renderHome() {
     }
   }
   document.getElementById('home-stats').innerHTML = `
-    <div class="stat-card" onclick="openCategory('chapter')"><div class="num text-accent">${data.done}</div><div class="lbl">已做试卷</div></div>
+    <div class="stat-card" onclick="openCategory('chapter_practice')"><div class="num text-accent">${data.done}</div><div class="lbl">已做试卷</div></div>
     <div class="stat-card" onclick="showWrongBook()"><div class="num text-red">${data.wrong}</div><div class="lbl">错题总数</div></div>
     <div class="stat-card"><div class="num text-green">${data.avgScore}%</div><div class="lbl">平均得分</div></div>`;
   const wc = wrongBook.length;
