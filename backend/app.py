@@ -90,6 +90,13 @@ def init_db():
             key   TEXT PRIMARY KEY,
             value TEXT NOT NULL
         );
+
+        CREATE TABLE IF NOT EXISTS userdata (
+            username    TEXT PRIMARY KEY,
+            history     TEXT NOT NULL DEFAULT '{}',
+            wrong_book  TEXT NOT NULL DEFAULT '[]',
+            updated_at  TEXT NOT NULL DEFAULT (datetime('now'))
+        );
     """)
     conn.commit()
     conn.close()
@@ -313,6 +320,23 @@ select{padding:6px 10px;border:1px solid #d4c9b8;border-radius:6px;font-size:13p
 <button class="btn btn-outline" onclick="exportCodes('txt')">📥 导出 TXT（每行一个）</button>
 <button class="btn btn-outline" onclick="copyAllCodes()">📋 一键复制全部</button>
 </div>
+
+<!-- 闲鱼自动发货专用 -->
+<div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px;margin-top:10px">
+<div class="flex" style="margin-bottom:6px">
+<span style="font-weight:600;font-size:13px">🐟 闲鱼自动发货</span>
+<span class="tag tag-active" style="font-size:10px">0费率</span>
+</div>
+<p class="text-sm text-dim" style="margin-bottom:8px">导出后复制到闲鱼「设置自动发货」→ 卡密发货，一行一个</p>
+<div class="flex" style="gap:6px">
+<button class="btn btn-primary" onclick="exportCodes('xianyu')">📤 导出闲鱼格式</button>
+<button class="btn btn-sm btn-outline" onclick="copyAllCodes()">📋 复制全部到剪贴板</button>
+</div>
+<div class="text-dim" style="margin-top:6px;font-size:11px">
+操作路径：闲鱼APP → 我的 → 我卖出的 → 找到商品 → 设置自动发货 → 卡密发货 → 粘贴
+</div>
+</div>
+
 <div class="text-dim" style="margin-top:8px">只导出未使用的激活码，按生成时间排序</div>
 </div>
 </div>
@@ -423,7 +447,7 @@ async function generateCodes() {
           <button class="copy-btn" onclick="copyText('${c}', this)">📋</button>
         </div>`;
       });
-      html += '<div style="margin-top:6px"><button class="btn btn-sm btn-outline" onclick="document.getElementById(\'gen-area\').style.display=\'none\'">收起</button></div>';
+      html += '<div style="margin-top:6px"><button class="btn btn-sm btn-outline" onclick="document.getElementById(\\'gen-area\\').style.display=\\'none\\'">收起</button></div>';
       area.innerHTML = html;
       showToast(`✅ 成功生成 ${data.codes.length} 个码`);
       setTimeout(() => window.location.reload(), 1500);
@@ -660,11 +684,12 @@ def api_export():
         codes = [r["code_plaintext"] for r in rows if r["code_plaintext"]]
         return jsonify({"codes": codes, "count": len(codes)})
 
-    if format_type == "txt":
+    if format_type == "txt" or format_type == "xianyu":
         text = "\n".join(r["code_plaintext"] for r in rows if r["code_plaintext"])
+        fname = "xianyu_import" if format_type == "xianyu" else "activation_codes"
         response = make_response(text)
         response.headers["Content-Type"] = "text/plain; charset=utf-8"
-        response.headers["Content-Disposition"] = f"attachment; filename=activation_codes_{datetime.now().strftime('%Y%m%d')}.txt"
+        response.headers["Content-Disposition"] = f"attachment; filename={fname}_{datetime.now().strftime('%Y%m%d')}.txt"
         return response
 
     if format_type == "qianxun":
@@ -779,8 +804,52 @@ def faka_webhook():
 
 
 # ─── 用户 API ─────────────────────────────────────────────
+
+@app.route("/api/user/sync", methods=["GET", "POST"])
+def user_sync():
+    if request.method == "GET":
+        username = request.args.get("username")
+        if not username:
+            return jsonify({"error": "username required"}), 400
+        conn = get_db()
+        row = conn.execute(
+            "SELECT history, wrong_book FROM userdata WHERE username=?",
+            (username,)
+        ).fetchone()
+        conn.close()
+        if row:
+            return jsonify({
+                "history": json.loads(row["history"]),
+                "wrongBook": json.loads(row["wrong_book"])
+            })
+        return jsonify({"history": {}, "wrongBook": []})
+
+    # POST
+    data = request.get_json(silent=True) or {}
+    username = data.get("username")
+    if not username:
+        return jsonify({"error": "username required"}), 400
+
+    history_str = json.dumps(data.get("history", {}), ensure_ascii=False, default=str)
+    wrong_book_str = json.dumps(data.get("wrongBook", []), ensure_ascii=False, default=str)
+
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO userdata (username, history, wrong_book, updated_at) "
+        "VALUES (?, ?, ?, datetime('now')) "
+        "ON CONFLICT(username) DO UPDATE SET "
+        "history=excluded.history, wrong_book=excluded.wrong_book, "
+        "updated_at=datetime('now')",
+        (username, history_str, wrong_book_str)
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({"ok": True, "synced_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+
+
 @app.route("/api/user/status", methods=["GET"])
 def api_user_status():
+
     username = request.args.get("username", "").strip()
     if not username:
         return jsonify({"error": "username required"}), 400
