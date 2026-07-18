@@ -6,7 +6,51 @@ let history = JSON.parse(localStorage.getItem('secHistory') || '{}');
 let wrongBook = JSON.parse(localStorage.getItem('secWrongBook') || '[]');
 
 // ====== Backend API ======
-const API_BASE = window.API_BASE || 'http://localhost:5000';  // 部署时改这个地址
+const API_BASE = window.API_BASE || 'http://localhost:5000';
+
+// ====== 云同步: 做题记录与错题集 ======
+let syncTimer = null;
+function syncUserData() {
+  if (!currentUser) return;
+  if (syncTimer) clearTimeout(syncTimer);
+  syncTimer = setTimeout(async () => {
+    try {
+      await fetch(API_BASE + '/api/user/sync', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          username: currentUser.username,
+          history: history,
+          wrongBook: wrongBook
+        })
+      });
+    } catch(e) { /* 离线时静默失败，下次重试 */ }
+  }, 2000);
+}
+
+async function loadUserData() {
+  if (!currentUser) return;
+  try {
+    const r = await fetch(API_BASE + '/api/user/sync?username=' + encodeURIComponent(currentUser.username));
+    if (!r.ok) return;
+    const data = await r.json();
+    if (data.history && Object.keys(data.history).length > 0) {
+      // Merge server data: local wins for conflicts (latest save wins)
+      history = { ...data.history, ...history };
+      localStorage.setItem('secHistory', JSON.stringify(history));
+    }
+    if (data.wrongBook && data.wrongBook.length > 0) {
+      // Merge: deduplicate by qid+examId
+      const localKeys = new Set(wrongBook.map(w => w.qid + '|' + w.examId));
+      data.wrongBook.forEach(w => {
+        if (!localKeys.has(w.qid + '|' + w.examId)) {
+          wrongBook.push(w);
+        }
+      });
+      localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
+    }
+  } catch(e) { /* 离线静默 */ }
+}
 
 // ====== Auth (Local + Server) ======
 const USERS_KEY = 'secUsersDb';
@@ -30,6 +74,7 @@ function register() {
   currentUser = { username, is_member: false, member_expires: null };
   localStorage.setItem('secUser', JSON.stringify(currentUser));
   showPage('page-home'); renderHome();
+  loadUserData();
 }
 
 function login() {
@@ -42,7 +87,8 @@ function login() {
   currentUser = { username, is_member: user.is_member, member_expires: user.member_expires };
   localStorage.setItem('secUser', JSON.stringify(currentUser));
   showPage('page-home'); renderHome();
-  syncMembership(); // 跨设备登录时同步会员状态
+  syncMembership();
+  loadUserData(); // 同步云端做题记录
 }
 
 function logout() {
@@ -146,7 +192,8 @@ function requireMember(callback) {
     if (currentUser) {
       showPage('page-home');
       renderHome();
-      syncMembership(); // 后台同步会员状态
+      syncMembership();
+      loadUserData();
     } else {
       showPage('page-auth');
     }
@@ -396,8 +443,9 @@ function confirmAnswer() {
       typeCn: typeCn, question: q.q || '', userAnswer: u, correctAnswer: q.a || '',
       isCorrect: isCorrect, choices: q.c || {}, source: curExam.subject || '试卷'
     });
-  }
+  // Save to wrong book
   localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
+  syncUserData();
   saveProgress(); renderQ();
 }
 
@@ -408,6 +456,7 @@ function saveProgress() {
     lastScore: history[curExam.id]?.lastScore, best: history[curExam.id]?.best
   };
   localStorage.setItem('secHistory', JSON.stringify(history));
+  syncUserData();
 }
 
 function navQ(d) {
@@ -485,6 +534,7 @@ function submitExam() {
     }
   });
   localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
+  syncUserData();
 
   const pct = isFullMock ? Math.round(weightedScore/maxWeighted*100) : Math.round(correct/t*100);
   const h = history[curExam.id] || {answers:{},submitted:false};
@@ -587,6 +637,7 @@ function clearWrongBook() {
   if (confirm('确定清空所有错题吗？')) {
     wrongBook = [];
     localStorage.setItem('secWrongBook', JSON.stringify(wrongBook));
+    syncUserData();
     showWrongBook();
     renderHome();
   }
